@@ -1,0 +1,436 @@
+﻿
+<section class="content-header">
+    <h1>
+        Conduct Test
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <i class="fa fa-user">
+            </i>
+        </li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Conduct Test</li>
+    </ol>
+</section>
+
+<section class="content">
+    <!--<div class="well" style="background: #fff;padding: 15px;">
+        <div class="row" style="margin-bottom: 15px;">
+            <div class="col-sm-3">
+                <div clas="form-group">
+                    <label>Program Code :</label>
+                    <span> </span>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div clas="form-group">
+                    <label>Program Name :</label>
+                    <span> </span>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div clas="form-group">
+                    <label>Day :</label>
+                    <span> </span>
+                </div>
+            </div>           
+        </div>     
+    </div>-->
+    <div class="panel panel-default panel-table">
+        <div class="panel-heading">
+            <div class="row">
+                
+                
+                <div class="col col-xs-12 text-right">
+                    <span style="float:left;font-size:large;"> Faculty - {{FacultyName}}</span>
+                    <input type="text" placeholder="Search.." ng-model="SearchText" />
+                    <button class="btn btn-sm btn-create btn-xs" style="background:#57907b;color:aliceblue;" ng-click="AddCandidate()">Add Candidate</button>
+                    <button class="btn btn-sm btn-primary btn-xs" ng-show="TestInitiateDay" ng-click="ShowCandidates()">Show Candidates</button>
+                    <button class="btn btn-success btn-xs" ng-show="TestInitiateDay" ng-click="ViewResult(pt)">View Result</button>
+                    <button type="button" class="btn btn-sm btn-success btn-warning btn-xs" ng-show="ShowInitiateButton==true && ProgramType_Id!=3" ng-click="InitiatTestWithAttendance()">
+                        <span ng-show="InitiateTheory"> Initiate Theory Day- {{TestInitiateDay}} Test</span>
+                        <span ng-hide="InitiateTheory"> Initiate Practical Day- {{TestInitiateDay}} Test</span>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-success btn-warning btn-xs" ng-show="ShowInitiateButton==true && ProgramType_Id==3" ng-click="InitiatTestWithAttendance()">
+                        <span ng-show="InitiateTheory"> Initiate Theory Test- {{TestInitiateDay}}</span>
+                        <span ng-hide="InitiateTheory"> Initiate Practical Test- {{TestInitiateDay}}</span>
+                    </button>
+                    <!--<button type="button" class="btn btn-sm btn-success btn-warning btn-xs" ng-show="InitiateTheory == false && ShowInitiateButton==true" ng-click="InitiatTestWithAttendance()">Initiate Practical- {{TestInitiateDay}} Test</button>-->
+                </div>
+               
+            </div>
+        </div>
+        <div class="panel-body" style="padding:0;">
+            <table class="table table-striped " style="margin:0;">
+                <thead>
+                    <tr>
+                        <th style="width:25px"></th>
+                        <th>Session Id</th>
+                        <th>Program Code</th>
+                        <th>Program Name</th>
+                        <th>Start Date</th>
+                        <th>EndDate</th>
+                        <th>Test Day</th>
+                        <th>Students</th>
+                        <!--<th>Action</th>-->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="pt in SessionIdList | filter:SearchText">                        
+                        <td class="hidden-xs"style="width:25px"><input type="checkbox" ng-change="GetSelectedSessionIds(pt)" ng-model="pt.IsChecked"/></td>                      
+                        <td>{{pt.SessionID}}</td>
+                        <td>{{pt.ProgramCode}}</td>
+                        <td>{{pt.ProgramName}}</td>
+                        <td>{{pt.StartDate | date: 'dd-MMM-yy'}}</td>
+                        <td>{{pt.EndDate| date: 'dd-MMM-yy'}}</td>
+                        <td><span ng-if="!pt.day">0</span>
+                            <a href="" ng-click="ShowTestCode(pt)">
+                                <span ng-if="pt.day">{{pt.day}}</span>
+                            </a>
+                        </td>
+                        <td>{{pt.TotalStudents}}</td>
+                        <!--<td><button class="btn btn-success" ng-click="ViewResult(pt)">View Result</button></td>-->
+                    </tr>
+                </tbody>
+            </table>
+            <dir-pagination-controls max-size="20"
+                                     direction-links="true"
+                                     boundary-links="true">
+            </dir-pagination-controls>
+        </div>
+        <!--<div class="panel-footer text-center">
+            <div class="pull-left" style="padding-top:7.5px">Page 1 of 5</div>
+
+            <ul class="pagination" style="margin:0">
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+            </ul>
+            <button class="btn btn-success  pull-right">Start Test</button>
+        </div>-->
+    </div>
+</section>
+
+<script type="text/ng-template" id="TestRecordssss.html">
+    <div class="modal-header">
+        <h5 class="modal-title">
+            <b>Student Post Test Records</b>
+            <div style="float:right" class="jarviswidget-ctrls" role="menu">
+                <a href="" ng-click="cancel()" class="button-icon jarviswidget-delete-btn" rel="tooltip" title=""
+                   data-placement="bottom" data-original-title="Delete"><i class="fa fa-times"></i></a>
+            </div>
+        </h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="box-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center;">
+                                    Day
+                                </th>
+                                <th style="text-align:center;">
+                                    Marks Scored
+                                </th>
+
+                                <th style="text-align:center;">
+                                    Maximum Marks
+                                </th>
+                                <th style="text-align:center;">
+                                    %
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="text-align:center;" ng-repeat="pt in StudentPostTestScores">
+                                <td>{{pt.Day}}</td>
+                                <td>{{pt.PostTest_MarksObtained}}</td>
+                                <td>{{pt.PostTestMaxMarks}}</td>
+                                <td>{{(pt.PostTest_MarksObtained*100)/pt.PostTestMaxMarks}} %</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="StudentsList.html">
+    <div class="modal-header">
+        <h5 class="modal-title">
+            <b>Candidates List</b>
+            <input type="text" placeholder="Search Here.."  ng-model="SearchText"/>
+            <button> <i class="fa fa-refresh" aria-hidden="false" ng-click="init()"></i></button>
+            <div style="float:right" class="jarviswidget-ctrls" role="menu">
+                <a href="" ng-click="cancel()" class="button-icon jarviswidget-delete-btn pull-right" rel="tooltip" title=""
+                   data-placement="bottom" data-original-title="Delete"><i class="fa fa-times"></i></a>
+            </div>
+        </h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="box-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead style="background:lightgrey;">
+                            <tr>
+                                <th style="text-align:center;">
+                                    Sno.
+                                </th>
+                                <th style="text-align:center;">
+                                    Program Code
+                                </th>
+                                <th style="text-align:center;">
+                                    Session ID
+                                </th>
+                                <th style="text-align:center;">
+                                    MSPin
+                                </th>
+                                <th style="text-align:center;">
+                                    Name
+                                </th>
+                                <th style="text-align:center;">
+                                    Mobile
+                                </th>
+                                <th style="text-align:center;">
+                                    DOB
+                                </th>
+                                <th style="text-align:center;" ng-hide="CurrentTestEvaluationType_Id==2">
+                                    Action
+                                </th>
+                                <th style="text-align:center;" ng-show="CurrentTestEvaluationType_Id==2">
+                                   Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="text-align:center; background:{{pt.RowColor}}" ng-repeat="pt in SessionWiseStudentsList| filter:SearchText">
+                                <td>{{$index+1}}</td>
+                                <td>{{pt.ProgramCode}}</td>
+                                <td>{{pt.SessionID}}</td>
+                                <td>{{pt.MSPIN}}</td>
+                                <td>{{pt.Name}} </td>
+                                <td>{{pt.MobileNo}} </td>
+                                <td>{{pt.DateofBirth|date:'dd-MM-yyyy'}}</td>
+                                <td ng-hide="CurrentTestEvaluationType_Id==2">
+                                    <button type="button" class="btn btn-sm btn-success btn-xs" ng-click="ResetStudentLogin(pt)">Reset Login</button>
+                                </td>
+                                <td ng-show="CurrentTestEvaluationType_Id==2">
+                                    <!--<a href="#/PracticalQuestion/log={{pt.MSPIN}}"target="_blank" class="btn btn-primary btn-xs">Start Practical</a>-->
+                                    <button class="btn btn-primary btn-xs" ng-click="InitiatPracticalTest(pt)">Start Practical</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<script type="text/ng-template" id="InitiateTest.html">
+    <div class="modal-header">
+        <h5 class="modal-title text-right">
+            <b class="pull-left">Candidates List</b>
+            <input type="text" placeholder="Search Here.." ng-model="SearchText1" />
+            <button type="button" ng-hide="ProgramType_Id==3" style="margin: -5px 15px;" ng-click="SaveTestInitiationDetailsWithAttendance()" class="btn btn-sm btn-success btn-create btn-xs">
+                <!--Initiate Day- {{TestInitiateDay}} Test-->
+                <span ng-show="InitiateTheory"> Initiate Theory Day- {{TestInitiateDay}} Test</span>
+                <span ng-hide="InitiateTheory"> Initiate Practical Day- {{TestInitiateDay}} Test</span>
+            </button>
+            <button type="button" ng-show="ProgramType_Id==3" style="margin: -5px 15px;"  class="btn btn-sm btn-success btn-create btn-xs">
+                <!--Initiate Day- {{TestInitiateDay}} Test-->
+                <span ng-show="InitiateTheory" ng-click="SaveTestInitiationDetailsWithAttendance()"> Initiate Theory Test- {{TestInitiateDay}}</span>
+                <span ng-hide="InitiateTheory" ng-click="ClosePractical()"> Close Practical Test - {{TestInitiateDay}}</span>
+            </button>
+            <div style="float:right" class="jarviswidget-ctrls" role="menu">
+                <a ng-click="cancel()" class="button-icon jarviswidget-delete-btn pull-right" rel="tooltip" title=""
+                   data-placement="bottom" data-original-title="Delete"><i class="fa fa-times" style="cursor:pointer;"></i></a>
+            </div>
+        </h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="box-body" ng-show="EvaluationTypeId==1">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead style="background:lightgrey;">
+                            <tr>
+                                <th style="text-align:center;">
+                                    P/A
+                                </th>
+                                <th style="text-align:center;">
+                                    Sno
+                                </th>
+                                <th style="text-align:center;">
+                                    Program Code
+                                </th>
+                                <th style="text-align:center;">
+                                    Session ID
+                                </th>
+                                <th style="text-align:center;">
+                                    MSPin
+                                </th>
+                                <th style="text-align:center;">
+                                    Name
+                                </th>
+                                <th style="text-align:center;">
+                                    Mobile
+                                </th>
+                                <th style="text-align:center;">
+                                    DOB
+                                </th>
+                                <th ng-show="CurrentTestEvaluationType_Id==2">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="text-align:center;" ng-repeat="pt in SessionWiseStudentsList| filter:SearchText1">
+                                <td><input type="checkbox" ng-model="pt.IsChecked" /></td>
+                                <td>{{$index+1}}</td>
+                                <td>{{pt.ProgramCode}}</td>
+                                <td>{{pt.SessionID}}</td>
+                                <td>{{pt.MSPIN}}</td>
+                                <td>{{pt.Name}} </td>
+                                <td>{{pt.MobileNo}} </td>
+                                <td>{{pt.DateofBirth|date:'dd-MM-yyyy'}}</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <div class="box-body no-padding" ng-hide="EvaluationTypeId==1">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            
+                            <th style="width: 150px;text-align:center;">MSPIN</th>
+                            <th style="text-align:center;">Name</th>
+                            <th style="text-align:center;">SessionID</th>
+                            <th  style="width: 10px;text-align:center;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="cd in Candidates | filter:SearchText">
+                            <td style="text-align:center;">{{cd.MSPIN}}</td>
+                            <td style="text-align:center;">{{cd.Name}}</td>
+                            <td style="text-align:center;">{{cd.SessionID}}</td>
+                            <td style="text-align:center;" >
+                                <button ng-show="cd.IsEligible" class="btn btn-primary btn-xs" ng-click="InitiatPracticalTest(cd)">
+                                    Start Practical
+                                </button>
+                                <button ng-hide="cd.IsEligible" class="btn btn-success btn-xs" ng-click="ViewResult(cd)">View Result</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="ViewResultPractical.html">
+    <div class="modal-header">
+        <h5 class="modal-title">
+            <b>Practical Result</b>
+            <div style="float:right" class="jarviswidget-ctrls" role="menu">
+                <a href="" ng-click="cancel()" class="button-icon jarviswidget-delete-btn" rel="tooltip" title=""
+                   data-placement="bottom" data-original-title="Delete"><i class="fa fa-times"></i></a>
+            </div>
+        </h5>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel -body" style="background: #3c8dbc;color: white;">
+            <div class="modal-body">
+                <div class="row" style="margin:0px;">
+                    <div class="col col-lg-3">
+                        <label>MSPIN: {{CandidateDetails.MSPIN}}</label>
+                    </div>
+                    <div class="col col-lg-3">
+                        <label>Name: {{CandidateDetails.Name}}</label>
+                    </div>
+                    <div class="col col-lg-3">
+                        <label>Day: {{CandidateDetails.Day}}</label>
+                    </div>
+                    <div class="col col-lg-3">
+                        <label>Score: {{StudentPracticalScores.MarksEarned}}</label>
+                    </div>
+                </div>
+            </div><!--panel body-->
+            <div class="panel-footer" style="background:#fff;">
+
+                <a ng-if="StudentPracticalScores.ExcelUrl" target="_blank" href="{{StudentPracticalScores.ExcelUrl}}" class="btn btn-success btn-xs pull-right" download>Export</a>
+                <div class="clearfix">
+                </div>
+            </div><!--panel footer-->
+        </div><!--panel end-->
+
+        <div class="row" style="margin:0px;">
+            <div class="box-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center;">
+                                    MSPIN
+                                </th>
+                                <th style="text-align:center;">
+                                    Question
+                                </th>
+                                <th style="text-align:center;">
+                                    Action A
+                                </th>
+                                <th style="text-align:center;">
+                                    Action B
+                                </th>
+                                <th style="text-align:center;">
+                                    Action C
+                                </th>
+                                <th style="text-align:center;">
+                                    Action D
+                                </th>
+                                <th style="text-align:center;">
+                                    Action E
+                                </th>
+                                <th style="text-align:center;">
+                                    Action F
+                                </th>
+                                <th style="text-align:center;">
+                                    Total
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="text-align:center;"
+                                ng-repeat="pt in StudentPracticalScores.DayWisePracticalMarkSheet">
+                                <td>{{pt.MSPIN}}</td>
+                                <td>{{pt.Question}}</td>
+                                <td>{{pt.Marks_A!=0?pt.Marks_A:'-'}}</td>
+                                <td>{{pt.Marks_B!=0?pt.Marks_B:'-'}}</td>
+                                <td>{{pt.Marks_C!=0?pt.Marks_C:'-'}}</td>
+                                <td>{{pt.Marks_D!=0?pt.Marks_D:'-'}}</td>
+                                <td>{{pt.Marks_E!=0?pt.Marks_E:'-'}}</td>
+                                <td>{{pt.Marks_F!=0?pt.Marks_F:'-'}}</td>
+                                <td>{{pt.Total}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

@@ -1,0 +1,110 @@
+﻿<!--only for mobile view-->
+<style>
+    ul.homepage-dash {
+        padding: 0;
+        list-style: none;
+        width: 100%;
+        display: table;
+        background: #fff;
+    }
+
+        ul.homepage-dash > li {
+            text-align: center;
+            display: table-cell;
+        }
+
+            ul.homepage-dash > li.active a {
+                border-bottom: 3px solid #db1e0a;
+                color: #022d7b;
+            }
+
+            ul.homepage-dash > li a {
+                padding: 10px;
+                display: block;
+                color: #000;
+            }
+</style>
+<ul class="homepage-dash visible-xs" ng-show="session.Role_Id ==6">
+
+    <li class="active">
+        <a href="#/ManageAttandence"><span>Attendance</span></a>
+    </li>
+    <li >
+        <a href="#/SSTCMarks"><span>Marks</span></a>
+    </li>
+    <li >
+        <a href="#/CourseClosure"><span>Course Closure</span></a>
+    </li>
+
+</ul>
+<!--/only for mobile view-->
+<section class="content-header">
+    <h1>
+        Manage Attendance
+        <!--<small>Preview of UI elements</small>-->
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Manage Attendance</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <div class="row">
+                <div class="col-sm-3 col-xs-3 pull-left" ng-if="session.Role_Id==1">
+                    <select class="form-control" ng-options="ft.Agency_Id as ft.RTMName for ft in RTMList" ng-change="GetSessionList(Agency_IdOfRTM)" ng-model="Agency_IdOfRTM">
+                        <option selected disabled hidden value="">Select RTM</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-3 col-xs-6 text-right">
+                    <select ng-hide="session.Role_Id == 6" class="form-control" ng-options="ft.SessionID as ft.SessionID for ft in SessionList" ng-change="GetCandidateList(SessionID)" ng-model="SessionID">
+                        <option selected disabled hidden value="">Select SessionID</option>
+                    </select>
+                    <select ng-show="session.Role_Id == 6" class="form-control" ng-options="ft.SessionID as ft.SessionID for ft in SessionList" ng-change="GetDaySequenceSSTC(SessionID)" ng-model="SessionID">
+                        <option selected disabled hidden value="">Select SessionID</option>
+                    </select>
+                </div>
+                <div class="col-lg-3 col-xs-6 text-right">
+                    <select ng-show="session.Role_Id == 6" class="form-control" ng-options="ft.Day as ft.DayDate for ft in DaySequence" ng-change="GetCandidateListForSSTC(SessionID,Day)" ng-model="Day">
+                        <option selected disabled hidden value="">Select Day</option>
+                    </select>
+                </div>
+                <div class="col-sm-3 col-xs-12 text-right" ng-show="ShowTable">
+                    <button ng-show="session.Role_Id == 6" style="margin-top:10px;" ng-click="Update_InsertIntoTblAttendance_SSTC()" class="btn btn-success ">Update</button>
+                    <button ng-hide="session.Role_Id == 6" ng-click="UpdateAttendance()" class="btn btn-success ">Update</button>
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <table class="table table-bordered" ng-show="ShowTable" style="max-width:600px;">
+                <thead>
+                    <tr style="background: #ecf0f5;font-size: 12px;vertical-align: top;">
+                        <th style="text-align:center;">S.No</th>
+                        <th style="text-align:center;">MSPIN</th>
+                        <th style="text-align:center;">P/A</th>
+                        <th style="text-align:center;">Mark Attendance</th>
+
+                    </tr>
+                </thead>
+                <tbody style="text-align:center;">
+
+                    <tr ng-repeat="pt in CandidateList | filter:SearchText">
+                        <td>{{$index+1}}</td>
+                        <td>{{pt.MSPIN}}</td>
+                        <td>
+                            <span ng-if="pt.IsPresent==true">P</span>
+                            <span ng-if="pt.IsPresent!=true">A</span>
+                        </td>
+                        <td>
+                            <input ng-if="pt.IsPresent==false" type="checkbox" ng-model="pt.IsChecked" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</section>

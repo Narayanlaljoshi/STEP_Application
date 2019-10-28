@@ -1,0 +1,130 @@
+﻿
+<section class="content-header">
+    <h1>
+        Attendance Report
+        <!--<small>Preview of UI elements</small>-->
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Attendance Report</li>
+    </ol>
+</section>
+
+<section class="content">
+
+
+    <div class="box">
+        <div class="box-body">
+            <div class="row">
+                <!--<div class="col-xs-2">
+                    <label>Start Date* </label>
+                    <div class="datepicker" id="Div1" date-format="MMM dd, yyyy" date-min-limit="{{MaxDate.toString()}}" button-prev="<i class=&quot;fa fa-arrow-circle-left&quot;></i>" button-next="<i class=&quot;fa fa-arrow-circle-right&quot;></i>">
+                        <input ng-required="true" class="form-control" contenteditable="false" name="ExpectedStartDate" ng-model="ReportInput.StartDate" type="text" />
+
+                    </div>
+                </div>-->
+                <div class="col-xs-2">
+                    <label>End Date* </label><!--{{MaxDate.toString()}}-->
+                    <div class="datepicker" id="Div1" date-format="MMM dd, yyyy" date-min-limit="{{MaxDate.toString()}}" button-prev="<i class=&quot;fa fa-arrow-circle-left&quot;></i>" button-next="<i class=&quot;fa fa-arrow-circle-right&quot;></i>">
+                        <input ng-required="true" class="form-control" contenteditable="false" name="ExpectedStartDate" ng-model="ReportInput.EndDate" type="text" />
+
+                    </div>
+                </div>
+                <div class="col col-xs-2">
+                    <label>Program</label>
+                    <select class="form-control" ng-options="pt.ProgramId as pt.ProgramName for pt in ReportFilter.ProgramList" ng-model="ReportInput.ProgramId" ng-change="GetSessionId(ReportInput.ProgramId)"></select>
+                </div>
+                <div class="col col-xs-2">
+                    <label>Session</label>
+                    <select class="form-control" ng-options="pt.SessionID as pt.SessionID for pt in SessionList" ng-model="ReportInput.SessionID"></select>
+                </div>
+                <!--<div class="col col-xs-2">
+                    <label>Agency</label>
+                    <select class="form-control" ng-options="pt.Agency_Id as pt.AgencyName for pt in ReportFilter.AgencyList" ng-model="ReportInput.Agency_Id"
+                            ng-change="GetFacultyList(ReportInput.Agency_Id)"></select>
+                </div>
+                <div class="col col-xs-2">
+                    <label>Faculty</label>
+                    <select class="form-control" ng-options="pt.Faculty_Id as pt.FacultyName for pt in ReportFilter.FacultyList" ng-model="ReportInput.Faculty_Id"></select>
+                </div>-->
+            </div>
+            <div class="row">
+                <div class="col col-xs-4" style="margin-top: 15px;float: right;text-align: right;">
+                    <button class="btn btn-primary btn-xs" ng-click="ResetFilters(ReportInput)">Reset Filters</button>
+                    <button class="btn btn-success btn-xs" ng-click="GetReport(ReportInput)">Go</button>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="box-body" style="overflow-y:auto">
+            <div class="row">
+                <div class="col col-xs-3">
+                    <label>
+                        Search :
+                        <input class="form-control" type="text" placeholder="Search.." ng-model="SearchText" />
+                    </label>
+
+                </div>
+                <div class="col col-xs-3 pull-right text-right">
+                    <!--<button class="btn btn-success btn-xs" style="margin-top:30px;" ng-click="exportExcel()">Get Report</button>-->
+                    <csv-download ng-if="ShowReport" filename="{{data.exportFilename}}"
+                                  label="{{data.displayLabel}}"
+                                  column-header="data.myHeaderData"
+                                  input-array="data.myInputArray">
+                    </csv-download>
+                </div>
+                <!--<div class="col col-xs-3">
+            <label class="form-control">
+                Marks Greater Than
+                <input type="text" placeholder="Search.." ng-model="MarksGreater" />
+            </label>
+        </div>
+        <div class="col col-xs-3">
+            <label class="form-control">
+                Marks Less Than
+                <input type="text" placeholder="Search.." ng-model="MarksLess" />
+            </label>
+        </div>-->
+            </div>
+            <table ng-show="ShowReport" id="AttendanceReportDMS" class="table table-bordered table-hover">
+                <thead>
+                    <tr style="background: #ecf0f5;font-size: 12px;vertical-align: top;">
+                        <th>S.No</th>
+                        <th>Co id</th>
+                        <th>Agency Code</th>
+                        <th>Faculty Code</th>
+                        <th>Program code</th>
+                        <th>Session ID</th>
+                        <th>Date of Start</th>
+                        <th>MSPIN</th>
+                        <th>Day</th>
+                        <th>P/A</th>
+
+                    </tr>
+                </thead>
+                <tbody dir-paginate="pt in AttendanceReportData| itemsPerPage: 10|filter : SearchText">
+                    <!--|filter: serachText-->
+                    <tr>
+                        <td>{{$index+1}}</td>
+                        <td>{{pt.Co_id}}</td>
+                        <td>{{pt.AgencyCode}}</td>
+                        <td>{{pt.FacultyCode}}</td>
+                        <td>{{pt.ProgramCode}}</td>
+                        <td>{{pt.SessionID}}</td>
+                        <td>{{pt.StartDate|date:'dd-MMM-yy'}}</td>
+                        <td>{{pt.MSPIN}}</td>
+                        <td>{{pt.Day}}</td>
+                        <td>{{pt.P_A}}</td>
+                    </tr>
+            </table>
+            <dir-pagination-controls max-size="10"
+                                     direction-links="true"
+                                     boundary-links="true">
+            </dir-pagination-controls>
+           
+        </div>
+    </div>
+
+</section>
+

@@ -1,0 +1,67 @@
+﻿
+<section class="content-header">
+    <h1>
+        Manage Session
+        <!--<small>Preview of UI elements</small>-->
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Manage Sessions</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="box" >
+        <div class="box-header with-border">
+            <div class="row">
+                <div class="col-lg-4 pull-left"ng-if="session.Role_Id==1">
+                    <select class="form-control" ng-options="ft.Agency_Id as ft.RTMName for ft in RTMList" ng-change="GetFacultyList(Agency_IdOfRTM)" ng-model="Agency_IdOfRTM">
+                        <option selected disabled hidden value="">Select RTM</option>
+                    </select>
+                </div>
+                <div class="col-lg-4 pull-right text-right">
+                    <input type="text" placeholder="Search Text" ng-model="SearchText" />
+                    <!-- <button ng-click="AddProgram()" class="btn  btn-success btn-sm">Add Program</button>-->
+                </div>
+
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr style="background: #ecf0f5;font-size: 12px;vertical-align: top;">
+                            <th>S.No</th>
+                            <th>Session ID</th>
+                            <th>Program Code</th>
+                            <th>Program Name</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Duration(Days)</th>
+                            <th>Faculty</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr ng-repeat="pt in SessionList | filter:SearchText">
+                            <td>{{ $index+1}}</td>
+                            <td>{{pt.SessionID}}</td>
+                            <td>{{pt.ProgramCode}}</td>
+                            <td>{{pt.ProgramName}}</td>
+                            <td>{{pt.StartDate | date:'dd-MMM-yyyy'}}</td>
+                            <td>{{pt.EndDate| date:'dd-MMM-yyyy'}}</td>
+                            <td>{{pt.Duration}}</td>
+                            <td>
+                                <select class="form-control" ng-options="ft.Faculty_Id as ft.FacultyName for ft in FacultyList" ng-model="pt.Faculty_Id"></select>
+                            </td>
+                            <td>
+                                <button ng-click="UpdateFaculty(pt)" class="btn btn-success btn-xs">Update</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><!--./table resposnive-->
+        </div>
+    </div>
+</section>

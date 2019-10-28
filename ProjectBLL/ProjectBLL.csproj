@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B6002181-13CF-4456-830A-B7512342111F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ProjectBLL</RootNamespace>
+    <AssemblyName>ProjectBLL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.5.3.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.3.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CustomModel\AddCandidateBLL.cs" />
+    <Compile Include="CustomModel\AgencyListForreportFilterBLL.cs" />
+    <Compile Include="CustomModel\AttendanceDMSAutomation.cs" />
+    <Compile Include="CustomModel\AttendancePunchDtl.cs" />
+    <Compile Include="CustomModel\AttendanceReportBLL.cs" />
+    <Compile Include="CustomModel\BiometricVersiondetails.cs" />
+    <Compile Include="CustomModel\CandidatesListForStarlink.cs" />
+    <Compile Include="CustomModel\CountersForStepAgencyTrainer.cs" />
+    <Compile Include="CustomModel\CustomBLL.cs" />
+    <Compile Include="CustomModel\DaySequenceSSTC.cs" />
+    <Compile Include="CustomModel\DayWisePracticalMarkSheet.cs" />
+    <Compile Include="CustomModel\DealerOutletBLL.cs" />
+    <Compile Include="CustomModel\DocumentsBLL.cs" />
+    <Compile Include="CustomModel\EligibleCandidatesForEvaluation.cs" />
+    <Compile Include="CustomModel\FaceRecognitionDataBLL.cs" />
+    <Compile Include="CustomModel\FaciltyProgramdetails.cs" />
+    <Compile Include="CustomModel\FacultyDetailsBLL.cs" />
+    <Compile Include="CustomModel\FacultyList.cs" />
+    <Compile Include="CustomModel\FeedbackQuestionsSet.cs" />
+    <Compile Include="CustomModel\LanguageMasterBLL.cs" />
+    <Compile Include="CustomModel\MarksReportBLL.cs" />
+    <Compile Include="CustomModel\Mobile_Notification.cs" />
+    <Compile Include="CustomModel\MSPINDetails.cs" />
+    <Compile Include="CustomModel\NominationsList.cs" />
+    <Compile Include="CustomModel\NominationValidationBLL.cs" />
+    <Compile Include="CustomModel\ProgramList_For_Filter_Vendor.cs" />
+    <Compile Include="CustomModel\ProgramMasterBLL.cs" />
+    <Compile Include="CustomModel\ProgramTestCalenderBLL.cs" />
+    <Compile Include="CustomModel\ProgramTestCalenderDetail_Practical.cs" />
+    <Compile Include="CustomModel\ProgramTypes.cs" />
+    <Compile Include="CustomModel\RegistrationDetails.cs" />
+    <Compile Include="CustomModel\ReportFilterBLL.cs" />
+    <Compile Include="CustomModel\ReportInputBLL.cs" />
+    <Compile Include="CustomModel\RtcMasterBLL.cs" />
+    <Compile Include="CustomModel\ServiceType_Position.cs" />
+    <Compile Include="CustomModel\SessionIdForResetTestBLL.cs" />
+    <Compile Include="CustomModel\SessionIDListBLL.cs" />
+    <Compile Include="CustomModel\SessionList.cs" />
+    <Compile Include="CustomModel\SetSequenceBll.cs" />
+    <Compile Include="CustomModel\SSTCCandidatesList.cs" />
+    <Compile Include="CustomModel\StudentPostTestScoresBLL.cs" />
+    <Compile Include="CustomModel\StudentsList.cs" />
+    <Compile Include="CustomModel\StudenttestDetailsBLL.cs" />
+    <Compile Include="CustomModel\StudentTestQuestionsBLL.cs" />
+    <Compile Include="CustomModel\TestCodes.cs" />
+    <Compile Include="CustomModel\UploadErrors.cs" />
+    <Compile Include="CustomModel\UserDetailsBLL.cs" />
+    <Compile Include="CustomModel\VendorList.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

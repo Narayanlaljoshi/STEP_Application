@@ -1,0 +1,163 @@
+﻿
+<section class="content-header">
+    <h1>
+        Evaluation Test
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <i class="fa fa-user">
+            </i>
+        </li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Evaluation Test</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-3">
+
+            
+            <div class="box box-primary">
+                <div class="form-group" style="margin: 0;    padding: 15px 15px 0;">
+                    <label>Select Program</label>
+                    <select class="form-control" ng-options="pt.ProgramId as pt.ProgramCode for pt in ProgramsList" ng-change="GetTestCodes(ProgramId)" ng-model="ProgramId">
+                    </select>
+                </div>
+                <hr />
+                <div class="box-header with-border" ng-show="TestCodeSection">
+                    <h3 class="box-title">Evaluation</h3>
+                </div>
+                <div class="box-body"ng-show="TestCodeSection">
+
+                    <button ng-repeat="pt in TestCodes" ng-click="GetEligibleCandidatesForEvaluation(pt)" class="btn btn-primary btn-block"><b>{{pt.TestCode}} - {{pt.EvaluationType}}</b></button>
+                    <!--<a href="#" class="btn btn-primary btn-block"><b>TEST 02</b></a>
+                    <a href="#" class="btn btn-primary btn-block"><b>TEST 03</b></a>
+                    <a href="#" class="btn btn-primary btn-block"><b>TEST 04</b></a>-->
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+           
+        </div>
+        <!-- /.col -->
+        <div class="col-md-9" ng-show="CandidatesSection">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">STUDENTS For - {{CurrentTestCode}}</h3>
+                    <div class="box-tools">
+                        <div class="input-group input-group-sm pull-left" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control pull-right" ng-model="SearchText" placeholder="Search here.." />
+
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                        <button ng-hide="IsPractical" ng-click="InitiateTestForEvaluation_Theory()" class="btn btn-success btn-sm pull-right" style="margin-left:15px">Initiate Test</button>
+                    </div>
+                    
+                </div>
+                <div class="box-body no-padding">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th ng-hide="IsPractical" style="width: 10px;text-align:center;">Action</th>
+                                <th style="width: 150px;text-align:center;">MSPIN</th>
+                                <th style="text-align:center;">Name</th>
+                                <th style="text-align:center;">SessionID</th>
+                                <th ng-show="IsPractical" style="width: 10px;text-align:center;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="cd in Candidates | filter:SearchText">
+                                <td style="text-align:center;"ng-hide="IsPractical">
+                                    <input ng-hide="cd.IsEligible==false" type="checkbox" ng-model="cd.IsChecked"/>
+                                    <button ng-show="cd.IsEligible==false"class="btn btn-success btn-xs" ng-click="ViewResultTheory()">View Result</button>
+                                </td>
+                                <td style="text-align:center;">{{cd.MSPIN}}</td>
+                                <td style="text-align:center;">{{cd.Name}}</td>
+                                <td style="text-align:center;">{{cd.SessionID}}</td>
+                                <td style="text-align:center;" ng-show="IsPractical">
+                                    <button ng-show="cd.IsEligible" class="btn btn-primary btn-xs" ng-click="InitiatPracticalTest(cd)">
+                                        Start Practical
+                                    </button>
+                                    <button ng-hide="cd.IsEligible" class="btn btn-success btn-xs" ng-click="ViewResult(cd)">View Result</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+</section>
+<script type="text/ng-template" id="ViewResultsEvaluation.html">
+    <div class="modal-header">
+        <h5 class="modal-title">
+            <b>Student Test Result</b>
+            <div style="float:right" class="jarviswidget-ctrls" role="menu">
+                <a href="" ng-click="cancel()" class="button-icon jarviswidget-delete-btn" rel="tooltip" title=""
+                   data-placement="bottom" data-original-title="Delete"><i class="fa fa-times"></i></a>
+            </div>
+            <a ng-if="StudentPracticalScores.ExcelUrl" target="_blank" href="{{StudentPracticalScores.ExcelUrl}}" class="btn btn-success btn-xs" download>Export</a>
+        </h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="box-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center;">
+                                    MSPIN
+                                </th>
+                                <th style="text-align:center;">
+                                    Question
+                                </th>
+                                <th style="text-align:center;">
+                                    Action A
+                                </th>
+                                <th style="text-align:center;">
+                                    Action A
+                                </th>
+                                <th style="text-align:center;">
+                                    Action A
+                                </th>
+                                <th style="text-align:center;">
+                                    Action A
+                                </th>
+                                <th style="text-align:center;">
+                                    Action A
+                                </th>
+                                <th style="text-align:center;">
+                                    Action A
+                                </th>
+                                <th style="text-align:center;">
+                                    Total
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="text-align:center;"
+                                ng-repeat="pt in StudentPracticalScores.DayWisePracticalMarkSheet">
+                                <td>{{pt.MSPIN}}</td>
+                                <td>{{pt.Question}}</td>
+                                <td>{{pt.Marks_A}}</td>
+                                <td>{{pt.Marks_B}}</td>
+                                <td>{{pt.Marks_C}}</td>
+                                <td>{{pt.Marks_D}}</td>
+                                <td>{{pt.Marks_E}}</td>
+                                <td>{{pt.Marks_F}}</td>
+                                <td>{{pt.Total}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

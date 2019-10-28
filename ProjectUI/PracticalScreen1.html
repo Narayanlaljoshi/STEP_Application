@@ -1,0 +1,466 @@
+﻿<html ng-app="PracticalModule" ng-controller="PracticalController">
+
+
+<head>
+
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css" />-->
+    <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+    <!--Import Google Icon Font-->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link href="bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" />
+    <link href="dist/css/sweetalert.css" rel="stylesheet" />
+
+    <link href="dist/css/style.css" rel="stylesheet" />
+    <!--<script src="Scripts/jquery-1.10.2.min.js"></script>-->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+    <script src="JavaScript/OtherJS/jquery.min.js"></script>
+    <script src="JavaScript/OtherJS/jquery-ui.min.js"></script>
+    <!--<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>-->
+    <!--<script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>
+    <script src="JavaScript/CryptoJS/aes.js"></script>
+    <script src="JavaScript/CryptoJS/aes-min.js"></script>-->
+    <!--<script>
+     function preventBack() { window.history.forward(1); }
+     setTimeout("preventBack()", 1);
+     window.onunload = function () { null };
+    </script>-->
+    <script type="text/javascript">
+
+        function preventBack() { window.history.forward(); }
+
+        setTimeout("preventBack()", 0);
+
+        window.onunload = function () { null };
+    </script>
+    <!--<script type="text/javascript">
+        jQuery(document).ready(function () {
+            return "";
+        }
+    </script>-->
+
+</head>
+
+
+
+
+<style>
+    .carousel .carousel-item {
+        width: 100%;
+    }
+
+    .index-tabs {
+        overflow-x: unset;
+        overflow-y: unset;
+        white-space: normal;
+        margin-top: 15px;
+    }
+
+        .index-tabs > li {
+            display: block !important;
+            width: 25%;
+            float: left;
+        }
+
+    .footer-btn-card {
+        margin: 0;
+    }
+
+    .card.darken-1 {
+        margin-bottom: 0;
+    }
+
+    .btns button {
+        width: 125px;
+        text-align: left;
+    }
+
+        .btns button > i.material-icons.left {
+            position: absolute;
+            left: 4px;
+            top: 0;
+            font-size: 30px;
+        }
+
+        .btns button > i.material-icons.right {
+            position: absolute;
+            right: 4px;
+            top: 0;
+            font-size: 30px;
+        }
+
+
+    html,
+    body {
+        min-height: 100%;
+        width: 100%;
+    }
+
+    .tabs-icon {
+        font-size: 10px;
+        overflow: hidden;
+    }
+
+        .tabs-icon i {
+            display: block;
+            margin-top: 5px;
+            margin-bottom: -15px;
+            font-size: 24px;
+        }
+
+        .tabs-icon a.active {
+            background-color: #F3F3F3;
+        }
+    /* OVERWRITE MATERIAL CSS MIN WIDTH FOR MOBILE */
+    .tabs .tab {
+        min-width: 50px !important
+    }
+
+    .tabs .tab-hide {
+        display: none;
+    }
+
+    .no-pd {
+        padding: 0 !important
+    }
+
+    .mid-view {
+        background: white;
+        border: 0 none;
+        border-radius: 3px;
+        box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+        padding: 20px 30px;
+        box-sizing: border-box;
+        /*         width: 80%;
+        margin: 0 10%; */
+        position: relative;
+    }
+
+    nav.navingbar {
+        background: #fff;
+        padding: 15px;
+        width: 100%;
+        position: fixed;
+        box-shadow: 0 0 2px 0px #000;
+        z-index: 999;
+        text-align: center;
+        height: 63px;
+    }
+
+    .row.text-left.options {
+        margin: 0 0px;
+    }
+
+    .option {
+        position: relative;
+        padding: 0;
+        /*background: linear-gradient(45deg, rgba(153,218,255,1) 0%, rgba(0,128,128,1) 100%);*/
+    }
+
+        .option > input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            margin: 0;
+            padding: 0;
+            opacity: 0;
+        }
+
+        .option > label {
+            display: block;
+            padding: 5px 10px;
+        }
+
+        .option > input:checked ~ label {
+            background: #00448d;
+            color: #fff;
+        }
+
+    timer div p {
+        margin: 0;
+    }
+
+    .right-side-view {
+        position: fixed;
+        height: 100vh;
+        padding-top: 78px;
+        right: 0;
+        background: #fff;
+    }
+
+    .qa-index {
+        height: calc(100vh - 170px);
+        overflow-y: scroll;
+    }
+
+    .qa-index-ul {
+        padding: 0;
+        list-style: none;
+    }
+
+        .qa-index-ul > li {
+            color: #000;
+            float: left;
+            text-align: center;
+            background: #3ca4b26b;
+            margin: 5px;
+            width: calc(20% - 10px);
+            border: 0;
+        }
+
+            .qa-index-ul > li > div {
+                padding: 8px 0;
+                cursor: pointer;
+            }
+
+            .qa-index-ul > li.selected {
+                outline: 2px solid #033888;
+            }
+
+            .qa-index-ul > li.aanswered {
+                background: #0080009e;
+                color: #fff;
+            }
+
+            .qa-index-ul > li.unaanswered {
+                background: #dc1800bf;
+                color: #fff;
+            }
+
+    .input-field label {
+        font-weight: 700;
+        color: black;
+    }
+</style>
+<!--oncontextmenu="return false"-->
+<body ng-cloak oncontextmenu="return false" style="background: linear-gradient(45deg, rgba(153,218,255,1) 0%, rgba(0,128,128,1) 100%); display: table;">
+    <div style="width: 100%; height: 100%; position: fixed; z-index: 1111; left: 0; top: 0;" us-spinner="{radius:30, width:8, length: 16}">
+
+        <div style="clear: both;" class="clear"></div>
+    </div>
+
+    <nav class="navingbar" ng-init="init()">
+
+        <span class="logo-lg" style="position: absolute;left: 15px;height: 25px;overflow: hidden;margin-top: 8px;display: block;"><img src="dist/img/maruti-logo1.jpg" /></span>
+        <span style="font-size: 24px;font-weight: 600;float: right;color: #043b95;">
+            Service Training Evaluation Portal
+        </span>
+    </nav>
+
+    <div ng-show="ShowStartButton==true" style="text-align: center;display: table-cell;vertical-align: middle;">
+        <select class="form-control ng-pristine ng-valid ng-valid-required" style="width:166PX;margin:30px auto;"
+                ng-options="item.Set_Id as 'Set-'+item.Set_Id for item in SetSequence" ng-model="Set_Id">
+            <option value="">Select Set</option>
+        </select>
+        <button class="btn btn-success" ng-click="ShowDirective = true; GetStudentTestQuestions(LanguageMaster_Id)" style="padding: 20px 40px;font-size: 26px;border-radius: 35px !important;">Start Practical</button>
+    </div>
+
+
+    <div class="container-fluid" ng-show="ShowQuestions==true">
+
+        <div class="row">
+            <div class="col-sm-9" style="padding: 165px 50px 40px;">
+
+                <!--<h1 class="center">{{q.ProgramId}}</h1>-->
+
+                <div class="quizNav" style="z-index:99;background: #00000014;position: absolute;width: 100%;top: 63px;left: 0;">
+                    <div style="padding: 15px 50px;text-align: left;height:18%">
+                        <!--<button class="btn btn-default" ng-show="config.allowBack" ng-click="goTo(1);">First</button>-->
+                        <button class="btn btn-default btn-lg" style="width: 125px;" ng-show="config.allowBack" ng-click="GoToPrevious(currentPage - 1);">Previous</button>
+                        <!--<button ng-show="ShowNextbutton==true" class="btn btn-primary btn-lg" style="width: 125px;" ng-click="GoToNext(currentPage+1);">Next</button>-->
+                        <!--<button class="btn btn-default" ng-show="config.allowBack" ng-click="goTo(totalItems);">Last</button>-->
+                        <div class="" style="float:right" >
+                            <button ng-show="ShowSubmitButton" ng-click="Submit()"style="width: 125px;"class="btn btn-default btn-success btn-lg">Submit Test</button>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="mode=='quiz'" class="mid-view">
+
+                    <div ng-repeat="qt in StudentLanguageQuestion">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>
+                                    Category :{{qt.QuestionCategory}}
+                                </h2>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 style="position:relative;padding-left:35px;font-size:26px">
+                                    <span style="font-size:25px;position: absolute;left: 0;top: 0;text-align: right;width: 30px;">{{$index+1}}.</span>
+                                    <span>{{qt.Question}}</span><br />
+                                    <!--<span style="font-size:18px;display:block;margin-top:10px;">{{qt.LanguageQuestion}}</span>-->
+                                </h2>
+                            </div>
+                        </div>
+
+                        <div ng-show="qt.Question_Image">
+                            <img style="width: 200px;" ng-src="{{qt.Question_Image}}">
+                            <a data-toggle="modal" data-target="#myModal" style="display: block;margin-bottom: 10px;">Click here to enlarge the image</a>
+                            <div id="myModal" class="modal fade" role="dialog">
+                                <div class="modal-dialog modal-lg">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-body" style="padding:0">
+                                            <img class="img-responsive" style="margin:auto;width:50%" ng-src="{{qt.Question_Image}}">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row text-left options">
+                            <div class="col-xs-12 no-pd"ng-show="qt.ActionA">
+                                <div class="option" >
+                                    <input name="{{qt.QuestionCode}}"type="radio" id="{{qt.Id}}" value="a" ng-model="qt.ActionTaken" />
+                                    <label class="">
+                                        <label>A. </label>
+                                        {{qt.ActionA}}
+                                        <!--<br />&nbsp;&nbsp;&nbsp;{{qt.LanguageActionA}}-->
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 no-pd" ng-show="qt.ActionB">
+                                <div class="option">
+                                    <input name="{{qt.QuestionCode}}"type="radio"id="{{qt.Id}}" value="b" ng-model="qt.ActionTaken" />
+                                    <label class="">
+                                        <label>B. </label>
+                                        {{qt.ActionB}}
+                                        <!--<br />&nbsp;&nbsp;&nbsp;{{qt.LanguageActionB}}-->
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 no-pd" ng-show="qt.ActionC">
+                                <div class="option">
+                                    <input name="{{qt.QuestionCode}}"type="radio"id="{{qt.Id}}" value="c" ng-model="qt.ActionTaken" />
+                                    <label class="">
+                                        <label>C. </label>
+                                        {{qt.ActionC}}
+                                        <!--<br />&nbsp;&nbsp;&nbsp;{{qt.LanguageActionC}}-->
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 no-pd" ng-show="qt.ActionD">
+                                <div class="option">
+                                    <input name="{{qt.QuestionCode}}"type="radio"id="{{qt.Id}}" value="d" ng-model="qt.ActionTaken" />
+                                    <label class="">
+                                        <label>D. </label>
+                                        {{qt.ActionD}}
+                                        <!--<br />&nbsp;&nbsp;&nbsp;{{qt.LanguageActionD}}-->
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 no-pd" ng-show="qt.ActionE">
+                                <div class="option">
+                                    <input name="{{qt.QuestionCode}}"type="radio"id="{{qt.Id}}" value="e" ng-model="qt.ActionTaken" />
+                                    <label class="">
+                                        <label>E. </label>
+                                        {{qt.ActionE}}
+                                        <!--<br />&nbsp;&nbsp;&nbsp;{{qt.LanguageActionE}}-->
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 no-pd" ng-show="qt.ActionF">
+                                <div class="option">
+                                    <input name="{{qt.QuestionCode}}"type="radio"id="{{qt.Id}}" value="f" ng-model="qt.ActionTaken" />
+                                    <label class="">
+                                        <label>E. </label>
+                                        {{qt.ActionF}}
+                                        <!--<br />&nbsp;&nbsp;&nbsp;{{qt.LanguageActionE}}-->
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-3 right-side-view">
+                <div ng-if="ShowDirective" class="timer" ng-show="mode=='quiz'" ng-style="fontSize" style="padding:0;max-width: 145px;margin: auto;">
+                    <span style="font-size:20px;" ng-class="timerColor.color">
+                        <span style="float: left;">Time Left :</span>
+                        <timer interval="1000" countdown="Duration" options="dirOptions" autostart="false" /><span>{{mminutes}}:{{sseconds}}</span>
+                    </span>
+                </div>
+                <div class="btn" style="background:#df2901;display: block;padding:15px;margin-top: 10px;font-size: 18px;width: 100%;background: #0473c1;color: white;font-weight: 700;">Pause Timer</div>
+                <div class="label" style="background:#df2901;display: block;padding:15px;margin-top: 10px;font-size: 18px;width: 100%;background: #2797a0;">Question {{currentPage}} of {{totalItems}}.</div>
+                <div class="qa-index">
+                    <ul class="qa-index-ul">
+                        <li ng-repeat="qw in QuestionsResponse" ng-class="qw.ActionTaken!=null?'aanswered': 'unaanswered'">
+                            <div ng-click="GoToNext($index+1)">{{$index + 1}} </div>
+                        </li>
+                    </ul>
+                </div>
+            </div><!--./right-side-view-->
+        </div><!--./row-->
+        <!--./row-->
+        <!-- Modal -->
+        <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <!--<script src="JavaScript/AngularJS/angular.min.js"></script>-->
+        <script src="JavaScript/AngularJS/angular.min.js"></script>
+        <script src="JavaScript/OtherJS/angular-cookies.js"></script>
+        <script src="JavaScript/AngularJS/angular-route.min.js"></script>
+        <script src="JavaScript/AngularJS/angular-animate.min.js"></script>
+        <script src="JavaScript/AngularJS/angular-sanitize.min.js"></script>
+        <script src="JavaScript/AngularJS/dirPagination.js"></script>
+        <script src="JavaScript/OtherJS/angular-morris-chart-min.js"></script>
+        <script src="JavaScript/AngularJS/angular-spinner.min.js"></script>
+        <script src="JavaScript/AngularJS/angular-loading-spinner.js"></script>
+        <script src="JavaScript/AngularJS/angular-loader.min.js"></script>
+        <!--<script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>-->
+        <script src="JavaScript/OtherJS/ckeditor.js"></script>
+        <script src="JavaScript/OtherJS/angular-ckeditor.min.js"></script>
+        <script src="JavaScript/AngularJS/alasql.js"></script>
+        <script src="JavaScript/OtherJS/ui-bootstrap-tpls-1.3.3.min.js"></script>
+        <script src="WorkingJS/Script.js"></script>
+        <script src="JavaScript/OtherJS/ngStorage.min.js"></script>
+        <script src="JavaScript/OtherJS/sweetalert.min.js"></script>
+        <script src="JavaScript/OtherJS/MD5.js"></script>
+        <!--<script src="dist/js/app.js"></script>
+        <script src="dist/js/demo.js"></script>-->
+        <script></script>
+        <script src="JavaScript/OtherJS/spin.min.js"></script>
+        <script src="JavaScript/OtherJS/angular-spinner.min.js"></script>
+        <script src="JavaScript/OtherJS/angular-loading-spinner.js"></script>
+        <script src="JavaScript/OtherJS/Chart.js"></script>
+        <script src="JavaScript/AngularJS/angular-chart.min.js"></script>
+        <script src="WorkingJS/PracticalScreen.js"></script>
+        <!--<script src="WorkingJS/helperservice.js"></script>-->
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>-->
+        <script>
+            $(document).ready(function () {
+                $('ul.tabs').tabs({
+                    swipeable: true,
+                    responsiveThreshold: 1920
+                });
+            });
+            $('.carousel').carousel('set', 4);
+            $('.moveNextCarousel').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $('.carousel').carousel('next');
+            });
+            // move prev carousel
+            $('.movePrevCarousel').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $('.carousel').carousel('prev');
+            });
+        </script>
+</body>
+<!--<script>
+            $(document).ready(function () {
+                function disableBack() { window.history.forward() }
+                window.onload = disableBack();
+                window.onpageshow = function (evt) { if (evt.persisted) disableBack() }
+            });
+</script>-->
+</html>

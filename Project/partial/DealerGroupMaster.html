@@ -1,0 +1,134 @@
+﻿
+<section class="content-header">
+    <h1>
+        DealerGroup
+
+
+    </h1>
+    <!--<ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Program Setup</a></li>
+        <li class="active">DealerGroup</li>
+    </ol>-->
+</section>
+
+<section class="content">
+    <div class="row" ng-show="showAddBulkButton==true">
+        <div class="col-lg-3">
+            <!--<button class="btn btn-primary btn-sm" ng-click="GetList(SearchData,TargetType)">Search</button>-->
+            <button class="btn btn-primary btn-sm" ng-click="AddDealerGroup()">Add New DealerGroup</button>
+            <!--<button class="btn btn-primary btn-sm" ng-click="AddTransaction()">Bulk Upload</button>-->
+
+        </div>
+
+
+
+
+    </div>
+
+    <div class="row" ng-show="showDealerGroupGrid==true">
+        <div class="col-lg-12">
+            <div class="box">
+
+                <div class="box-body" style="overflow-y:auto">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+
+                                <th>DealerGroup Code</th>
+                                <th>DealerGroup Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="pt in DealerGroupData">
+                            <!--|filter: serachText-->
+                            <tr>
+                                <td>{{$index+1}}</td>
+
+                                <td>{{pt.DealerGroupCode}}</td>
+                                <td>{{pt.DealerGroupName}}</td>
+
+                                <td>
+                                    <button class="btn btn-warning btn-sm" ng-click="DeleteTransaction(pt)">Delete</button>
+                                    <button class="btn btn-primary btn-sm" ng-click="UpdateTransaction(pt)">Update </button>
+                                </td>
+                            </tr>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!----------showAddForm----------------->
+
+    <div class="box" ng-show="showAddForm==true">
+        <div class="box-header">
+            <h3 class="box-title">Add DealerGroup </h3>
+            <div class="box-body">
+                <div class="row">
+
+                    <div class="col-xs-2">
+                        <label>DealerGroup Code*</label>
+                        <input type="text" class=" form-control" ng-maxlength="100" ng-model="DealerGroupDetailData.DealerGroupCode" placeholder="DealerGroup Code" />
+                    </div>
+                    <div class="col-xs-2">
+                        <label>DealerGroup Name*</label>
+                        <input type="text" class=" form-control" ng-maxlength="100" ng-model="DealerGroupDetailData.DealerGroupName" placeholder="DealerGroup Name" />
+                    </div>
+
+
+                </div>
+
+                <hr />
+                <div class="row">
+                    <div class="col-xs-3">
+                        <button class="btn btn-primary btn-sm" ng-click="AddSaveDealerGroup()">Save</button>
+                        <button class="btn btn-primary btn-sm" ng-click="init()">Back </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!----------showUpdataForm----------------->
+
+    <div class="box" ng-show="showUpdataForm==true">
+        <div class="box-header">
+            <h3 class="box-title">Update DealerGroup </h3>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-xs-2">
+                    <label>DealerGroup Code</label>
+                    <input type="text" class=" form-control" ng-maxlength="100" ng-model="DealerGroupDetailData.DealerGroupCode" placeholder="DealerGroup Code" />
+                </div>
+                <div class="col-xs-2">
+                    <label>DealerGroup Name*</label>
+                    <input type="text" class=" form-control" ng-maxlength="100" ng-model="DealerGroupDetailData.DealerGroupName" placeholder="DealerGroup Name" />
+                </div>
+
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-xs-3">
+                    <button class="btn btn-primary btn-sm" ng-click="UpdateSaveDealerGroup(pt)">Update</button>
+                    <button class="btn btn-primary btn-sm" ng-click="init()">Back </button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+</section>
+

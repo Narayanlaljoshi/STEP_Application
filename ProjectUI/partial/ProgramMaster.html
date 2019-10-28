@@ -1,0 +1,135 @@
+﻿
+<section class="content-header">
+    <h1>
+        Program Setup
+        <!--<small>Preview of UI elements</small>-->
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Program Setup</li>
+    </ol>
+</section>
+
+<section class="content">
+
+    <div class="box" ng-show="DataProgram==true">
+        <div class="box-header with-border text-right">
+            <input type="text" placeholder="Search Text" ng-model="SearchText" />
+                <button ng-click="AddProgram()" class="btn  btn-success btn-sm btn-xs">Add Program</button>
+            </div>
+
+
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr style="background: #ecf0f5;font-size: 12px;vertical-align: top;">
+                                <th>S.No</th>
+                                <th>Program Code</th>
+                                <th>Program Name</th>
+                                <th>Program Type</th>
+                                <th>Duration</th>
+                                <th>Language</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr ng-repeat="pt in ProgramArray | filter:SearchText">
+
+                                <td>{{ $index+1}}</td>
+                                <td>{{pt.ProgramCode}}</td>
+                                <td>{{pt.ProgramName}}</td>
+                                <td>
+                                    {{pt.ProgramType}}</td>
+                                <td>{{pt.Duration
+                                    }}
+                                </td>
+                                <td>
+                                    <label ng-repeat="item in pt.SelectedLanguages">
+                                        <span ng-hide="$first">,</span> {{item.Language}}
+                                    </label>
+                                </td>
+                                <td>
+                                    <button ng-click="Edit(pt)" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></button>
+                                    <!--<button ng-click="DeleteProgram(pt.ProgramId)" class="btn  btn-danger btn-xs"><i class="fa fa-close"></i></button>-->
+                                    <button ng-click="TestSetup(pt)" class="btn  btn-primary btn-xs">Test Setup</button>
+                                </td>
+                            </tr>
+                        </tbody>
+
+
+                    </table>
+                </div>
+
+            </div>
+
+        <div class="box" ng-show="PlusProgram==true">
+            <div class="box-header with-border">
+                <h3 class="box-title">Add Program</h3>
+            </div>
+
+            <div class="box-body">
+        
+                <div class="row">
+                    <section class="col-lg-4">
+                        <div class="form-group ">
+                            <label class="control-label " for="select">
+                                Program Code :
+                            </label>
+                            <input type="text" ng-disabled="ProgramId" class="form-control" id="exampleInputEmail1" ng-model="ProgramCode" placeholder="Program Code">
+
+                        </div>
+                    </section>
+                    <section class="col-lg-4">
+                        <div class="form-group ">
+                            <label class="control-label " for="select">
+                                Program Name :
+                            </label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" ng-model="ProgramName" placeholder="Program Name">
+                        </div>
+                    </section>
+                    <section class="col-lg-4">
+                        <div class="form-group ">
+                            <label class="control-label " for="select">
+                                Program Type :
+                            </label>
+                            <select class="form-control" value="item.ProgramType_Id" ng-model="ProgramType_Id">
+                                <option value="1">Course</option>
+                                <option value="2">Evaluation</option>
+                                <option value="3">New Model</option>
+                                <option value="4">Blank</option>
+                            </select>
+                        </div>
+                    </section>
+                    <section class="col-lg-4">
+                        <div class="form-group ">
+                            <label class="control-label " for="select">
+                                Duration :
+                            </label>
+                            <input type="number" class="form-control" id="exampleInputEmail1" ng-model="Duration" placeholder="Duration">
+
+                        </div>
+                    </section>
+                    <section class="col-lg-4">
+                        <div class="form-group ">
+                            <label class="control-label " for="select">
+                                Applicable Language :
+                            </label>
+                            <select class="form-control" value="item.LanguageMasterId" multiple ng-options="item.LanguageMasterId as item.Language for item in LanguageArray" ng-model="SelectedLanguages"></select>
+                        </div>
+                    </section>
+                </div>  
+
+            </div><!--./box-body-->
+
+            <div class="box-footer text-right">
+                <button ng-click="UpdateFunction()" ng-show="UpdateProgram==true" class="btn  btn-success btn-xs">Update</button>
+
+                <button ng-click="SaveFunction()" ng-show="SaveProgram==true" class="btn  btn-primary btn-xs">Save</button>
+
+                <button ng-click="Back()" ng-show="BackProgram==true" class="btn  btn-warning btn-xs">Back</button>
+            </div>
+
+        </div><!--./box-->
+
+</section>

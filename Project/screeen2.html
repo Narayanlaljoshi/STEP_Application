@@ -1,0 +1,395 @@
+﻿<html ng-app="StudentModule" ng-controller="StudentController">
+
+
+<head>
+
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css" />-->
+    <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+    <!--Import Google Icon Font-->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link href="bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" />
+    <link href="dist/css/sweetalert.css" rel="stylesheet" />
+
+    <link href="dist/css/style.css" rel="stylesheet" />
+    <!--<script src="Scripts/jquery-1.10.2.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <!--<script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>
+    <script src="JavaScript/CryptoJS/aes.js"></script>
+    <script src="JavaScript/CryptoJS/aes-min.js"></script>-->
+    <!--<script>
+     function preventBack() { window.history.forward(1); }
+     setTimeout("preventBack()", 1);
+     window.onunload = function () { null };
+    </script>-->
+    <script type="text/javascript">
+
+        function preventBack() { window.history.forward(); }
+
+        setTimeout("preventBack()", 0);
+
+        window.onunload = function () { null };
+    </script>
+    <!--<script type="text/javascript">
+        jQuery(document).ready(function () {
+            return "";
+        }
+    </script>-->
+
+</head>
+
+
+
+
+<style>
+    .carousel .carousel-item {
+        width: 100%;
+    }
+
+    .index-tabs {
+        overflow-x: unset;
+        overflow-y: unset;
+        white-space: normal;
+        margin-top: 15px;
+    }
+
+        .index-tabs > li {
+            display: block !important;
+            width: 25%;
+            float: left;
+        }
+
+    .footer-btn-card {
+        margin: 0;
+    }
+
+    .card.darken-1 {
+        margin-bottom: 0;
+    }
+
+    .btns button {
+        width: 125px;
+        text-align: left;
+    }
+
+        .btns button > i.material-icons.left {
+            position: absolute;
+            left: 4px;
+            top: 0;
+            font-size: 30px;
+        }
+
+        .btns button > i.material-icons.right {
+            position: absolute;
+            right: 4px;
+            top: 0;
+            font-size: 30px;
+        }
+
+
+    html,
+    body {
+        min-height: 100%;
+        width: 100%;
+    }
+
+    .tabs-icon {
+        font-size: 10px;
+        overflow: hidden;
+    }
+
+        .tabs-icon i {
+            display: block;
+            margin-top: 5px;
+            margin-bottom: -15px;
+            font-size: 24px;
+        }
+
+        .tabs-icon a.active {
+            background-color: #F3F3F3;
+        }
+    /* OVERWRITE MATERIAL CSS MIN WIDTH FOR MOBILE */
+    .tabs .tab {
+        min-width: 50px !important
+    }
+
+    .tabs .tab-hide {
+        display: none;
+    }
+
+    .no-pd {
+        padding: 0 !important
+    }
+
+    .mid-view {
+        background: white;
+        border: 0 none;
+        border-radius: 3px;
+        box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+        padding: 20px 30px;
+        box-sizing: border-box;
+        /*         width: 80%;
+        margin: 0 10%; */
+        position: relative;
+    }
+
+    .right-side-view {
+        position: fixed;
+        height: 100vh;
+        padding-top: 87px;
+        right: 0;
+        background: #fff;
+    }
+
+    .qa-index-ul {
+        padding: 0;
+        list-style: none;
+    }
+
+        .qa-index-ul > li {
+            color: #000;
+            float: left;
+            text-align: center;
+            background: #3ca4b26b;
+            padding: 14px 0;
+            margin: 5px;
+            width: calc(20% - 10px);
+        }
+
+            .qa-index-ul > li.answered {
+                background: #0080009e;
+                color: #fff;
+            }
+
+    nav.navingbar {
+        background: #fff;
+        padding: 15px;
+        width: 100%;
+        position: fixed;
+        box-shadow: 0 0 2px 0px #000;
+        z-index: 999;
+    }
+
+    .option {
+        position: relative;
+        padding: 0;
+        /*background: linear-gradient(45deg, rgba(153,218,255,1) 0%, rgba(0,128,128,1) 100%);*/
+    }
+
+        .option > input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            margin: 0;
+            padding: 0;
+            opacity: 0;
+        }
+
+        .option > label {
+            display: block;
+            padding: 5px 10px;
+        }
+
+        .option > input:checked ~ label {
+            background: #00448d;
+            color: #fff;
+        }
+
+    timer div p {
+        margin: 0;
+    }
+</style>
+
+
+<body oncontextmenu="return false" ng-cloak style="background: linear-gradient(45deg, rgba(153,218,255,1) 0%, rgba(0,128,128,1) 100%); display: table;">
+
+    <nav class="navingbar" ng-init="init()">
+
+        <img style="margin: 9px 0;" src="dist/img/maruti-logo1.jpg" />
+
+        <div ng-if="ShowDirective" class="timer" ng-show="mode=='quiz'" ng-style="fontSize" style="float:right">
+            <span style="font-size: 40px;" ng-class="timerColor.color">
+                <timer interval="1000" countdown="Duration" options="dirOptions" autostart="false" /><span>{{mminutes}}:{{sseconds}}</span>
+            </span>
+        </div>
+    </nav>
+
+
+
+
+    <div class="container-fluid" ng-show="ShowQuestions==true">
+
+        <div class="row">
+            <div id="quiz" class="col-sm-9" style="padding: 0 50px;">
+
+                <h1 class="center">{{q.ProgramId}}</h1>
+
+
+                <div ng-show="mode=='quiz'" class="mid-view">
+
+                    <div ng-repeat="question in filteredQuestions">
+                        <div class="label" style="background:#df2901">Question {{currentPage}} of {{totalItems}}.</div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 style="position:relative;padding-left:35px;font-size:26px">
+                                    <span style="position: absolute;left: 0;top: 0;text-align: right;width: 30px;">{{currentPage}}.</span><span ng-bind-html="question.Name">{{question.Question}}</span>{{question.Question}}
+                                    <br />
+                                    {{question.QuestionLanguage}}
+                                </h2>
+                            </div>
+                        </div>
+
+                        <div ng-show="question.Image">
+                            <img style="width: 200px;" ng-src="{{question.Image}}">
+                            <a data-toggle="modal" data-target="#myModal" style="display: block;margin-bottom: 10px;">Click here to enlarge the image</a>
+
+                            <div id="myModal" class="modal fade" role="dialog">
+                                <div class="modal-dialog modal-lg">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <!--<div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Modal Header</h4>
+                                        </div>-->
+                                        <div class="modal-body" style="padding:0">
+                                            <img class="img-responsive" ng-src="{{question.Image}}">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row text-left options">
+
+                            <div class="col-xs-6">
+                                <div class="option">
+                                    <input name="name" id="{{option.Id}}" value="1"
+                                           type="radio" ng-model="question.AnswerGiven" />      <!--ng-change="onSelect(question, option);"-->
+                                    <label class="" for="{{option.Id}}">
+                                        {{question.Answer1}}
+                                        <br />{{question.LanguageAnswer1}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="option">
+                                    <input name="name" id="{{option.Id}}" value="2" type="radio" ng-model="question.AnswerGiven" />
+                                    <label class="" for="{{option.Id}}">
+                                        {{question.Answer2}}
+                                        <br />{{question.LanguageAnswer2}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="option">
+                                    <input name="name" id="{{option.Id}}" value="3" type="radio" ng-model="question.AnswerGiven" />
+                                    <label class="" for="{{option.Id}}">
+                                        {{question.Answer3}}
+                                        <br />{{question.LanguageAnswer3}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="option">
+                                    <input name="name" id="{{option.Id}}" value="4" type="radio" ng-model="question.AnswerGiven" /> <label class="" for="{{option.Id}}">
+                                        {{question.Answer4}}
+                                        <br />{{question.LanguageAnswer4}}
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="quizNav">
+                        <div style="padding: 25px 0;">
+                            <!--<button class="btn btn-default" ng-show="config.allowBack" ng-click="goTo(1);">First</button>-->
+                            <button class="btn btn-default btn-lg" style="width: 125px;" ng-show="config.allowBack" ng-click="goTo(currentPage - 1);">Previous</button>
+                            <button class="btn btn-primary btn-lg" style="width: 125px;" ng-click="goTo(currentPage + 1);">Next</button>
+                            <!--<button class="btn btn-default" ng-show="config.allowBack" ng-click="goTo(totalItems);">Last</button>-->
+
+                        </div>
+
+                        <br />
+                        <pagination ng-show="config.showPager" direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>
+                    </div>
+                </div>
+                <!--<div class="row review" ng-show="mode=='review'">
+                    <div class="col-sm-4" ng-repeat="question in questions">
+                        <div ng-click="goTo($index + 1)" class="{{ isAnswered($index) == 'Answered'? 'answered': 'not-answered' }}">{{$index + 1}}. {{ isAnswered($index) }}</div>
+                    </div>
+                </div>-->
+                <!--<div class="result" ng-show="mode=='result'">
+                    <h2>Quiz Result</h2>
+                    <div ng-repeat="question in questions">
+                        <div class="result-question">
+                            <h4>{{$index + 1}}. {{question.Name}}</h4>
+                            <div class="row">
+                                <div class="col-md-6" ng-repeat="Option in question.Options">
+                                    <div>
+                                        <input id="{{Option.Id}}" type="checkbox" disabled="disabled" ng-model="Option.Selected" />
+                                        {{Option.Name}}
+                                    </div>
+                                </div>
+                            </div>
+                            <h4 class="alert {{ isCorrect(question) == 'correct'? 'alert-success': 'alert-danger'}}">Your answer is {{isCorrect(question)}}.</h4>
+                        </div>
+                    </div>
+                    <h4 class="alert alert-info text-center">You may close this window now.</h4>
+                </div>-->
+
+
+            </div>
+            <!--./row-->
+
+            <div class="col-sm-3 right-side-view">
+                <div class="qa-index">
+
+                    <ul class="qa-index-ul">
+                        <li class="answered">1</li>
+                        <li class="answered">2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>10</li>
+                        <li>11</li>
+                        <li>12</li>
+                        <li>13</li>
+                        <li>14</li>
+                        <li>15</li>
+                        <li>16</li>
+                        <li>17</li>
+                        <li>18</li>
+                        <li>19</li>
+                        <li>20</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+</body>
+
+<!--<script>
+            $(document).ready(function () {
+                function disableBack() { window.history.forward() }
+
+                window.onload = disableBack();
+                window.onpageshow = function (evt) { if (evt.persisted) disableBack() }
+            });
+</script>-->
+
+</html>

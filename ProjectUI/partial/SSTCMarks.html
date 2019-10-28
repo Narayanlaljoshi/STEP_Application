@@ -1,0 +1,137 @@
+﻿<!--only for mobile view-->
+<style>
+    ul.homepage-dash {
+        padding: 0;
+        list-style: none;
+        width: 100%;
+        display: table;
+        background: #fff;
+    }
+
+        ul.homepage-dash > li {
+            text-align: center;
+            display: table-cell;
+        }
+
+            ul.homepage-dash > li.active a {
+                border-bottom: 3px solid #db1e0a;
+                color: #022d7b;
+            }
+
+            ul.homepage-dash > li a {
+                padding: 10px;
+                display: block;
+                color: #000;
+            }
+</style>
+<ul class="homepage-dash visible-xs" ng-show="session.Role_Id ==6">
+
+    <li>
+        <a href="#/ManageAttandence"><span>Attendance</span></a>
+    </li>
+    <li class="active">
+        <a href="#/SSTCMarks"><span>Marks</span></a>
+    </li>
+    <li>
+        <a href="#/CourseClosure"><span>Course Closure</span></a>
+    </li>
+
+</ul>
+<!--/only for mobile view-->
+<section class="content-header">
+    <h1>
+        Marks
+        <!--<small>Preview of UI elements</small>-->
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Candidates List</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="box">
+        <div class="box-header with-border">
+
+                <button class="btn btn-success pull-right btn-sm" ng-click="AddCandidate()">+ Add Candidate</button>
+            
+        </div>
+            <div class="box-body">
+            
+                <div class="row">
+                        <div class="col-lg-3 col-xs-6">
+                            <label>
+                                Select SessionID
+                            </label>
+                            <select class="form-control" ng-change="GetDaySequenceSSTC()" ng-model="Filter.SessionId" ng-options="ft.SessionID as ft.SessionID for ft in SessionList"></select>
+                        </div>
+                        <div class="col-lg-2 col-xs-3" style="    padding: 0;">
+                            <label>
+                                Day
+                            </label>
+                            <select class="form-control" ng-options="ft.Day as ft.Day for ft in DaySequence" ng-model="Filter.Day">
+                                <!--<option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>-->
+                            </select>
+                        </div>
+                        <div class="col-lg-2 col-xs-3">
+                            <button class="btn btn-primary" style="margin-top: 25px;" ng-click="GetCandidatesListForSSTC()">Go</button>
+                        </div>
+                        
+
+                    </div>
+                <br/>
+                <div class="table-responsive" ng-show="ShowTable">
+                <table class="table table-bordered" style="max-width:600px;">
+                    <thead>
+                        <tr style="background: #3c8dbc;color: aliceblue;">
+                            <th style="text-align:center">
+                                MSPIN
+                            </th>
+                            <th style="text-align:center">
+                                Day
+                            </th>
+                            <th style="text-align:center">
+                                Marks
+                            </th>
+                            <!--<th>
+                        Action
+                    </th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="pt in CandidateList" style="text-align: center;">
+                            <td>
+                                {{pt.MSPIN}}
+                            </td>
+                            <td>
+                                {{pt.Day}}
+                            </td>
+                            <td>
+                                <span ng-if="pt.IsSubmitted!=0">{{pt.Marks}}</span>
+                                <span ng-if="pt.IsSubmitted==0">
+                                    <input type="text" style="width: 80px;margin: auto;" class="form-control" maxlength="3" numbers-only ng-model="pt.Marks" />
+                                </span>
+                            </td>
+                            <!--<td>
+                        <button class="btn btn-danger btn-xs" ng-click="SpliceRowToFacultyList(pt,$index)">-</button>
+                    </td>-->
+                        </tr>
+                    </tbody>
+                </table>
+
+                </div><!--./table-responsive--->
+
+          
+        </div> <!--./box-body-->
+            <div class="box-footer"  ng-show="ShowTable">
+              
+                    <button class="btn btn-success btn-sm pull-right"  ng-click="UpDateMarksForSSTC()">Submit</button>
+             
+            </div>
+    </div><!--./box-->
+</section>

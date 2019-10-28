@@ -1,0 +1,511 @@
+﻿<html ng-app="TimerModule" ng-controller="ControllerName">
+
+
+<head>
+
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css" />-->
+    <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+    <!--Import Google Icon Font-->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link href="bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" />
+    <link href="dist/css/sweetalert.css" rel="stylesheet" />
+
+    <link href="dist/css/style.css" rel="stylesheet" />
+    <!--<script src="Scripts/jquery-1.10.2.min.js"></script>-->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+    <script src="JavaScript/OtherJS/jquery.min.js"></script>
+    <script src="JavaScript/OtherJS/jquery-ui.min.js"></script>
+    <!--<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>-->
+    <!--<script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>
+    <script src="JavaScript/CryptoJS/aes.js"></script>
+    <script src="JavaScript/CryptoJS/aes-min.js"></script>-->
+    <!--<script>
+     function preventBack() { window.history.forward(1); }
+     setTimeout("preventBack()", 1);
+     window.onunload = function () { null };
+    </script>-->
+    <script type="text/javascript">
+
+        function preventBack() { window.history.forward(); }
+
+        setTimeout("preventBack()", 0);
+
+        window.onunload = function () { null };
+    </script>
+    <!--<script type="text/javascript">
+        jQuery(document).ready(function () {
+            return "";
+        }
+    </script>-->
+
+</head>
+
+
+
+
+<style>
+    .carousel .carousel-item {
+        width: 100%;
+    }
+
+    .index-tabs {
+        overflow-x: unset;
+        overflow-y: unset;
+        white-space: normal;
+        margin-top: 15px;
+    }
+
+        .index-tabs > li {
+            display: block !important;
+            width: 25%;
+            float: left;
+        }
+
+    .footer-btn-card {
+        margin: 0;
+    }
+
+    .card.darken-1 {
+        margin-bottom: 0;
+    }
+
+    .btns button {
+        width: 125px;
+        text-align: left;
+    }
+
+        .btns button > i.material-icons.left {
+            position: absolute;
+            left: 4px;
+            top: 0;
+            font-size: 30px;
+        }
+
+        .btns button > i.material-icons.right {
+            position: absolute;
+            right: 4px;
+            top: 0;
+            font-size: 30px;
+        }
+
+
+    html,
+    body {
+        min-height: 100%;
+        width: 100%;
+    }
+
+    .tabs-icon {
+        font-size: 10px;
+        overflow: hidden;
+    }
+
+        .tabs-icon i {
+            display: block;
+            margin-top: 5px;
+            margin-bottom: -15px;
+            font-size: 24px;
+        }
+
+        .tabs-icon a.active {
+            background-color: #F3F3F3;
+        }
+    /* OVERWRITE MATERIAL CSS MIN WIDTH FOR MOBILE */
+    .tabs .tab {
+        min-width: 50px !important
+    }
+
+    .tabs .tab-hide {
+        display: none;
+    }
+
+    .no-pd {
+        padding: 0 !important
+    }
+
+    .mid-view {
+        background: white;
+        border: 0 none;
+        border-radius: 3px;
+        box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+        padding: 20px 30px;
+        box-sizing: border-box;
+        /*         width: 80%;
+        margin: 0 10%; */
+        position: relative;
+    }
+
+    nav.navingbar {
+        background: #fff;
+        padding: 15px;
+        width: 100%;
+        position: fixed;
+        box-shadow: 0 0 2px 0px #000;
+        z-index: 999;
+        text-align: center;
+        height: 63px;
+    }
+
+    .row.text-left.options {
+        margin: 0 0px;
+    }
+
+    .option {
+        position: relative;
+        padding: 0;
+        /*background: linear-gradient(45deg, rgba(153,218,255,1) 0%, rgba(0,128,128,1) 100%);*/
+    }
+
+        .option > input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            margin: 0;
+            padding: 0;
+            opacity: 0;
+        }
+
+        .option > label {
+            display: block;
+            padding: 5px 10px;
+        }
+
+        .option > input:checked ~ label {
+            background: #00448d;
+            color: #fff;
+        }
+
+    timer div p {
+        margin: 0;
+    }
+
+    .right-side-view {
+        position: fixed;
+        height: 100vh;
+        padding-top: 78px;
+        right: 0;
+        background: #fff;
+    }
+
+    .qa-index {
+        height: calc(100vh - 170px);
+        overflow-y: scroll;
+    }
+
+    .qa-index-ul {
+        padding: 0;
+        list-style: none;
+    }
+
+        .qa-index-ul > li {
+            color: #000;
+            float: left;
+            text-align: center;
+            background: #3ca4b26b;
+            margin: 5px;
+            width: calc(20% - 10px);
+            border: 0;
+        }
+
+            .qa-index-ul > li > div {
+                padding: 8px 0;
+                cursor: pointer;
+            }
+
+            .qa-index-ul > li.selected {
+                outline: 2px solid #033888;
+            }
+
+            .qa-index-ul > li.aanswered {
+                background: #0080009e;
+                color: #fff;
+            }
+
+            .qa-index-ul > li.unaanswered {
+                background: #dc1800bf;
+                color: #fff;
+            }
+
+    button#two:focus {
+        background: #5cb85c;
+        border-color: #5cb85c;
+    }
+
+    .input-field label {
+        font-weight: 700;
+        color: black;
+    }
+
+    .col-sm-5 {
+        width: 20%;
+    }
+
+    .tr-active > td.active {
+        background-color: #337ab7 !important;
+        color:white;
+    }
+
+    .label-left {
+        color: aliceblue;
+        border: 1px solid white;
+        padding: 6px;
+        
+    }
+</style>
+<!--ng-cloak oncontextmenu="return false"-->
+<body ng-cloak style="background: linear-gradient(45deg, rgba(153,218,255,1) 0%, rgba(0,128,128,1) 100%); display: table;">
+    <div style="width: 100%; height: 100%; position: fixed; z-index: 1111; left: 0; top: 0;" us-spinner="{radius:30, width:8, length: 16}">
+
+        <div style="clear: both;" class="clear"></div>
+    </div>
+
+    <nav class="navingbar" ng-init="init()">
+
+        <span class="logo-lg" style="position: absolute;left: 15px;height: 25px;overflow: hidden;margin-top: 8px;display: block;"><img src="dist/img/maruti-logo1.jpg" /></span>
+        <span style="font-size: 24px;font-weight: 600;float: right;color: #043b95;">
+            Service Training Evaluation Portal
+        </span>
+
+
+    </nav>
+    <div ng-show="ShowStartButton==true" style="text-align: center;display: table-cell;vertical-align: middle;">
+        <div class="row">
+            
+            <select class="form-control ng-pristine ng-valid ng-valid-required" style="width:auto;margin:30px auto;"
+                    ng-options="item.Set_Id as item.Set_Title for item in SetSequence" ng-model="Set_Id">
+                <option value="">Select Set</option>
+            </select>
+            <select class="form-control ng-pristine ng-valid ng-valid-required" ng-show="StudentTestDetails.ExtendedTime==null" style="width:auto;margin:30px auto;"
+                    ng-options="item.Id as item.ServiceType+' : '+item.Position for item in ServiceTypeList" ng-change="GetPosition(Position_Id)" ng-model="Position_Id">
+                <option value="">Select Position</option>
+            </select>
+            <input class="form-control" ng-show="StudentTestDetails.ExtendedTime==null" maxlength="3" numbers-only placeholder="Extend Time(min)" style="width:auto;margin:30px auto;" ng-model="ExtendedTime" />
+        </div>
+        <button class="btn btn-success" ng-click="ShowDirective = true; GetStudentTestQuestions(LanguageMaster_Id)" style="padding: 20px 40px;font-size: 26px;border-radius: 35px !important;">Start Practical</button>
+
+    </div>
+
+    <div class="container-fluid" ng-show="ShowQuestions==true">
+        <div class="row">
+            <div class="col-sm-12" style="padding: 165px 50px 40px;">
+
+                <!--<h1 class="center">{{q.ProgramId}}</h1>-->
+                <div class="quizNav" style="z-index:99;background: #0f898d;position: absolute;width: 100%;top: 63px;left: 0;position:fixed;">
+                    <div style="float:left;margin-top:10px;margin-left:6px;">
+                        <label class="label-left" style="border-radius: 15px;">Dealer : {{StudentTestDetails.DealerName}}</label>
+                        <label class="label-left" style="border-radius: 15px;">Examinee : {{StudentTestDetails.Name +' ('+ StudentTestDetails.MSPIN +')'}}</label>
+                        <label class="label-left" style="border-radius: 15px;">Examiner : {{StudentTestDetails.FacultyName}}</label>
+                        <label class="label-left" style="border-radius: 15px;">
+                            Position :{{Position}}
+                            <!--<select class="form-control ng-pristine ng-valid ng-valid-required" disabled style="width:auto;margin:30px auto;"
+            ng-options="item.Id as item.ServiceType+' : '+item.Position for item in ServiceTypeList" ng-model="Position_Id">
+        <option value="">Select Position</option>
+    </select>-->
+                        </label>
+                        <label class="timer label-left" ng-show="mode=='quiz'&& IsTimePaused==false && IsTimeOver==false" style="background: #337ab7;border-radius: 15px;" ng-style="fontSize" ng-class="timerColor.color">
+                            <span ng-show="IsTimePaused==false && clock > 0">Time left: {{countDown_text1}}:{{countDown_text2}}s</span>
+                            <!--<span class="label-left" style="border-radius: 15px;color:red;font-size:20px;" ng-show="IsTimeOver">Times up .</span>-->
+                        </label>
+                        <label class="label-left" style="background: #b84a4a;font-size:20px;border-radius: 15px;" ng-show="IsTimeOver">
+                        Times up:{{countDown_text1}}:{{countDown_text2}}s</label>
+                    </div>
+                    <div style="float:right;">
+                    <span >
+                    </span>
+                    <button class="btn btn-warning btn-sm" ng-show="IsTimePaused==false && clock > 0" ng-click="PauseTime()" style="margin-top: 9px;margin-bottom:10px;margin-right:6px;font-size:15px;border-radius: 15px;">Pause Timer</button>
+                    <button class="btn btn-success btn-lg" ng-show="IsTimePaused" ng-click="ResumeTime()" style="margin-top: 9px;margin-bottom:10px;margin-right:6px;font-size:15px;border-radius: 15px;">Resume Timer</button>
+                    </div>
+                    <br />
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-sm-4"ng-show="mode=='quiz' && IsTimePaused==false">
+                        <div style="max-height:575px;overflow-y:auto; ">
+                            <table class="table" style="margin-bottom:auto;">
+                                <tbody>
+                                    <tr class="tr-active" ng-repeat="pt in StudentLanguageQuestion" style="font-size:12px;">
+                                        <td class="btn-hover clickable-row"style="border-radius:10px;background: white;border-top:0px;cursor: pointer;"
+                                            ng-class="getClass(pt)"ng-click="SelectCatagory(pt.Catagory)" >
+                                            <span class="">
+                                                <b>{{$index+1}}-{{pt.Catagory}}</b>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div><!--table div-->
+                    </div>
+                    <div class="col-md-8 col-sm-8">
+                        <div ng-show="mode=='quiz' && IsTimePaused==false" class="mid-view" style="max-height:800px;overflow-y:auto;" ng-if="qt.Catagory == SelectedCatagory" ng-repeat="qt in StudentLanguageQuestion">
+                            <div>
+                                <div class="row" style="background: #337ab7;color: aliceblue;text-align: center;padding4px;">
+                                    <div class="col-md-12">
+                                        <span style="font-size:21px;">
+                                            Category :{{qt.Catagory}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div ng-repeat="q in qt.StudentLanguageQuestion">
+                                    <div class="row" style="margin-right:0px;">
+                                        <div class="col-md-12">
+                                            <h2 style="position:relative;padding-left:35px;font-size:18px">
+                                                <span style="font-size:18px;position: absolute;left: 0;top: 0;text-align: right;width: 30px;">{{q.Ques_Sequence}}.</span>
+                                                <span>{{q.Question}}</span>
+                                                <button ng-show="q.ActionTaken" class="btn btn-primary btn-xs pull-right" ng-click="q.ActionTaken=null">Reset</button>
+                                                <br />
+                                                <!--<span style="font-size:18px;display:block;margin-top:10px;">{{q.LanguageQuestion}}</span>-->
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <div ng-show="q.Question_Image">
+                                        <img style="width: 200px;" ng-src="{{q.Question_Image}}">
+                                        <a data-toggle="modal" data-target="#myModal" style="display: block;margin-bottom: 10px;">Click here to enlarge the image</a>
+                                        <div id="myModal" class="modal fade" role="dialog">
+                                            <div class="modal-dialog modal-lg">
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-body" style="padding:0">
+                                                        <img class="img-responsive" style="margin:auto;width:50%" ng-src="{{q.Question_Image}}">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row text-left options">
+                                        <div class="col-xs-3 no-pd" ng-show="q.ActionA">
+                                            <div class="option" style="font-size:15px;">
+                                                <input name="{{q.QuestionCode}}" type="radio" id="{{q.Id}}" value="a" ng-model="q.ActionTaken" />
+                                                <label class="">
+                                                    <!--<label>A. </label>-->
+                                                    {{q.ActionA}}
+                                                    <!--<br />&nbsp;&nbsp;&nbsp;{{q.LanguageActionA}}-->
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-3 no-pd" ng-show="q.ActionB">
+                                            <div class="option" style="font-size:15px;">
+                                                <input name="{{q.QuestionCode}}" type="radio" id="{{q.Id}}" value="b" ng-model="q.ActionTaken" />
+                                                <label class="">
+                                                    <!--<label>B. </label>-->
+                                                    {{q.ActionB}}
+                                                    <!--<br />&nbsp;&nbsp;&nbsp;{{q.LanguageActionB}}-->
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-3 no-pd" ng-show="q.ActionC">
+                                            <div class="option" style="font-size:15px;">
+                                                <input name="{{q.QuestionCode}}" type="radio" id="{{q.Id}}" value="c" ng-model="q.ActionTaken" />
+                                                <label class="">
+                                                    <!--<label>C. </label>-->
+                                                    {{q.ActionC}}
+                                                    <!--<br />&nbsp;&nbsp;&nbsp;{{q.LanguageActionC}}-->
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-3 no-pd" ng-show="q.ActionD">
+                                            <div class="option" style="font-size:15px;">
+                                                <input name="{{q.QuestionCode}}" type="radio" id="{{q.Id}}" value="d" ng-model="q.ActionTaken" />
+                                                <label class="">
+                                                    <!--<label>D. </label>-->
+                                                    {{q.ActionD}}
+                                                    <!--<br />&nbsp;&nbsp;&nbsp;{{q.LanguageActionD}}-->
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 no-pd" ng-show="q.ActionE">
+                                            <div class="option">
+                                                <input name="{{q.QuestionCode}}" type="radio" id="{{q.Id}}" value="e" ng-model="q.ActionTaken" />
+                                                <label class="">
+                                                    <!--<label>E. </label>-->
+                                                    {{q.ActionE}}
+                                                    <!--<br />&nbsp;&nbsp;&nbsp;{{q.LanguageActionE}}-->
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 no-pd" ng-show="q.ActionF">
+                                            <div class="option">
+                                                <input name="{{q.QuestionCode}}" type="radio" id="{{q.Id}}" value="f" ng-model="q.ActionTaken" />
+                                                <label class="">
+                                                    <!--<label>E. </label>-->
+                                                    {{q.ActionF}}
+                                                    <!--<br />&nbsp;&nbsp;&nbsp;{{q.LanguageActionE}}-->
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!--row end-->
+                <div class="row">
+                    <div ng-show="IsTimePaused" class="mid-view" style="text-align: center;font-size: 32px;padding: 62px;color: red;border-radius: 65px;">
+                        <span>
+                            To resume Practical please resume timer.
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 right-side-view" style="display:none;">
+                <div class="timer" ng-show="mode=='quiz'" ng-style="fontSize" style="padding:0;margin: auto;">
+                    <span style="" ng-class="timerColor.color">
+                        <span style="float: left;width:100%;font-size:20px;" class="btn btn-primary" ng-click="PauseTime()" ng-show="IsTimePaused==false && clock > 0">Time left: {{countDown_text1}}:{{countDown_text2}}s</span>
+                        <span style="float: left;width:100%;font-size:20px;" class="btn btn-primary" ng-click="ResumeTime()" ng-show="IsTimePaused">Time Paused: {{PausedMinutes}}:{{PausedSeconds}}s</span>
+                        <span style="color:red;font-size:20px;" ng-show="clock == 0">Times up .</span>
+                    </span>
+                </div>
+                <div class="label" style="background:#df2901;display: block;padding:15px;margin-top: 50px;font-size: 18px;width: 100%;background: #2797a0;">Total Questions {{totalItems}}.</div>
+                <div class="qa-index">
+                    <ul class="qa-index-ul" ng-repeat="qw in QuestionsResponse">
+                        <li ng-class="q.ActionTaken!=null?'aanswered': 'unaanswered'" ng-repeat="q in qw.StudentLanguageQuestion">
+                            <!--ng-click="GoToNext($index+1)"-->
+                            <div>C{{$parent.$index + 1}}:{{$index + 1}} </div><br />
+                        </li>
+                    </ul>
+                </div>
+            </div><!--./right-side-view-->
+        </div><!--./row-->
+        <!--./row-->
+        <div class="quizNav" style="text-align:center;">
+            <button ng-show="ShowSubmitButton==true && IsTimePaused==false" ng-click="Submit()" style="width: 125px;" class="btn btn-default btn-success btn-lg">Submit Test</button>
+        </div>
+    </div>
+    <!-- Modal -->
+    <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="JavaScript/AngularJS/angular.min.js"></script>
+    <script src="JavaScript/AngularJS/angular.min.js"></script>
+    <script src="JavaScript/OtherJS/angular-cookies.js"></script>
+    <script src="JavaScript/AngularJS/angular-route.min.js"></script>
+    <script src="JavaScript/AngularJS/angular-animate.min.js"></script>
+    <script src="JavaScript/AngularJS/angular-sanitize.min.js"></script>
+    <script src="JavaScript/AngularJS/dirPagination.js"></script>
+    <script src="JavaScript/OtherJS/angular-morris-chart-min.js"></script>
+    <script src="JavaScript/AngularJS/angular-spinner.min.js"></script>
+    <script src="JavaScript/AngularJS/angular-loading-spinner.js"></script>
+    <script src="JavaScript/AngularJS/angular-loader.min.js"></script>
+    <!--<script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>-->
+    <script src="JavaScript/OtherJS/ckeditor.js"></script>
+    <script src="JavaScript/OtherJS/angular-ckeditor.min.js"></script>
+    <script src="JavaScript/AngularJS/alasql.js"></script>
+    <script src="JavaScript/OtherJS/ui-bootstrap-tpls-1.3.3.min.js"></script>
+    <script src="WorkingJS/Script.js"></script>
+    <script src="JavaScript/OtherJS/ngStorage.min.js"></script>
+    <script src="JavaScript/OtherJS/sweetalert.min.js"></script>
+    <script src="JavaScript/OtherJS/MD5.js"></script>
+    <script></script>
+    <script src="JavaScript/OtherJS/spin.min.js"></script>
+    <script src="JavaScript/OtherJS/angular-spinner.min.js"></script>
+    <script src="JavaScript/OtherJS/angular-loading-spinner.js"></script>
+    <script src="JavaScript/OtherJS/Chart.js"></script>
+    <script src="JavaScript/AngularJS/angular-chart.min.js"></script>
+    <script src="Timer.js"></script>
+
+</body>
+</html>

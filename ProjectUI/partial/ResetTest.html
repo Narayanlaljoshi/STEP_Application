@@ -1,0 +1,136 @@
+﻿
+<section class="content-header">
+    <h1>
+        Test Reset
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Manage</a></li>
+        <li class="active">Reset</li>
+    </ol>
+</section>
+
+<section class="content">
+    
+    <div class="box">
+        <div class="box-body" style="overflow-y:auto">
+            <div class="row">
+                <div class="col-lg-3 pull-right">
+                    <input type="text" placeholder="Search.." class="form-control" ng-model="serachText" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <table id="example2" class="table table-bordered table-hover" style="text-align:center;">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center;">S.No</th>
+                                <th style="text-align:center;">Program</th>
+                                <th style="text-align:center;">Session</th>
+                                <th style="text-align:center;">Day</th>
+                                <th style="text-align:center;">Duration</th>
+                                <th style="text-align:center;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="pt in CurrentSessions|filter: serachText">
+                            <!--|filter: serachText-->
+                            <tr>
+                                <td>{{$index+1}}</td>
+                                <td>{{pt.ProgramCode}}</td>
+                                <td>{{pt.SessionID}}</td>
+                                <td>{{pt.Day}}</td>
+                                <td>{{pt.TestDuration}}</td>
+                                <td>
+                                    <button class="btn btn-warning btn-sm" ng-click="ResetForSession(pt)">Reset Session</button>
+                                    <button class="btn btn-primary btn-sm" ng-click="">Candidate Reset </button>
+                                </td>
+                            </tr>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!----------showAddForm----------------->
+
+    <div class="box" ng-show="showAddForm==true">
+        <div class="box-header">
+            <h3 class="box-title">Add Region </h3>
+            <div class="box-body">
+                <div class="row">
+
+                    <div class="col-xs-2">
+                        <label>Region Code*</label>
+                        <input type="text" class=" form-control" ng-maxlength="100" ng-model="RegionDetailData.RegionCode" placeholder="Region Code" />
+                    </div>
+                    <div class="col-xs-2">
+                        <label>Region Name*</label>
+                        <input type="text" class=" form-control" ng-maxlength="100" ng-model="RegionDetailData.RegionName" placeholder="Region Name" />
+                    </div>
+                    <div class="col-xs-3 col-md-3">
+                        <label>Zone Name*</label>
+                        <select ng-required="" name="singleSelect" class="form-control ng-pristine ng-valid ng-valid-required" ng-options="item.Zone_Id as item.ZoneName for item in ZoneData" ng-model="RegionDetailData.Zone_Id"></select>
+                    </div>
+
+
+                </div>
+
+                <hr />
+                <div class="row">
+                    <div class="col-xs-3">
+                        <button class="btn btn-primary btn-sm" ng-click="AddSaveRegion()">Save</button>
+                        <button class="btn btn-primary btn-sm" ng-click="init()">Back </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!----------showUpdataForm----------------->
+
+    <div class="box" ng-show="showUpdataForm==true">
+        <div class="box-header">
+            <h3 class="box-title">Update Region </h3>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-xs-2">
+                    <label>Region Code</label>
+                    <input type="text" class=" form-control" ng-maxlength="100" ng-model="RegionDetailData.RegionCode" placeholder="Region Code" />
+                </div>
+                <div class="col-xs-2">
+                    <label>Region Name*</label>
+                    <input type="text" class=" form-control" ng-maxlength="100" ng-model="RegionDetailData.RegionName" placeholder="Region Name" />
+                </div>
+
+                <div class="col-xs-3 col-md-3">
+                    <label>Zone Name*</label>
+                    <select ng-required="" name="singleSelect" class="form-control ng-pristine ng-valid ng-valid-required" ng-options="item.Zone_Id as item.ZoneName for item in ZoneData" ng-model="RegionDetailData.Zone_Id"></select>
+                </div>
+
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-xs-3">
+                    <button class="btn btn-primary btn-sm" ng-click="UpdateSaveRegion(pt)">Update</button>
+                    <button class="btn btn-primary btn-sm" ng-click="init()">Back </button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+</section>
+

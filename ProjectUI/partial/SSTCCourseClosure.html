@@ -1,0 +1,97 @@
+﻿<!--only for mobile view-->
+<style>
+    ul.homepage-dash {
+        padding: 0;
+        list-style: none;
+        width: 100%;
+        display: table;
+        background: #fff;
+    }
+
+        ul.homepage-dash > li {
+            text-align: center;
+            display: table-cell;
+        }
+
+            ul.homepage-dash > li.active a {
+                border-bottom: 3px solid #db1e0a;
+                color: #022d7b;
+            }
+
+            ul.homepage-dash > li a {
+                padding: 10px;
+                display: block;
+                color: #000;
+            }
+</style>
+<ul class="homepage-dash visible-xs" ng-show="session.Role_Id ==6" >
+
+    <li >
+        <a href="#/ManageAttandence"><span>Attendance</span></a>
+    </li>
+    <li >
+        <a href="#/SSTCMarks"><span>Marks</span></a>
+    </li>
+    <li class="active">
+        <a href="#/CourseClosure"><span>Course Closure</span></a>
+    </li>
+
+</ul>
+<!--/only for mobile view-->
+<section class="content-header">
+    <h1>
+        Courses Closure
+        <!--<small>Preview of UI elements</small>-->
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Courses Closure</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="box">
+        <div class="box-body">
+            <!--<div class="row">-->
+            <div class="box-header">
+
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered" style="max-width:600px">
+                    <thead>
+                        <tr style="background: #3c8dbc;color: aliceblue;">
+                            <th style="text-align:center">
+                                Session Id
+                            </th>
+                            <th style="text-align:center">
+                                Expected Close Date
+                            </th>
+                            <th style="text-align:center">
+                                Action
+                            </th>
+                            <!--<th>
+                                Action
+                            </th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="pt in SessionList" style="text-align: center;">
+                            <td>
+                                {{pt.SessionID}}
+                            </td>
+                            <td>
+                                {{pt.EndDate| date : "dd MMM yyyy"}}
+                            </td>
+                            <td>
+                                <button class="btn btn-danger btn-xs" ng-click="CloseSSTCCourse(pt)">Close</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+            <!--</div>-->
+        </div>
+    </div>
+</section>

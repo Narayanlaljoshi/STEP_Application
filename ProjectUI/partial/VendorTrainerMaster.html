@@ -1,0 +1,74 @@
+﻿<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Trainer Master</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form role="form">
+                    <div class="box-header">
+                        <button class="btn btn-primary btn-xs pull-right" ng-click="AddRow()">Add Trainer</button>
+                    </div>
+                    <div class="box-body">
+                       
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Trainer Code</th>
+                                    <th>Trainer Name</th>
+                                    <th>Trainer Email</th>
+                                    <th>Trainer Mobile</th>
+                                    <th>Status/Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="pt in TrainerList track by $index">
+                                    <td>{{$index+1}}</td>
+                                    <td>
+                                        <span ng-if="pt.Id!=0">{{pt.TrainerCode}}</span>
+                                        <span ng-if="pt.Id==0"><input type="text" ng-disabled="pt.CreatedBy!=null" ng-model="pt.TrainerCode" /></span>
+                                    </td>
+                                    <td>
+                                        <span ng-if="pt.Id!=0">{{pt.TrainerName}}</span>
+                                        <span ng-if="pt.Id==0"><input type="text" ng-model="pt.TrainerName" /></span>
+                                    </td>
+                                    <td>
+                                        <span ng-if="pt.Id!=0">{{pt.TrainerEmail}}</span>
+                                        <span ng-if="pt.Id==0"><input type="email" ng-model="pt.TrainerEmail" /></span>
+                                    </td>
+                                    <td>
+                                        <span ng-if="pt.Id!=0">{{pt.TrainerMobile}}</span>
+                                        <span ng-if="pt.Id==0"><input type="text" ng-model="pt.TrainerMobile" maxlength="10" numbers-only /></span>
+                                    </td>
+                                    <td>
+                                        <span ng-if="pt.CreatedBy!=null">
+
+                                            <input type="checkbox" ng-model="pt.IsActive" style="width:22px;height:22px;"/>
+                                            <button class="btn btn-warning btn-xs" ng-click="EditRow(pt)" style="margin-top:-14px;">
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                        </span>
+                                        <span ng-if="pt.CreatedBy==null">
+                                        <button class="btn btn-danger btn-xs" ng-click="RemoveRow($index)">-</button>
+                                        </span>
+
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-success btn-xs pull-right" ng-click="UpdateTrainerList()">Update</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.box -->
+        </div>
+    </div><!-- </div>row end -->
+</section>

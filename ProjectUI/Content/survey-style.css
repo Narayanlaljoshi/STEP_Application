@@ -1,0 +1,104 @@
+﻿.language-selection {
+    text-align: right;
+    padding:8px;
+}
+
+    .language-selection > select {
+        padding: 5px;
+        border-radius: 4px;
+    }
+
+    .language-selection > h5 {
+        margin: 0px 0 10px;
+    }
+
+.survey-feedback-form {
+    /*max-width:700px;*/
+    margin: auto;
+    padding: 15px;
+}
+
+    .survey-feedback-form > h3 {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+p.message {
+    /*margin-bottom: 50px;*/
+}
+ul.smiley-ul {
+    width: 100%;
+    float: left;
+    padding: 0;
+    margin-bottom: 25px;
+}
+.smiley-ul > li {
+    list-style: none;
+    float: left;
+    margin-left: 1%;
+    text-align: center;
+    width: 24%;
+}
+
+    .smiley-ul > li > a,a:hover {
+        cursor: pointer;
+        text-decoration: none;
+        color: #000;
+    }
+
+.smiley-bg {
+    background: url(https://i.imgur.com/DR0cJr8.png);
+    width: 62px;
+    height: 62px;
+    display: block;
+    margin: 5px auto;
+}
+
+    .smiley-bg.delighted {
+        background-position: 197px -1px;
+    }
+
+.smiley-ul > li > a.selected > .smiley-bg.delighted {
+    background-position: 71px -2px;
+}
+
+.smiley-bg.satisfied {
+    background-position: 678px -1px;
+}
+
+.smiley-ul > li > a.selected > .smiley-bg.satisfied {
+    background-position: 564px -1px;
+}
+
+.smiley-bg.average {
+    background-position: 448px -1px;
+}
+
+.smiley-ul > li > a.selected > .smiley-bg.average {
+    background-position: 338px -1px;
+}
+
+.smiley-bg.poor {
+    background-position: 0px -1px;
+}
+
+.smiley-ul > li > a.selected > .smiley-bg.poor {
+    background-position: -103px -2px;
+}
+
+.tabcontent {
+    display: none;
+}
+
+.tab-content-holder {
+    float: left;
+    width: 100%;
+    margin: 25px 0;
+    text-align: center;
+}
+@media(max-width:480px){
+    .smiley-ul>li {
+        font-size: 10px;
+    }
+
+}

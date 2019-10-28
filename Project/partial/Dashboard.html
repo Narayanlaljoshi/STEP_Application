@@ -1,0 +1,719 @@
+﻿
+<style>
+    .box-title {
+        font-size: 16px !important;
+    }
+
+    .col-xs-27 {
+        width: 14.2857143%;
+        float: left;
+        padding: 0 7.5px;
+    }
+
+    .modal-open .modal {
+        visibility: visible !important;
+    }
+
+    .daterangepicker.dropdown-menu.show-calendar.opensleft {
+        width: 544px;
+    }
+</style>
+<!-- Content Header (Page header) -->
+<section class="content-header" style="display:none;    ">
+    <h1>
+        Dashboard
+
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content" style="display:none;">
+
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog" style="visibility:hidden;display:block">
+        <div class="modal-dialog modal-lg" style="width:90%">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">CEI Index (North) - Regions</h4>
+                </div>
+                <div class="modal-body">
+                    <!---->
+                    <!---CUstomer rating Trend-->
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <!--Bar Chart 2-->
+                            <!-- Bar chart -->
+                            <div class="box box-primary">
+                                <div class="box-header with-border">
+                                    <i class="fa fa-bar-chart-o"></i>
+
+                                    <h3 class="box-title">CEI Index (North)</h3>
+
+                                    <div class="box-tools pull-right hidden">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <div id="bar-chart3" style="height: 200px;"></div>
+                                </div>
+                                <!-- /.box-body-->
+                            </div>
+                            <!-- /.box -->
+                        </div><!--./col-md-4-->
+
+                        <div class="col-md-8">
+
+
+                            <!--start-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <!-- Bar chart -->
+                                    <div class="box box-primary">
+                                        <div class="box-header with-border">
+                                            <i class="fa fa-bar-chart-o"></i>
+
+                                            <h3 class="box-title">CEI (N1)</h3>
+
+                                            <div class="box-tools pull-right hidden">
+                                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body">
+                                            <div id="bar-chart31" style="height: 150px;"></div>
+                                        </div>
+                                        <!-- /.box-body-->
+                                    </div>
+                                    <!-- /.box -->
+                                </div><!--./col-md-6-->
+                                <!--Bar Chart 2-->
+                                <div class="col-md-6">
+                                    <!-- Bar chart -->
+                                    <div class="box box-primary">
+                                        <div class="box-header with-border">
+                                            <i class="fa fa-bar-chart-o"></i>
+
+                                            <h3 class="box-title">CEI (N2)</h3>
+
+                                            <div class="box-tools pull-right hidden">
+                                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body">
+                                            <div id="bar-chart32" style="height: 150px;"></div>
+                                        </div>
+                                        <!-- /.box-body-->
+                                    </div>
+                                    <!-- /.box -->
+                                </div><!--./col-md-6-->
+                            </div><!--./row-->
+                            <!--row 2-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <!-- Bar chart -->
+                                    <div class="box box-primary">
+                                        <div class="box-header with-border">
+                                            <i class="fa fa-bar-chart-o"></i>
+
+                                            <h3 class="box-title">CEI (N3)</h3>
+
+                                            <div class="box-tools pull-right hidden">
+                                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body">
+                                            <div id="bar-chart33" style="height: 150px;"></div>
+                                        </div>
+                                        <!-- /.box-body-->
+                                    </div>
+                                    <!-- /.box -->
+                                </div><!--./col-md-6-->
+                                <div class="col-md-6">
+                                    <!-- Bar chart -->
+                                    <div class="box box-primary">
+                                        <div class="box-header with-border">
+                                            <i class="fa fa-bar-chart-o"></i>
+
+                                            <h3 class="box-title">CEI (N4)</h3>
+
+                                            <div class="box-tools pull-right hidden">
+                                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body">
+                                            <div id="bar-chart34" style="height: 150px;"></div>
+                                        </div>
+                                        <!-- /.box-body-->
+                                    </div>
+                                    <!-- /.box -->
+                                </div><!--./col-md-6-->
+
+                            </div><!--./row-->
+                            <!--./end-->
+                        </div><!--./col-md-8-->
+
+                    </div><!--./row-->
+                    <!--./-->
+                    <!--./-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="row" style="margin:0 -7.5px">
+        <div class="col-xs-27 ">
+
+            <label>Service Date</label>
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" name="daterange" class="form-control pull-right" id="reservation">
+            </div>
+
+            <!-- /.input group -->
+
+        </div>
+
+        <div class="col-xs-27">
+            <label>Sale Date</label>
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" name="daterange" class="form-control pull-right">
+            </div>
+            <!-- /.input group -->
+        </div>
+        <div class="col-xs-27">
+            <label>Zone</label>
+            <select name="Language" class="form-control">
+                <option label="All" value="number:0" selected="selected">All</option>
+                <option value="number:10">North</option>
+                <option value="number:1">South</option>
+                <option value="number:1">West</option>
+                <option value="number:1">East</option>
+                <option value="number:1">South East</option>
+                <option value="number:1">Central</option>
+            </select>
+        </div>
+        <div class="col-xs-27">
+            <label>Region</label>
+            <select name="Language" class="form-control">
+                <option label="All" value="number:0" selected="selected">All</option>
+                <option value="number:10">N1</option>
+                <option value="number:10">N2</option>
+                <option value="number:10">N3</option>
+                <option value="number:1">S1</option>
+                <option value="number:10">S2</option>
+                <option value="number:10">S3</option>
+                <option value="number:1">W1</option>
+                <option value="number:10">W2</option>
+                <option value="number:10">W3</option>
+                <option value="number:1">E1</option>
+                <option value="number:10">E2</option>
+                <option value="number:10">E3</option>
+                <option value="number:1">SE1</option>
+                <option value="number:10">SE2</option>
+                <option value="number:10">SE3</option>
+                <option value="number:1">C1</option>
+                <option value="number:1">C2</option>
+                <option value="number:1">C3</option>
+            </select>
+        </div>
+        <div class="col-xs-27">
+            <label>Dealer</label>
+            <select name="Language" class="form-control">
+                <option label="All" value="number:0" selected="selected">All</option>
+                <option value="number:10">N1</option>
+                <option value="number:10">N2</option>
+                <option value="number:10">N3</option>
+                <option value="number:1">S1</option>
+                <option value="number:10">S2</option>
+                <option value="number:10">S3</option>
+                <option value="number:1">W1</option>
+                <option value="number:10">W2</option>
+                <option value="number:10">W3</option>
+                <option value="number:1">E1</option>
+                <option value="number:10">E2</option>
+                <option value="number:10">E3</option>
+                <option value="number:1">SE1</option>
+                <option value="number:10">SE2</option>
+                <option value="number:10">SE3</option>
+                <option value="number:1">C1</option>
+                <option value="number:1">C2</option>
+                <option value="number:1">C3</option>
+            </select>
+        </div>
+        <div class="col-xs-27">
+            <label>Workshop Code</label>
+            <select name="Language" class="form-control">
+                <option label="All" value="number:0" selected="selected">All</option>
+                <option value="number:10">N1</option>
+                <option value="number:10">N2</option>
+                <option value="number:10">N3</option>
+                <option value="number:1">S1</option>
+                <option value="number:10">S2</option>
+                <option value="number:10">S3</option>
+                <option value="number:1">W1</option>
+                <option value="number:10">W2</option>
+                <option value="number:10">W3</option>
+                <option value="number:1">E1</option>
+                <option value="number:10">E2</option>
+                <option value="number:10">E3</option>
+                <option value="number:1">SE1</option>
+                <option value="number:10">SE2</option>
+                <option value="number:10">SE3</option>
+                <option value="number:1">C1</option>
+                <option value="number:1">C2</option>
+                <option value="number:1">C3</option>
+            </select>
+        </div>
+        <div class="col-xs-27">
+            <label>Model</label>
+            <select name="Language" class="form-control">
+                <option label="All" value="number:0" selected="selected">All</option>
+                <option value="number:10">N1</option>
+                <option value="number:10">N2</option>
+                <option value="number:10">N3</option>
+                <option value="number:1">S1</option>
+                <option value="number:10">S2</option>
+                <option value="number:10">S3</option>
+                <option value="number:1">W1</option>
+                <option value="number:10">W2</option>
+                <option value="number:10">W3</option>
+                <option value="number:1">E1</option>
+                <option value="number:10">E2</option>
+                <option value="number:10">E3</option>
+                <option value="number:1">SE1</option>
+                <option value="number:10">SE2</option>
+                <option value="number:10">SE3</option>
+                <option value="number:1">C1</option>
+                <option value="number:1">C2</option>
+                <option value="number:1">C3</option>
+            </select>
+        </div>
+        <!-- <div class="col-xs-2">
+            <label style="width:100%">&nbsp;</label>
+            <button type="button" class="btn btn-primary btn-sm" ng-click="ChangeCountry()">Search</button>
+        </div> -->
+    </div><!--./row-->
+    <br />
+    <div class="row">
+
+        <div class="col-md-4">
+            <!-- Bar chart -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <i class="fa fa-bar-chart-o"></i>
+
+                    <h3 class="box-title">CEI Index (All India)</h3>
+
+                    <div class="box-tools pull-right hidden">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div id="bar-chart" style="height: 200px;"></div>
+                </div>
+                <!-- /.box-body-->
+            </div>
+            <!-- /.box -->
+
+        </div>
+        <!-- /.col - md - 4-->
+
+        <div class="col-md-8">
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <!-- Bar chart -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <i class="fa fa-bar-chart-o"></i>
+
+                            <h3 class="box-title">CEI Index (All India)</h3>
+
+                            <div class="box-tools pull-right hidden">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div id="bar-chart00" style="height: 200px;"></div>
+                        </div>
+                        <!-- /.box-body-->
+                    </div>
+                    <!-- /.box -->
+
+                </div>
+
+
+            </div>
+
+            <!--./-->
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- Bar chart -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <i class="fa fa-bar-chart-o"></i>
+
+                            <h3 class="box-title">CEI Index (North)</h3>
+
+                            <div class="box-tools pull-right hidden">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <a data-toggle="modal" data-target="#myModal">
+                                <div id="bar-chart11" style="height: 150px;"></div>
+                            </a>
+                        </div>
+                        <!-- /.box-body-->
+                    </div>
+                    <!-- /.box -->
+                </div><!--./col-md-6-->
+                <!--Bar Chart 2-->
+                <div class="col-md-6">
+                    <!-- Bar chart -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <i class="fa fa-bar-chart-o"></i>
+
+                            <h3 class="box-title">CEI Index (Central)</h3>
+
+                            <div class="box-tools pull-right hidden">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div id="bar-chart12" style="height: 150px;"></div>
+                        </div>
+                        <!-- /.box-body-->
+                    </div>
+                    <!-- /.box -->
+                </div><!--./col-md-6-->
+            </div><!--./row-->
+            <!--row 2-->
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- Bar chart -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <i class="fa fa-bar-chart-o"></i>
+
+                            <h3 class="box-title">CEI Index (South)</h3>
+
+                            <div class="box-tools pull-right hidden">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div id="bar-chart13" style="height: 150px;"></div>
+                        </div>
+                        <!-- /.box-body-->
+                    </div>
+                    <!-- /.box -->
+                </div><!--./col-md-6-->
+                <!--Bar Chart 2-->
+                <div class="col-md-6">
+                    <!-- Bar chart -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <i class="fa fa-bar-chart-o"></i>
+
+                            <h3 class="box-title">CEI Index (East)</h3>
+
+                            <div class="box-tools pull-right hidden">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div id="bar-chart14" style="height: 150px;"></div>
+                        </div>
+                        <!-- /.box-body-->
+                    </div>
+                    <!-- /.box -->
+                </div><!--./col-md-6-->
+            </div><!--./row-->
+            <!--row 3-->
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- Bar chart -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <i class="fa fa-bar-chart-o"></i>
+
+                            <h3 class="box-title">CEI Index (West)</h3>
+
+                            <div class="box-tools pull-right hidden">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div id="bar-chart15" style="height: 150px;"></div>
+                        </div>
+                        <!-- /.box-body-->
+                    </div>
+                    <!-- /.box -->
+                </div><!--./col-md-6-->
+                <!--Bar Chart 2-->
+                <div class="col-md-6">
+                    <!-- Bar chart -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <i class="fa fa-bar-chart-o"></i>
+
+                            <h3 class="box-title">CEI Index (South East)</h3>
+
+                            <div class="box-tools pull-right hidden">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div id="bar-chart16" style="height: 150px;"></div>
+                        </div>
+                        <!-- /.box-body-->
+                    </div>
+                    <!-- /.box -->
+                </div><!--./col-md-6-->
+            </div><!--./row-->
+        </div>
+        <!-- /.col - md - 8-->
+    </div>
+
+
+
+    <!---CUstomer rating Trend-->
+    <div class="row">
+        <div class="col-md-4">
+            <!--Bar Chart 2-->
+            <!-- Bar chart -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <i class="fa fa-bar-chart-o"></i>
+
+                    <h3 class="box-title">Customer Rating Trend (All India)</h3>
+
+                    <div class="box-tools pull-right hidden">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <canvas id="sales-chart122" style="height: 200px;"></canvas>
+                </div>
+                <!-- /.box-body-->
+            </div>
+            <!-- /.box -->
+        </div><!--./col-md-4-->
+        <div class="col-md-8">
+            <!--start-->
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- Bar chart -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <i class="fa fa-bar-chart-o"></i>
+
+                            <h3 class="box-title">Customer Rating Trend Index (North)</h3>
+
+                            <div class="box-tools pull-right hidden">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <canvas id="bar-chart-horizontal1" width="800" height="450"></canvas>
+                        </div>
+                        <!-- /.box-body-->
+                    </div>
+                    <!-- /.box -->
+                </div><!--./col-md-6-->
+                <!--Bar Chart 2-->
+                <div class="col-md-6">
+                    <!-- Bar chart -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <i class="fa fa-bar-chart-o"></i>
+
+                            <h3 class="box-title">Customer Rating Trend Index (Center)</h3>
+
+                            <div class="box-tools pull-right hidden">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <canvas id="bar-chart-horizontal2" width="800" height="450"></canvas>
+                        </div>
+                        <!-- /.box-body-->
+                    </div>
+                    <!-- /.box -->
+                </div><!--./col-md-6-->
+            </div><!--./row-->
+            <!--row 2-->
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- Bar chart -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <i class="fa fa-bar-chart-o"></i>
+
+                            <h3 class="box-title">Customer Rating Trend Index (South)</h3>
+
+                            <div class="box-tools pull-right hidden">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <canvas id="bar-chart-horizontal3" width="800" height="450"></canvas>
+                        </div>
+                        <!-- /.box-body-->
+                    </div>
+                    <!-- /.box -->
+                </div><!--./col-md-6-->
+                <!--Bar Chart 2-->
+                <div class="col-md-6">
+                    <!-- Bar chart -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <i class="fa fa-bar-chart-o"></i>
+
+                            <h3 class="box-title">Customer Rating Trend Index (East)</h3>
+
+                            <div class="box-tools pull-right hidden">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <canvas id="bar-chart-horizontal4" width="800" height="450"></canvas>
+                        </div>
+                        <!-- /.box-body-->
+                    </div>
+                    <!-- /.box -->
+                </div><!--./col-md-6-->
+            </div><!--./row-->
+            <!--row 3-->
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- Bar chart -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <i class="fa fa-bar-chart-o"></i>
+
+                            <h3 class="box-title">Customer Rating Trend Index (West)</h3>
+
+                            <div class="box-tools pull-right hidden">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <canvas id="bar-chart-horizontal5" width="800" height="450"></canvas>
+                        </div>
+                        <!-- /.box-body-->
+                    </div>
+                    <!-- /.box -->
+                </div><!--./col-md-6-->
+                <!--Bar Chart 2-->
+                <div class="col-md-6">
+                    <!-- Bar chart -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <i class="fa fa-bar-chart-o"></i>
+
+                            <h3 class="box-title">Customer Rating Trend Index (South East)</h3>
+
+                            <div class="box-tools pull-right hidden">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <canvas id="bar-chart-horizontal6" width="800" height="450"></canvas>
+                        </div>
+                        <!-- /.box-body-->
+                    </div>
+                    <!-- /.box -->
+                </div><!--./col-md-6-->
+            </div><!--./row-->
+            <!--./end-->
+        </div><!--./col-md-8-->
+    </div><!--./row-->
+    <!-- ./wrapper -->
+
+</section>
+<!-- /.content -->

@@ -1,0 +1,933 @@
+﻿
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+            Perfomance Report
+
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Perfomance Report</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      
+      <div class="row" style="margin:0 -7.5px">
+        <div class="col-xs-27 ">
+ 
+            <label>Service Date</label>
+            <div class="input-group">
+              <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+              </div>
+              <input type="text" class="form-control pull-right" id="reservation">
+            </div>
+            <!-- /.input group -->
+         
+        </div>
+        
+        <div class="col-xs-27">
+            <label>Sale Date</label>
+            <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" class="form-control pull-right" >
+              </div>
+              <!-- /.input group -->
+        </div>
+
+        <div class="col-xs-27">
+            <label>Zone</label>
+            <select name="Language" class="form-control">
+              <option label="All" value="number:0" selected="selected">All</option>
+              <option  value="number:10">North</option>
+              <option  value="number:1">South</option>
+              <option  value="number:1">West</option>
+              <option  value="number:1">East</option>
+              <option  value="number:1">South East</option>
+              <option  value="number:1">Center</option>
+            </select>
+        </div>
+
+        <div class="col-xs-27">
+            <label>Region</label>
+            <select name="Language" class="form-control">
+                <option label="All" value="number:0" selected="selected">All</option>
+                <option  value="number:10">N1</option>
+                <option  value="number:10">N2</option>
+                <option  value="number:10">N3</option>
+                <option  value="number:1">S1</option>
+                <option  value="number:10">S2</option>
+                <option  value="number:10">S3</option>
+                <option  value="number:1">W1</option>
+                <option  value="number:10">W2</option>
+                <option  value="number:10">W3</option>
+                <option  value="number:1">E1</option>
+                <option  value="number:10">E2</option>
+                <option  value="number:10">E3</option>
+                <option  value="number:1">SE1</option>
+                <option  value="number:10">SE2</option>
+                <option  value="number:10">SE3</option>
+                <option  value="number:1">C1</option>
+                <option  value="number:1">C2</option>
+                <option  value="number:1">C3</option>
+              </select>
+        </div>
+
+        <div class="col-xs-27">
+            <label>Dealer</label>
+            <select name="Language" class="form-control">
+                <option label="All" value="number:0" selected="selected">All</option>
+                <option  value="number:10">N1</option>
+                <option  value="number:10">N2</option>
+                <option  value="number:10">N3</option>
+                <option  value="number:1">S1</option>
+                <option  value="number:10">S2</option>
+                <option  value="number:10">S3</option>
+                <option  value="number:1">W1</option>
+                <option  value="number:10">W2</option>
+                <option  value="number:10">W3</option>
+                <option  value="number:1">E1</option>
+                <option  value="number:10">E2</option>
+                <option  value="number:10">E3</option>
+                <option  value="number:1">SE1</option>
+                <option  value="number:10">SE2</option>
+                <option  value="number:10">SE3</option>
+                <option  value="number:1">C1</option>
+                <option  value="number:1">C2</option>
+                <option  value="number:1">C3</option>
+              </select>
+        </div>
+        <div class="col-xs-27">
+            <label>Workshop Code</label>
+            <select name="Language" class="form-control">
+                <option label="All" value="number:0" selected="selected">All</option>
+                <option  value="number:10">N1</option>
+                <option  value="number:10">N2</option>
+                <option  value="number:10">N3</option>
+                <option  value="number:1">S1</option>
+                <option  value="number:10">S2</option>
+                <option  value="number:10">S3</option>
+                <option  value="number:1">W1</option>
+                <option  value="number:10">W2</option>
+                <option  value="number:10">W3</option>
+                <option  value="number:1">E1</option>
+                <option  value="number:10">E2</option>
+                <option  value="number:10">E3</option>
+                <option  value="number:1">SE1</option>
+                <option  value="number:10">SE2</option>
+                <option  value="number:10">SE3</option>
+                <option  value="number:1">C1</option>
+                <option  value="number:1">C2</option>
+                <option  value="number:1">C3</option>
+              </select>
+        </div>
+        <div class="col-xs-27">
+            <label>Model</label>
+            <select name="Language" class="form-control">
+                <option label="All" value="number:0" selected="selected">All</option>
+                <option  value="number:10">N1</option>
+                <option  value="number:10">N2</option>
+                <option  value="number:10">N3</option>
+                <option  value="number:1">S1</option>
+                <option  value="number:10">S2</option>
+                <option  value="number:10">S3</option>
+                <option  value="number:1">W1</option>
+                <option  value="number:10">W2</option>
+                <option  value="number:10">W3</option>
+                <option  value="number:1">E1</option>
+                <option  value="number:10">E2</option>
+                <option  value="number:10">E3</option>
+                <option  value="number:1">SE1</option>
+                <option  value="number:10">SE2</option>
+                <option  value="number:10">SE3</option>
+                <option  value="number:1">C1</option>
+                <option  value="number:1">C2</option>
+                <option  value="number:1">C3</option>
+              </select>
+        </div>
+        <!-- <div class="col-xs-2">
+            <label style="width:100%">&nbsp;</label>
+            <button type="button" class="btn btn-primary btn-sm" ng-click="ChangeCountry()">Search</button>
+        </div> -->
+
+        </div><!--./row-->
+
+<br/>
+
+  
+            <!-- Bar chart -->
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <i class="fa fa-bar-chart-o"></i>
+  
+                <h3 class="box-title">CEI Perfomance Report (All India)</h3>
+  
+                <div class="box-tools pull-right">
+                        <a href="perfomance-report.xlsx" class="btn-success btn btn-sm" download>Download</a>
+                    </div>
+              </div>
+              <div class="box-body table-responsive no-padding">
+                   
+
+                    <table class="table table-hover pr-table">
+                        <tbody style="font-weight: 500;">
+                            <tr style="background: #3c8dbc47;font-weight:600;">
+                                <td STYLE="width:50px">Zone/<br/>Region/<br/>Dealers</td>
+                                <td >Sample</td>
+                                <td >Rate MSIL</td>
+                                <td >Prefer MSIL</td>
+                                <td >Overall Performance</td>
+                                <td >Prefer Model</td>
+                                <td >Service center performance</td>
+                                <td >Prefer Service Center</td>
+                                <td >Feel Welcomed</td>
+                                <td >Waiting Space</td>
+                                <td >Wait Time</td>
+                                <td >Time & Attention</td>
+                                <td >Understanding of work</td>
+                                <td >Ability to listen</td>
+                                <td >Behavior</td>
+                                <td >Recommendation</td>
+                                <td >Explanation</td>
+                                <td >Explanation work</td>
+                                <td >Quality of work</td>
+                                <td >rate ease of obtain</td>
+                                <td >Rate</td>
+                                <td >Usefullness</td>
+                                <td >Seating</td>
+                                <td >CEI based on Key attributes </td>
+                                <td >CEI</td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="num11">CENTRE</td>
+                                <td class="num12">1113</td>
+                                <td class="num1">110.64690026954</td>
+                                <td class="num1">61.725067385445</td>
+                                <td class="num1">109.83827493261</td>
+                                <td class="num1 label-danger">88.364779874214</td>
+                                <td class="num1 label-danger">88.544474393531</td>
+                                <td class="num1 label-danger">61.725067385445</td>
+                                <td class="num1">63.027852650494</td>
+                                <td class="num1">61.051212938005</td>
+                                <td class="num1">61.275831087152</td>
+                                <td class="num1">67.610062893082</td>
+                                <td class="num1 label-danger">93.575920934411</td>
+                                <td class="num1 label-danger">94.968553459119</td>
+                                <td class="num1">76.460017969452</td>
+                                <td class="num1 label-danger">91.77897574124</td>
+                                <td class="num1 label-danger">91.599281221923</td>
+                                <td class="num1 label-danger">89.667565139263</td>
+                                <td class="num1 label-danger">88.409703504043</td>
+                                <td class="num1">17.250673854447</td>
+                                <td class="num1">17.69991015274</td>
+                                <td class="num1">14.240790655885</td>
+                                <td class="num1">-2.5606469002695</td>
+                                <td class="num1">87.278706199461</td>
+                                <td class="num1">83.619928122192</td>
+                            </tr>
+                            <tr>
+                                <td class="num11">EAST</td>
+                                <td class="num12">2067</td>
+                                <td class="num1">106.19254958878</td>
+                                <td class="num1">74.963715529753</td>
+                                <td class="num1">109.84518626028</td>
+                                <td class="num1">88.437348814707</td>
+                                <td class="num1">96.371552975327</td>
+                                <td class="num1">74.963715529753</td>
+                                <td class="num1">57.232704402516</td>
+                                <td class="num1">54.668601838413</td>
+                                <td class="num1">54.426705370102</td>
+                                <td class="num1 label-danger">60.377358490566</td>
+                                <td class="num1">99.395258829221</td>
+                                <td class="num1">102.51572327044</td>
+                                <td class="num1">67.319787131108</td>
+                                <td class="num1">98.209966134494</td>
+                                <td class="num1">96.250604741171</td>
+                                <td class="num1">97.653604257378</td>
+                                <td class="num1">95.379777455249</td>
+                                <td class="num1">47.605224963716</td>
+                                <td class="num1">45.210449927431</td>
+                                <td class="num1">40.420899854862</td>
+                                <td class="num1">2.2496371552975</td>
+                                <td class="num1">91.382268988873</td>
+                                <td class="num1">89.497805999032</td>
+                            </tr>
+                            <tr>
+                                <td class="num11">NORTH</td>
+                                <td class="num12">1053</td>
+                                <td class="num1">108.40455840456</td>
+                                <td class="num1">75.498575498576</td>
+                                <td class="num1">111.82336182336</td>
+                                <td class="num1">95.156695156695</td>
+                                <td class="num1 label-danger">89.268755935423</td>
+                                <td class="num1">75.498575498576</td>
+                                <td class="num1">73.789173789174</td>
+                                <td class="num1">70.750237416904</td>
+                                <td class="num1">73.314339981007</td>
+                                <td class="num1">79.62962962963</td>
+                                <td class="num1 label-danger">95.441595441595</td>
+                                <td class="num1 label-danger">99.382716049383</td>
+                                <td class="num1">85.660018993352</td>
+                                <td class="num1 label-danger">92.260208926876</td>
+                                <td class="num1 label-danger">93.162393162393</td>
+                                <td class="num1 label-danger">92.640075973409</td>
+                                <td class="num1">92.355175688509</td>
+                                <td class="num1">18.186134852802</td>
+                                <td class="num1">17.188983855651</td>
+                                <td class="num1">13.390313390313</td>
+                                <td class="num1">18.186134852802</td>
+                                <td class="num1">91.359734093067</td>
+                                <td class="num1">88.74522317189</td>
+                            </tr>
+                            <tr>
+                                <td class="num11">SOUTH</td>
+                                <td class="num12">766</td>
+                                <td class="num1 label-danger">103.39425587467</td>
+                                <td class="num1">67.10182767624</td>
+                                <td class="num1">105.02610966057</td>
+                                <td class="num1">73.172323759791</td>
+                                <td class="num1">96.54046997389</td>
+                                <td class="num1 label-danger">67.10182767624</td>
+                                <td class="num1">46.21409921671</td>
+                                <td class="num1">46.279373368146</td>
+                                <td class="num1">48.498694516971</td>
+                                <td class="num1 label-danger">52.219321148825</td>
+                                <td class="num1">104.43864229765</td>
+                                <td class="num1">106.46214099217</td>
+                                <td class="num1 label-danger">55.744125326371</td>
+                                <td class="num1">99.34725848564</td>
+                                <td class="num1">97.976501305483</td>
+                                <td class="num1">95.88772845953</td>
+                                <td class="num1">94.843342036554</td>
+                                <td class="num1">35.052219321149</td>
+                                <td class="num1">34.725848563969</td>
+                                <td class="num1">30.417754569191</td>
+                                <td class="num1">-35.900783289817</td>
+                                <td class="num1">90.30998694517</td>
+                                <td class="num1">87.644353785901</td>
+                            </tr>
+                            <tr>
+                                <td class="num11">SOUTH EAST</td>
+                                <td class="num12">1171</td>
+                                <td class="num1 label-danger">103.58667805295</td>
+                                <td class="num1 label-danger">65.243381725021</td>
+                                <td class="num1 label-danger">107.68573868488</td>
+                                <td class="num1 label-danger">81.041844577284</td>
+                                <td class="num1 label-danger">86.037574722459</td>
+                                <td class="num1 label-danger">65.243381725021</td>
+                                <td class="num1 label-danger">44.321093082835</td>
+                                <td class="num1 label-danger">43.680614859095</td>
+                                <td class="num1 label-danger">44.064901793339</td>
+                                <td class="num1 label-danger">49.615713065756</td>
+                                <td class="num1 label-danger">89.923142613151</td>
+                                <td class="num1 label-danger">91.673783091375</td>
+                                <td class="num1 label-danger">54.910333048676</td>
+                                <td class="num1 label-danger">88.556789069172</td>
+                                <td class="num1 label-danger">86.592655849701</td>
+                                <td class="num1 label-danger">89.069171648164</td>
+                                <td class="num1 label-danger">85.738684884714</td>
+                                <td class="num1 label-danger">24.466268146883</td>
+                                <td class="num1 label-danger">23.99658411614</td>
+                                <td class="num1 label-danger">18.830059777968</td>
+                                <td class="num1 label-danger">-28.565328778822</td>
+                                <td class="num1 label-danger">81.48488471392</td>
+                                <td class="num1 label-danger">79.561076003416</td>
+                            </tr>
+                            <tr>
+                                <td class="num11">WEST</td>
+                                <td class="num12">1037</td>
+                                <td class="num1">108.48601735776</td>
+                                <td class="num1">68.032786885246</td>
+                                <td class="num1">107.9556412729</td>
+                                <td class="num1">89.633558341369</td>
+                                <td class="num1">97.878495660559</td>
+                                <td class="num1 label-danger">68.032786885246</td>
+                                <td class="num1">56.894889103182</td>
+                                <td class="num1">55.062680810029</td>
+                                <td class="num1">52.362584378014</td>
+                                <td class="num1 label-danger">58.100289296046</td>
+                                <td class="num1">99.807135969142</td>
+                                <td class="num1">102.41080038573</td>
+                                <td class="num1 label-danger">63.693346190935</td>
+                                <td class="num1">98.360655737705</td>
+                                <td class="num1">99.46962391514</td>
+                                <td class="num1">100.24108003857</td>
+                                <td class="num1">96.480231436837</td>
+                                <td class="num1">55.785920925747</td>
+                                <td class="num1">56.55737704918</td>
+                                <td class="num1">47.155255544841</td>
+                                <td class="num1">-24.108003857281</td>
+                                <td class="num1">91.575988428158</td>
+                                <td class="num1">89.086142719383</td>
+                            </tr>
+                            <tr STYLE="FONT-WEIGHT:BOLD">
+                                <td class="num11">ALL INDIA</td>
+                                <td class="num12">7207</td>
+                                <td class="num1">106.8128208686</td>
+                                <td class="num1">69.58512557236</td>
+                                <td class="num1">108.99819619814</td>
+                                <td class="num1">86.755931733037</td>
+                                <td class="num1">92.680727070903</td>
+                                <td class="num1">69.58512557236</td>
+                                <td class="num1">57.229082836132</td>
+                                <td class="num1">55.383654780075</td>
+                                <td class="num1">55.633411960594</td>
+                                <td class="num1">61.363951713612</td>
+                                <td class="num1">96.975163035937</td>
+                                <td class="num1">99.535174136256</td>
+                                <td class="num1">67.64256972388</td>
+                                <td class="num1">94.921603996115</td>
+                                <td class="num1">94.15845705564</td>
+                                <td class="num1">94.477591230748</td>
+                                <td class="num1">92.39628139309</td>
+                                <td class="num1">34.702372693215</td>
+                                <td class="num1">33.93922575274</td>
+                                <td class="num1">28.826141251561</td>
+                                <td class="num1">-9.0190092965173</td>
+                                <td class="num1">89.05101984182</td>
+                                <td class="num1">86.609350631331</td>
+                            </tr>
+                            <tr>
+                                <td colspan="15"></td>
+                            </tr>
+                            <tr>
+                                <td class="num11">C1</td>
+                                <td class="num12">205</td>
+                                <td class="num1">114.87804878049</td>
+                                <td class="num1">61.707317073171</td>
+                                <td class="num1">111.9512195122</td>
+                                <td class="num1">88.536585365854</td>
+                                <td class="num1">87.317073170732</td>
+                                <td class="num1">61.707317073171</td>
+                                <td class="num1">61.463414634146</td>
+                                <td class="num1">54.634146341463</td>
+                                <td class="num1">57.073170731707</td>
+                                <td class="num1">64.146341463415</td>
+                                <td class="num1">95.121951219512</td>
+                                <td class="num1">97.80487804878</td>
+                                <td class="num1">73.90243902439</td>
+                                <td class="num1">91.951219512195</td>
+                                <td class="num1">90.731707317073</td>
+                                <td class="num1">91.951219512195</td>
+                                <td class="num1">89.512195121951</td>
+                                <td class="num1">26.829268292683</td>
+                                <td class="num1">28.780487804878</td>
+                                <td class="num1">26.585365853659</td>
+                                <td class="num1">0.97560975609756</td>
+                                <td class="num1">87.748048780488</td>
+                                <td class="num1">83.67143902439</td>
+                            </tr>
+                            <tr>
+                                <td class="num11">C2</td>
+                                <td class="num12">367</td>
+                                <td class="num1">114.85013623978</td>
+                                <td class="num1">63.623978201635</td>
+                                <td class="num1">110.76294277929</td>
+                                <td class="num1">89.91825613079</td>
+                                <td class="num1">94.141689373297</td>
+                                <td class="num1">63.623978201635</td>
+                                <td class="num1">70.980926430518</td>
+                                <td class="num1">67.983651226158</td>
+                                <td class="num1">69.618528610354</td>
+                                <td class="num1">76.566757493188</td>
+                                <td class="num1">99.455040871935</td>
+                                <td class="num1">100.40871934605</td>
+                                <td class="num1">83.787465940055</td>
+                                <td class="num1">99.318801089918</td>
+                                <td class="num1">97.138964577657</td>
+                                <td class="num1">95.640326975477</td>
+                                <td class="num1">96.730245231608</td>
+                                <td class="num1">12.942779291553</td>
+                                <td class="num1">14.1689373297</td>
+                                <td class="num1">10.08174386921</td>
+                                <td class="num1">6.1307901907357</td>
+                                <td class="num1">94.524795640327</td>
+                                <td class="num1">89.642997275204</td>
+                            </tr>
+                            <tr>
+                                <td class="num11">C3</td>
+                                <td class="num12">271</td>
+                                <td class="num1">109.0405904059</td>
+                                <td class="num1">59.594095940959</td>
+                                <td class="num1">108.67158671587</td>
+                                <td class="num1">88.191881918819</td>
+                                <td class="num1">85.977859778598</td>
+                                <td class="num1">59.594095940959</td>
+                                <td class="num1">70.29520295203</td>
+                                <td class="num1">72.509225092251</td>
+                                <td class="num1">68.265682656827</td>
+                                <td class="num1">74.723247232472</td>
+                                <td class="num1">89.29889298893</td>
+                                <td class="num1">92.066420664207</td>
+                                <td class="num1">84.132841328413</td>
+                                <td class="num1">89.29889298893</td>
+                                <td class="num1">90.036900369004</td>
+                                <td class="num1">86.90036900369</td>
+                                <td class="num1">82.841328413284</td>
+                                <td class="num1">20.664206642066</td>
+                                <td class="num1">19.372693726937</td>
+                                <td class="num1">15.49815498155</td>
+                                <td class="num1">-7.7490774907749</td>
+                                <td class="num1">85.716789667897</td>
+                                <td class="num1">81.901605166052</td>
+                            </tr>
+                            <tr>
+                                <td class="num11">C4</td>
+                                <td class="num12">270</td>
+                                <td class="num1">103.33333333333</td>
+                                <td class="num1">61.296296296296</td>
+                                <td class="num1">108.14814814815</td>
+                                <td class="num1">86.296296296296</td>
+                                <td class="num1">84.444444444444</td>
+                                <td class="num1">61.296296296296</td>
+                                <td class="num1">46.111111111111</td>
+                                <td class="num1">45</td>
+                                <td class="num1">46.111111111111</td>
+                                <td class="num1">50.925925925926</td>
+                                <td class="num1">88.703703703704</td>
+                                <td class="num1">88.333333333333</td>
+                                <td class="num1">60.740740740741</td>
+                                <td class="num1">83.888888888889</td>
+                                <td class="num1">86.296296296296</td>
+                                <td class="num1">82.592592592593</td>
+                                <td class="num1">81.851851851852</td>
+                                <td class="num1">12.407407407407</td>
+                                <td class="num1">12.407407407407</td>
+                                <td class="num1">9.2592592592593</td>
+                                <td class="num1">-11.851851851852</td>
+                                <td class="num1">78.640740740741</td>
+                                <td class="num1">77.118592592593</td>
+                            </tr>
+                            <tr>
+                                <td class="num11">E1</td>
+                                <td class="num12">906</td>
+                                <td class="num1">108.99558498896</td>
+                                <td class="num1">74.337748344371</td>
+                                <td class="num1">111.53421633554</td>
+                                <td class="num1">85.98233995585</td>
+                                <td class="num1">98.951434878587</td>
+                                <td class="num1">74.337748344371</td>
+                                <td class="num1">59.657836644592</td>
+                                <td class="num1">58.002207505519</td>
+                                <td class="num1">55.684326710817</td>
+                                <td class="num1">62.362030905077</td>
+                                <td class="num1">101.98675496689</td>
+                                <td class="num1">105.02207505519</td>
+                                <td class="num1">69.205298013245</td>
+                                <td class="num1">100.22075055188</td>
+                                <td class="num1">99.006622516556</td>
+                                <td class="num1">101.15894039735</td>
+                                <td class="num1">97.792494481236</td>
+                                <td class="num1">69.757174392936</td>
+                                <td class="num1">67.273730684327</td>
+                                <td class="num1">61.644591611479</td>
+                                <td class="num1">6.7880794701987</td>
+                                <td class="num1">93.812251655629</td>
+                                <td class="num1">91.556567328918</td>
+                            </tr>
+                            <tr>
+                                <td class="num11">E2</td>
+                                <td class="num12">469</td>
+                                <td class="num1">103.62473347548</td>
+                                <td class="num1">71.855010660981</td>
+                                <td class="num1">107.46268656716</td>
+                                <td class="num1">89.55223880597</td>
+                                <td class="num1">90.831556503198</td>
+                                <td class="num1">71.855010660981</td>
+                                <td class="num1">57.675906183369</td>
+                                <td class="num1">55.43710021322</td>
+                                <td class="num1">56.609808102345</td>
+                                <td class="num1">65.245202558635</td>
+                                <td class="num1">91.791044776119</td>
+                                <td class="num1">98.294243070362</td>
+                                <td class="num1">74.520255863539</td>
+                                <td class="num1">92.217484008529</td>
+                                <td class="num1">89.339019189765</td>
+                                <td class="num1">91.151385927505</td>
+                                <td class="num1">91.791044776119</td>
+                                <td class="num1">31.023454157783</td>
+                                <td class="num1">28.251599147122</td>
+                                <td class="num1">24.946695095949</td>
+                                <td class="num1">1.2793176972281</td>
+                                <td class="num1">88.047334754797</td>
+                                <td class="num1">85.786268656716</td>
+                            </tr>
+                            <tr>
+                                <td class="num11">E3</td>
+                                <td class="num12">692</td>
+                                <td class="num1">104.26300578035</td>
+                                <td class="num1">77.890173410405</td>
+                                <td class="num1">109.24855491329</td>
+                                <td class="num1">90.895953757225</td>
+                                <td class="num1">96.748554913295</td>
+                                <td class="num1">77.890173410405</td>
+                                <td class="num1">53.757225433526</td>
+                                <td class="num1">49.78323699422</td>
+                                <td class="num1">51.300578034682</td>
+                                <td class="num1">54.479768786127</td>
+                                <td class="num1">101.15606936416</td>
+                                <td class="num1">102.09537572254</td>
+                                <td class="num1">59.971098265896</td>
+                                <td class="num1">99.638728323699</td>
+                                <td class="num1">97.326589595376</td>
+                                <td class="num1">97.471098265896</td>
+                                <td class="num1">94.653179190751</td>
+                                <td class="num1">29.841040462428</td>
+                                <td class="num1">27.817919075145</td>
+                                <td class="num1">23.121387283237</td>
+                                <td class="num1">-3.0346820809249</td>
+                                <td class="num1">90.461054913295</td>
+                                <td class="num1">89.317854046243</td>
+                            </tr>
+                            <tr>
+                                <td class="num11">N1</td>
+                                <td class="num12">140</td>
+                                <td class="num1">113.57142857143</td>
+                                <td class="num1">73.571428571429</td>
+                                <td class="num1">110</td>
+                                <td class="num1">85.714285714286</td>
+                                <td class="num1">87.142857142857</td>
+                                <td class="num1">73.571428571429</td>
+                                <td class="num1">75</td>
+                                <td class="num1">71.785714285714</td>
+                                <td class="num1">84.285714285714</td>
+                                <td class="num1">82.857142857143</td>
+                                <td class="num1">97.142857142857</td>
+                                <td class="num1">98.928571428571</td>
+                                <td class="num1">91.428571428571</td>
+                                <td class="num1">87.5</td>
+                                <td class="num1">94.642857142857</td>
+                                <td class="num1">90.357142857143</td>
+                                <td class="num1">90.357142857143</td>
+                                <td class="num1">11.785714285714</td>
+                                <td class="num1">11.071428571429</td>
+                                <td class="num1">9.6428571428571</td>
+                                <td class="num1">13.571428571429</td>
+                                <td class="num1">90.341428571429</td>
+                                <td class="num1">87.966142857143</td>
+                            </tr>
+                            <tr>
+                                <td class="num11">N2</td>
+                                <td class="num12">256</td>
+                                <td class="num1">123.2421875</td>
+                                <td class="num1">80.2734375</td>
+                                <td class="num1">121.6796875</td>
+                                <td class="num1">97.4609375</td>
+                                <td class="num1">103.90625</td>
+                                <td class="num1">80.2734375</td>
+                                <td class="num1">85.546875</td>
+                                <td class="num1">80.46875</td>
+                                <td class="num1">83.203125</td>
+                                <td class="num1">89.2578125</td>
+                                <td class="num1">109.765625</td>
+                                <td class="num1">112.5</td>
+                                <td class="num1">90.0390625</td>
+                                <td class="num1">105.2734375</td>
+                                <td class="num1">105.2734375</td>
+                                <td class="num1">111.1328125</td>
+                                <td class="num1">109.1796875</td>
+                                <td class="num1">43.9453125</td>
+                                <td class="num1">42.96875</td>
+                                <td class="num1">37.5</td>
+                                <td class="num1">33.984375</td>
+                                <td class="num1">105.1876953125</td>
+                                <td class="num1">101.25833984375</td>
+                            </tr>
+                            <tr>
+                                <td class="num11">N3</td>
+                                <td class="num12">522</td>
+                                <td class="num1">97.509578544061</td>
+                                <td class="num1">73.084291187739</td>
+                                <td class="num1">106.89655172414</td>
+                                <td class="num1">95.210727969349</td>
+                                <td class="num1">81.32183908046</td>
+                                <td class="num1">73.084291187739</td>
+                                <td class="num1">62.068965517241</td>
+                                <td class="num1">61.015325670498</td>
+                                <td class="num1">59.770114942529</td>
+                                <td class="num1">70.114942528736</td>
+                                <td class="num1">85.536398467433</td>
+                                <td class="num1">91.187739463602</td>
+                                <td class="num1">77.394636015326</td>
+                                <td class="num1">84.291187739464</td>
+                                <td class="num1">84.961685823755</td>
+                                <td class="num1">81.800766283525</td>
+                                <td class="num1">83.333333333333</td>
+                                <td class="num1">10.823754789272</td>
+                                <td class="num1">9.7701149425287</td>
+                                <td class="num1">6.3218390804598</td>
+                                <td class="num1">6.4176245210728</td>
+                                <td class="num1">82.282471264368</td>
+                                <td class="num1">80.816848659004</td>
+                            </tr>
+                            <tr>
+                                <td class="num11">N4</td>
+                                <td class="num12">135</td>
+                                <td class="num1">117.03703703704</td>
+                                <td class="num1">77.777777777778</td>
+                                <td class="num1">114.07407407407</td>
+                                <td class="num1">100.37037037037</td>
+                                <td class="num1">94.444444444444</td>
+                                <td class="num1">77.777777777778</td>
+                                <td class="num1">95.555555555556</td>
+                                <td class="num1">88.888888888889</td>
+                                <td class="num1">95.555555555556</td>
+                                <td class="num1">94.814814814815</td>
+                                <td class="num1">104.81481481481</td>
+                                <td class="num1">106.66666666667</td>
+                                <td class="num1">103.33333333333</td>
+                                <td class="num1">103.33333333333</td>
+                                <td class="num1">100.37037037037</td>
+                                <td class="num1">101.85185185185</td>
+                                <td class="num1">97.407407407407</td>
+                                <td class="num1">4.4444444444444</td>
+                                <td class="num1">3.3333333333333</td>
+                                <td class="num1">-1.1111111111111</td>
+                                <td class="num1">38.518518518519</td>
+                                <td class="num1">101.29259259259</td>
+                                <td class="num1">96.480962962963</td>
+                            </tr>
+                            <tr>
+                                <td class="num11">S1</td>
+                                <td class="num12">194</td>
+                                <td class="num1">105.15463917526</td>
+                                <td class="num1">63.144329896907</td>
+                                <td class="num1">105.67010309278</td>
+                                <td class="num1">77.835051546392</td>
+                                <td class="num1">89.432989690722</td>
+                                <td class="num1">63.144329896907</td>
+                                <td class="num1">26.80412371134</td>
+                                <td class="num1">25.257731958763</td>
+                                <td class="num1">27.319587628866</td>
+                                <td class="num1">27.319587628866</td>
+                                <td class="num1">96.39175257732</td>
+                                <td class="num1">96.134020618557</td>
+                                <td class="num1">32.989690721649</td>
+                                <td class="num1">84.020618556701</td>
+                                <td class="num1">88.917525773196</td>
+                                <td class="num1">82.731958762887</td>
+                                <td class="num1">88.144329896907</td>
+                                <td class="num1">18.556701030928</td>
+                                <td class="num1">17.525773195876</td>
+                                <td class="num1">15.20618556701</td>
+                                <td class="num1">-41.494845360825</td>
+                                <td class="num1">76.742783505155</td>
+                                <td class="num1">77.031597938144</td>
+                            </tr>
+                            <tr>
+                                <td class="num11">S2</td>
+                                <td class="num12">232</td>
+                                <td class="num1">106.25</td>
+                                <td class="num1">67.241379310345</td>
+                                <td class="num1">109.69827586207</td>
+                                <td class="num1">72.844827586207</td>
+                                <td class="num1">93.534482758621</td>
+                                <td class="num1">67.241379310345</td>
+                                <td class="num1">48.275862068966</td>
+                                <td class="num1">48.275862068966</td>
+                                <td class="num1">53.663793103448</td>
+                                <td class="num1">52.801724137931</td>
+                                <td class="num1">101.72413793103</td>
+                                <td class="num1">104.95689655172</td>
+                                <td class="num1">59.051724137931</td>
+                                <td class="num1">100.21551724138</td>
+                                <td class="num1">92.241379310345</td>
+                                <td class="num1">97.413793103448</td>
+                                <td class="num1">92.887931034483</td>
+                                <td class="num1">23.922413793103</td>
+                                <td class="num1">22.413793103448</td>
+                                <td class="num1">21.336206896552</td>
+                                <td class="num1">-41.810344827586</td>
+                                <td class="num1">90.25474137931</td>
+                                <td class="num1">86.602543103448</td>
+                            </tr>
+                            <tr>
+                                <td class="num11">S3</td>
+                                <td class="num12">340</td>
+                                <td class="num1">100.44117647059</td>
+                                <td class="num1">69.264705882353</td>
+                                <td class="num1">101.47058823529</td>
+                                <td class="num1">70.735294117647</td>
+                                <td class="num1">102.64705882353</td>
+                                <td class="num1">69.264705882353</td>
+                                <td class="num1">55.882352941176</td>
+                                <td class="num1">56.911764705882</td>
+                                <td class="num1">57.058823529412</td>
+                                <td class="num1">66.029411764706</td>
+                                <td class="num1">110.88235294118</td>
+                                <td class="num1">113.38235294118</td>
+                                <td class="num1">66.470588235294</td>
+                                <td class="num1">107.5</td>
+                                <td class="num1">107.05882352941</td>
+                                <td class="num1">102.35294117647</td>
+                                <td class="num1">100</td>
+                                <td class="num1">52.058823529412</td>
+                                <td class="num1">52.941176470588</td>
+                                <td class="num1">45.294117647059</td>
+                                <td class="num1">-28.676470588235</td>
+                                <td class="num1">98.088970588235</td>
+                                <td class="num1">94.41075</td>
+                            </tr>
+                            <tr>
+                                <td class="num11">T1</td>
+                                <td class="num12">749</td>
+                                <td class="num1">102.13618157543</td>
+                                <td class="num1">61.081441922563</td>
+                                <td class="num1">104.87316421896</td>
+                                <td class="num1">74.365821094793</td>
+                                <td class="num1">81.50867823765</td>
+                                <td class="num1">61.081441922563</td>
+                                <td class="num1">41.455273698264</td>
+                                <td class="num1">41.855807743658</td>
+                                <td class="num1">40.720961281709</td>
+                                <td class="num1">46.328437917223</td>
+                                <td class="num1">87.783711615487</td>
+                                <td class="num1">89.652870493992</td>
+                                <td class="num1">50.333778371162</td>
+                                <td class="num1">86.248331108144</td>
+                                <td class="num1">83.978638184246</td>
+                                <td class="num1">84.646194926569</td>
+                                <td class="num1">82.109479305741</td>
+                                <td class="num1">17.957276368491</td>
+                                <td class="num1">18.49132176235</td>
+                                <td class="num1">12.950600801068</td>
+                                <td class="num1">-35.647530040053</td>
+                                <td class="num1">78.305140186916</td>
+                                <td class="num1">76.005106809079</td>
+                            </tr>
+                            <tr>
+                                <td class="num11">T2</td>
+                                <td class="num12">422</td>
+                                <td class="num1">106.16113744076</td>
+                                <td class="num1">72.630331753555</td>
+                                <td class="num1">112.67772511848</td>
+                                <td class="num1">92.890995260664</td>
+                                <td class="num1">94.075829383886</td>
+                                <td class="num1">72.630331753555</td>
+                                <td class="num1">49.407582938389</td>
+                                <td class="num1">46.919431279621</td>
+                                <td class="num1">50</td>
+                                <td class="num1">55.450236966825</td>
+                                <td class="num1">93.720379146919</td>
+                                <td class="num1">95.260663507109</td>
+                                <td class="num1">63.03317535545</td>
+                                <td class="num1">92.654028436019</td>
+                                <td class="num1">91.232227488152</td>
+                                <td class="num1">96.919431279621</td>
+                                <td class="num1">92.18009478673</td>
+                                <td class="num1">36.018957345972</td>
+                                <td class="num1">33.767772511848</td>
+                                <td class="num1">29.265402843602</td>
+                                <td class="num1">-15.995260663507</td>
+                                <td class="num1">87.12855450237</td>
+                                <td class="num1">85.8725</td>
+                            </tr>
+                            <tr>
+                                <td class="num11">W1</td>
+                                <td class="num12">336</td>
+                                <td class="num1">109.67261904762</td>
+                                <td class="num1">61.904761904762</td>
+                                <td class="num1">109.07738095238</td>
+                                <td class="num1">86.607142857143</td>
+                                <td class="num1">92.410714285714</td>
+                                <td class="num1">61.904761904762</td>
+                                <td class="num1">57.886904761905</td>
+                                <td class="num1">53.571428571429</td>
+                                <td class="num1">48.958333333333</td>
+                                <td class="num1">58.779761904762</td>
+                                <td class="num1">98.958333333333</td>
+                                <td class="num1">102.52976190476</td>
+                                <td class="num1">63.690476190476</td>
+                                <td class="num1">95.684523809524</td>
+                                <td class="num1">98.363095238095</td>
+                                <td class="num1">100.59523809524</td>
+                                <td class="num1">93.154761904762</td>
+                                <td class="num1">69.047619047619</td>
+                                <td class="num1">69.196428571429</td>
+                                <td class="num1">56.25</td>
+                                <td class="num1">-21.577380952381</td>
+                                <td class="num1">90.260119047619</td>
+                                <td class="num1">86.561904761905</td>
+                            </tr>
+                            <tr>
+                                <td class="num11">W2</td>
+                                <td class="num12">344</td>
+                                <td class="num1">109.88372093023</td>
+                                <td class="num1">71.802325581395</td>
+                                <td class="num1">107.99418604651</td>
+                                <td class="num1">88.808139534884</td>
+                                <td class="num1">104.79651162791</td>
+                                <td class="num1">71.802325581395</td>
+                                <td class="num1">66.860465116279</td>
+                                <td class="num1">68.604651162791</td>
+                                <td class="num1">64.098837209302</td>
+                                <td class="num1">67.441860465116</td>
+                                <td class="num1">102.03488372093</td>
+                                <td class="num1">103.77906976744</td>
+                                <td class="num1">72.96511627907</td>
+                                <td class="num1">103.1976744186</td>
+                                <td class="num1">102.18023255814</td>
+                                <td class="num1">103.1976744186</td>
+                                <td class="num1">101.01744186047</td>
+                                <td class="num1">52.470930232558</td>
+                                <td class="num1">52.325581395349</td>
+                                <td class="num1">46.075581395349</td>
+                                <td class="num1">-16.56976744186</td>
+                                <td class="num1">96.322238372093</td>
+                                <td class="num1">93.827078488372</td>
+                            </tr>
+                            <tr>
+                                <td class="num11">W3</td>
+                                <td class="num12">357</td>
+                                <td class="num1">106.02240896359</td>
+                                <td class="num1">70.168067226891</td>
+                                <td class="num1">106.86274509804</td>
+                                <td class="num1">93.27731092437</td>
+                                <td class="num1">96.358543417367</td>
+                                <td class="num1">70.168067226891</td>
+                                <td class="num1">46.358543417367</td>
+                                <td class="num1">43.417366946779</td>
+                                <td class="num1">44.257703081232</td>
+                                <td class="num1">48.459383753501</td>
+                                <td class="num1">98.459383753501</td>
+                                <td class="num1">100.98039215686</td>
+                                <td class="num1">54.761904761905</td>
+                                <td class="num1">96.218487394958</td>
+                                <td class="num1">97.899159663866</td>
+                                <td class="num1">97.058823529412</td>
+                                <td class="num1">95.238095238095</td>
+                                <td class="num1">46.498599439776</td>
+                                <td class="num1">48.739495798319</td>
+                                <td class="num1">39.635854341737</td>
+                                <td class="num1">-33.75350140056</td>
+                                <td class="num1">88.241036414566</td>
+                                <td class="num1">86.893599439776</td>
+                            </tr>
+                        </tbody>
+                        </table>
+
+
+                  </div>
+              <!-- /.box-body-->
+            </div>
+            <!-- /.box -->
+  
+        
+
+
+
+
+
+
+
+
+
+
+    </section>
+    <!-- /.content -->
+ 

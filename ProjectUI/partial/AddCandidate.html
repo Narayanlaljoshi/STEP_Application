@@ -1,0 +1,152 @@
+﻿
+
+<div class="modal-header">
+    <h5 class="modal-title">
+        <b>Add Candidate</b>
+        <div style="float:right" class="jarviswidget-ctrls" role="menu">
+            <a href="" ng-click="cancel()" class="button-icon jarviswidget-delete-btn" rel="tooltip" title=""
+               data-placement="bottom" data-original-title="Delete"><i class="fa fa-times"></i></a>
+        </div>
+    </h5>
+</div>
+<div class="modal-body">
+
+    <div class="box-body">
+        <div class="row">
+            <div class="col col-lg-3">
+                <label>
+                    Session Id:
+                </label>
+                <select class="form-control" ng-change="ValidateSession(Candidate)" ng-options="pt.SessionID as pt.SessionID for pt in SessionIdList"
+                        ng-model="Candidate.SessionID"></select>
+               
+            </div>
+            <!--<div class="col col-lg-3">
+                <label>
+                    Name:
+                </label>
+                <input class="form-control" type="text" ng-model="Candidate.Name" />
+
+            </div>
+            <div class="col col-lg-3">
+                <label>
+                    Designation:
+                </label>
+                <input class="form-control" type="text" ng-model="Candidate.Designation" />
+
+            </div>
+            <div class="col col-lg-3">
+                <label>
+                    Org Type:
+                </label>
+                <select class="form-control" ng-model="Candidate.OrgType">
+                    <option value="Dealer">Dealer</option>
+                    <option value="Vender">Vender</option>
+                    <option value="MSIL">MSIL</option>
+                    <option value="Other">Other</option>
+                </select>
+
+            </div>-->
+        </div>
+        <br />
+        <div class="table-responsive" style="overflow-x: initial;"><!--table-responsive-->
+            <table class="table table-bordered">
+                <thead style="background:lightgrey;">
+                    <tr>
+                        <th style="text-align:center;">
+                            Name:
+                        </th>
+
+                        <th style="text-align:center;">
+                            Designation:
+                        </th>
+                        <th style="text-align:center;">
+                            Org Type:
+                        </th>
+                        <th style="text-align:center;">
+                            Organization:
+                        </th>
+                        <th style="text-align:center;">
+                            Location:
+                        </th>
+                        <th style="text-align:center;">
+                            Mobile:
+                        </th>
+                        <th style="text-align:center;">
+                            DOB:
+                        </th>
+                        <!--<th style="text-align:center;">
+                            MSPIN:
+                        </th>-->
+                        <th><button ng-click="AddRow()" class="btn btn-success btn-xs">+</button></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="text-align:center;" ng-repeat="pt in Candidates">
+
+                        <td><input class="form-control" type="text" ng-model="pt.Name" /></td>
+                        <td><input class="form-control" type="text" ng-model="pt.Designation" /></td>
+                        <td>
+                            <select style="width:100px;" class="form-control" ng-model="pt.OrgType">
+                                <option value="Dealer">Dealer</option>
+                                <option value="Vendor">Vendor</option>
+                                <option value="MSIL">MSIL</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </td>
+                        <td><input class="form-control" type="text" ng-model="pt.Organization" /></td>
+                        <td><input class="form-control" type="text" ng-model="pt.Location" /></td>
+                        <td><input class="form-control" maxlength="10" numbers-only type="text" ng-model="pt.MobileNo" /></td>
+                        <td>
+                            <div  class="datepicker hidden-xs" id="Div1" date-format="MMM dd, yyyy" date-min-limit="{{MaxDate.toString()}}" button-prev="<i class=&quot;fa fa-arrow-circle-left&quot;></i>" button-next="<i class=&quot;fa fa-arrow-circle-right&quot;></i>">
+                                <input ng-required="true" class="form-control" contenteditable="false" name="ExpectedStartDate" ng-model="pt.DateofBirth" type="text" />
+                            </div>
+                            <input class="form-control visible-xs" type="date" ng-model="pt.DateofBirth"/>
+                        </td>
+                        <!--<td>
+                            <input class="form-control" maxlength="6" numbers-only type="text" ng-model="pt.MSPIN" />
+                        </td>-->
+                        <td><button class="btn btn-warning btn-xs" ng-click="DeleteRow($index)">-</button></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    
+        <div class="row" style="display:none;">
+            <div class="col col-lg-3">
+                <label>
+                    Organization:
+                </label>
+                    <input class="form-control" type="text" ng-model="Candidate.Organization" />
+                
+            </div>
+            <div class="col col-lg-3">
+                <label>
+                    Location:
+                </label>
+                    <input class="form-control" type="text" ng-model="Candidate.Location" />
+                
+            </div>
+            <div class="col col-lg-3">
+                <label>
+                    Mobile:
+                </label>
+                <input class="form-control"maxlength="10" numbers-only type="text" ng-model="Candidate.MobileNo" />
+
+            </div>
+            <div class="col col-lg-3">
+                <label>
+                    DOB:
+                </label>
+                <div class="datepicker" id="Div1" date-format="MMM dd, yyyy" date-min-limit="{{MaxDate.toString()}}" button-prev="<i class=&quot;fa fa-arrow-circle-left&quot;></i>" button-next="<i class=&quot;fa fa-arrow-circle-right&quot;></i>">
+                    <input ng-required="true" class="form-control" contenteditable="false" name="ExpectedStartDate" ng-model="Candidate.DateofBirth" type="text" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <button class="btn btn-success pull-right" style="margin-right: 15px;" ng-click="Submit(Candidate)">Submit</button>
+        </div>
+    </div>
+</div>
+

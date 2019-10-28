@@ -1,0 +1,316 @@
+﻿<style>
+    .que {
+        display: inline-block;
+        font-size: 12px;
+        background: #3c8dbc;
+        color: #fff;
+        padding: 5px;
+        border-radius: 4px;
+        margin: 5px 0;
+    }
+
+    .choseiamge {
+        margin-top: 5px;
+        border: 1px solid #d2d6de;
+        width: 142px;
+        padding: 1px 3px;
+    }
+</style>
+<section class="content-header">
+    <h1>
+        Question Bank
+        <!--<small>Preview of UI elements</small>-->
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">
+            Question Bank For Practical 
+        </li>
+    </ol>
+</section>
+
+<section class="content"ng-show="ShowTable">
+    <div class="row" >
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border" style="border-bottom:1px solid #dddddd;">
+                    <div class="row" style="margin-top:10px;">
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label>
+                                    Select Set: 
+                                </label>
+                                <select class="form-control" ng-options="item.Set_Id as ('Set-')+item.SetNumber for item in SetSequence" ng-op="" ng-model="Filter.Set_Id">
+                                </select>
+                            </div>
+                        </div><!--col-sm-3-->
+                        <div class="col-sm-3">
+                            <div>
+                                <label>Select Language:</label>
+                                <select class="form-control"
+                                        ng-options="item.LanguageMaster_Id as item.Language for item in ProgramLanguageArray" ng-model="Filter.LanguageMaster_Id"
+                                        ng-change="ChangeFormat()">
+                                    <option value="">Language</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <button class="btn btn-success btn-xs" style="margin-top:26px;"ng-click="ChangeFormat()">Go</button>
+                        </div><!--col-sm-3-->
+                        <div class="col-sm-5" style="text-align:right;margin-top:26px;">
+                            <button class="btn btn-primary btn-xs" ng-click="UploadLanguageWise()">Upload Language Wise</button>
+                            <button class="btn btn-primary btn-xs" ng-click="UploadBulk()">Bulk Upload</button>
+                            <button class="btn btn-warning btn-xs"ng-click="Back()">Back</button>
+                        </div><!--col-sm-3-->
+                    </div><!--row end-->
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <div class="box-body">
+                    <div class="table-responsive" style="overflow-y:scroll;max-height:477px;">
+                        <table class="table table-bordered" style="background-color:#fff;">
+                            <thead>
+                                <tr style="background:#3c8dbc;color:white;">
+                                    <th scope="col" style="width:2px;">#</th>
+                                    <th scope="col" style="width:2px;">Question</th>
+                                    <th colspan="5" scope="col" style="text-align:center;">Quetions Set</th>
+                                    <th colspan="5" scope="col" style="text-align:center;">Score Matrix</th>
+                                    <th scope="col" style="text-align:center;">Action</th>
+                                </tr>
+                                <tr style="background:#ecf0f5;">
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col">Action A</th>
+                                    <th scope="col">Action B</th>
+                                    <th scope="col">Action C</th>
+                                    <th scope="col">Action D</th>
+                                    <th scope="col">Action E</th>
+                                    <th scope="col">Action A</th>
+                                    <th scope="col">Action B</th>
+                                    <th scope="col">Action C</th>
+                                    <th scope="col">Action D</th>
+                                    <th scope="col">Action E</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="pt in QuestionBankData">
+                                    <td>{{$index+1
+                                    }}</td>
+                                    <td>
+                                        {{pt.Question}}
+                                        <span ng-if="pt.Question_Image">
+                                            <!--<a data-toggle="modal" data-target="#myModal1" style="display: block;margin-bottom: 10px;">-->
+                                            <a href="{{pt.Question_Image}}" target="_blank">
+                                                <img ng-src="{{pt.Question_Image}}" style="height:20px;width:20px" />
+                                            </a>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {{pt.ActionA}}
+                                        <span ng-if="pt.ActionA_Image">
+                                            <a href="{{pt.ActionA_Image}}" target="_blank"> <img ng-src="{{pt.ActionA_Image}}" style="height:20px;width:20px" /></a>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {{pt.ActionB}}
+                                        <span ng-if="pt.ActionB_Image">
+                                            <a href="{{pt.ActionB_Image}}" target="_blank">
+                                                <img ng-src="{{pt.ActionB_Image}}" style="height:20px;width:20px" />
+                                            </a>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {{pt.ActionC}}
+                                        <span ng-if="pt.ActionC_Image">
+                                            <a href="{{pt.ActionC_Image}}" target="_blank">
+                                                <img ng-src="{{pt.ActionC_Image}}" style="height:20px;width:20px" />
+                                            </a>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {{pt.ActionD}}
+                                        <span ng-if="pt.ActionD_Image">
+                                            <a href="{{pt.ActionD_Image}}" target="_blank">
+                                                <img ng-src="{{pt.ActionD_Image}}" style="height:20px;width:20px" />
+                                            </a>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {{pt.ActionE}}
+                                        <span ng-if="pt.ActionE_Image">
+                                            <a href="{{pt.ActionE_Image}}" target="_blank">
+                                                <img ng-src="{{pt.ActionE_Image}}" style="height:20px;width:20px" />
+                                            </a>
+                                        </span>
+                                    </td>
+                                    <td>{{pt.Marks_A}}</td>
+                                    <td>{{pt.Marks_B}}</td>
+                                    <td>{{pt.Marks_C}}</td>
+                                    <td>{{pt.Marks_D}}</td>
+                                    <td>{{pt.Marks_E}}</td>
+                                    <td><button class="btn btn-primary btn-xs" ng-click="UpdateImages(pt)">Update Images</button></td>
+                                    </tr>
+                                    </tbody>
+                                    </table>
+</div>
+                    
+
+                    <div id="myModal1" class="modal fade" role="dialog">
+                        <div class="modal-dialog modal-lg">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <!--<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>-->
+                                <div class="modal-body" style="padding:0">
+                                    <img class="img-responsive" style="margin:auto;" ng-src="{{Image}}">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box -->
+
+            </div>
+        </div><!-- </div>row end -->
+    </div>
+   
+</section>
+<section class="content" ng-show="BulkUpload">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border" style="border-bottom:1px solid #dddddd;">
+                    <div class="row" style="margin-top:10px;">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label>Select</label>
+                                <select class="form-control" ng-options="item.Set_Id as ('Set-')+item.SetNumber for item in SetSequence" ng-op="" ng-model="Set_Id"></select>
+                            </div>
+                        </div><!--col-sm-3-->
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label>Select File</label>
+                                <input type="file" id="exampleInputFile" class="form-control" file-model="File1">
+                            </div>
+                        </div><!--col-sm-3-->
+
+                        <div class="col-sm-3" style="margin-top:26px;">
+
+                            <a href="../Templates/PracticalQuestions.xlsx" class="btn btn-primary btn-xs">Downlaod Template</a>
+                            <button class="btn btn-success btn-xs" ng-click="UploadExcelfunction()">Upload</button>
+                        </div><!--col-sm-3-->
+                    </div><!--row end-->
+                </div>
+                <!-- /.box-header -->               
+                <!-- /.box -->
+                <div class="box-footer text-right">
+                    <button ng-click="BackToQuestionScreen()" class="btn  btn-warning btn-xs">Back</button>
+                </div>
+            </div>
+        </div><!-- </div>row end -->
+    </div>
+
+</section>
+<section class="content" ng-hide="ShowTable">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border" style="border-bottom:1px solid #dddddd;">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label>Select Question Image</label>
+                            <input type="file" class="form-control" file-model="Files.QuestionImage" />
+                        </div><!--col3-->
+                        <div class="col-sm-4">
+                            <label>Select Action A Image</label>
+                            <input type="file" class="form-control" file-model="Files.ActionAImage" />
+                        </div><!--col3-->
+                        <div class="col-sm-4">
+                            <label>Select Action B Image</label>
+                            <input type="file" class="form-control" file-model="Files.ActionBImage" />
+                        </div><!--col3-->
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label>Select Action C Image</label>
+                            <input type="file" class="form-control" file-model="Files.ActionCImage" />
+                        </div><!--col3-->
+                        <div class="col-sm-4">
+                            <label>Select Action D Image</label>
+                            <input type="file" class="form-control" file-model="Files.ActionDImage" />
+                        </div><!--col3-->
+                        <div class="col-sm-4">
+                            <label>Select Action E Image</label>
+                            <input type="file" class="form-control" file-model="Files.ActionEImage" />
+                        </div><!--col3-->
+
+                    </div><!--row end-->
+                    <div class="box-footer">
+                        <div class="col-sm-6" style="text-align:right;">
+                            <button  class="btn btn-primary btn-xs"ng-click="UpdateImage_Practical(QuestionDetails)">Upload</button>
+                            <button ng-click="BackToQuestionScreen()" class="btn btn-default btn-xs">Back</button>
+                        </div><!--col-sm-3-->
+                    </div>
+                </div>
+                <!-- /.box-header -->
+            </div>
+            <!-- /.box -->
+        </div>
+    </div><!-- </div>row end -->
+</section>
+<section class="content" ng-show="LanguageWise">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border" style="border-bottom:1px solid #dddddd;">
+                    <div class="row" style="margin-top:10px;">
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label>
+                                    Select Set:
+                                </label>
+                                <select class="form-control" ng-options="item.Set_Id as ('Set-')+item.SetNumber for item in SetSequence" ng-op="" ng-model="Filter.Set_Id"></select>
+                            </div>
+                        </div><!--col-sm-3-->
+                        <div class="col-sm-2">
+                            <button class="btn btn-primary btn-xs" ng-click="DownloadTemplate()" style="margin-top:26px;">Download Template</button>
+                        </div><!--col-sm-3-->
+
+                        <div class="col-sm-3">
+                            <div>
+                                <label>
+                                    Select Language:</label>
+                                <select class="form-control"
+                                        ng-options="item.LanguageMaster_Id as item.Language for item in ProgramLanguageArray" ng-model="Filter.LanguageMaster_Id">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Select File</label>
+                            <input type="file" class="form-control" file-model="LanguageQuestionExcel" />
+                        </div><!--col-sm-3-->
+                        <div class="col-sm-3" style="text-align:right;margin-top:26px;">
+                            <button class="btn btn-success btn-xs" ng-click="BulkUpload_PracticalQuestions()" style="margin-top:26px;">Upload</button>
+                            <button class="btn btn-warning btn-xs" ng-click="BackToQuestionScreen()">Back</button>
+                        </div><!--col-sm-3-->
+                    </div><!--row end-->
+                </div>
+                <!-- /.box-header -->
+                <div class="row">
+                </div>
+            </div>
+        </div><!-- </div>row end -->
+    </div>
+</section>

@@ -1,0 +1,133 @@
+﻿<section class="content-header">
+    <h1>
+        Vendor Master
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Vendors</li>
+    </ol>
+</section>
+
+<section class="content">
+
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Vendor Master</h3>
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" style="float:right;">Add Vendor</button>
+
+        </div>
+        <div class="box-body">
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header" style="color:white;background:#3c8dbc;padding:6px;">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Vendor Information</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>FAC Code</label>
+                                        <input type="text" class="form-control" placeholder="Enter ..." ng-model="VendorDetails.FAC_Code">
+                                    </div>
+                                </div><!--col end-->
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Vendor Name</label>
+                                        <input type="text" class="form-control" placeholder="Enter ..." ng-model="VendorDetails.VendorName">
+                                    </div>
+                                </div><!--col end-->
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Manager Name</label>
+                                        <input type="text" class="form-control" placeholder="Enter ..." ng-model="VendorDetails.ManagerName">
+                                    </div>
+                                </div><!--col end-->
+                            </div><!--row end-->
+
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Manager Email</label>
+                                        <input type="text" class="form-control" placeholder="Enter ..." ng-model="VendorDetails.ManagerEmail">
+                                    </div>
+                                </div><!--col end-->
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Manager ID</label>
+                                        <input type="text" class="form-control" placeholder="Enter ..." ng-model="VendorDetails.ManagerID">
+                                    </div>
+                                </div><!--col end-->
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Manager Mobile No</label>
+                                        <input type="text" class="form-control" numbers-only placeholder="Enter ..." ng-model="VendorDetails.ManagerMobile">
+                                    </div>
+                                </div><!--col end-->
+                            </div><!--row end-->
+                        </div>
+
+
+                        <div class="modal-footer">
+
+                            <button type="button" class="btn btn-success btn-sm" ng-click="AddVendor(VendorDetails)">Submit</button>
+                            <!--<a href="#/VM" class="btn btn-default btr-xs">Back</a>-->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--Modal button end-->
+        </div>
+
+        <div class="box-body">
+            <div class="row">
+                <table class="table table-bordered" style="    margin-left: 10px;width: 98%;">
+                    <thead style="background: #3c8dbc;color: aliceblue;">
+                        <tr>
+                            <th>S.No</th>
+                            <th>FAC Code</th>
+                            <th>Vendor Name</th>
+                            <th>Vendor Manager</th>
+                            <th>Vendor Manager ID</th>
+                            <th>Vendor Manager E-Mail ID</th>
+                            <th>Vendor Manager Contact No.</th>
+                        </tr>
+                    </thead>
+                    <tbody style="">
+                        <tr ng-repeat="pt in VendorList">
+                            <td>{{$Index+1}}</td>
+                            <td>{{pt.FAC_Code}}</td>
+                            <td>{{pt.VendorName}}</td>
+                            <td>{{pt.ManagerName}}</td>
+                            <td>{{pt.ManagerID}}</td>
+                            <td>{{pt.ManagerEmail}}</td>
+                            <td>{{pt.ManagerMobile}}</td>
+                        </tr>
+                        <!--<tr>
+                        <td>1.</td>
+                        <td>FAC002</td>
+                        <td> Hero Mindmine </td>
+                        <td>Neha Parashar</td>
+                        <td>258752</td>
+                        <td>nehapa2311187@gmail.com</td>
+                        <td>9876543210</td>
+                    </tr>-->
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="box-footer">
+            <!--<a class="btn btn-success btn-sm btn-xs" href="../Excel Template/SampleNominationFile.xlsx">Download Template</a>-->
+        </div>
+    </div>
+
+
+
+
+</section>

@@ -1,0 +1,73 @@
+﻿
+<section class="content-header">
+    <h1>
+        Upload Errors
+        <!--<small>Preview of UI elements</small>-->
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Errors</li>
+    </ol>
+</section>
+
+<section class="content">
+
+    <div class="box" ng-show="ShowTable">
+        <div class="box-header with-border text-right">
+            <div class="input-group col-lg-4 pull-right">
+                <input type="text" name="q" class="form-control" placeholder="Search..."ng-model="SearchText" >
+                <span class="input-group-btn">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+            <!--<input type="text" placeholder="Search Text" ng-model="SearchText" />-->
+            <!--<button ng-click="AddProgram()" class="btn  btn-success btn-sm btn-xs">Add Program</button>-->
+        </div>
+
+        <div class="box-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr style="background: #ecf0f5;font-size: 12px;vertical-align: top;">
+                        <th style="text-align:center;">#</th>
+                        <th style="text-align:center;">Date</th>
+                        <th style="text-align:center;">Column Name</th>
+                        <th style="text-align:center;">Value</th>
+                        <th style="text-align:center;">Action (Mark if Resolved)</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr ng-repeat="pt in ErrorList | filter:SearchText" style="text-align:center;">
+
+                        <td>{{ $index+1}}</td>
+                        <td>{{pt.Date | date:'dd-MM-yyyy'}}</td>
+                        <td>{{pt.ColumnName}}</td>
+                        <td>
+                            {{pt.Value}}
+                        </td>
+                        <td>
+                            <input type="checkbox" ng-model="pt.IsResolved"/>
+                        </td>
+                        
+                    </tr>
+                </tbody>
+
+
+            </table>
+        </div>
+        <div class="box-footer">
+
+        </div>
+    </div>
+    <div class="box" ng-hide="ShowTable">
+        <div class="box-header with-border text-right">
+            <div class="col-lg-12">
+                <label>No Errors</label>
+            </div>
+        </div>
+    </div>
+
+</section>

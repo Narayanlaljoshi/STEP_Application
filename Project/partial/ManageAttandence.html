@@ -1,0 +1,64 @@
+﻿
+<section class="content-header">
+    <h1>
+        Manage Attandence
+        <!--<small>Preview of UI elements</small>-->
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Manage Attandence</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <div class="row">
+                <div class="col-lg-3 pull-left" ng-if="session.Role_Id==1">
+                    <select class="form-control" ng-options="ft.Agency_Id as ft.RTMName for ft in RTMList" ng-change="GetSessionList(Agency_IdOfRTM)" ng-model="Agency_IdOfRTM">
+                        <option selected disabled hidden value="">Select RTM</option>
+                    </select>
+                </div>
+                <!--<div class="col-lg-3 pull-right text-right">
+                    <input type="text" placeholder="Search Text" ng-model="SearchText" />
+                </div>-->
+                <div class="col-lg-3 text-right">
+                    <select class="form-control" ng-options="ft.SessionID as ft.SessionID for ft in SessionList" ng-change="GetCandidateList(SessionID)" ng-model="SessionID">
+                        <option selected disabled hidden value="">Select SessionID</option>
+                    </select>
+                </div>
+                <div class="col-lg-3 " ng-show="ShowTable">
+                    <button ng-click="UpdateAttendance()" class="btn btn-success ">Update</button>
+                </div>
+            </div>
+            </div>
+        <div class="box-body">
+            <table class="table table-bordered"ng-show="ShowTable" style="width:60%;">
+                <thead>
+                    <tr style="background: #ecf0f5;font-size: 12px;vertical-align: top;">
+                        <th style="text-align:center;">S.No</th>
+                        <th style="text-align:center;">MSPIN</th>
+                        <th style="text-align:center;">P/A</th>
+                        <th style="text-align:center;">Mark Attendance</th>
+
+                    </tr>
+                </thead>
+                <tbody style="text-align:center;">
+
+                    <tr ng-repeat="pt in CandidateList | filter:SearchText">
+                        <td>{{$index+1}}</td>
+                        <td>{{pt.MSPIN}}</td>
+                        <td>
+                            <span ng-if="pt.IsPresent==true">P</span>
+                            <span ng-if="pt.IsPresent!=true">A</span>
+                        </td>
+                        <td>
+                            <input ng-if="pt.IsPresent==false" type="checkbox" ng-model="pt.IsChecked" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+</section>

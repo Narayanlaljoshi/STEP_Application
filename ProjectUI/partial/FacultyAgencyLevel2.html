@@ -1,0 +1,192 @@
+﻿
+<section class="content-header">
+    <h1>
+        Conduct Test
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Conduct Test</li>
+    </ol>
+</section>
+
+<section class="content">
+
+    <div class="well" style="background: #fff;padding: 15px;">
+        <div class="row" style="margin-bottom: 15px;">
+            <div class="col-sm-3">
+                <div clas="form-group">
+                    <label>Program Code :</label>
+                    <span> {{FacultyProgramdetails.FaciltyProgramdetails.ProgramCode}}</span>
+
+
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div clas="form-group">
+                    <label>Program Name :</label>
+                    <span> {{FacultyProgramdetails.FaciltyProgramdetails.ProgramName}}</span>
+                </div>
+            </div>
+            <!--<div class="col-sm-3">
+                <div clas="form-group">
+                    <label>Day :</label>
+                    <span> {{FacultyProgramdetails.FaciltyProgramdetails.DayCount}}</span>
+                </div>
+            </div>-->
+            <div class="col-sm-6  text-right" ng-show="EligiblForTestInitiate==true">
+                <button type="button" ng-click="InitiatTest(FacultyProgramdetails.FaciltyProgramdetails)" class="btn btn-sm btn-success btn-create">Initiate Day- {{FacultyProgramdetails.FaciltyProgramdetails.DayCount}} Test</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <div clas="form-group">
+                    <label>Start Date :</label>
+                    <span> {{FacultyProgramdetails.FaciltyProgramdetails.StartDate}}</span>
+
+
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div clas="form-group">
+                    <label>End Date :</label>
+                    <span> {{FacultyProgramdetails.FaciltyProgramdetails.EndDate}}</span>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div clas="form-group">
+                    <label>Duration :</label>
+                    <span> {{FacultyProgramdetails.FaciltyProgramdetails.Duration}} (Day)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default panel-table">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col col-xs-6">
+                    <h3 class="panel-title" style="padding-top:7.5px">Candidates</h3>
+                </div>
+                <div class="col col-xs-6 text-right">
+                    <button class="btn btn-sm btn-primary">Add Candidate</button>
+
+                </div>
+            </div>
+        </div>
+        <div class="panel-body" style="padding:0;">
+            <table class="table table-striped " style="margin:0;">
+                <thead>
+                    <tr>
+                        <!--<th style="width:25px"><input type="checkbox" /></th>-->
+                        <th style=" width: 50px;" class="hidden-xs">S.No.</th>
+                        <th>MSPIN</th>
+                        <th>Session Id</th>
+                        <th>Name</th>
+                        <th>Pre Test Score</th>
+                        <th>Post Test Score</th>
+                        <!--<th>Action</th>-->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="pt in FacultyProgramdetails.StudentList">
+                        <!----| itemPerPage:20">-->
+                        <!--<td align="center">
+                            <a class="btn btn-default"><em class="fa fa-pencil"></em></a>
+                            <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
+                        </td>-->
+                        <!--<td><input type="checkbox" /></td>-->
+                        <td class="hidden-xs">{{$index+1}}</td>
+                        <td>{{pt.MSPIN}}</td>
+                        <td>{{pt.SessionID}}</td>
+                        <td>{{pt.Name}}</td>
+                        <td>
+                            <span ng-if="pt.PreTest_MarksObtained ==-1 && pt.IsPresentInPreTest==0">NA</span>
+                            <span ng-if="pt.PreTest_MarksObtained ==-1 && pt.IsPresentInPreTest==1">0 %</span>
+                            <span ng-if="pt.PreTest_MarksObtained !=-1">{{pt.PreTest_MarksObtained}}</span>
+                            <span ng-if="pt.PreTest_MarksObtained !=-1"> ({{(pt.PreTest_MarksObtained/pt.PreTestMaxMarks) * 100}}) %</span>
+
+                        </td>
+                        <td>
+                            <span ng-if="pt.PostTest_MarksObtained ==-1 && pt.IsPresentInPostTest==0">NA</span>
+                            <span ng-if="pt.PostTest_MarksObtained ==-1 && pt.IsPresentInPostTest==1">0 %</span>
+                            <a href="" ng-click="ShowPostTestsScore(pt)">
+                                <span ng-if="pt.PostTest_MarksObtained !=-1">{{pt.PostTest_MarksObtained}}</span>
+                                <span ng-if="pt.PostTest_MarksObtained !=-1">({{(pt.PostTest_MarksObtained/pt.PostTestMaxMarks) * 100}}) %</span>
+                            </a>
+                        </td>
+                        <!--<td><button class="btn btn-success">View Result</button></td>-->
+                    </tr>
+
+                </tbody>
+            </table>
+            <dir-pagination-controls max-size="20"
+                                     direction-links="true"
+                                     boundary-links="true">
+            </dir-pagination-controls>
+        </div>
+        <!--<div class="panel-footer text-center">
+            <div class="pull-left" style="padding-top:7.5px">Page 1 of 5</div>
+
+            <ul class="pagination" style="margin:0">
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+            </ul>
+
+            <button class="btn btn-success  pull-right">Start Test</button>
+
+
+        </div>-->
+    </div>
+</section>
+
+<script type="text/ng-template" id="TestRecords.html">
+    <div class="modal-header">
+        <h5 class="modal-title">
+            <b>Student Post Test Records</b>
+            <div style="float:right" class="jarviswidget-ctrls" role="menu">
+                <a href="" ng-click="cancel()" class="button-icon jarviswidget-delete-btn" rel="tooltip" title=""
+                   data-placement="bottom" data-original-title="Delete"><i class="fa fa-times"></i></a>
+            </div>
+        </h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="box-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center;">
+                                    Day
+                                </th>
+                                <th style="text-align:center;">
+                                    Marks Scored
+                                </th>
+
+                                <th style="text-align:center;">
+                                    Maximum Marks
+                                </th>
+                                <th style="text-align:center;">
+                                    %
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="text-align:center;" ng-repeat="pt in StudentPostTestScores">
+                                <td>{{pt.Day}}</td>
+                                <td>{{pt.PostTest_MarksObtained}}</td>
+                                <td>{{pt.PostTestMaxMarks}}</td>
+                                <td>{{(pt.PostTest_MarksObtained*100)/pt.PostTestMaxMarks}} %</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</script>

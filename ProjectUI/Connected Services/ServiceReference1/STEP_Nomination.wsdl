@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNominationFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PNPMC" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="FromDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNominationFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNominationFileResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCalendarFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PNPMC" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="FromDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCalendarFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCalendarFileResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadAttendance">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="data">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadAttendanceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UploadAttendanceResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadScore">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="data">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadScoreResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UploadScoreResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RunBatchJob_Attendance">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EndDate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RunBatchJob_AttendanceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RunBatchJob_AttendanceResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RunBatchJob_Marks">
+        <s:complexType />
+      </s:element>
+      <s:element name="RunBatchJob_MarksResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RunBatchJob_MarksResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNominationFileSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNominationFile" />
+  </wsdl:message>
+  <wsdl:message name="GetNominationFileSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNominationFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCalendarFileSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCalendarFile" />
+  </wsdl:message>
+  <wsdl:message name="GetCalendarFileSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCalendarFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadAttendanceSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadAttendance" />
+  </wsdl:message>
+  <wsdl:message name="UploadAttendanceSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadAttendanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadScoreSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadScore" />
+  </wsdl:message>
+  <wsdl:message name="UploadScoreSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadScoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="RunBatchJob_AttendanceSoapIn">
+    <wsdl:part name="parameters" element="tns:RunBatchJob_Attendance" />
+  </wsdl:message>
+  <wsdl:message name="RunBatchJob_AttendanceSoapOut">
+    <wsdl:part name="parameters" element="tns:RunBatchJob_AttendanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="RunBatchJob_MarksSoapIn">
+    <wsdl:part name="parameters" element="tns:RunBatchJob_Marks" />
+  </wsdl:message>
+  <wsdl:message name="RunBatchJob_MarksSoapOut">
+    <wsdl:part name="parameters" element="tns:RunBatchJob_MarksResponse" />
+  </wsdl:message>
+  <wsdl:portType name="STEP_NominationSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNominationFile">
+      <wsdl:input message="tns:GetNominationFileSoapIn" />
+      <wsdl:output message="tns:GetNominationFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCalendarFile">
+      <wsdl:input message="tns:GetCalendarFileSoapIn" />
+      <wsdl:output message="tns:GetCalendarFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadAttendance">
+      <wsdl:input message="tns:UploadAttendanceSoapIn" />
+      <wsdl:output message="tns:UploadAttendanceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadScore">
+      <wsdl:input message="tns:UploadScoreSoapIn" />
+      <wsdl:output message="tns:UploadScoreSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RunBatchJob_Attendance">
+      <wsdl:input message="tns:RunBatchJob_AttendanceSoapIn" />
+      <wsdl:output message="tns:RunBatchJob_AttendanceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RunBatchJob_Marks">
+      <wsdl:input message="tns:RunBatchJob_MarksSoapIn" />
+      <wsdl:output message="tns:RunBatchJob_MarksSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="STEP_NominationSoap" type="tns:STEP_NominationSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNominationFile">
+      <soap:operation soapAction="http://tempuri.org/GetNominationFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCalendarFile">
+      <soap:operation soapAction="http://tempuri.org/GetCalendarFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadAttendance">
+      <soap:operation soapAction="http://tempuri.org/UploadAttendance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadScore">
+      <soap:operation soapAction="http://tempuri.org/UploadScore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunBatchJob_Attendance">
+      <soap:operation soapAction="http://tempuri.org/RunBatchJob_Attendance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunBatchJob_Marks">
+      <soap:operation soapAction="http://tempuri.org/RunBatchJob_Marks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="STEP_NominationSoap12" type="tns:STEP_NominationSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNominationFile">
+      <soap12:operation soapAction="http://tempuri.org/GetNominationFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCalendarFile">
+      <soap12:operation soapAction="http://tempuri.org/GetCalendarFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadAttendance">
+      <soap12:operation soapAction="http://tempuri.org/UploadAttendance" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadScore">
+      <soap12:operation soapAction="http://tempuri.org/UploadScore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunBatchJob_Attendance">
+      <soap12:operation soapAction="http://tempuri.org/RunBatchJob_Attendance" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunBatchJob_Marks">
+      <soap12:operation soapAction="http://tempuri.org/RunBatchJob_Marks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="STEP_Nomination">
+    <wsdl:port name="STEP_NominationSoap" binding="tns:STEP_NominationSoap">
+      <soap:address location="http://220.226.210.11:2552/STEP_Nomination.asmx" />
+    </wsdl:port>
+    <wsdl:port name="STEP_NominationSoap12" binding="tns:STEP_NominationSoap12">
+      <soap12:address location="http://220.226.210.11:2552/STEP_Nomination.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

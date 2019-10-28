@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="106cfada651a4823814ffa86335135c2" Name="Diagram1" ZoomLevel="114">
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblAgencyBioMetricMaster" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblAttendance" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblAttendance_SSTC" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblAttendancePunchIn" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblEvaluationTypeMaster" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblFaculty" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.tblLanguageMaster" Width="1.5" PointX="4.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblLogBeforeSaveQuestion" Width="1.5" PointX="6.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblLogReport_Candidates" Width="1.5" PointX="8.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblLogWhile_AfterSavingQuestions" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblPhotoDocumentDtl" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.tblPrgramMasterDetail" Width="1.5" PointX="10.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblProgramMaster" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblProgramTestCalender" Width="1.5" PointX="2.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblProgramTestCalenderDetail" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblProgramTypeMaster" Width="1.5" PointX="6.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblQuestionLanguageDetail" Width="1.5" PointX="8.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblQuestionLanguageDetail_Practical" Width="1.5" PointX="12.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblRegistrationData" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblRole" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblRTCMaster" Width="1.5" PointX="14.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblSetMaster" Width="1.5" PointX="14.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblSSTC_CourseClosure" Width="1.5" PointX="14.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblSSTC_Marks" Width="1.5" PointX="15.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblStatu" Width="1.5" PointX="10.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblStudentAnswer" Width="1.5" PointX="16.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblTestDtl" Width="1.5" PointX="16.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblUser" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="STEPDBBetaModel.FK_TblUser_TblRole" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblTestHdr" Width="1.5" PointX="7.375" PointY="17.75" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblStudentAnswerHdr" Width="1.5" PointX="13.375" PointY="17.75" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblTestDtl_Evaluation" Width="1.5" PointX="17.375" PointY="14.75" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblNomination" Width="1.5" PointX="15.375" PointY="18.75" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblTestDtl_Practical" Width="1.5" PointX="18.375" PointY="0.75" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblUploadError" Width="1.5" PointX="17.375" PointY="18.75" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblFeedbackQuestion" Width="1.5" PointX="0.75" PointY="19.75" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblProgramTestCalenderDetail_Practical" Width="1.5" PointX="9.375" PointY="18.75" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblAutomationErrorLog" Width="1.5" PointX="3.375" PointY="19.75" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblSubFacultyMaster" Width="1.5" PointX="19.375" PointY="4.75" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblFaceRecognitionData" Width="1.5" PointX="19.375" PointY="9.75" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblVendorMaster" Width="1.5" PointX="19.375" PointY="13.75" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblVendorTrainerMaster" Width="1.5" PointX="19.375" PointY="18.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

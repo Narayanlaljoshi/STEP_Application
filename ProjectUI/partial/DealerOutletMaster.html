@@ -1,0 +1,185 @@
+﻿
+<section class="content-header">
+    <h1>
+        DealerOutlet
+
+
+    </h1>
+    <!--<ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Program Setup</a></li>
+        <li class="active">DealerOutlet</li>
+    </ol>-->
+</section>
+
+<section class="content">
+    <div class="row" ng-show="showAddBulkButton==true">
+        <div class="col-lg-3">
+            <!--<button class="btn btn-primary btn-sm" ng-click="GetList(SearchData,TargetType)">Search</button>-->
+            <button class="btn btn-primary btn-sm" ng-click="AddDealerOutlet()">Add New DealerOutlet</button>
+            <!--<button class="btn btn-primary btn-sm" ng-click="AddTransaction()">Bulk Upload</button>-->
+
+        </div>
+
+
+
+
+    </div>
+
+    <div class="row" ng-show="showDealerOutletGrid==true">
+        <div class="col-lg-12">
+            <div class="box">
+
+                <div class="box-body" style="overflow-y:auto">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+
+
+                                <th>Dealer Code</th>
+                                <td>Outlet Code</td>
+
+                                <th>Outlet Name</th>
+                                <td>Dealer Group Name</td>
+                                <th>Channel Name</th>
+                                <th>Region Name </th>
+                                <td>City Name</td>
+                               <td>Outlet Address </td>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="pt in DealerOutletData">
+                            <!--|filter: serachText-->
+                            <tr>
+                                <td>{{$index+1}}</td>
+
+                                <td>{{pt.DealerCode}}</td>
+                                <td>{{pt.OutletCode}}</td>
+
+
+                                <td>{{pt.OutletName}}</td>
+                                <td>{{pt.DealerGroupName}}</td>
+                                <td>{{pt.ChannelName}}</td>
+                                <td>{{pt.RegionName}}</td>
+                                <td>{{pt.CityName}}</td>
+                                <td>{{pt.OutletAddress}}</td>
+                               
+
+
+                                <td>
+                                    <button class="btn btn-warning btn-sm" ng-click="DeleteTransaction(pt)">Delete</button>
+                                    <button class="btn btn-primary btn-sm" ng-click="UpdateTransaction(pt)">Update </button>
+                                </td>
+                            </tr>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!----------showAddForm----------------->
+
+    <div class="box" ng-show="showAddForm==true">
+        <div class="box-header">
+            <h3 class="box-title">Add DealerOutlet </h3>
+            <div class="box-body">
+                <div class="row">
+
+
+                    <div class="col-xs-2">
+                        <label>Dealer Code*</label>
+                        <input type="text" class=" form-control" ng-maxlength="100" ng-model="DealerOutletDetailData.DealerCode" placeholder="Dealer Code" />
+                    </div>
+
+
+                    <div class="col-xs-2">
+                        <label>Outlet Code*</label>
+                        <input type="text" class=" form-control" ng-maxlength="100" ng-model="DealerOutletDetailData.OutletCode" placeholder=" Outlet Code" />
+                    </div>
+
+
+                    <div class="col-xs-2">
+                        <label>Outlet Name*</label>
+                        <input type="text" class=" form-control" ng-maxlength="100" ng-model="DealerOutletDetailData.OutletName" placeholder="Outlet Name " />
+                    </div>
+
+                    <div class="col-xs-3 col-md-3">
+                        <label>Dealer Group Name*</label>
+                        <select ng-required="" name="singleSelect" class="form-control ng-pristine ng-valid ng-valid-required" ng-options="item.DealerGroup_Id as item.DealerGroupName for item in DealerGroupData" ng-model="DealerOutletDetailData.DealerGroup_Id"></select>
+                    </div>
+                    <div class="col-xs-3 col-md-3">
+                        <label>Channel Name*</label>
+                        <select ng-required="" name="singleSelect" class="form-control ng-pristine ng-valid ng-valid-required" ng-options="item.Channel_Id as item.ChannelName for item in ChannelData" ng-model="DealerOutletDetailData.Channel_Id"></select>
+                    </div>
+
+                    <div class="col-xs-3 col-md-3">
+                        <label>Region Name*</label>
+                        <select ng-required="" name="singleSelect" class="form-control ng-pristine ng-valid ng-valid-required" ng-options="item.Region_Id as item.RegionName for item in RegionData" ng-model="DealerOutletDetailData.Region_Id" ng-change="GetCity(DealerOutletDetailData.Region_Id)"></select>
+                    </div>
+                    <div class="col-xs-3 col-md-3">
+                        <label>City Name*</label>
+                        <select ng-required="" name="singleSelect" class="form-control ng-pristine ng-valid ng-valid-required" ng-options="item.City_Id as item.CityName for item in CityData" ng-model="DealerOutletDetailData.City_Id" ></select>
+                    </div>
+
+                    <div class="col-xs-2">
+                        <label>Outlet Address*</label>
+                        <input type="text" class=" form-control" ng-maxlength="100" ng-model="DealerOutletDetailData.OutletAddress" placeholder="Outlet Name " />
+                    </div>
+
+                </div>
+
+                <hr />
+                <div class="row">
+                    <div class="col-xs-3">
+                        <button class="btn btn-primary btn-sm" ng-click="AddSaveDealerOutlet()">Save</button>
+                        <button class="btn btn-primary btn-sm" ng-click="init()">Back </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!----------showUpdataForm----------------->
+
+    <div class="box" ng-show="showUpdataForm==true">
+        <div class="box-header">
+            <h3 class="box-title">Update DealerOutlet </h3>
+        </div>
+        <div class="box-body">
+            <div class="row">
+
+                <div class="col-xs-2">
+                    <label>DealerOutlet Name*</label>
+                    <input type="text" class=" form-control" ng-maxlength="100" ng-model="DealerOutletDetailData.DealerOutletName" placeholder="DealerOutlet Name" />
+                </div>
+
+                <div class="col-xs-3 col-md-3">
+                    <label>Region Name*</label>
+                    <select ng-required="" name="singleSelect" class="form-control ng-pristine ng-valid ng-valid-required" ng-options="item.Region_Id as item.RegionName for item in RegionData" ng-model="DealerOutletDetailData.Region_Id"></select>
+                </div>
+
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-xs-3">
+                    <button class="btn btn-primary btn-sm" ng-click="UpdateSaveDealerOutlet(pt)">Update</button>
+                    <button class="btn btn-primary btn-sm" ng-click="init()">Back </button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+</section>
+

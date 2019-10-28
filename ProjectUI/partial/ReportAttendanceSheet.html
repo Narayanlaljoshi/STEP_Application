@@ -1,0 +1,55 @@
+﻿<div class="row">
+	<div class="col-md-12">
+		<h3 class="box-title">REPORT ATTENDANCE SHEET</h3>
+		<div class="box">
+			<div class="box-header with-border">
+
+				<br />
+				<div>
+
+					<div class="box-body">
+
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>S.No</th>
+									<th>Co id</th>
+									<th>Faculty Code</th>
+									<th>Program code</th>
+									<th>Session ID</th>
+									<th>Date of Start</th>
+									<th>MSPIN</th>
+									<th>Day</th>
+									<th>P/A</th>
+									
+								</tr>
+
+							</thead>
+							<tbody>
+
+								<tr ng-repeat="pt in LanguageArray">
+
+									<td>{{ $index+1}}</td>
+									<td>{{pt.Coid}}</td>
+									<td>{{pt.FacultyCode}}</td>
+									<td>{{pt.Programcode}}</td>
+									<td>{{pt.SessionID}}</td>
+									<td>{{pt.DateofStart}}</td>
+									<td>{{pt.MSPIN}}</td>
+									<td>{{pt.Name}}</td>
+									<td>{{pt.Day}}</td>
+									<td>{{pt.P/A}}</td>
+
+
+
+								</tr>
+							</tbody>
+
+
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

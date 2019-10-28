@@ -1,0 +1,418 @@
+﻿
+<section class="content-header">
+    <h1>
+        Test Setup
+        <!--<small>Preview of UI elements</small>-->
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Test Setup</li>
+    </ol>
+</section>
+
+<section class="content">
+
+  
+   <div class="box" ng-show="showAddBulkButton==true" style="margin-bottom:0">
+               <div class="box-header with-border text-right" >
+                   <input type="text" class="col-lg-3" placeholder="Search here.." ng-model="SearchText"/>
+                   <button ng-show="ProgramDetails.ProgramType_Id==1" class="btn btn-primary btn-sm btn-xs" ng-click="AddTransaction()">Bulk Upload</button>
+                   <button class="btn btn-success btn-sm btn-xs" ng-click="AddProgramTestCalender()">Create Test</button>
+                   <button class="btn btn-warning btn-sm btn-xs" ng-click="BackToProgramMaster()">Back</button>
+               </div>
+    </div>
+    <div class="box"  ng-show="showProgramTestCalenderGrid==true" style="border: 0;">
+        <div class="box-body" style="overflow-y:auto">
+            <table id="example2" class="table table-bordered table-hover" style="font-size:12px">
+                <thead>
+                    <tr style="background: #ecf0f5;font-size: 12px;vertical-align: top;">
+                        <th>S.No</th>
+                        <th>Program Code</th>
+                        <th>Program Name </th>
+                        <th>
+                            <span ng-show="ProgramType_Id==1">Day</span>
+                            <span ng-show="ProgramType_Id!=1">Test</span>
+                        </th>
+                        <th>Test Code</th>
+                        <th>Evaluation Type</th>
+                        <th>Type Of Test</th>
+
+                        <th>Test Questions</th>
+                        <th>Questions / Sets</th>
+                        <th>Marks/ Question</th>
+                        <th>Total Marks</th>
+                        <!--<th>Question Bank</th>-->
+                        <th>Test Duration (Min)</th>
+                        <th>Valid Duration (Min)</th>
+                        <th>Practical Default Marks</th>
+                        <th>Practical Max Marks</th>
+                        <th>Practical Min Marks</th>
+                        <th style="width:220px">Action</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="pt in ProgramTestCalenderData | filter:SearchText">
+
+                    <tr style="background:{{pt.RowColor}}">
+                        <td>{{$index+1}}</td>
+
+                        <td>{{pt.ProgramCode}}</td>
+                        <td>{{pt.ProgramName}}</td>
+                        <td style="white-space: nowrap;">
+                            <span ng-show="ProgramType_Id==1"> Day-{{pt.DayCount}}</span>
+                            <span ng-show="ProgramType_Id!=1"> {{pt.DayCount}}</span>
+                           
+                        </td>
+                        <td style="white-space: nowrap;">{{pt.TestCode}}</td>
+                        <td>
+                            <label ng-if="pt.EvaluationTypeId==1">Theory</label>
+                            <label ng-if="pt.EvaluationTypeId==2">Practical</label>
+                        </td>
+                        <td>
+                            <label ng-if="pt.TypeOfTest=='1'">Pre Test</label>
+                            <label ng-if="pt.TypeOfTest=='3'">Post Test</label>
+
+                        </td>
+
+                        <td>{{pt.TotalNoQuestion}}</td>
+                        <td>{{pt.QuesAdded}}</td>
+                        <td>{{pt.Marks_Question}}</td>
+                        <td>{{pt.Total_Marks}}</td>
+                        <td>{{pt.TestDuration}}</td>
+                        <td>{{pt.ValidDuration}}</td>
+                        <td>{{pt.PracticalDefaultMarks}}</td>
+                        <td>{{pt.PracticalMaxMarks}}</td>
+                        <td>{{pt.PracticalMinMarks}}</td>
+                        <td>
+                            <button class="btn btn-primary btn-xs" ng-click="AddQuestionBank(pt)">Question Setup </button>
+
+                            <button class="btn btn-warning btn-xs" ng-click="UpdateTransaction(pt)">Update </button>
+                            <!--<button class="btn btn-danger btn-xs" ng-click="DeleteTransaction(pt)">Delete</button>-->
+                        </td>
+                    </tr>
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!----------showAddForm----------------->
+
+    <div class="box" ng-show="showAddForm==true">
+        <div class="box-header">
+            <h3 class="box-title">Add ProgramTestCalender </h3>
+            <div class="box-body">
+
+                <div class="row">
+                    <div class="col-xs-3 col-md-3">
+                        <label>Program Code Name*</label>
+                        <select disabled ng-required="" name="singleSelect" class="form-control ng-pristine ng-valid ng-valid-required" ng-options="item.ProgramId as item.ProgramCode for item in ProgramData" ng-model="ProgramTestCalenderDetailData.ProgramId"></select>
+                    </div>
+                </div>
+
+                <br />
+
+                <br />
+
+                <div class="row" style="display:none;" ng-show="ProgramTestCalenderDetailData.ProgramId">
+                    <div class="col-xs-2">
+                        <label>Day*</label>
+                        <input type="text" class=" form-control" ng-maxlength="100" numbers-Only ng-model="ProgramTestCalenderDetailData.DayCount" placeholder="Day " />
+                    </div>
+                    <div class="col-xs-2">
+                        <label>Test Code*</label>
+                        <input type="text" class=" form-control" ng-maxlength="100" ng-model="ProgramTestCalenderDetailData.TestCode" placeholder="Test Code " />
+                    </div>
+                    <div class="col-xs-3 col-md-3">
+                        <label>Evaluation Type*</label>
+                        <select ng-required="" name="singleSelect" class="form-control"
+                                ng-model="ProgramTestCalenderDetailData.EvaluationType">
+                            <option label="Select Program Name" value="number:0" selected="selected">Select</option>
+                            <option value="1">Theory</option>
+                            <option value="2">Praction</option>
+                        </select>
+
+                    </div>
+                    <div class="col-xs-3 col-md-3">
+                        <label>Type Of Test*</label>
+                        <select ng-required="" name="singleSelect" class="form-control"
+                                ng-model="ProgramTestCalenderDetailData.TypeOfTest">
+                            <option label="Select Program Name" value="number:0" selected="selected">Select</option>
+                            <option value="1">Pre Test</option>
+                            <!--<option value="2">Daily Test</option>-->
+                            <option value="3">Post Test</option>
+                            <option value="4">Non-DMS</option>
+                        </select>
+
+                    </div>
+
+                    <div class="col-xs-2">
+                        <label>Total No question*</label>
+                        <input numbers-Only type="text" class=" form-control" ng-maxlength="100" ng-model="ProgramTestCalenderDetailData.TotalNoQuestion" placeholder="Total No Question" />
+                    </div>
+
+
+                    <div class="col-xs-2">
+                        <label>Marks/Question*</label>
+                        <input numbers-Only type="text" class=" form-control" ng-maxlength="100" ng-model="ProgramTestCalenderDetailData.Marks_Question" placeholder="Marks/Question" />
+                    </div>
+                    <!--<div class="col-xs-2">
+        <label>Question Bank*</label>
+        <input type="text" class=" form-control" ng-maxlength="100" ng-model="ProgramTestCalenderDetailData.Q_Bank" placeholder="Question Bank" />
+    </div>-->
+
+                    <div class="col-xs-2">
+                        <label>Test Duration (Min)*</label>
+                        <input numbers-Only type="text" class=" form-control" ng-maxlength="100" ng-model="ProgramTestCalenderDetailData.TestDuration" placeholder="Test Duration( min) " />
+                    </div>
+                    <div class="col-xs-2">
+                        <label>Valid Duration (Min)*</label>
+                        <input numbers-Only type="text" class=" form-control" ng-maxlength="100" ng-model="ProgramTestCalenderDetailData.ValidDuration" placeholder="Valid Duration( min) " />
+                    </div>
+
+
+                </div>
+                <div ng-show="ProgramTestCalenderDetailData.ProgramId" class="">
+                    <!--table-responsive-->
+                    <table class="table table-bordered">
+                        <thead style="background:lightgrey;">
+                            <tr>
+                                <th style="text-align:center;">
+                                    Day:
+                                </th>
+
+                                <th style="text-align:center;">
+                                    Test Code:
+                                </th>
+                                <th style="text-align:center; width:120px;">
+                                    Evaluation Type:
+                                </th>
+                                <th style="text-align:center; width:120px;">
+                                    Type Of Test:
+                                </th>
+                                <th style="text-align:center;">
+                                    Total No question:
+                                </th>
+                                <th style="text-align:center;">
+                                    Marks/Question:
+                                </th>
+                                <th style="text-align:center;">
+                                    Default Marks:
+                                </th>
+                                <th style="text-align:center;">
+                                    Max Marks:
+                                </th>
+                                <th style="text-align:center;">
+                                    Min Marks:
+                                </th>
+
+                                <th style="text-align:center;">
+                                    Test Duration (Min):
+                                </th>
+                                <th style="text-align:center;">
+                                    Valid Duration (Min):
+                                </th>
+                                <!--<th><button ng-click="AddRow()" class="btn btn-success btn-xs">+</button></th>-->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="text-align:center;" ng-repeat="pt in ProgramTestCalenderDetailData">
+
+                                <td><input disabled numbers-Only class="form-control" type="text" ng-model="pt.DayCount" /></td>
+                                <td><input class="form-control" type="text" ng-model="pt.TestCode" /></td>
+                                <td>
+                                    <select ng-required="" name="singleSelect" class="form-control"
+                                            ng-model="pt.EvaluationTypeId">
+                                        <!--<option label="Select Program Name" value="number:0" selected="selected">Select Program Name</option>-->
+                                        <option value="1">Theory</option>
+                                        <option value="2">Practical</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select ng-required="" name="singleSelect" class="form-control"
+                                            ng-model="pt.TypeOfTest">
+                                        <!--<option label="Select Program Name" value="number:0" selected="selected">Select Program Name</option>-->
+                                        <option ng-if="$first" value="1">Pre Test</option>
+                                        <!--<option value="2">Daily Test</option>-->
+                                        <option value="3">Post Test</option>
+                                        <option value="4">Non-DMS</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input numbers-Only type="text"ng-show="pt.EvaluationTypeId==1" class=" form-control" ng-maxlength="100" ng-model="pt.TotalNoQuestion" placeholder="Total No Question" />
+                                </td>
+                                <td>
+                                    <input ng-show="pt.EvaluationTypeId==1" numbers-Only type="text" class=" form-control" ng-maxlength="100" ng-model="pt.Marks_Question" placeholder="Marks/Question" />
+                                </td>
+                                <td>
+                                    <input ng-show="pt.EvaluationTypeId==2" numbers-Only type="text" class=" form-control" ng-maxlength="100" ng-model="pt.PracticalDefaultMarks" placeholder="PracticalDefaultMarks" />
+                                </td>
+                                <td>
+                                    <input ng-show="pt.EvaluationTypeId==2" numbers-Only type="text" class=" form-control" ng-maxlength="100" ng-model="pt.PracticalMaxMarks" placeholder="PracticalMaxMarks" />
+                                </td>
+                                <td>
+                                    <input ng-show="pt.EvaluationTypeId==2" numbers-Only type="text" class=" form-control" ng-maxlength="100" ng-model="pt.PracticalMinMarks" placeholder="PracticalMinMarks" />
+                                </td>
+                                <td>
+                                    <input numbers-Only type="text" class=" form-control" ng-maxlength="100" ng-model="pt.TestDuration" placeholder="Test Duration( min) " />
+                                </td>
+                                <td>
+                                    <input numbers-Only type="text" class=" form-control" ng-maxlength="100" ng-model="pt.ValidDuration" placeholder="Valid Duration( min) " />
+                                </td>
+                                <!--<td><button class="btn btn-warning btn-xs" ng-click="DeleteRow($index)">-</button></td>-->
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-xs-3">
+                        <button class="btn btn-primary btn-xs" ng-click="AddSaveProgramTestCalender()">Save</button>
+                        <button class="btn btn-primary btn-xs" ng-click="init()">Back </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!----------showUpdataForm----------------->
+
+    <div class="box" ng-show="showUpdataForm==true">
+        <div class="box-header">
+            <h3 class="box-title">Update Test Setup </h3>
+        </div>
+        <div class="box-body">
+
+
+            <div class="row">
+                <div class="col-xs-3 col-md-3">
+                    <label>Program Code Name*</label>
+                    <select ng-disabled="ProgramTestCalenderDetailData.ProgramId" ng-required="" name="singleSelect" class="form-control ng-pristine ng-valid ng-valid-required" ng-options="item.ProgramId as item.ProgramCode for item in ProgramData" ng-model="ProgramTestCalenderDetailData.ProgramId"></select>
+                </div>
+            </div>
+
+            <br />
+
+            <br />
+
+            <div class="row" ng-show="ProgramTestCalenderDetailData.ProgramId">
+
+
+
+
+
+                <div class="col-xs-2">
+                    <label>Day*</label>
+                    <input ng-disabled="ProgramTestCalenderDetailData.DayCount" numbers-Only type="text" class=" form-control" ng-maxlength="100" ng-model="ProgramTestCalenderDetailData.DayCount" placeholder="Day " />
+                </div>
+
+                <div class="col-xs-2">
+                    <label>Test Code*</label>
+                    <input type="text" class=" form-control" ng-maxlength="100" ng-model="ProgramTestCalenderDetailData.TestCode" placeholder="Test Code " />
+                </div>
+
+                <div class="col-xs-3 col-md-3">
+                    <label>Type Of Test*</label>
+                    <select ng-required="" name="singleSelect" class="form-control"
+                            ng-model="ProgramTestCalenderDetailData.TypeOfTest">
+                        <!--<option label="Select Program Name" value="number:0" selected="selected">Select Program Name</option>-->
+                        <option ng-hide="ProgramTestCalenderDetailData.DayCount!=1" value="1">Pre Test</option>
+                        <!--<option value="2">Daily Test</option>-->
+                        <option value="3">Post Test</option>
+                        <option value="4">Non-DMS</option>
+                    </select>
+
+                </div>
+
+
+
+
+
+                <div class="col-xs-2">
+                    <label>Total No question*</label>
+                    <input type="text" class=" form-control" ng-maxlength="100" ng-model="ProgramTestCalenderDetailData.TotalNoQuestion"
+                           numbers-Only placeholder="Total No Question" />
+                </div>
+
+                <div class="col-xs-2">
+                    <label>Marks/Question*</label>
+                    <input  numbers-Only type="text" class=" form-control" ng-maxlength="100" ng-model="ProgramTestCalenderDetailData.Marks_Question" placeholder="Marks/Question" />
+                </div>
+                <!--<div class="col-xs-2">
+                    <label>Question Bank*</label>
+                    <input type="text" class=" form-control" ng-maxlength="100" ng-model="ProgramTestCalenderDetailData.Q_Bank" placeholder="Question Bank" />
+                </div>-->
+
+                <div class="col-xs-2">
+                    <label>Test Duration (Min)*</label>
+                    <input  numbers-Only type="text" class=" form-control" ng-maxlength="100" ng-model="ProgramTestCalenderDetailData.TestDuration" placeholder="Test Duration( min) " />
+                </div>
+
+
+                <div class="col-xs-2">
+                    <label>Valid Duration (Min)*</label>
+                    <input  numbers-Only type="text" class=" form-control" ng-maxlength="100" ng-model="ProgramTestCalenderDetailData.ValidDuration" placeholder="Valid Duration( min) " />
+                </div>
+
+            </div>
+
+
+            <hr />
+            <div class="row">
+                <div class="col-xs-3">
+                    <button class="btn btn-primary btn-xs" ng-click="UpdateSaveProgramTestCalender(pt)">Update</button>
+                    <button class="btn btn-primary btn-xs" ng-click="init()">Back </button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-----------------bulkUpload --------------------->
+
+    <div class="box" ng-show="showBulk==true">
+        <div class="box-header with-border">
+            <h3 class="box-title">Test Details</h3>
+        </div>
+        <div class="box-body">
+                    <div class="input-group" style="max-width:320px;margin: 15px;">
+                        <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                           file-model="File1" class="form-control" s>
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary btn-xs" ng-click="UploadExcelfunction()">Upload Excel</button>
+                        </div>
+                    </div>
+
+
+        </div>
+        <div class="box-footer">
+                    
+                    <a class="btn btn-success btn-sm btn-xs" href="../Excel Template/testCalender.xlsx">Download Template</a>
+
+                    <button class="btn btn-warning btn-sm pull-right btn-xs" ng-click="init()">Back </button>
+        </div>
+
+    </div>
+
+    <!-------------------Add Question Section ------------------>
+    <!--<div ng-show="QuestionShow==true">
+
+
+
+        <button class="btn btn-primary btn-sm" ng-click="init()">Back </button>
+        <button class="btn btn-primary btn-sm" ng-click="init()">Back </button>
+        <button class="btn btn-primary btn-sm" ng-click="oh()">check </button>
+
+    </div>-->
+
+</section>
+
+
+
+
+
+

@@ -1,0 +1,65 @@
+﻿
+<section class="content-header">
+    <h1>
+        Feedback Setup
+        <!--<small>Preview of UI elements</small>-->
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Feedback Setup</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border" style="border-bottom:1px solid #dddddd;">
+                    <h3 class="box-title">Upload Question Bank</h3>
+                </div>
+                <form role="form">
+                    <div class="box-header">
+                        <div class="row">
+                            
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label for="contryname" style="font-weight: 400;"><strong>Select Program</strong></label>
+                                <select class="form-control" ng-options="pt.ProgramId as pt.ProgramName for pt in ReportFilter.ProgramList" ng-model="ReportInput.ProgramId" ng-change="GetProgrmaLanuages(ReportInput.ProgramId)">
+                                    <option value="">---Select Program--- </option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label>Select Language</label>
+                                <select class="form-control ng-pristine ng-valid ng-valid-required" ng-options="item.LanguageMaster_Id as item.Language for item in LanuagesList" ng-model="ReportInput.LanguageMaster_Id">
+                                    <option value="">---Select Any Language--- </option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label>&nbsp;</label>
+                                <div class="form-group">
+                                    <input type="file" class="form-control" id="exampleInputFile" file-model="File">
+                                    <a class="btn btn-primary btn-xs" style="margin-top:10px" href="../Templates/FeedbackQuestions.xlsx" target="_blank">Template</a>
+                                </div>
+                            </div>
+                           
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <button class="btn btn-success btn-sm" style="margin-top:24px" ng-click="UploadFeedbackFile()">Upload File</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
