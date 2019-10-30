@@ -835,6 +835,7 @@
         <Function Name="sp_GetAutomationErrorRecords" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CreationDate" Type="date" Mode="In" />
         </Function>
+        <Function Name="sp_GetBiometricReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_GetCandidateListBySessionId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SessionID" Type="nvarchar" Mode="In" />
         </Function>
@@ -1925,7 +1926,7 @@
           </AssociationSet>
           <FunctionImport Name="sp_AttendanceReport" ReturnType="Collection(STEPDBBetaModel.sp_AttendanceReport_Result)" />
           <FunctionImport Name="SP_BatchJobMSPIN_And_SessionId_Wise">
-            <Parameter Name="NewMSPIN" Mode="In" Type="String" />
+          <Parameter Name="NewMSPIN" Mode="In" Type="String" />
             <Parameter Name="SessionIdForMSPIN" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_BatchJobMSPINWise">
@@ -1934,16 +1935,16 @@
           <FunctionImport Name="SP_BatchJobSessionIDWise" />
           <FunctionImport Name="SP_BatchJobWith_Practical" />
           <FunctionImport Name="SP_CheckAttendanceByDate" ReturnType="Collection(STEPDBBetaModel.SP_CheckAttendanceByDate_Result)">
-            <Parameter Name="AgencyCode" Mode="In" Type="String" />
+          <Parameter Name="AgencyCode" Mode="In" Type="String" />
             <Parameter Name="Date" Mode="In" Type="DateTime" />
             <Parameter Name="MSPIN" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_CheckIfAnyTestIsGoingOn" ReturnType="Collection(STEPDBBetaModel.sp_CheckIfAnyTestIsGoingOn_Result)">
-            <Parameter Name="MSPIN" Mode="In" Type="String" />
+          <Parameter Name="MSPIN" Mode="In" Type="String" />
             <Parameter Name="SessionId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_CheckQuestionDuplicacy" ReturnType="Collection(STEPDBBetaModel.sp_CheckQuestionDuplicacy_Result)">
-            <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
+          <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
             <Parameter Name="Question" Mode="In" Type="String" />
             <Parameter Name="Answer1" Mode="In" Type="String" />
             <Parameter Name="Answer2" Mode="In" Type="String" />
@@ -1951,16 +1952,16 @@
             <Parameter Name="Answer4" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Sp_CheckStatus" ReturnType="Collection(STEPDBBetaModel.Sp_CheckStatus_Result)">
-            <Parameter Name="MSPIN" Mode="In" Type="String" />
+          <Parameter Name="MSPIN" Mode="In" Type="String" />
             <Parameter Name="Day" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_CheckTblLogReport_Candidates" ReturnType="Collection(STEPDBBetaModel.SP_CheckTblLogReport_Candidates_Result)">
-            <Parameter Name="MSPIN" Mode="In" Type="String" />
+          <Parameter Name="MSPIN" Mode="In" Type="String" />
             <Parameter Name="Day" Mode="In" Type="Int32" />
             <Parameter Name="SessionID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_CheckTblStudentAnswerHdr" ReturnType="Collection(STEPDBBetaModel.SP_CheckTblStudentAnswerHdr_Result)">
-            <Parameter Name="MSPIN" Mode="In" Type="String" />
+          <Parameter Name="MSPIN" Mode="In" Type="String" />
             <Parameter Name="Day" Mode="In" Type="Int32" />
             <Parameter Name="SessionID" Mode="In" Type="String" />
           </FunctionImport>
@@ -1975,7 +1976,7 @@
           <Parameter Name="Agency_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_GetAttendanceReport" ReturnType="Collection(STEPDBBetaModel.sp_GetAttendanceReport_Result)">
-            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+          <Parameter Name="StartDate" Mode="In" Type="DateTime" />
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
             <Parameter Name="Agency_Id" Mode="In" Type="Int32" />
             <Parameter Name="SessionID" Mode="In" Type="String" />
@@ -1986,12 +1987,12 @@
           <Parameter Name="SessionID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_GetCandidateListBySessionId_SSTC" ReturnType="Collection(STEPDBBetaModel.SP_GetCandidateListBySessionId_SSTC_Result)">
-            <Parameter Name="SessionID" Mode="In" Type="String" />
+          <Parameter Name="SessionID" Mode="In" Type="String" />
             <Parameter Name="Day" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_GetCandidatesListDayWise" ReturnType="Collection(STEPDBBetaModel.sp_GetCandidatesListDayWise_Result)" />
           <FunctionImport Name="sp_GetCandidatesListForSSTC" ReturnType="Collection(STEPDBBetaModel.sp_GetCandidatesListForSSTC_Result)">
-            <Parameter Name="SessionID" Mode="In" Type="String" />
+          <Parameter Name="SessionID" Mode="In" Type="String" />
             <Parameter Name="Day" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_GetCity">
@@ -2001,7 +2002,7 @@
           <Parameter Name="SessionID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_GetDayWiseMarksReport" ReturnType="Collection(STEPDBBetaModel.sp_GetDayWiseMarksReport_Result)">
-            <Parameter Name="Agency_Id" Mode="In" Type="Int32" />
+          <Parameter Name="Agency_Id" Mode="In" Type="Int32" />
             <Parameter Name="Faculty_Id" Mode="In" Type="Int32" />
             <Parameter Name="SessionID" Mode="In" Type="String" />
             <Parameter Name="Program_Id" Mode="In" Type="Int32" />
@@ -2009,7 +2010,7 @@
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="sp_GetDayWisePracticalMarkSheet" ReturnType="Collection(STEPDBBetaModel.sp_GetDayWisePracticalMarkSheet_Result)">
-            <Parameter Name="MSPIN" Mode="In" Type="String" />
+          <Parameter Name="MSPIN" Mode="In" Type="String" />
             <Parameter Name="SessionId" Mode="In" Type="String" />
             <Parameter Name="Day" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -2025,11 +2026,11 @@
           <Parameter Name="programId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_GetLanguageWiseQuestionList" ReturnType="Collection(STEPDBBetaModel.Sp_GetLanguageWiseQuestionList_Result)">
-            <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
+          <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
             <Parameter Name="LangId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_GetMarksReport" ReturnType="Collection(STEPDBBetaModel.sp_GetMarksReport_Result)">
-            <Parameter Name="Agency_Id" Mode="In" Type="Int32" />
+          <Parameter Name="Agency_Id" Mode="In" Type="Int32" />
             <Parameter Name="Faculty_Id" Mode="In" Type="Int32" />
             <Parameter Name="SessionID" Mode="In" Type="String" />
             <Parameter Name="Program_Id" Mode="In" Type="Int32" />
@@ -2042,33 +2043,33 @@
           <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_GetQuestionListFromTblSA" ReturnType="Collection(STEPDBBetaModel.SP_GetQuestionListFromTblSA_Result)">
-            <Parameter Name="MSPIN" Mode="In" Type="String" />
+          <Parameter Name="MSPIN" Mode="In" Type="String" />
             <Parameter Name="SessionID" Mode="In" Type="String" />
             <Parameter Name="Day" Mode="In" Type="Int32" />
             <Parameter Name="LanguageMaster_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_GetQuestionListFromTblSA_Practical" ReturnType="Collection(STEPDBBetaModel.SP_GetQuestionListFromTblSA_Practical_Result)">
-            <Parameter Name="MSPIN" Mode="In" Type="String" />
+          <Parameter Name="MSPIN" Mode="In" Type="String" />
             <Parameter Name="SessionID" Mode="In" Type="String" />
             <Parameter Name="Day" Mode="In" Type="Int32" />
             <Parameter Name="LanguageMaster_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_GetQuestionListIfExist" ReturnType="Collection(STEPDBBetaModel.SP_GetQuestionListIfExist_Result)">
-            <Parameter Name="MSPIN" Mode="In" Type="String" />
+          <Parameter Name="MSPIN" Mode="In" Type="String" />
             <Parameter Name="Day" Mode="In" Type="Int32" />
             <Parameter Name="SessionID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_GetRTMDropdownForAdmin" ReturnType="Collection(STEPDBBetaModel.sp_GetRTMDropdownForAdmin_Result)" />
           <FunctionImport Name="sp_GetSessionIdForResetTest" ReturnType="Collection(STEPDBBetaModel.sp_GetSessionIdForResetTest_Result)" />
           <FunctionImport Name="sp_GetSessionIDList" ReturnType="Collection(STEPDBBetaModel.sp_GetSessionIDList_Result)">
-            <Parameter Name="Agency_Id" Mode="In" Type="Int32" />
+          <Parameter Name="Agency_Id" Mode="In" Type="Int32" />
             <Parameter Name="FacultyCode" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_GetSessionIdListBy_AgencyId" ReturnType="Collection(STEPDBBetaModel.SP_GetSessionIdListBy_AgencyId_Result)">
           <Parameter Name="Agency_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_GetSessionIdListBy_FacultyCode" ReturnType="Collection(STEPDBBetaModel.SP_GetSessionIdListBy_FacultyCode_Result)">
-            <Parameter Name="Agency_Id" Mode="In" Type="Int32" />
+          <Parameter Name="Agency_Id" Mode="In" Type="Int32" />
             <Parameter Name="FacultyCode" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_GetSessionIDWiseStudentList" ReturnType="Collection(STEPDBBetaModel.sp_GetSessionIDWiseStudentList_Result)">
@@ -2085,11 +2086,11 @@
           <Parameter Name="UserName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_GetStudentList" ReturnType="Collection(STEPDBBetaModel.sp_GetStudentList_Result)">
-            <Parameter Name="FacultyCode" Mode="In" Type="String" />
+          <Parameter Name="FacultyCode" Mode="In" Type="String" />
             <Parameter Name="ProgramCode" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_GetStudentMarksReport" ReturnType="Collection(STEPDBBetaModel.sp_GetStudentMarksReport_Result)">
-            <Parameter Name="Agency_Id" Mode="In" Type="Int32" />
+          <Parameter Name="Agency_Id" Mode="In" Type="Int32" />
             <Parameter Name="Faculty_Id" Mode="In" Type="Int32" />
             <Parameter Name="SessionID" Mode="In" Type="String" />
             <Parameter Name="Program_Id" Mode="In" Type="Int32" />
@@ -2103,11 +2104,11 @@
           <Parameter Name="MSPIN" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_GetStudentTestDetails_Evaluation" ReturnType="Collection(STEPDBBetaModel.sp_GetStudentTestDetails_Evaluation_Result)">
-            <Parameter Name="MSPIN" Mode="In" Type="String" />
+          <Parameter Name="MSPIN" Mode="In" Type="String" />
             <Parameter Name="Day" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_GetStudentTestLanguageWiseList" ReturnType="Collection(STEPDBBetaModel.Sp_GetStudentTestLanguageWiseList_Result)">
-            <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
+          <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
             <Parameter Name="LangId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_GetStudentTestQuestions" ReturnType="Collection(STEPDBBetaModel.sp_GetStudentTestQuestions_Result)">
@@ -2120,12 +2121,12 @@
           <Parameter Name="MSPIN" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_GetUserDetails" ReturnType="Collection(STEPDBBetaModel.SP_GetUserDetails_Result)">
-            <Parameter Name="UserName" Mode="In" Type="String" />
+          <Parameter Name="UserName" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Sp_GetZoneDetail" />
           <FunctionImport Name="SP_InertInto_TblStudentAnswerHdr">
-            <Parameter Name="SA_Id" Mode="In" Type="Int32" />
+          <Parameter Name="SA_Id" Mode="In" Type="Int32" />
             <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
             <Parameter Name="ProgramId" Mode="In" Type="Int32" />
             <Parameter Name="MSPIN" Mode="In" Type="String" />
@@ -2137,7 +2138,7 @@
             <Parameter Name="IsActive" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="SP_Insert_Update_TblStudentAnswer">
-            <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
+          <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
             <Parameter Name="ProgramId" Mode="In" Type="Int32" />
             <Parameter Name="SA_Id" Mode="In" Type="Int32" />
             <Parameter Name="MSPIN" Mode="In" Type="String" />
@@ -2151,7 +2152,7 @@
             <Parameter Name="IsActive" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="SP_Insert_Update_TblStudentAnswer_Practical">
-            <Parameter Name="SA_Id" Mode="In" Type="Int64" />
+          <Parameter Name="SA_Id" Mode="In" Type="Int64" />
             <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
             <Parameter Name="ProgramId" Mode="In" Type="Int32" />
             <Parameter Name="MSPIN" Mode="In" Type="String" />
@@ -2174,7 +2175,7 @@
             <Parameter Name="IsActive" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="SP_Insert_Update_TblStudentAnswerHdr">
-            <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
+          <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
             <Parameter Name="ProgramId" Mode="In" Type="Int32" />
             <Parameter Name="TypeOfTest" Mode="In" Type="String" />
             <Parameter Name="MSPIN" Mode="In" Type="String" />
@@ -2184,7 +2185,7 @@
             <Parameter Name="Status_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_InsertQuestionLanguage">
-            <Parameter Name="DetailId" Mode="In" Type="Int32" />
+          <Parameter Name="DetailId" Mode="In" Type="Int32" />
             <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
             <Parameter Name="Question" Mode="In" Type="String" />
             <Parameter Name="answer1" Mode="In" Type="String" />
@@ -2196,7 +2197,7 @@
             <Parameter Name="CretedBy" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_InsertQuestionLanguage_Practical">
-            <Parameter Name="DetailId" Mode="In" Type="Int32" />
+          <Parameter Name="DetailId" Mode="In" Type="Int32" />
             <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
             <Parameter Name="QuestionCode" Mode="In" Type="String" />
             <Parameter Name="Langid" Mode="In" Type="Int32" />
@@ -2211,7 +2212,7 @@
             <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Inset_Update_TblSSTCMarks">
-            <Parameter Name="MSPIN" Mode="In" Type="String" />
+          <Parameter Name="MSPIN" Mode="In" Type="String" />
             <Parameter Name="SessionID" Mode="In" Type="String" />
             <Parameter Name="Day" Mode="In" Type="Int32" />
             <Parameter Name="Marks" Mode="In" Type="Int32" />
@@ -2221,7 +2222,7 @@
             <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="Sp_PracticalQuestion_Detail" ReturnType="Collection(STEPDBBetaModel.Sp_PracticalQuestion_Detail_Result)">
-            <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
+          <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
             <Parameter Name="Set_Id" Mode="In" Type="Int32" />
             <Parameter Name="LanguageMaster_Id" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -2234,30 +2235,30 @@
           </FunctionImport>
           <FunctionImport Name="Sp_Region_City" />
           <FunctionImport Name="sp_ResetStudentLogin">
-            <Parameter Name="MSPIN" Mode="In" Type="String" />
+          <Parameter Name="MSPIN" Mode="In" Type="String" />
             <Parameter Name="Day" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SessionIDsForManage" ReturnType="Collection(STEPDBBetaModel.sp_SessionIDsForManage_Result)" />
           <FunctionImport Name="sp_TruncateTblNomination" />
           <FunctionImport Name="sp_Update_InsertIntoTblAttendance_SSTC">
-            <Parameter Name="MSPIN" Mode="In" Type="String" />
+          <Parameter Name="MSPIN" Mode="In" Type="String" />
             <Parameter Name="DateTime" Mode="In" Type="DateTime" />
             <Parameter Name="SessionId" Mode="In" Type="String" />
             <Parameter Name="Day" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Update_InsertIntoTblAttendancePunchIn">
-            <Parameter Name="MSPIN" Mode="In" Type="String" />
+          <Parameter Name="MSPIN" Mode="In" Type="String" />
             <Parameter Name="AgencyCode" Mode="In" Type="String" />
             <Parameter Name="DateTime" Mode="In" Type="DateTime" />
             <Parameter Name="MachineCode" Mode="In" Type="String" />
             <Parameter Name="MachineId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_UpdateNomination">
-            <Parameter Name="SessionID" Mode="In" Type="String" />
+          <Parameter Name="SessionID" Mode="In" Type="String" />
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="Sp_UpdateQuestionLanguage">
-            <Parameter Name="DetailId" Mode="In" Type="Int32" />
+          <Parameter Name="DetailId" Mode="In" Type="Int32" />
             <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
             <Parameter Name="Question" Mode="In" Type="String" />
             <Parameter Name="answer1" Mode="In" Type="String" />
@@ -2269,7 +2270,7 @@
             <Parameter Name="ModifiedBy" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_UpdateQuestionLanguage_Practical">
-            <Parameter Name="DetailId" Mode="In" Type="Int32" />
+          <Parameter Name="DetailId" Mode="In" Type="Int32" />
             <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
             <Parameter Name="QuestionCode" Mode="In" Type="String" />
             <Parameter Name="Langid" Mode="In" Type="Int32" />
@@ -2284,7 +2285,7 @@
             <Parameter Name="ModifiedBy" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_UpdateTblStudentAnswerHdr">
-            <Parameter Name="SA_Id" Mode="In" Type="Int32" />
+          <Parameter Name="SA_Id" Mode="In" Type="Int32" />
             <Parameter Name="MSPIN" Mode="In" Type="String" />
             <Parameter Name="RemainingTime" Mode="In" Type="Double" />
             <Parameter Name="Day" Mode="In" Type="Int32" />
@@ -2293,7 +2294,7 @@
             <Parameter Name="IsActive" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="sp_UpdateTblTestDtl_Evaluation">
-            <Parameter Name="MSPIN" Mode="In" Type="String" />
+          <Parameter Name="MSPIN" Mode="In" Type="String" />
             <Parameter Name="SessionId" Mode="In" Type="String" />
             <Parameter Name="Day" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -2301,7 +2302,7 @@
           <EntitySet Name="TblStudentAnswerHdrs" EntityType="STEPDBBetaModel.TblStudentAnswerHdr" />
           <EntitySet Name="TblTestDtl_Evaluation" EntityType="STEPDBBetaModel.TblTestDtl_Evaluation" />
           <FunctionImport Name="sp_GeneratePracticalQuestions">
-            <Parameter Name="MSPIN" Mode="In" Type="String" />
+          <Parameter Name="MSPIN" Mode="In" Type="String" />
             <Parameter Name="ProgramId" Mode="In" Type="Int32" />
             <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
             <Parameter Name="SessionID" Mode="In" Type="String" />
@@ -2317,29 +2318,29 @@
           <EntitySet Name="TblTestDtl_Practical" EntityType="STEPDBBetaModel.TblTestDtl_Practical" />
           <EntitySet Name="TblUploadErrors" EntityType="STEPDBBetaModel.TblUploadError" />
           <FunctionImport Name="sp_Get_IfAbesnt" ReturnType="Collection(STEPDBBetaModel.sp_Get_IfAbesnt_Result)">
-            <Parameter Name="MSPIN" Mode="In" Type="String" />
+          <Parameter Name="MSPIN" Mode="In" Type="String" />
             <Parameter Name="SessionID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_GetUploadErrors" ReturnType="Collection(STEPDBBetaModel.sp_GetUploadErrors_Result)" />
           <FunctionImport Name="sp_UpdadeUploadErrors">
-            <Parameter Name="ColumnName" Mode="In" Type="String" />
+          <Parameter Name="ColumnName" Mode="In" Type="String" />
             <Parameter Name="Value" Mode="In" Type="String" />
             <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
             <Parameter Name="IsActive" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="sp_Update_InsertIntoTblAttendance_SSTC_V2">
-            <Parameter Name="MSPIN" Mode="In" Type="String" />
+          <Parameter Name="MSPIN" Mode="In" Type="String" />
             <Parameter Name="DateTime" Mode="In" Type="DateTime" />
             <Parameter Name="SessionId" Mode="In" Type="String" />
             <Parameter Name="Day" Mode="In" Type="Int32" />
             <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_CheckMSPIN_Registered_NotRegistered" ReturnType="Collection(STEPDBBetaModel.SP_CheckMSPIN_Registered_NotRegistered_Result)">
-            <Parameter Name="AgencyCode" Mode="In" Type="String" />
+          <Parameter Name="AgencyCode" Mode="In" Type="String" />
             <Parameter Name="MSPIN" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_InsertIntoTblRegistrationData">
-            <Parameter Name="MSPIN" Mode="In" Type="String" />
+          <Parameter Name="MSPIN" Mode="In" Type="String" />
             <Parameter Name="Thumb_1" Mode="In" Type="Binary" />
             <Parameter Name="Thumb_2" Mode="In" Type="Binary" />
             <Parameter Name="Candidate_Image" Mode="In" Type="Binary" />
@@ -2348,14 +2349,14 @@
             <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_GETGuardLoginDetails" ReturnType="Collection(STEPDBBetaModel.SP_GETGuardLoginDetails_Result)">
-            <Parameter Name="User" Mode="In" Type="String" />
+          <Parameter Name="User" Mode="In" Type="String" />
             <Parameter Name="Pass" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_GetFeedBackQueSet" ReturnType="Collection(STEPDBBetaModel.sp_GetFeedBackQueSet_Result)">
           <Parameter Name="ProgramId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Insert_Update_TblFeedbackCaptured">
-            <Parameter Name="FeedbackQuestion_Id" Mode="In" Type="Int64" />
+          <Parameter Name="FeedbackQuestion_Id" Mode="In" Type="Int64" />
             <Parameter Name="MSPIN" Mode="In" Type="String" />
             <Parameter Name="SessionID" Mode="In" Type="String" />
             <Parameter Name="Rating" Mode="In" Type="Int32" />
@@ -2364,7 +2365,7 @@
           </FunctionImport>
           <EntitySet Name="TblFeedbackQuestions" EntityType="STEPDBBetaModel.TblFeedbackQuestion" />
           <FunctionImport Name="sp_InsertFeedbackQuestions">
-            <Parameter Name="ProgramId" Mode="In" Type="Int32" />
+          <Parameter Name="ProgramId" Mode="In" Type="Int32" />
             <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
             <Parameter Name="Question" Mode="In" Type="String" />
             <Parameter Name="IsActive" Mode="In" Type="Boolean" />
@@ -2374,7 +2375,7 @@
           <EntitySet Name="TblProgramTestCalenderDetail_Practical" EntityType="STEPDBBetaModel.TblProgramTestCalenderDetail_Practical" />
           <FunctionImport Name="sp_GetServiceTypes" ReturnType="Collection(STEPDBBetaModel.sp_GetServiceTypes_Result)" />
           <FunctionImport Name="SP_Insert_Update_TblStudentAnswerHdr_V2">
-            <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
+          <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
             <Parameter Name="ProgramId" Mode="In" Type="Int32" />
             <Parameter Name="TypeOfTest" Mode="In" Type="String" />
             <Parameter Name="MSPIN" Mode="In" Type="String" />
@@ -2386,7 +2387,7 @@
             <Parameter Name="Position_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_InsertUpdate_TblNominationDownload">
-            <Parameter Name="Co_id" Mode="In" Type="String" />
+          <Parameter Name="Co_id" Mode="In" Type="String" />
             <Parameter Name="Region" Mode="In" Type="String" />
             <Parameter Name="Venue" Mode="In" Type="String" />
             <Parameter Name="Dealer_LocationCode" Mode="In" Type="String" />
@@ -2410,7 +2411,7 @@
           </FunctionImport>
           <EntitySet Name="TblAutomationErrorLogs" EntityType="STEPDBBetaModel.TblAutomationErrorLog" />
           <FunctionImport Name="sp_InsertIntoTblAutomationErrorLogs">
-            <Parameter Name="ErrorType" Mode="In" Type="String" />
+          <Parameter Name="ErrorType" Mode="In" Type="String" />
             <Parameter Name="Value" Mode="In" Type="String" />
             <Parameter Name="IsActive" Mode="In" Type="Boolean" />
             <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
@@ -2420,7 +2421,7 @@
           <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="sp_DeleteQuestionForMSPINandSessionID">
-            <Parameter Name="MSPIN" Mode="In" Type="String" />
+          <Parameter Name="MSPIN" Mode="In" Type="String" />
             <Parameter Name="SessionID" Mode="In" Type="String" />
             <Parameter Name="ProgramId" Mode="In" Type="Int32" />
             <Parameter Name="Day" Mode="In" Type="Int32" />
@@ -2432,7 +2433,7 @@
           <Parameter Name="Machine_Name" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_Update_Biometric_VersionMapping">
-            <Parameter Name="Machine_Name" Mode="In" Type="String" />
+          <Parameter Name="Machine_Name" Mode="In" Type="String" />
             <Parameter Name="Current_Version" Mode="In" Type="String" />
             <Parameter Name="Current_CRC" Mode="In" Type="String" />
             <Parameter Name="Mapped_Version_Id" Mode="In" Type="Int32" />
@@ -2443,7 +2444,7 @@
           <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_GetAttendanceReport_Evaluation" ReturnType="Collection(STEPDBBetaModel.sp_GetAttendanceReport_Evaluation_Result)">
-            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+          <Parameter Name="StartDate" Mode="In" Type="DateTime" />
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
             <Parameter Name="Agency_Id" Mode="In" Type="Int32" />
             <Parameter Name="SessionID" Mode="In" Type="String" />
@@ -2451,7 +2452,7 @@
             <Parameter Name="Program_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Insert_Update_TblUserId_TokenMapping">
-            <Parameter Name="User_Id" Mode="In" Type="Int32" />
+          <Parameter Name="User_Id" Mode="In" Type="Int32" />
             <Parameter Name="Token" Mode="In" Type="String" />
             <Parameter Name="IsActive" Mode="In" Type="Boolean" />
             <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
@@ -2463,7 +2464,7 @@
           <Parameter Name="SessionID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_GetAgencyWiseFaculty_External" ReturnType="Collection(STEPDBBetaModel.sp_GetAgencyWiseFaculty_External_Result)">
-            <Parameter Name="Agency_Id" Mode="In" Type="Int32" />
+          <Parameter Name="Agency_Id" Mode="In" Type="Int32" />
             <Parameter Name="ParentFaculty_Code" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="TblSubFacultyMasters" EntityType="STEPDBBetaModel.TblSubFacultyMaster" />
@@ -2472,7 +2473,7 @@
           </FunctionImport>
           <FunctionImport Name="sp_GetCurrentSessionIdsForReset" ReturnType="Collection(STEPDBBetaModel.sp_GetCurrentSessionIdsForReset_Result)" />
           <FunctionImport Name="sp_ResetTestForSessionId">
-            <Parameter Name="SessioniD" Mode="In" Type="String" />
+          <Parameter Name="SessioniD" Mode="In" Type="String" />
             <Parameter Name="remainingtime" Mode="In" Type="Int32" />
             <Parameter Name="Day" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -2481,7 +2482,7 @@
           <Parameter Name="EndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="sp_GetFacultyList_ExternalAgency" ReturnType="Collection(STEPDBBetaModel.sp_GetFacultyList_ExternalAgency_Result)">
-            <Parameter Name="Agency_Id" Mode="In" Type="Int32" />
+          <Parameter Name="Agency_Id" Mode="In" Type="Int32" />
             <Parameter Name="ParentFaculty_Code" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_GetExternalFacultyDetail" ReturnType="Collection(STEPDBBetaModel.sp_GetExternalFacultyDetail_Result)">
@@ -2493,7 +2494,7 @@
           </FunctionImport>
           <FunctionImport Name="sp_GetVendorsList" ReturnType="Collection(STEPDBBetaModel.sp_GetVendorsList_Result)" />
           <FunctionImport Name="sp_Insert_Update_TblVendorMaster">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
             <Parameter Name="FAC_Code" Mode="In" Type="String" />
             <Parameter Name="VendorName" Mode="In" Type="String" />
             <Parameter Name="ManagerName" Mode="In" Type="String" />
@@ -2504,7 +2505,7 @@
             <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Insert_Update_TblVendorTrainerMaster">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
             <Parameter Name="Vendor_Id" Mode="In" Type="Int32" />
             <Parameter Name="TrainerCode" Mode="In" Type="String" />
             <Parameter Name="TrainerName" Mode="In" Type="String" />
@@ -2516,7 +2517,7 @@
           <EntitySet Name="TblVendorMasters" EntityType="STEPDBBetaModel.TblVendorMaster" />
           <EntitySet Name="TblVendorTrainerMasters" EntityType="STEPDBBetaModel.TblVendorTrainerMaster" />
           <FunctionImport Name="SP_GetUserDetails_VendorTrainer" ReturnType="Collection(STEPDBBetaModel.SP_GetUserDetails_VendorTrainer_Result)">
-            <Parameter Name="UserName" Mode="In" Type="String" />
+          <Parameter Name="UserName" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_GetProgramListByEndDate_V2" ReturnType="Collection(STEPDBBetaModel.sp_GetProgramListByEndDate_V2_Result)">
@@ -2570,7 +2571,7 @@
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="sp_GetDaySequence_STEPAgency" ReturnType="Collection(STEPDBBetaModel.sp_GetDaySequence_STEPAgency_Result)">
-            <Parameter Name="SessionID" Mode="In" Type="String" />
+          <Parameter Name="SessionID" Mode="In" Type="String" />
             <Parameter Name="ListType" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetActiveSessionIDListForSTEP_Agency_Trainer_V2" ReturnType="Collection(STEPDBBetaModel.GetActiveSessionIDListForSTEP_Agency_Trainer_V2_Result)">
@@ -2587,11 +2588,11 @@
             <Parameter Name="ProgramId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Get_IfAbesnt_v2" ReturnType="Collection(STEPDBBetaModel.sp_Get_IfAbesnt_v2_Result)">
-            <Parameter Name="MSPIN" Mode="In" Type="String" />
+          <Parameter Name="MSPIN" Mode="In" Type="String" />
             <Parameter Name="SessionID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_InsertUpdate_TblCalendarDownload">
-            <Parameter Name="CALNDR_ID" Mode="In" Type="String" />
+          <Parameter Name="CALNDR_ID" Mode="In" Type="String" />
             <Parameter Name="PRG_ID" Mode="In" Type="String" />
             <Parameter Name="RO_FRM_DATE" Mode="In" Type="DateTime" />
             <Parameter Name="RO_TO_DATE" Mode="In" Type="DateTime" />
@@ -2624,6 +2625,7 @@
             <Parameter Name="Vendor_Id" Mode="In" Type="Int32" />
             <Parameter Name="month" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="sp_GetBiometricReport" ReturnType="Collection(STEPDBBetaModel.sp_GetBiometricReport_Result)" />
         </EntityContainer>
         <ComplexType Name="sp_AttendanceReport_Result">
           <Property Type="String" Name="Co_id" Nullable="true" MaxLength="50" />
@@ -4177,6 +4179,12 @@
           <Property Type="String" Name="ProgramName" Nullable="true" MaxLength="150" />
           <Property Type="Int32" Name="Duration" Nullable="true" />
           <Property Type="String" Name="TrainerCode" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_GetBiometricReport_Result">
+          <Property Type="String" Name="AgencyCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="MSPIN" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FAcultyCode" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="CreationDate" Nullable="false" Precision="23" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -6649,6 +6657,16 @@
                 <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
                 <ScalarProperty Name="Duration" ColumnName="Duration" />
                 <ScalarProperty Name="TrainerCode" ColumnName="TrainerCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetBiometricReport" FunctionName="STEPDBBetaModel.Store.sp_GetBiometricReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="STEPDBBetaModel.sp_GetBiometricReport_Result">
+                <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
+                <ScalarProperty Name="MSPIN" ColumnName="MSPIN" />
+                <ScalarProperty Name="FAcultyCode" ColumnName="FAcultyCode" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

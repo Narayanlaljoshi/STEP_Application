@@ -206,6 +206,7 @@
     </Compile>
     <Compile Include="Controllers\AttendancePunchController.cs" />
     <Compile Include="Controllers\AutomationController.cs" />
+    <Compile Include="Controllers\BiometricReportsController.cs" />
     <Compile Include="Controllers\DocumentCaptureController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FaceRecognitionController.cs" />

@@ -165,5 +165,71 @@ namespace STEPDAL.CustomDAL
             }
         }
 
+        public static string sendEmail_WithReports(string Subject, string Body,string AttachmentPath)
+        {
+            string ADminEmail = System.Configuration.ConfigurationManager.AppSettings["ToMail"];
+            string SMTPEmailHost = System.Configuration.ConfigurationManager.AppSettings["SmtpServer"];
+            string SMTPusername = System.Configuration.ConfigurationManager.AppSettings["SmtpUserName"];
+            string SMTPpass = System.Configuration.ConfigurationManager.AppSettings["SmtpPassword"];
+            string AllowEmail = System.Configuration.ConfigurationManager.AppSettings["AllowEmail"];
+            string FromMailAddress = System.Configuration.ConfigurationManager.AppSettings["FromEmailId"];
+            string SMTPPortNumber = System.Configuration.ConfigurationManager.AppSettings["PortNo"];
+
+            if (AllowEmail == "true")
+            {
+                try
+                {
+                    SmtpClient smtp = new SmtpClient(SMTPEmailHost);
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new NetworkCredential(SMTPusername, SMTPpass);
+                    smtp.Port = Convert.ToInt32(SMTPPortNumber);
+                    smtp.EnableSsl = true;
+                    MailMessage message = new MailMessage();
+                    message.From = new MailAddress(FromMailAddress);
+
+                    message.To.Add(ADminEmail);
+                    message.CC.Add("narayanjoshi25cs@gmail.com");
+                    //message.Bcc.Add("himanshu.tiwari@phoenixtech.consulting");
+                    //if (toEmail.Contains(new MailAddress("amit.kaushik@phoenixtech.consulting")))
+                    //{ toEmail.Remove(new MailAddress("amit.kaushik@phoenixtech.consulting")); }
+                    //if (ccEmail.Contains(new MailAddress("amit.kaushik@phoenixtech.consulting")))
+                    //{ ccEmail.Remove(new MailAddress("amit.kaushik@phoenixtech.consulting")); }
+                    //if (toEmail != null)
+                    //{
+                    //    foreach (var mail in toEmail)
+                    //    {
+                    //        message.To.Add(mail);
+                    //    }
+                    //}
+                    //if (ccEmail != null)
+                    //{
+                    //    foreach (var mail in ccEmail)
+                    //    {
+                    //        //message.CC.Contains(mail)?0:
+                    //        if (message.CC.Contains(mail))
+                    //            continue;
+                    //        else
+                    //            message.CC.Add(mail);
+                    //    }
+                    //}
+                    message.IsBodyHtml = true;
+                    message.Subject = Subject;
+                    message.Body = Body;
+                    message.Attachments.Add(new Attachment(AttachmentPath));
+                    //message.Attachments.Add(new Attachment(AttachMentPath));
+                    smtp.Send(message);
+                    return "Success: Notification sent";
+                }
+                catch (Exception Ex)
+                {
+                    return "Failed: Email ";
+                }
+            }
+            else
+            {
+                return "Email not allowed";
+            }
+        }
+
     }
 }

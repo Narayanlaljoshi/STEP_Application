@@ -2485,5 +2485,10 @@ namespace STEPDAL.DB
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetSessionListForStepAgencyManager_Result>("sp_GetSessionListForStepAgencyManager", agency_IdParameter, vendor_IdParameter, monthParameter);
         }
+    
+        public virtual ObjectResult<sp_GetBiometricReport_Result> sp_GetBiometricReport()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetBiometricReport_Result>("sp_GetBiometricReport");
+        }
     }
 }

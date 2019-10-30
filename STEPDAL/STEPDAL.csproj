@@ -65,6 +65,7 @@
     <Compile Include="CustomDAL\AttendancePunch.cs" />
     <Compile Include="CustomDAL\Automation.cs" />
     <Compile Include="CustomDAL\BioMetricDAL.cs" />
+    <Compile Include="CustomDAL\BiometricReports.cs" />
     <Compile Include="CustomDAL\DocumentCapture.cs" />
     <Compile Include="CustomDAL\Email.cs" />
     <Compile Include="CustomDAL\ErrorReport.cs" />
@@ -173,6 +174,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\sp_GetAutomationErrorRecords_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\sp_GetBiometricReport_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\SP_GetCandidateListBySessionId_Result.cs">
