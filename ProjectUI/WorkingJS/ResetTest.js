@@ -14,7 +14,7 @@ app.service('TestResetService', function ($http, $location) {
     }
 
     this.UpdateSaveRegion = function (data) {
-        return $http.post(this.AppUrl + '/Region/UpdateRegion', data, {});
+        return $http.post(this.AppUrl + '/Region/UpdateRegion', data);
     };
 
     this.GetCurrentSessionIDsForReset = function () {
@@ -24,13 +24,12 @@ app.service('TestResetService', function ($http, $location) {
 
     this.ResetForWholeSession = function (pt) {
 
-        return $http.post(this.AppUrl + '/TestReset/ResetForWholeSession',pt);
+        return $http.post(this.AppUrl + '/TestReset/ResetForWholeSession', pt);
     };
 
 
 });
 app.controller('TestResetController', function ($scope, $http, $location, TestResetService, $rootScope) {
-
 
     $scope.init = function () {
 
@@ -41,70 +40,36 @@ app.controller('TestResetController', function ($scope, $http, $location, TestRe
         }, function error(data) {
             console.log("Error in loading data from EDB");
         });
-
     };
 
     $scope.ResetForSession = function (pt) {
-
-        TestResetService.ResetForWholeSession(pt).then(function success(data) {
-            if (data.data.indexOf('Success') != -1) {
-                $scope.init();
-                swal("", data.data, "success");
-            }
-            else { swal("", data.data, "error"); }
-            console.log("Get Region List", data);
-        }, function error(data) {
-            console.log("Error in loading data from EDB");
+        swal({
+            title: 'Warning',
+            text: "it will reset the test for all the candidates of Session ID - " + pt.SessionID + " for the day - " + pt.Day,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            //  cancelButtonColor: '#d33',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            TestResetService.ResetForWholeSession(pt).then(function success(data) {
+                if (data.data.indexOf('Success') != -1) {
+                    $scope.init();
+                    swal("", data.data, "success");
+                }
+                else { swal("", data.data, "error"); }
+                console.log("Get Region List", data);
+            }, function error(data) {
+                console.log("Error in loading data from EDB");
+            });
         });
     };
 
-    $scope.ResetForCanddaite = function () {
+    $scope.ResetForCandidate = function (pt) {
 
-        if (!$scope.RegionDetailData.RegionCode) {
-            swal('Please enter Region Name');
+        swal("Sorry", "It's not available as of now.", "info");
+        return false;
+    };
 
-            return false;
-        }
-
-
-        if (!$scope.RegionDetailData.RegionName) {
-            swal('Please enter Region Name');
-
-            return false;
-        }
-
-
-
-        //swal({
-        //    title: "Are you sure?", text: "You are about update Region?",
-        //    type: "warning",
-        //    showCancelButton: true,
-        //    confirmButtonColor: "#DD6B55",
-        //    confirmButtonText: "Continue",
-        //    closeOnConfirm: false
-        //},
-        //    function () {
-
-        $scope.RegionDetailData.IsActive = true;
-        //    $scope.RegionDetailData.ModifiedBy = $rootScope.session.data.User_Id;
-        TestResetService.UpdateSaveRegion($scope.RegionDetailData).then(function success(retdata) {
-
-            if (retdata.data.indexOf("Success") !== -1) {
-                swal(retdata.data);
-            }
-            else {
-                swal(retdata.data);
-            }
-
-            $scope.init();
-
-
-
-        }, function error(data) {
-            console.log("Error in loading data from EDB");
-        });
-        // });
-    }
-    
     $scope.init();
 });

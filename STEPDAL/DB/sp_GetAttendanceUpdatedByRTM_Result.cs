@@ -11,18 +11,11 @@ namespace STEPDAL.DB
 {
     using System;
     
-    public partial class SP_GetCandidateListBySessionId_SSTC_Result
+    public partial class sp_GetAttendanceUpdatedByRTM_Result
     {
-        public string Name { get; set; }
         public string MSPIN { get; set; }
-        public Nullable<System.DateTime> StartDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
-        public string AgencyCode { get; set; }
-        public string Dealer_LocationCode { get; set; }
-        public string DealerName { get; set; }
-        public Nullable<bool> IsPresent { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
-        public Nullable<int> Day { get; set; }
         public string SessionID { get; set; }
+        public string AgencyCode { get; set; }
+        public System.DateTime DateTime { get; set; }
     }
 }

@@ -366,7 +366,6 @@ namespace STEPDAL.CustomDAL
             
         }
 
-
         public static bool BulkInsert_RawData(DataTable dataTable)
         {
             bool isSuccuss;
@@ -428,7 +427,6 @@ namespace STEPDAL.CustomDAL
             }
             return isSuccuss;
         }
-
 
     }
 }

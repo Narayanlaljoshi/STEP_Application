@@ -282,35 +282,9 @@ namespace STEPDAL.DB
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetCandidateListBySessionId_Result>("SP_GetCandidateListBySessionId", sessionIDParameter);
         }
     
-        public virtual ObjectResult<SP_GetCandidateListBySessionId_SSTC_Result> SP_GetCandidateListBySessionId_SSTC(string sessionID, Nullable<int> day)
-        {
-            var sessionIDParameter = sessionID != null ?
-                new ObjectParameter("SessionID", sessionID) :
-                new ObjectParameter("SessionID", typeof(string));
-    
-            var dayParameter = day.HasValue ?
-                new ObjectParameter("Day", day) :
-                new ObjectParameter("Day", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetCandidateListBySessionId_SSTC_Result>("SP_GetCandidateListBySessionId_SSTC", sessionIDParameter, dayParameter);
-        }
-    
         public virtual ObjectResult<sp_GetCandidatesListDayWise_Result> sp_GetCandidatesListDayWise()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCandidatesListDayWise_Result>("sp_GetCandidatesListDayWise");
-        }
-    
-        public virtual ObjectResult<sp_GetCandidatesListForSSTC_Result> sp_GetCandidatesListForSSTC(string sessionID, Nullable<int> day)
-        {
-            var sessionIDParameter = sessionID != null ?
-                new ObjectParameter("SessionID", sessionID) :
-                new ObjectParameter("SessionID", typeof(string));
-    
-            var dayParameter = day.HasValue ?
-                new ObjectParameter("Day", day) :
-                new ObjectParameter("Day", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCandidatesListForSSTC_Result>("sp_GetCandidatesListForSSTC", sessionIDParameter, dayParameter);
         }
     
         public virtual int Sp_GetCity(Nullable<int> regionId)
@@ -2489,6 +2463,57 @@ namespace STEPDAL.DB
         public virtual ObjectResult<sp_GetBiometricReport_Result> sp_GetBiometricReport()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetBiometricReport_Result>("sp_GetBiometricReport");
+        }
+    
+        public virtual ObjectResult<sp_GetAttendanceUpdatedByRTM_Result> sp_GetAttendanceUpdatedByRTM(string agencyCode)
+        {
+            var agencyCodeParameter = agencyCode != null ?
+                new ObjectParameter("AgencyCode", agencyCode) :
+                new ObjectParameter("AgencyCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetAttendanceUpdatedByRTM_Result>("sp_GetAttendanceUpdatedByRTM", agencyCodeParameter);
+        }
+    
+        public virtual ObjectResult<SP_GetCandidateListBySessionId_SSTC_Result> SP_GetCandidateListBySessionId_SSTC(string sessionID, Nullable<int> day, string region, string venue)
+        {
+            var sessionIDParameter = sessionID != null ?
+                new ObjectParameter("SessionID", sessionID) :
+                new ObjectParameter("SessionID", typeof(string));
+    
+            var dayParameter = day.HasValue ?
+                new ObjectParameter("Day", day) :
+                new ObjectParameter("Day", typeof(int));
+    
+            var regionParameter = region != null ?
+                new ObjectParameter("Region", region) :
+                new ObjectParameter("Region", typeof(string));
+    
+            var venueParameter = venue != null ?
+                new ObjectParameter("Venue", venue) :
+                new ObjectParameter("Venue", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetCandidateListBySessionId_SSTC_Result>("SP_GetCandidateListBySessionId_SSTC", sessionIDParameter, dayParameter, regionParameter, venueParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetCandidatesListForSSTC_Result> sp_GetCandidatesListForSSTC(string sessionID, Nullable<int> day, string region, string venue)
+        {
+            var sessionIDParameter = sessionID != null ?
+                new ObjectParameter("SessionID", sessionID) :
+                new ObjectParameter("SessionID", typeof(string));
+    
+            var dayParameter = day.HasValue ?
+                new ObjectParameter("Day", day) :
+                new ObjectParameter("Day", typeof(int));
+    
+            var regionParameter = region != null ?
+                new ObjectParameter("Region", region) :
+                new ObjectParameter("Region", typeof(string));
+    
+            var venueParameter = venue != null ?
+                new ObjectParameter("Venue", venue) :
+                new ObjectParameter("Venue", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCandidatesListForSSTC_Result>("sp_GetCandidatesListForSSTC", sessionIDParameter, dayParameter, regionParameter, venueParameter);
         }
     }
 }

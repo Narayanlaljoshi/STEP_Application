@@ -10,12 +10,12 @@ app.service('RegionService', function ($http, $location) {
 
     if ($location.absUrl().indexOf('CST') != -1) {
 
-        this.AppUrl = "/CST/api"
+        this.AppUrl = "/CST/api";
 
     }
     else {
 
-        this.AppUrl = "/api"
+        this.AppUrl = "/api";
     }
     this.AddSaveRegion = function (data) {
         //       console.log("yahiooooooooooo");

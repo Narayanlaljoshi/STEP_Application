@@ -479,7 +479,7 @@ namespace STEPDAL.CustomDAL
             {
                 List<CandidateList_SSTC> objList = new List<CandidateList_SSTC>();
                 foreach (var row in List) {
-                    var data = context.SP_GetCandidateListBySessionId_SSTC(row.SessionID, row.Day).ToList();
+                    var data = context.SP_GetCandidateListBySessionId_SSTC(row.SessionID, row.Day,null,null).ToList();
 
                     if (data.Count != 0)
                     {
@@ -591,7 +591,7 @@ namespace STEPDAL.CustomDAL
                 }
                 if (Msg.Equals(string.Empty))
                 {
-                    SendEmailForAttendanceMarkedByRTM(Obj);
+                    SendEmailForAttendanceMarkedByRTM(NewCandidates);
                     return "Success: Updated Successfully!";
                 }
                 else
@@ -615,14 +615,14 @@ namespace STEPDAL.CustomDAL
                 if (Obj.Count!=0) {
                     string AgencyCode = Obj[0].AgencyCode;
                     var RTMDetails = context.TblRTCMasters.Where(x => x.AgencyCode == AgencyCode && x.IsActive == true).FirstOrDefault();
-                    
+                    var AttnList = context.sp_GetAttendanceUpdatedByRTM(AgencyCode).ToList();
                     string Body = "<html><body><h3>Dear "+ RTMDetails .RTMName+ " San,</h3><b>Greetings for the day!!</b>";
-                    Body += "<p>You have marked the attendance for the following Candidates : </p>";
+                    Body += "<p>You have marked the attendance for the following Candidates today: </p>";
                     Body = Body + @"<table border=\"" +1+\""style=\""text- align:center; \""><thead><tr><th>#</th><th>Agency Code</th><th>MSPIN</th></tr></thead>";
                     Body += "<tbody>";
                     int Index = 1;
                     //Obj = Obj.Select(x=>x.ErrorType).Distinct().ToList();
-                    foreach (var Q in Obj)
+                    foreach (var Q in AttnList)
                     {
                         Body += "<tr><td>";
                         Body += Index.ToString() + "</td><td>";

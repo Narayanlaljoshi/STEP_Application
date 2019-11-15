@@ -20,13 +20,13 @@ namespace STEPDAL.CustomDAL
 
                 if (data.Count != 0)
                 {
-                    var ProgramList = data.Select(x => x.ProgramName).Distinct().ToList();
+                    var ProgramList = data.Select(x => new { x.ProgramName ,x.StartDate,x.EndDate}).Distinct().ToList();
                     //var ProgramList_V2 = data.GroupBy(d => new { d.ProgramName, d.StartDate, d.EndDate }).Select(m => new { m.Key.ProgramName, m.Key.StartDate, m.Key.EndDate });
                     foreach (var ss in ProgramList)
                     {
-                        var RegionVenues = data.Where(x => x.ProgramName == ss).ToList();
+                        var RegionVenues = data.Where(x => x.ProgramName == ss.ProgramName &&x.StartDate==ss.StartDate && x.EndDate==ss.EndDate).ToList();
                         //PRG_SD_ED Details = data.Where(x => x.ProgramName == ss).FirstOrDefault();
-                        var Details = data.Where(x => x.ProgramName == ss).FirstOrDefault();
+                        var Details = data.Where(x => x.ProgramName == ss.ProgramName && x.StartDate == ss.StartDate && x.EndDate == ss.EndDate).FirstOrDefault();
                         objList.Add(new ActiveSessionIdListForVendorTrainer
                         {
 
@@ -58,12 +58,14 @@ namespace STEPDAL.CustomDAL
                 List<ActiveSessionIdListForVendorTrainer> objList = new List<ActiveSessionIdListForVendorTrainer>();
                 if (data.Count != 0)
                 {
-                    var ProgramList = data.Select(x => x.ProgramName).Distinct().ToList();
+                    //var ProgramList = data.Select(x => x.ProgramName).Distinct().ToList();
+
+                    var ProgramList = data.Select(x => new { x.ProgramName, x.StartDate, x.EndDate }).Distinct().ToList();
 
                     foreach (var ss in ProgramList)
                     {
-                        var RegionVenues = data.Where(x => x.ProgramName == ss).ToList();
-                        var Details = data.Where(x => x.ProgramName == ss).FirstOrDefault();
+                        var RegionVenues = data.Where(x => x.ProgramName == ss.ProgramName&&x.StartDate==ss.StartDate&&x.EndDate==ss.EndDate).ToList();
+                        var Details = data.Where(x => x.ProgramName == ss.ProgramName && x.StartDate == ss.StartDate && x.EndDate == ss.EndDate).FirstOrDefault();
                         objList.Add(new ActiveSessionIdListForVendorTrainer
                         {
 
@@ -92,12 +94,13 @@ namespace STEPDAL.CustomDAL
                 List<PendingSessionIdListForVendorTrainer> objList = new List<PendingSessionIdListForVendorTrainer>();
                 if (data.Count != 0)
                 {
-                    var ProgramList = data.Select(x => x.ProgramName).Distinct().ToList();
+                    //var ProgramList = data.Select(x => x.ProgramName).Distinct().ToList();
+                    var ProgramList = data.Select(x => new { x.ProgramName, x.StartDate, x.EndDate }).Distinct().ToList();
 
                     foreach (var ss in ProgramList)
                     {
-                        var RegionVenues = data.Where(x => x.ProgramName == ss).ToList();
-                        var Details = data.Where(x => x.ProgramName == ss).FirstOrDefault();
+                        var RegionVenues = data.Where(x => x.ProgramName == ss.ProgramName && x.StartDate==ss.StartDate&&x.EndDate==ss.EndDate).ToList();
+                        var Details = data.Where(x => x.ProgramName == ss.ProgramName && x.StartDate == ss.StartDate && x.EndDate == ss.EndDate).FirstOrDefault();
                         List<MRK_ATNDC_Check> MRK_ATNDC_Check = new List<MRK_ATNDC_Check>();
                         foreach (var item in RegionVenues) {
                             MRK_ATNDC_Check.Add(CheckIf_ATNDC_MRKS_Submitted(item.SessionID));
@@ -126,14 +129,15 @@ namespace STEPDAL.CustomDAL
                 return objList;
             }
         }
+
         private static MRK_ATNDC_Check CheckIf_ATNDC_MRKS_Submitted(string SessionID)
         {
             
             using (var context = new CEIDBEntities()) {
                 var ATDNC_DTL = context.sp_GetVendorReport_Attendance(SessionID).ToList();
                 var MRKS_DTL = context.sp_GetVendorReport_Marks(SessionID).ToList();
-                var MarksDayCount = context.sp_GetDaySequence_STEPAgency(SessionID,"M");
-                var ATNDCDayCount = context.sp_GetDaySequence_STEPAgency(SessionID, "A");
+                //var MarksDayCount = context.sp_GetDaySequence_STEPAgency(SessionID,"M");
+                //var ATNDCDayCount = context.sp_GetDaySequence_STEPAgency(SessionID, "A");
                 MRK_ATNDC_Check Obj = new MRK_ATNDC_Check();
                 var MSPINList_AT = ATDNC_DTL.Select(x => x.MSPIN).Distinct();
                 var MSPINList_Mr = MRKS_DTL.Count!=0? MRKS_DTL.Select(x => x.MSPIN).Distinct():null;
@@ -163,6 +167,7 @@ namespace STEPDAL.CustomDAL
                 return Obj;
             }
         }
+
         public static List<ActiveSessionIdListForVendorTrainer> GetClosedSessionIDListForSTEP_Agency_Trainer_Mobile(int Agency_Id, string FacultyCode)
         {
             using (var context = new CEIDBEntities())
@@ -172,12 +177,13 @@ namespace STEPDAL.CustomDAL
                 List<ActiveSessionIdListForVendorTrainer> objList = new List<ActiveSessionIdListForVendorTrainer>();
                 if (data.Count != 0)
                 {
-                    var ProgramList = data.Select(x => x.ProgramName).Distinct().ToList();
+                    //var ProgramList = data.Select(x => x.ProgramName).Distinct().ToList();
+                    var ProgramList = data.Select(x => new { x.ProgramName, x.StartDate, x.EndDate }).Distinct().ToList();
 
                     foreach (var ss in ProgramList)
                     {
-                        var RegionVenues = data.Where(x => x.ProgramName == ss).ToList();
-                        var Details = data.Where(x => x.ProgramName == ss).FirstOrDefault();
+                        var RegionVenues = data.Where(x => x.ProgramName == ss.ProgramName&&x.StartDate==ss.StartDate&&x.EndDate==ss.EndDate).ToList();
+                        var Details = data.Where(x => x.ProgramName == ss.ProgramName && x.StartDate == ss.StartDate && x.EndDate == ss.EndDate).FirstOrDefault();
                         objList.Add(new ActiveSessionIdListForVendorTrainer
                         {
                             //SessionID = Details.SessionID,
@@ -227,7 +233,7 @@ namespace STEPDAL.CustomDAL
                 List<CandidatesList_StepAgency_Marks> List1 = new List<CandidatesList_StepAgency_Marks>();
                 foreach (var item in Obj.RegionVenues)
                 {
-                    var ReqData = Context.sp_GetCandidatesListForSSTC(item.SessionID, Obj.Day).ToList();
+                    var ReqData = Context.sp_GetCandidatesListForSSTC(item.SessionID, Obj.Day,item.Region,item.Venue).ToList();
 
                     if (ReqData.Count != 0)
                     {
@@ -291,7 +297,7 @@ namespace STEPDAL.CustomDAL
                 List<CandidateList_StepAgency_Attendance> objList = new List<CandidateList_StepAgency_Attendance>();
                 foreach (var item in Obj.RegionVenues)
                 {
-                    var data = context.SP_GetCandidateListBySessionId_SSTC(item.SessionID, Obj.Day).ToList();
+                    var data = context.SP_GetCandidateListBySessionId_SSTC(item.SessionID, Obj.Day,item.Region,item.Venue).ToList();
 
                     if (data.Count != 0)
                     {

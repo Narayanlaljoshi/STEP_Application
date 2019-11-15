@@ -7,7 +7,6 @@ namespace STEPDAL.CustomDAL
 {
     public class Email
     {
-
         public static string sendEmail(string FromMailAddress, MailAddressCollection toEmail, MailAddressCollection ccEmail, string Subject, string Body)
         {
             string ADminEmail = System.Configuration.ConfigurationManager.AppSettings["ToMail"];
@@ -168,6 +167,7 @@ namespace STEPDAL.CustomDAL
         public static string sendEmail_WithReports(string Subject, string Body,string AttachmentPath)
         {
             string ADminEmail = System.Configuration.ConfigurationManager.AppSettings["ToMail"];
+
             string SMTPEmailHost = System.Configuration.ConfigurationManager.AppSettings["SmtpServer"];
             string SMTPusername = System.Configuration.ConfigurationManager.AppSettings["SmtpUserName"];
             string SMTPpass = System.Configuration.ConfigurationManager.AppSettings["SmtpPassword"];
@@ -188,12 +188,7 @@ namespace STEPDAL.CustomDAL
                     message.From = new MailAddress(FromMailAddress);
 
                     message.To.Add(ADminEmail);
-                    message.CC.Add("narayanjoshi25cs@gmail.com");
-                    //message.Bcc.Add("himanshu.tiwari@phoenixtech.consulting");
-                    //if (toEmail.Contains(new MailAddress("amit.kaushik@phoenixtech.consulting")))
-                    //{ toEmail.Remove(new MailAddress("amit.kaushik@phoenixtech.consulting")); }
-                    //if (ccEmail.Contains(new MailAddress("amit.kaushik@phoenixtech.consulting")))
-                    //{ ccEmail.Remove(new MailAddress("amit.kaushik@phoenixtech.consulting")); }
+                    message.CC.Add("narayan.joshi@phoenixtech.consulting");
                     //if (toEmail != null)
                     //{
                     //    foreach (var mail in toEmail)

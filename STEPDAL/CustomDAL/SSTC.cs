@@ -18,7 +18,7 @@ namespace STEPDAL.CustomDAL
                 Context.Database.CommandTimeout = 1200;
                 List<SSTCCandidatesList> List1 = new List<SSTCCandidatesList>();
                 foreach (var row in List) {
-                    var ReqData = Context.sp_GetCandidatesListForSSTC(row.SessionID , row.Day).ToList();
+                    var ReqData = Context.sp_GetCandidatesListForSSTC(row.SessionID , row.Day,null,null).ToList();
 
                     if (ReqData.Count != 0)
                     {

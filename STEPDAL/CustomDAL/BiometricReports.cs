@@ -16,9 +16,13 @@ namespace STEPDAL.CustomDAL
         public static void ExportExcel_RegistrationData()
         {
             string Url = GeneraetExcel_Biometric();
+            string Body = "<html><body><h3>Dear San,</h3><b>Greetings for the day!!</b>";
+            Body += "<p>Please find the attachment for the biometric report for last 90 days.  </p>";
+            //Body = Body + @"<table border=\"" +1+\""style=\""text- align:center; \""><thead><tr><th>#</th><th>Agency Code</th><th>MSPIN</th></tr></thead>";
+            Body += "<p>Thank You.</p><p> Regards </p><p> STEP Portal </p>";
+            Body += "<p>** This is an auto generated mail, please do not reply.</p></body></html>";
 
-            Email.sendEmail_WithReports("Biometric Report as on - "+DateTime.Now.ToString("dd-MMM-yyyy"),"", Url);
-
+            Email.sendEmail_WithReports("Biometric Report as on - "+ DateTime.Now.ToString("dd-MMM-yyyy"), Body, Url);
         }
 
         private static string GeneraetExcel_Biometric()
@@ -60,8 +64,8 @@ namespace STEPDAL.CustomDAL
             workSheet.Column(4).AutoFit();
             
             string FileName =HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["Reports"])+"BiometricReport_" + DateTime.Now.ToString("dd-MMM-yyyy")+".xlsx";
-            //string FolderPath = Path.Combine(HttpRuntime.AppDomainAppPath, System.Configuration.ConfigurationManager.AppSettings["Reports"] + FileName);
-
+            string FolderPath = HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["Reports"]);
+            //if()
             excel.SaveAs(new FileInfo(FileName));
             excel.Dispose();
 
