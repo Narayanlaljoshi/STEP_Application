@@ -501,7 +501,6 @@ namespace ProjectBLL.CustomModel
         }
         public static string ResetStudentLogin(StudentsList Obj)
         {
-
             using (var context = new CEIDBEntities())
             {
                 string MSPIN = Obj.MSPIN;

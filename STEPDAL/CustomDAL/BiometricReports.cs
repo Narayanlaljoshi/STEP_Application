@@ -17,7 +17,7 @@ namespace STEPDAL.CustomDAL
         {
             string Url = GeneraetExcel_Biometric();
             string Body = "<html><body><h3>Dear San,</h3><b>Greetings for the day!!</b>";
-            Body += "<p>Please find the attachment for the biometric report for last 90 days.  </p>";
+            Body += "<p>Please find the attachment for the biometric report.  </p>";
             //Body = Body + @"<table border=\"" +1+\""style=\""text- align:center; \""><thead><tr><th>#</th><th>Agency Code</th><th>MSPIN</th></tr></thead>";
             Body += "<p>Thank You.</p><p> Regards </p><p> STEP Portal </p>";
             Body += "<p>** This is an auto generated mail, please do not reply.</p></body></html>";

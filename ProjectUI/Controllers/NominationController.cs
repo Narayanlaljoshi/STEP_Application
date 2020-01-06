@@ -70,7 +70,6 @@ namespace Project.Controllers
                         if (regex.Success)
                         {
                             fileName = regex.Groups[1].Value;
-
                         }
                     }
 
@@ -173,13 +172,11 @@ namespace Project.Controllers
             catch (Exception e)
             {
                 return Request.CreateResponse(HttpStatusCode.Accepted, e.Message);
-
             }
 
             if (Data.Response.Length < 1)
                 Data.Response = "Success: File uploaded successfully";
             return Request.CreateResponse(HttpStatusCode.Accepted, Data.Response);
-
         }
 
         [HttpGet]

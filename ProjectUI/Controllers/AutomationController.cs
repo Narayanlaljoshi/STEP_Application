@@ -30,6 +30,7 @@ namespace ProjectUI.Controllers
                 ServiceReference1.STEP_NominationSoapClient Client = new STEP_NominationSoapClient();
                 Client.Endpoint.Binding.SendTimeout = new TimeSpan(0, 0, 0, 600);
                 DataTable NominTionFile = Client.GetNominationFile(1, Convert.ToDateTime(DateTime.Now));//"13-Aug-19"
+                
                 if (NominTionFile.Rows.Count > 0)
                 {
                     Automation.BulkInsert_RawData(NominTionFile);

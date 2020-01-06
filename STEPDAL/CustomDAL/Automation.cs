@@ -153,10 +153,12 @@ namespace STEPDAL.CustomDAL
                     catch (Exception ex) { }
                     try
                     {
-                        //if (MSPIN == "585099")// || SessionID == "SSI19167355" || SessionID == "SSI19167355"
-                        //{ //DateofBirth = Convert.ToDateTime(DateofBirth.Value.Day+ DateofBirth.Value.Month+DateTime.Now.year); 
+                        //if (SessionID == "SSI19182858" && MSPIN=="707413")// || SessionID == "SSI19167355" || SessionID == "SSI19167355"
+                        //{
+
                         //}
-                        //else { continue; }
+                        //else
+                        //{ continue; }
                         if (!Name.Equals(string.Empty) && !AgencyCode.Equals(string.Empty) && !FacultyCode.Equals(string.Empty) && !MSPIN.Equals(string.Empty) && StartDate != null && EndDate != null && !ProgramCode.Equals(string.Empty))
                         {
                             var AgencyDtl = AgencyList.Where(x => x.AgencyCode == AgencyCode).FirstOrDefault();
@@ -200,7 +202,8 @@ namespace STEPDAL.CustomDAL
                         continue;
                     }
                 }
-                if (IsErroredRecords) {
+                if (IsErroredRecords)
+                {
                     //Save Err records
                     try { SaveErrorRecords(ErrList); }
                     catch (Exception Ex) { }
@@ -383,7 +386,6 @@ namespace STEPDAL.CustomDAL
             //string connectionStringTarget = "data source=.;initial catalog=ProductivityDashboard;integrated security=True;";
             using (SqlConnection SqlConnectionObj = new SqlConnection(connectionStringTarget))
             {
-
                 try
                 {
                     SqlConnectionObj.Open();

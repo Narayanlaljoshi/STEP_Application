@@ -917,7 +917,7 @@ namespace STEPDAL.CustomDAL
             {
                 context.Database.CommandTimeout = 1500;
                 var GetDownloadedData = context.sp_GetNominationListFromDownload(DateTime.Now).ToList();
-                //GetDownloadedData= GetDownloadedData.Where(x=>x.MSPIN== "585099").ToList();
+                //GetDownloadedData= GetDownloadedData.Where(x=>x.SessionID == "SSI19188295").ToList();
                 var ProgramList = context.TblProgramMasters.Where(x => x.IsActive == true).ToList();
                 var AgencyList = context.TblRTCMasters.Where(x => x.IsActive == true).ToList();
                 var FacultyList = context.TblFaculties.Where(x => x.IsActive == true).ToList();
@@ -1234,7 +1234,7 @@ namespace STEPDAL.CustomDAL
                                                 context.SaveChanges();
                                                 FilteredList.Add(NM);
                                             }
-                                            else if (Check.EndDate.Value.Date > DateTime.Now.Date)
+                                            else if (Check.EndDate.Value.Date >= DateTime.Now.Date)
                                             {
                                                 var IsAbsenDtl = context.sp_Get_IfAbesnt_v2(Check.MSPIN, Check.SessionID).Where(x => x.IsPresent == "A").FirstOrDefault();
                                                 if (IsAbsenDtl != null)
@@ -1289,6 +1289,8 @@ namespace STEPDAL.CustomDAL
                                         }
                                     }
                                 }
+
+                                #region MyRegion
                                 //if (FacultyCode.Equals(string.Empty) || string.IsNullOrEmpty(FacultyCode))
                                 //{
                                 //    var Check = context.TblNominations.Where(x => x.MSPIN == MSPIN && x.IsActive == true).FirstOrDefault();
@@ -1493,6 +1495,8 @@ namespace STEPDAL.CustomDAL
                                 //        continue;
                                 //    }
                                 //}
+                                #endregion
+
                             }
                             else
                             {
