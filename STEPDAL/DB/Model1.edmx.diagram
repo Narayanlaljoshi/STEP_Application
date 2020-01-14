@@ -47,6 +47,7 @@
         <EntityTypeShape EntityType="STEPDBBetaModel.TblFaceRecognitionData" Width="1.5" PointX="19.375" PointY="9.75" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblVendorMaster" Width="1.5" PointX="19.375" PointY="13.75" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblVendorTrainerMaster" Width="1.5" PointX="19.375" PointY="18.75" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.Tbl_Log_Report_DMS" Width="1.5" PointX="20.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

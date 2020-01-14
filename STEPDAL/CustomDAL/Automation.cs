@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using STEPDAL.DB;
 
 namespace STEPDAL.CustomDAL
 {
@@ -430,5 +431,101 @@ namespace STEPDAL.CustomDAL
             return isSuccuss;
         }
 
+        public static void Update_Log_Table(DateTime? Date, string ReportName, int TotalRecords, int? ErrorRecords,string ExceptionMsg)
+        {
+            using (var Context = new CEIDBEntities())
+            {
+                Tbl_Log_Report_DMS rs = new Tbl_Log_Report_DMS
+                {
+                    Date = Date,
+                    Error_Records_Received = ErrorRecords,
+                    CreationDate = DateTime.Now,
+                    ReportType = ReportName,
+                    Total_Records_Pushed = TotalRecords
+                };
+                Context.Entry(rs).State = System.Data.Entity.EntityState.Added;
+                Context.SaveChanges();
+            }
+        }
+
+        public static void Save_Report_SCORE_DMS(DataTable dataTable)
+        {
+            bool isSuccuss = false;
+            string connectionStringTarget = System.Configuration.ConfigurationManager.AppSettings["BulkUploadConnectionString"].ToString();
+            //string connectionStringTarget = "data source=.;initial catalog=ProductivityDashboard;integrated security=True;";
+            using (SqlConnection SqlConnectionObj = new SqlConnection(connectionStringTarget))
+            {
+                try
+                {
+                    SqlConnectionObj.Open();
+                    SqlBulkCopy bulkCopy = new SqlBulkCopy(SqlConnectionObj, SqlBulkCopyOptions.TableLock | SqlBulkCopyOptions.FireTriggers | SqlBulkCopyOptions.UseInternalTransaction, null);
+                    bulkCopy.DestinationTableName = "[dbo].[Tbl_Record_SCORE_Report_DMS]";
+
+                    bulkCopy.ColumnMappings.Add(dataTable.Columns[0].ColumnName, "FacultyCode");
+                    bulkCopy.ColumnMappings.Add(dataTable.Columns[1].ColumnName, "ProgramCode");
+                    bulkCopy.ColumnMappings.Add(dataTable.Columns[2].ColumnName, "SessionID");
+                    bulkCopy.ColumnMappings.Add(dataTable.Columns[3].ColumnName, "StartDate");
+                    bulkCopy.ColumnMappings.Add(dataTable.Columns[4].ColumnName, "MSPIN");
+                    bulkCopy.ColumnMappings.Add(dataTable.Columns[5].ColumnName, "PreTestScore");
+                    bulkCopy.ColumnMappings.Add(dataTable.Columns[6].ColumnName, "PostTestScore");
+                    //bulkCopy.ColumnMappings.Add(dataTable.Columns[7].ColumnName, "LV_FIN_YEAR");
+                    bulkCopy.ColumnMappings.Add(dataTable.Columns[8].ColumnName, "Name");
+
+                    bulkCopy.WriteToServer(dataTable);
+                    isSuccuss = true;
+                }
+                catch (Exception ex)
+                {
+                    isSuccuss = false;
+                }
+                finally
+                {
+                    SqlConnectionObj.Close();
+                    GC.Collect();
+                }
+
+            }
+
+
+        }
+
+        public static void Save_Report_ATNDC_DMS(DataTable dataTable)
+        {
+            bool isSuccuss = false;
+            string connectionStringTarget = System.Configuration.ConfigurationManager.AppSettings["BulkUploadConnectionString"].ToString();
+            //string connectionStringTarget = "data source=.;initial catalog=ProductivityDashboard;integrated security=True;";
+            using (SqlConnection SqlConnectionObj = new SqlConnection(connectionStringTarget))
+            {
+                try
+                {
+                    SqlConnectionObj.Open();
+                    SqlBulkCopy bulkCopy = new SqlBulkCopy(SqlConnectionObj, SqlBulkCopyOptions.TableLock | SqlBulkCopyOptions.FireTriggers | SqlBulkCopyOptions.UseInternalTransaction, null);
+                    bulkCopy.DestinationTableName = "[Tbl_Record_ATNDC_Reports_DMS]";
+                    
+                    bulkCopy.ColumnMappings.Add(dataTable.Columns[0].ColumnName, "FacultyCode");
+                    bulkCopy.ColumnMappings.Add(dataTable.Columns[1].ColumnName, "ProgramCode");
+                    bulkCopy.ColumnMappings.Add(dataTable.Columns[2].ColumnName, "SessionID");
+                    bulkCopy.ColumnMappings.Add(dataTable.Columns[3].ColumnName, "StartDate");
+                    bulkCopy.ColumnMappings.Add(dataTable.Columns[4].ColumnName, "MSPIN");
+                    bulkCopy.ColumnMappings.Add(dataTable.Columns[5].ColumnName, "Day");
+                    bulkCopy.ColumnMappings.Add(dataTable.Columns[6].ColumnName, "P_A");
+
+                    bulkCopy.WriteToServer(dataTable);
+                    isSuccuss = true;
+                }
+                catch (Exception ex)
+                {
+                    isSuccuss = false;
+                }
+                finally
+                {
+                    SqlConnectionObj.Close();
+                    GC.Collect();
+                }
+
+            }
+
+
+        }
     }
 }

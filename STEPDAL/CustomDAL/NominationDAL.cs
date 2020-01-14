@@ -917,7 +917,7 @@ namespace STEPDAL.CustomDAL
             {
                 context.Database.CommandTimeout = 1500;
                 var GetDownloadedData = context.sp_GetNominationListFromDownload(DateTime.Now).ToList();
-                //GetDownloadedData= GetDownloadedData.Where(x=>x.SessionID == "SSI19188295").ToList();
+                //GetDownloadedData= GetDownloadedData.Where(x=>x.SessionID == "SSI19192109" && x.MSPIN== "692385").ToList();
                 var ProgramList = context.TblProgramMasters.Where(x => x.IsActive == true).ToList();
                 var AgencyList = context.TblRTCMasters.Where(x => x.IsActive == true).ToList();
                 var FacultyList = context.TblFaculties.Where(x => x.IsActive == true).ToList();
@@ -1535,13 +1535,9 @@ namespace STEPDAL.CustomDAL
                         continue;
                     }
                 }
-
                 bool Status = CreateUserIds(FilteredList);
             }
-
             return RetMessage;
-
-
         }
 
         public static bool CreateUserIds(List<TblNomination> FilteredList)

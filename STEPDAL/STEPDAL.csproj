@@ -80,6 +80,7 @@
     <Compile Include="CustomDAL\ProgramMasterDAL.cs" />
     <Compile Include="CustomDAL\ProgramTestCalenderDAL.cs" />
     <Compile Include="CustomDAL\QuestionBankDAL.cs" />
+    <Compile Include="CustomDAL\RegistrationInfoDAL.cs" />
     <Compile Include="CustomDAL\ReportsDAL.cs" />
     <Compile Include="CustomDAL\RtcMaster.cs" />
     <Compile Include="CustomDAL\ServiceType.cs" />
@@ -273,6 +274,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\SP_GetQuestionListIfExist_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\sp_GetRegistrationInfo_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\sp_GetRTMDropdownForAdmin_Result.cs">
@@ -525,6 +529,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\TblVendorTrainerMaster.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\Tbl_Log_Report_DMS.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Extensions\LinqExtensions.cs" />

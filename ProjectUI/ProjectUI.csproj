@@ -222,6 +222,7 @@
     <Compile Include="Controllers\ProgramMasterController.cs" />
     <Compile Include="Controllers\ProgramTestCalenderController.cs" />
     <Compile Include="Controllers\QuestionBankController.cs" />
+    <Compile Include="Controllers\RegistrationInfoController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RtcMasterController.cs" />
     <Compile Include="Controllers\ServiceTypeController.cs" />
@@ -401,6 +402,7 @@
     <Content Include="partial\ChangePassword.html" />
     <Content Include="partial\ChannelMaster.html" />
     <Content Include="partial\CityMaster.html" />
+    <Content Include="partial\CloseCourse_DMS.html" />
     <Content Include="partial\customer-voice.html" />
     <Content Include="partial\Dashboard.html" />
     <Content Include="partial\DealerGroupMaster.html" />
@@ -428,6 +430,7 @@
     <Content Include="partial\QuestionBank.html" />
     <Content Include="partial\QuestionBankPractical.html" />
     <Content Include="partial\RegionMaster.html" />
+    <Content Include="partial\RegistrationInfo.html" />
     <Content Include="partial\ReportAttendanceSheet.html" />
     <Content Include="partial\ReportScoreSheet.html" />
     <Content Include="partial\ResetTest.html" />
@@ -1328,6 +1331,7 @@
     <Content Include="WorkingJS\ChangePassword.js" />
     <Content Include="WorkingJS\ChannelMaster.js" />
     <Content Include="WorkingJS\CityMaster.js" />
+    <Content Include="WorkingJS\CloseCourse_DMS.js" />
     <Content Include="WorkingJS\DealerGroupMaster.js" />
     <Content Include="WorkingJS\DealerOutletMaster.js" />
     <Content Include="WorkingJS\DocumentCapture.js" />
@@ -1354,6 +1358,7 @@
     <Content Include="WorkingJS\QuestionBank.js" />
     <Content Include="WorkingJS\QuestionBankPractical.js" />
     <Content Include="WorkingJS\RegionMaster.js" />
+    <Content Include="WorkingJS\RegistrationInfo.js" />
     <Content Include="WorkingJS\ReportAttendanceSheet.js" />
     <Content Include="WorkingJS\ReportScoreSheet.js" />
     <Content Include="WorkingJS\ResetTest.js" />

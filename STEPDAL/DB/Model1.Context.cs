@@ -68,6 +68,7 @@ namespace STEPDAL.DB
         public virtual DbSet<TblFaceRecognitionData> TblFaceRecognitionDatas { get; set; }
         public virtual DbSet<TblVendorMaster> TblVendorMasters { get; set; }
         public virtual DbSet<TblVendorTrainerMaster> TblVendorTrainerMasters { get; set; }
+        public virtual DbSet<Tbl_Log_Report_DMS> Tbl_Log_Report_DMS { get; set; }
     
         public virtual ObjectResult<sp_AttendanceReport_Result> sp_AttendanceReport()
         {
@@ -2514,6 +2515,28 @@ namespace STEPDAL.DB
                 new ObjectParameter("Venue", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCandidatesListForSSTC_Result>("sp_GetCandidatesListForSSTC", sessionIDParameter, dayParameter, regionParameter, venueParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetRegistrationInfo_Result> sp_GetRegistrationInfo(string mSPIN)
+        {
+            var mSPINParameter = mSPIN != null ?
+                new ObjectParameter("MSPIN", mSPIN) :
+                new ObjectParameter("MSPIN", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetRegistrationInfo_Result>("sp_GetRegistrationInfo", mSPINParameter);
+        }
+    
+        public virtual int sp_UpdateRegistrationInfo(Nullable<long> registration_Id, Nullable<bool> isActive)
+        {
+            var registration_IdParameter = registration_Id.HasValue ?
+                new ObjectParameter("Registration_Id", registration_Id) :
+                new ObjectParameter("Registration_Id", typeof(long));
+    
+            var isActiveParameter = isActive.HasValue ?
+                new ObjectParameter("IsActive", isActive) :
+                new ObjectParameter("IsActive", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateRegistrationInfo", registration_IdParameter, isActiveParameter);
         }
     }
 }

@@ -582,7 +582,7 @@ namespace STEPDAL.CustomDAL
                 string Msg = string.Empty;
                 foreach (var St in NewCandidates)
                 {
-                    var Status = context.sp_Update_InsertIntoTblAttendancePunchIn(St.MSPIN, St.AgencyCode, DateTime.Now, "Updtaed by RTM", null);
+                    var Status = context.sp_Update_InsertIntoTblAttendancePunchIn(St.MSPIN, St.AgencyCode, DateTime.Now, "Updated by RTM", null);
 
                     if (Status < 1)
                     {

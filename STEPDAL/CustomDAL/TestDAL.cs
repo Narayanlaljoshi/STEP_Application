@@ -1733,7 +1733,6 @@ namespace STEPDAL.CustomDAL
         public static List<StudentLanguageQuestion> GetStudentQuestionFormatedList_Mobile(QuestionVariable data)
         {
             string SessionId = data.SessionID;
-            
 
             using (var context = new CEIDBEntities())
             {                
@@ -1770,7 +1769,8 @@ namespace STEPDAL.CustomDAL
                         SessionID = data.SessionID,
                         Day = data.Day
                     }).ToList();
-                    
+
+                    QuesList = QuesList.OrderBy(a => Guid.NewGuid()).ToList();
 
                     return QuesList;
                 }
@@ -1800,22 +1800,21 @@ namespace STEPDAL.CustomDAL
                 try
                 {
                     StudentMSPIN = Obj.StudentTestDetails.MSPIN;
-                    TestDay = Obj.StudentTestDetails.Day;
+                    TestDay = Obj.StudentTestDetails.DayCount;
                     TotalQuestion = Obj.StudentTestDetails.TotalNoQuestion.HasValue ? Obj.StudentTestDetails.TotalNoQuestion : null;
                     QuetionReceivedCount = Obj.StudentLanguageQuestion.Count;
                     Obj.StudentTestDetails.Status_Id = 1;
-                    int Status = context.SP_Insert_Update_TblStudentAnswerHdr(Obj.StudentTestDetails.ProgramTestCalenderId, Obj.StudentTestDetails.ProgramId, Obj.StudentTestDetails.TypeOfTest, Obj.StudentTestDetails.MSPIN, Obj.StudentTestDetails.RemainingTime, Obj.StudentTestDetails.Day, Obj.StudentTestDetails.SessionID, 1);
+                    int Status = context.SP_Insert_Update_TblStudentAnswerHdr(Obj.StudentTestDetails.ProgramTestCalenderId, Obj.StudentTestDetails.ProgramId, Obj.StudentTestDetails.TypeOfTest, Obj.StudentTestDetails.MSPIN, Obj.StudentTestDetails.RemainingTime, TestDay, Obj.StudentTestDetails.SessionID, Obj.StudentTestDetails.Status_Id);
                     TestDAL.LogService("SP_Insert_Update_TblStudentAnswerHdr Status: - " + Status);
                     if (Obj.StudentTestDetails.Status_Id == 1)
                     {
-                        int status=context.sp_UpdateTblTestDtl_Evaluation(Obj.StudentTestDetails.MSPIN, Obj.StudentTestDetails.SessionID, Obj.StudentTestDetails.Day);
+                        int status=context.sp_UpdateTblTestDtl_Evaluation(Obj.StudentTestDetails.MSPIN, Obj.StudentTestDetails.SessionID, Obj.StudentTestDetails.DayCount);
                     }
 
                     foreach (var Ques in Obj.StudentLanguageQuestion)
                     {
                         bool IsCorrect = Ques.AnswerGiven == Ques.AnswerKey ? true : false;
                         QuesCode = Ques.QuestionCode;
-
                         int StatusDtl = context.SP_Insert_Update_TblStudentAnswer(Ques.ProgramTestCalenderId, Ques.ProgramId, null, Ques.MSPIN, Ques.QuestionCode, Ques.AnswerGiven, Ques.AnswerKey, Ques.Day, Ques.TypeOfTest, Ques.SessionID, IsCorrect, true);
                         TestDAL.LogService("SP_Insert_Update_TblStudentAnswer Status: - " + StatusDtl);
                     }

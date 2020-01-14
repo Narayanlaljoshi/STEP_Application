@@ -65,6 +65,7 @@ namespace ProjectBLL.CustomModel
         public Nullable<int> Position_Id { get; set; }
         public string MSPIN { get; set; }
         public Nullable<int> Day { get; set; }
+        public Nullable<int> DayCount { get; set; }
         public string SessionID { get; set; }
         public int Status_Id { get; set; }
         public int RemainingTime { get; set; }

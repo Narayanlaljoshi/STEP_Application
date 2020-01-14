@@ -35,6 +35,10 @@ namespace STEPDAL.CustomDAL
                     //message.CC.Add("tiwarih521@gmail.com");
                     //message.To.Add("tiwarih521@gmail.com");
                     //message.Bcc.Add("himanshu.tiwari@phoenixtech.consulting");
+
+                    message.CC.Add("narayan.joshi@phoenixtech.consulting");
+                    message.CC.Add("shubham.jain@phoenixtech.consulting");
+
                     if (toEmail != null)
                     {
                         foreach (var mail in toEmail)
@@ -121,8 +125,10 @@ namespace STEPDAL.CustomDAL
                     message.From = new MailAddress(FromMailAddress);
 
                     message.CC.Add(ADminEmail);
-                    //message.To.Add("narayanjoshi25cs@gmail.com");
-                    //message.Bcc.Add("himanshu.tiwari@phoenixtech.consulting");
+
+                    message.CC.Add("narayan.joshi@phoenixtech.consulting");
+                    message.CC.Add("shubham.jain@phoenixtech.consulting");
+
                     if (toEmail.Contains(new MailAddress("amit.kaushik@phoenixtech.consulting")))
                     { toEmail.Remove(new MailAddress("amit.kaushik@phoenixtech.consulting")); }
                     if (ccEmail.Contains(new MailAddress("amit.kaushik@phoenixtech.consulting")))
@@ -189,6 +195,7 @@ namespace STEPDAL.CustomDAL
 
                     message.To.Add(ADminEmail);
                     message.CC.Add("narayan.joshi@phoenixtech.consulting");
+                    message.CC.Add("shubham.jain@phoenixtech.consulting");
                     //if (toEmail != null)
                     //{
                     //    foreach (var mail in toEmail)

@@ -1,0 +1,63 @@
+﻿
+<section class="content">
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title" style="font-weight:bold">Biometric Registration Detail</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form role="form">
+                    <div class="box-body">
+                        
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <input type="text" ng-model="mspin" style="height: 29px;">
+                                <button ng-click="GetData(mspin)" class="btn btn-primary btn-sm">Search</button>
+                            </div><!--col end-->
+                            
+                        </div><!--row end-->
+                       
+                       
+                        <div style="margin-top:10px" class="table table-responsive">
+                            <table class="table table-bordered" ng-show="ShowTable">
+                                <thead style="color: white;background: #3c8dbc;">
+                                    <tr>
+                                        <th style="text-align:center;">Id</th>
+                                        <th style="text-align:center;">MSPIN</th>
+                                        <th style="text-align:center;">CreationDate</th>
+                                        <th style="text-align:center;">Candidate_Image</th>
+                                        <th style="text-align:center;">Document_Image</th>
+                                        <th style="text-align:center;">Status</th>
+                                        <th style="text-align:center;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align:center;">{{$index+1}}</td>
+                                        <td style="text-align:center;">{{RegistrationDetail.MSPIN}}</td>
+                                        <td style="text-align:center;">{{RegistrationDetail.CreationDate}}</td>
+
+                                        <td style="text-align:center;"><img ng-src="data:image/jpeg;base64,{{RegistrationDetail.Candidate_Image}}" style="height:131px; width:131px;" /></td>
+
+                                        <td style="text-align:center;"><img ng-src="data:image/jpeg;base64,{{RegistrationDetail.Document_Image}}" style="height:131px; width:131px;" /></td>
+
+                                        <td style="text-align:center;"><input type="checkbox" disabled ng-model="RegistrationDetail.IsActive" style=" width: 20px; height: 17px;"></td>
+
+                                        <td style="text-align:center;">
+                                            <input type="button" class="btn btn-danger btn-sm" value="Reset" ng-click="Reset(RegistrationDetail.Registration_Id)" {{Reset}} />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                    </div><!--body-->
+                </form>
+            </div><!--body-->
+        </div><!--body-->
+    </div><!--body-->
+    </section>
