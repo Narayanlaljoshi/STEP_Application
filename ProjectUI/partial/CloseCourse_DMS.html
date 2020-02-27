@@ -1,10 +1,31 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+﻿
+<section class="content-header">
+    <h1>
+        Marks Report-DMS
+        <!--<small>Preview of UI elements</small>-->
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Course Closure - DMS</li>
+    </ol>
+</section>
 
-</body>
-</html>
+<section class="content">
+    <div class="box">
+        <div class="box-body">
+            <div class="row">
+                <div class="col-sm-3">
+                    <label>End Date* </label><!--{{MaxDate.toString()}}-->
+                    <div class="datepicker" id="Div1" date-format="MMM dd, yyyy" date-min-limit="{{MaxDate.toString()}}" button-prev="<i class=&quot;fa fa-arrow-circle-left&quot;></i>" button-next="<i class=&quot;fa fa-arrow-circle-right&quot;></i>">
+                        <input ng-required="true" class="form-control" contenteditable="false" name="ExpectedStartDate" ng-model="ReportInput.EndDate" type="text" />
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <button class="btn btn-primary btn-sm" ng-click="UploadAttendance()" style="margin-top: 24px;">Upload Attendance</button>
+                    <button class="btn btn-success btn-sm" ng-click="UploadScore()" style="margin-top: 24px;">Upload Score</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

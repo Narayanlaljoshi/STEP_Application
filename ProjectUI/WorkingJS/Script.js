@@ -1,6 +1,7 @@
 ﻿var app = angular.module('homeApp', ['ui.bootstrap', 'ngLoadingSpinner', 'angularUtils.directives.dirPagination',
     'ngAnimate', 'ngRoute', 'chart.js', 'angular.morris-chart', 'ZoneModule', 'RtcMasterModule', 'RegionModule', 'CityModule', 'ChannelModule', 'DealerGroupModule', 'DealerOutletModule', '720kb.datepicker',
-    'ProgramTestCalenderModule', 'ProgramTestCalender_EvaluationModule', 'QuestionBankModule', 'NominationModule', 'LanguageMasterModule', 'ProgramMasterModule', 'ReportScoreSheetModule', 'ReportAttendanceSheetModule', 'FacultyAgencyLevelModule', 'StudentModule', 'AttendanceReportModule', 'ManageSessionModule', 'MarksReportModule', 'ShowStudentMarksModule', 'ManageNominationModule', 'ChangePasswordModule', 'MarksReportAsPerDMSModule', 'AttendanceReportDMSModule', 'ManageTestModule', 'ManageAttandenceModule', 'PracticalModule', 'EvaluationModule', 'SSTCModule', 'SSTCMarksModule', 'SSTCCourseClosureModule', 'UploadError', 'FeedbackModule', 'TestResetModule', 'VendorMasterModule', 'VendorTrainierMasterModule', 'VendorManageSessionModule', 'AttendanceReport_VendorModule', 'MarksReport_VendorModule','RegistrationInfoModule']);
+    'ProgramTestCalenderModule', 'ProgramTestCalender_EvaluationModule', 'QuestionBankModule', 'NominationModule', 'LanguageMasterModule', 'ProgramMasterModule', 'ReportScoreSheetModule', 'ReportAttendanceSheetModule', 'FacultyAgencyLevelModule', 'StudentModule', 'AttendanceReportModule', 'ManageSessionModule', 'MarksReportModule', 'ShowStudentMarksModule', 'ManageNominationModule', 'ChangePasswordModule', 'MarksReportAsPerDMSModule', 'AttendanceReportDMSModule', 'ManageTestModule', 'ManageAttandenceModule', 'PracticalModule', 'EvaluationModule', 'SSTCModule', 'SSTCMarksModule', 'SSTCCourseClosureModule', 'UploadError', 'FeedbackModule', 'TestResetModule', 'VendorMasterModule', 'VendorTrainierMasterModule', 'VendorManageSessionModule', 'AttendanceReport_VendorModule', 'MarksReport_VendorModule', 'RegistrationInfoModule',
+'CloseCourse_DMSModule']);
 
 app.factory('httpRequestInterceptor', function () {
     return {
@@ -302,6 +303,9 @@ app.config(function ($routeProvider, $httpProvider, $locationProvider) {
         }).when('/RegistrationInfo', {
             templateUrl: 'partial/RegistrationInfo.html',
             controller: 'RegistrationInfoController'
+        }).when('/CC_DMS', {
+            templateUrl: 'partial/CloseCourse_DMS.html',
+            controller: 'CloseCourse_DMSController'
         })
     .otherwise({
         redirectTo: "/"

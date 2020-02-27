@@ -95,7 +95,7 @@ namespace ProjectUI.Controllers
         }
         /*Attendance report as per DMS*/
         [HttpGet]
-        public void PushAttendanceReport(DateTime EndDate)
+        public string PushAttendanceReport(DateTime EndDate)
         {
             string MailBody = string.Empty;
             string ADminEmail = System.Configuration.ConfigurationManager.AppSettings["ToMail"];
@@ -145,25 +145,25 @@ namespace ProjectUI.Controllers
                 rowIndex++;
             }
             Automation.Save_Report_ATNDC_DMS(Dt);
-            //LogService(DateTime.Now.ToString() + " ATNDC Bulk cpy done");
+            LogService(DateTime.Now.ToString() + " ATNDC Bulk cpy done");
             ServiceReference1.STEP_NominationSoapClient Client = new STEP_NominationSoapClient();
             //Client.InnerChannel.OperationTimeout =new TimeSpan(0,10,15000);
             Client.Endpoint.Binding.SendTimeout = new TimeSpan(0, 0, 10, 60);
             try
             {
                 DataTable Return_Dt = Client.UploadAttendance(Dt);
-                //LogService(DateTime.Now.ToString() + " Bulk cpy done");
+                LogService(DateTime.Now.ToString() + " Bulk cpy done");
                 Automation.Update_Log_Table(Obj.EndDate,"ATNDC",Dt.Rows.Count, Return_Dt.Rows.Count,null);
                 if (Return_Dt.Rows.Count != 0)
                 {
                     MailBody = GenerateHtml(Return_Dt, "Error While Uploading The attendance Sheet. Number of error records - "+ Return_Dt.Rows.Count, false, SessionIDs);
                     Email.sendEmail("", toMail, ccMail, "STEP | Attendance Sheet Push Failed | " + Obj.EndDate.Value.ToString("dd-MMM-yyyy"), MailBody);
-                    return;
+                    return "Error While Uploading The attendance Sheet. Number of error records - " + Return_Dt.Rows.Count;
                 }
                 else
                 {
                     DataTable Return_DtForBatchJob = Client.RunBatchJob_Attendance(Obj.EndDate.Value.ToString("dd-MMM-yyyy"));
-                    //LogService(DateTime.Now.ToString() + " ATNDC Batch Job Done");
+                    LogService(DateTime.Now.ToString() + " ATNDC Batch Job Done");
                     //Return_DtForBatchJob = Return_DtForBatchJob.Rows.Cast<DataRow>().Where(row => !row.ItemArray.All(field => field is DBNull ||string.IsNullOrWhiteSpace(field as string))).CopyToDataTable();
                     Automation.Update_Log_Table(Obj.EndDate, "ATNDC", Dt.Rows.Count, Return_DtForBatchJob.Rows.Count,"Batch Job");
                     if (Return_DtForBatchJob.Rows.Count != 0)
@@ -171,13 +171,14 @@ namespace ProjectUI.Controllers
                         MailBody = GenerateHtml(Return_DtForBatchJob, "Error while running the batch job SP after uploading attendance sheet. Number of error records - " + Return_DtForBatchJob.Rows.Count, false, SessionIDs);
                         Email.sendEmail("", toMail, ccMail, "STEP | Attendance Sheet Push Failed | " + Obj.EndDate.Value.ToString("dd-MMM-yyyy"), MailBody);
                         //PushMarksReportAsperDMS();
+                        return "Error while running the batch job SP after uploading attendance sheet. Number of error records - " + Return_DtForBatchJob.Rows.Count;
                     }
                     else
                     {
                         MailBody = GenerateHtml(null, "Attendance Sheet Uploaded Successfully", true, SessionIDs);
                         Email.sendEmail("", toMail, ccMail, "STEP | Attendance Sheet Push Successful | " + Obj.EndDate.Value.ToString("dd-MMM-yyyy"), MailBody);
                         //PushMarksReportAsperDMS();
-                        return;
+                        return "Attendance Sheet Uploaded Successfully";
                     }
                 }
             }
@@ -253,14 +254,14 @@ namespace ProjectUI.Controllers
             }
 
             Automation.Save_Report_SCORE_DMS(Dt);
-            //LogService(DateTime.Now.ToString() + " Score Bulk Cpy Done");
+            LogService(DateTime.Now.ToString() + " Score Bulk Cpy Done");
 
             ServiceReference1.STEP_NominationSoapClient Client = new STEP_NominationSoapClient();
             Client.Endpoint.Binding.SendTimeout = new TimeSpan(0, 0, 10, 60);
             try
             {
                 DataTable Return_Dt = Client.UploadScore(Dt);
-                //LogService(DateTime.Now.ToString() + " Score Data Uploaded");
+                LogService(DateTime.Now.ToString() + " Score Data Uploaded");
                 Automation.Update_Log_Table(Obj.EndDate, "SCORE", Dt.Rows.Count, Return_Dt.Rows.Count,null);
                 if (Return_Dt.Rows.Count != 0)
                 {
@@ -271,7 +272,7 @@ namespace ProjectUI.Controllers
                 else
                 {
                     DataTable Return_DtForBatchJob = Client.RunBatchJob_Marks();
-                    //LogService(DateTime.Now.ToString() + " Score Batch Job Done");
+                    LogService(DateTime.Now.ToString() + " Score Batch Job Done");
                     Automation.Update_Log_Table(Obj.EndDate, "SCORE", Dt.Rows.Count, Return_DtForBatchJob.Rows.Count,"Batch Job");
                     if (Return_DtForBatchJob.Rows.Count != 0)
                     {
