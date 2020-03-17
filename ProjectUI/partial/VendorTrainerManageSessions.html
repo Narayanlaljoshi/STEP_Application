@@ -12,15 +12,21 @@
                     <div class="box-header">
                         <div class="row">
                             <div class="col-lg-2">
-                                <select class="form-control" ng-options="pt.Month as pt.Name for pt in MonthList" ng-model="Month">
+                                <b>Month:</b>
+                                <select class="form-control" ng-options="pt.Month as pt.Name for pt in MonthList" ng-model="Filter.Month"></select>
+                            </div>
+                            <div class="col-lg-3">
+                                <b>Program:</b>
+                                <select class="form-control" ng-options="pt.ProgramCode as pt.ProgramName for pt in ProgramList" ng-model="Filter.ProgramCode">
+                                    <option selected ng-value="null">All</option>
                                 </select>
                             </div>
                             <div class="col-lg-1">
-                                <button class="btn btn-primary" ng-click="GetSessionList_StepManager()">GO</button>
+                                <button class="btn btn-primary" ng-click="GetSessionList_StepManager()" style="margin-top: 20px;">GO</button>
                             </div>
-                            <div class="col-lg-6"></div>
+                            <div class="col-lg-3"></div>
                             <div class="col-lg-3">
-                                <input type="text" class="form-control" style="border-radius: 20px;" placeholder="Search..." ng-model="SearchText"/>
+                                <input type="text" class="form-control" style="border-radius: 20px;margin-top: 20px;" placeholder="Search..." ng-model="SearchText" />
                             </div>
                         </div>
                     </div>

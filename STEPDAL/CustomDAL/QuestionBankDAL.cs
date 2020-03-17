@@ -829,7 +829,7 @@ namespace STEPDAL.CustomDAL
                     LanguageMaster_Id = x.LanguageMaster_Id,
                     ProgramId = x.ProgramId
                 }).ToList();
-                return objList.Where(x => x.Language != "English").ToList();
+                return objList;//.Where(x => x.Language != "English").ToList();
             }
         }
 

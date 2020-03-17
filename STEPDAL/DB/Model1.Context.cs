@@ -1453,31 +1453,6 @@ namespace STEPDAL.DB
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdadeUploadErrors", columnNameParameter, valueParameter, creationDateParameter, isActiveParameter);
         }
     
-        public virtual int sp_Update_InsertIntoTblAttendance_SSTC_V2(string mSPIN, Nullable<System.DateTime> dateTime, string sessionId, Nullable<int> day, Nullable<int> createdBy)
-        {
-            var mSPINParameter = mSPIN != null ?
-                new ObjectParameter("MSPIN", mSPIN) :
-                new ObjectParameter("MSPIN", typeof(string));
-    
-            var dateTimeParameter = dateTime.HasValue ?
-                new ObjectParameter("DateTime", dateTime) :
-                new ObjectParameter("DateTime", typeof(System.DateTime));
-    
-            var sessionIdParameter = sessionId != null ?
-                new ObjectParameter("SessionId", sessionId) :
-                new ObjectParameter("SessionId", typeof(string));
-    
-            var dayParameter = day.HasValue ?
-                new ObjectParameter("Day", day) :
-                new ObjectParameter("Day", typeof(int));
-    
-            var createdByParameter = createdBy.HasValue ?
-                new ObjectParameter("CreatedBy", createdBy) :
-                new ObjectParameter("CreatedBy", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Update_InsertIntoTblAttendance_SSTC_V2", mSPINParameter, dateTimeParameter, sessionIdParameter, dayParameter, createdByParameter);
-        }
-    
         public virtual ObjectResult<SP_CheckMSPIN_Registered_NotRegistered_Result> SP_CheckMSPIN_Registered_NotRegistered(string agencyCode, string mSPIN)
         {
             var agencyCodeParameter = agencyCode != null ?
@@ -2444,23 +2419,6 @@ namespace STEPDAL.DB
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetTrainerDetails_TblCalendar_Result>("sp_GetTrainerDetails_TblCalendar", cALNDR_IDParameter);
         }
     
-        public virtual ObjectResult<sp_GetSessionListForStepAgencyManager_Result> sp_GetSessionListForStepAgencyManager(Nullable<int> agency_Id, Nullable<int> vendor_Id, Nullable<int> month)
-        {
-            var agency_IdParameter = agency_Id.HasValue ?
-                new ObjectParameter("Agency_Id", agency_Id) :
-                new ObjectParameter("Agency_Id", typeof(int));
-    
-            var vendor_IdParameter = vendor_Id.HasValue ?
-                new ObjectParameter("Vendor_Id", vendor_Id) :
-                new ObjectParameter("Vendor_Id", typeof(int));
-    
-            var monthParameter = month.HasValue ?
-                new ObjectParameter("month", month) :
-                new ObjectParameter("month", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetSessionListForStepAgencyManager_Result>("sp_GetSessionListForStepAgencyManager", agency_IdParameter, vendor_IdParameter, monthParameter);
-        }
-    
         public virtual ObjectResult<sp_GetBiometricReport_Result> sp_GetBiometricReport()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetBiometricReport_Result>("sp_GetBiometricReport");
@@ -2537,6 +2495,56 @@ namespace STEPDAL.DB
                 new ObjectParameter("IsActive", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateRegistrationInfo", registration_IdParameter, isActiveParameter);
+        }
+    
+        public virtual int sp_Update_InsertIntoTblAttendance_SSTC_V2(string mSPIN, Nullable<System.DateTime> dateTime, string sessionId, Nullable<bool> isPresent, Nullable<int> day, Nullable<int> createdBy)
+        {
+            var mSPINParameter = mSPIN != null ?
+                new ObjectParameter("MSPIN", mSPIN) :
+                new ObjectParameter("MSPIN", typeof(string));
+    
+            var dateTimeParameter = dateTime.HasValue ?
+                new ObjectParameter("DateTime", dateTime) :
+                new ObjectParameter("DateTime", typeof(System.DateTime));
+    
+            var sessionIdParameter = sessionId != null ?
+                new ObjectParameter("SessionId", sessionId) :
+                new ObjectParameter("SessionId", typeof(string));
+    
+            var isPresentParameter = isPresent.HasValue ?
+                new ObjectParameter("IsPresent", isPresent) :
+                new ObjectParameter("IsPresent", typeof(bool));
+    
+            var dayParameter = day.HasValue ?
+                new ObjectParameter("Day", day) :
+                new ObjectParameter("Day", typeof(int));
+    
+            var createdByParameter = createdBy.HasValue ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Update_InsertIntoTblAttendance_SSTC_V2", mSPINParameter, dateTimeParameter, sessionIdParameter, isPresentParameter, dayParameter, createdByParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetSessionListForStepAgencyManager_Result> sp_GetSessionListForStepAgencyManager(Nullable<int> agency_Id, Nullable<int> vendor_Id, Nullable<int> month, string programCode)
+        {
+            var agency_IdParameter = agency_Id.HasValue ?
+                new ObjectParameter("Agency_Id", agency_Id) :
+                new ObjectParameter("Agency_Id", typeof(int));
+    
+            var vendor_IdParameter = vendor_Id.HasValue ?
+                new ObjectParameter("Vendor_Id", vendor_Id) :
+                new ObjectParameter("Vendor_Id", typeof(int));
+    
+            var monthParameter = month.HasValue ?
+                new ObjectParameter("month", month) :
+                new ObjectParameter("month", typeof(int));
+    
+            var programCodeParameter = programCode != null ?
+                new ObjectParameter("ProgramCode", programCode) :
+                new ObjectParameter("ProgramCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetSessionListForStepAgencyManager_Result>("sp_GetSessionListForStepAgencyManager", agency_IdParameter, vendor_IdParameter, monthParameter, programCodeParameter);
         }
     }
 }

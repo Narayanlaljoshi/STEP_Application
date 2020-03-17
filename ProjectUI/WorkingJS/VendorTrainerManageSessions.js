@@ -10,8 +10,8 @@ app.service('VendorManageSessionService', function ($http, $location) {
     else {
         this.AppUrl = "/api/";
     }
-    this.GetSessionList_StepManager = function (UserName, Month) {
-        return $http.get(this.AppUrl + '/Vendor/GetSessionList_StepManager?UserName=' + UserName + '&Month=' + Month);
+    this.GetSessionList_StepManager = function (Filter) {
+        return $http.post(this.AppUrl + '/Vendor/GetSessionList_StepManager/', Filter);
     };
     this.GetActiveTrainerForVendor = function (UserName) {
         //       console.log("yahiooooooooooo");
@@ -19,6 +19,9 @@ app.service('VendorManageSessionService', function ($http, $location) {
     };
     this.UpdateFaculty = function (Obj) {
         return $http.post(this.AppUrl + '/Vendor/UpdateFaculty' ,Obj);
+    };
+    this.GetProgramList = function (UserName, Month) {
+        return $http.get(this.AppUrl + '/ProgramMaster/GetProgram', {});
     };
 });
 
@@ -47,15 +50,25 @@ app.controller('VendorManageSessionController', function ($scope, $http, $locati
     var date = new Date('01-Jan-2019');
     var year = date.getFullYear();
     var month = new Date().getMonth();
+    $scope.Filter = {
+        Month: month + 1,
+        ProgramCode: null,
+        UserName: $rootScope.session.UserName
+    };
     $scope.Month = month + 1;
-
+    $scope.ProgramList = [];
     $scope.init = function () {
         VendorManageSessionService.GetActiveTrainerForVendor($rootScope.session.UserName).then(function success(data) {
             $scope.TrainerList = data.data;
             console.log("Get Region List", data);
-            return VendorManageSessionService.GetSessionList_StepManager($rootScope.session.UserName, $scope.Month);
+            return VendorManageSessionService.GetSessionList_StepManager($scope.Filter);
         }).then(function success(RetData) {
             $scope.SessionList = RetData.data;
+            return VendorManageSessionService.GetProgramList();
+        }).then(function (successPrgData) {
+            $scope.ProgramList = successPrgData.data;
+            var Obj = { ProgramCode: null, ProgramName: 'All' };
+            $scope.ProgramList.splice(0, 0, Obj);
         }, function error(errorData) {
             console.log("Error in loading data from EDB", errorData);
         });

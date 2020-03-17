@@ -19,5 +19,6 @@ namespace STEPDAL.DB
         public Nullable<System.DateTime> Date { get; set; }
         public string Weekday { get; set; }
         public string DayDate { get; set; }
+        public Nullable<int> Max_Marks { get; set; }
     }
 }

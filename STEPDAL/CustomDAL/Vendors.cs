@@ -119,10 +119,20 @@ namespace STEPDAL.CustomDAL
             {
                 try
                 {
+                    int index = 0;
                     foreach (var Obj in List)
                     {
+                        index++;
+                        string Code = "";
                         var vandorDtl = Context.TblVendorMasters.Where(x => x.ManagerID == Obj.VendorName && x.IsActive == true).FirstOrDefault();
                         Obj.Vendor_Id = vandorDtl != null ? vandorDtl.Id: Obj.Vendor_Id;
+                        if (Obj.TrainerCode == null) {
+                            char[] whitespace = new char[] { ' ', '\t' };
+                            string[] ssizes = vandorDtl.VendorName.Split(whitespace);
+                            foreach (string s in ssizes) { Code = Code+ s.Substring(0, 1).ToUpper(); }
+                            Code = Code + "0" + index;
+                            Obj.TrainerCode = Code;
+                        }
                         int status = Context.sp_Insert_Update_TblVendorTrainerMaster(Obj.Id, Obj.Vendor_Id, Obj.TrainerCode, Obj.TrainerName, Obj.TrainerMobile, Obj.TrainerEmail,Obj.IsActive, Obj.CreatedBy);
 
                         if (Obj.Id==0 && status>0) {
@@ -151,14 +161,14 @@ namespace STEPDAL.CustomDAL
             }
         }
 
-        public static IList<SessionListForStepAgencyManager> GetSessionList_StepManager(string UserName, int Month)
+        public static IList<SessionListForStepAgencyManager> GetSessionList_StepManager(Filter_STEP_Agency Obj)
         {
             using (var Context = new CEIDBEntities())
             {
-                var UserDetail = Context.TblUsers.Where(x => x.UserName == UserName && x.IsActive == true).FirstOrDefault();
-                var VendorDtl = Context.TblVendorMasters.Where(x => x.ManagerID == UserName && x.IsActive == true).FirstOrDefault();
+                var UserDetail = Context.TblUsers.Where(x => x.UserName == Obj.UserName && x.IsActive == true).FirstOrDefault();
+                var VendorDtl = Context.TblVendorMasters.Where(x => x.ManagerID == Obj.UserName && x.IsActive == true).FirstOrDefault();
                 IList<SessionListForStepAgencyManager> objlist = null;
-                var ReqData = Context.sp_GetSessionListForStepAgencyManager(UserDetail.Agency_Id, VendorDtl.Id,Month).ToList();
+                var ReqData = Context.sp_GetSessionListForStepAgencyManager(UserDetail.Agency_Id, VendorDtl.Id, Obj.Month,Obj.ProgramCode).ToList();
                 if (ReqData.Count != 0)
                 {
                     objlist = ReqData.Select(x => new SessionListForStepAgencyManager()

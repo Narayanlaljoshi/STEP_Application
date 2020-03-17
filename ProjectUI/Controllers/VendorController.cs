@@ -34,10 +34,10 @@ namespace ProjectUI.Controllers
             return Vendors.UpdateVendorTrainerList(List);
         }
 
-        [HttpGet]
-        public IList<SessionListForStepAgencyManager> GetSessionList_StepManager(string UserName,int Month)
+        [HttpPost]
+        public IList<SessionListForStepAgencyManager> GetSessionList_StepManager(Filter_STEP_Agency Obj)
         {
-            return Vendors.GetSessionList_StepManager(UserName, Month);
+            return Vendors.GetSessionList_StepManager(Obj);
         }
 
         [HttpGet]

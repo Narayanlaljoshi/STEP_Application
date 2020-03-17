@@ -85,7 +85,7 @@ namespace STEPDAL.CustomDAL
                 {
                     if (row.IsChecked != null)
                     {
-                        int Status = Context.sp_Update_InsertIntoTblAttendance_SSTC_V2(row.MSPIN, Obj.Date, row.SessionID, Obj.Day, Obj.CreatedBy);
+                        int Status = Context.sp_Update_InsertIntoTblAttendance_SSTC_V2(row.MSPIN, Obj.Date, row.SessionID,row.IsChecked ,Obj.Day, Obj.CreatedBy);
                         if (Status < 1)
                         {
                             Msg = Msg + "Error";

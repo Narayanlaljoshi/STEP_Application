@@ -725,6 +725,7 @@ namespace STEPDAL.CustomDAL
                                     ProgramCode = DayList[0].ProgramCode,
                                     StartDate = DayList[0].StartDate,
                                     TrainerCode = item.TrainerCode,
+                                    Venue = DayList[0].Venue,
                                     DayWiseScore = DayList.Select(x => new DayWiseScore_Vendor
                                     {
                                         DayCount = x.DayCount,
@@ -740,7 +741,7 @@ namespace STEPDAL.CustomDAL
                     {
                         if (Row.DayWiseScore.Count < 15)
                         {
-                            for (int i = Row.DayWiseScore.Count + 1; i <= 15; i++)
+                            for (int i = Row.DayWiseScore.Count + 1; i <= 10; i++)
                             {
                                 Row.DayWiseScore.Add(new DayWiseScore_Vendor
                                 {
@@ -788,6 +789,7 @@ namespace STEPDAL.CustomDAL
                                 ProgramCode = DayList[0].ProgramCode,
                                 StartDate = DayList[0].StartDate,
                                 TrainerCode = item.TrainerCode,
+                                Venue= DayList[0].Venue,
                                 DayWiseScore = DayList.Select(x => new DayWiseScore_Vendor
                                 {
                                     DayCount = x.DayCount,
@@ -831,9 +833,9 @@ namespace STEPDAL.CustomDAL
                     }
                     foreach (var Row in objList)
                     {
-                        if (Row.DayWiseScore.Count < 15)
+                        if (Row.DayWiseScore.Count < 10)
                         {
-                            for (int i = Row.DayWiseScore.Count + 1; i <= 15; i++)
+                            for (int i = Row.DayWiseScore.Count + 1; i <= 10; i++)
                             {
                                 Row.DayWiseScore.Add(new DayWiseScore_Vendor
                                 {

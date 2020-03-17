@@ -30,6 +30,11 @@ namespace ProjectBLL.CustomModel
     {
         public string SessionID { get; set; }
         public string Mspin  { get; set; }
-
+    }
+    public class Filter_STEP_Agency
+    {
+        public string UserName { get; set; }
+        public int Month { get; set; }
+        public string ProgramCode { get; set; }
     }
 }

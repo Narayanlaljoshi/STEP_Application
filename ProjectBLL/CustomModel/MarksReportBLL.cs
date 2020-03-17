@@ -111,6 +111,7 @@ namespace ProjectBLL.CustomModel
         public string AgencyName { get; set; }
         public string TrainerCode { get; set; }
         public List<DayWiseScore_Vendor> DayWiseScore { get; set; }
+        public string Venue { get; set; }
     }
     public class DayWiseScore_Vendor
     {

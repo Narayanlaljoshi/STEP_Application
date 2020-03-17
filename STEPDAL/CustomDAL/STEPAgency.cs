@@ -146,20 +146,30 @@ namespace STEPDAL.CustomDAL
                 if (MSPINList_Mr.Count() == MSPINList_AT.Count())
                 {
                     int Duration = MRKS_DTL[0].Duration.Value;
+                    int Total_CNDT_Count = 0;
                     foreach (var MSPIN in MSPINList_Mr)
                     {
+                        int ATNDC_Count = 0;
+                        int MRKS_Count = 0;
                         for (int i = 1; i <= Duration; i++)
                         {
                             var CHECK_ATNDC = ATDNC_DTL.Where(x => x.MSPIN == MSPIN && x.DayCount == i).FirstOrDefault();
                             var CHECK_MRKS = MRKS_DTL.Where(x => x.MSPIN == MSPIN && x.DayCount == i).FirstOrDefault();
                             if (CHECK_ATNDC!=null && CHECK_MRKS!=null)
                             {
-                                if (CHECK_ATNDC.P_A == "A" && CHECK_MRKS.Marks == null) { continue; }
+                                if (CHECK_ATNDC.P_A == "A" && CHECK_MRKS.Marks == null) { ATNDC_Count++; MRKS_Count++; continue; }
                                 if (CHECK_ATNDC.P_A != "A" && CHECK_MRKS.Marks != null) { continue; }
-                                if (CHECK_ATNDC.P_A != "A" && CHECK_MRKS.Marks == null) { IsMarksSubmitted = false; }
-                                if (CHECK_ATNDC.P_A == "A" && CHECK_MRKS.Marks != null) { IsATNDCSubmitted=false; }
+                                if (CHECK_ATNDC.P_A != "A" && CHECK_MRKS.Marks == null) { MRKS_Count++; IsMarksSubmitted = false; }
+                                if (CHECK_ATNDC.P_A == "A" && CHECK_MRKS.Marks != null) { ATNDC_Count++; IsATNDCSubmitted =false; }
                             }
                         }
+                        if (ATNDC_Count == Duration || MRKS_Count == Duration) {
+                            Total_CNDT_Count++;
+                        }
+                    }
+                    if (Total_CNDT_Count == MSPINList_Mr.Count() || Total_CNDT_Count == MSPINList_AT.Count()) {
+                        IsATNDCSubmitted = false;
+                        IsMarksSubmitted = false;
                     }
                     Obj.IsAttendanceSubmitted = IsATNDCSubmitted;
                     Obj.IsMarksSubmitted = IsMarksSubmitted;
@@ -330,8 +340,8 @@ namespace STEPDAL.CustomDAL
         public static string UpdateAttendanceForStepAgency(List<CandidateList_StepAgency_Attendance> Obj)
         {
             string Msg = string.Empty;
-            if (Obj.Count != 0)
-                Obj = Obj.Where(x => x.IsChecked == true).ToList();
+            //if (Obj.Count != 0)
+            //    Obj = Obj.Where(x => x.IsChecked == true).ToList();
 
             using (var Context = new CEIDBEntities())
             {
@@ -339,7 +349,7 @@ namespace STEPDAL.CustomDAL
                 {
                     if (row.IsChecked != null)
                     {
-                        int Status = Context.sp_Update_InsertIntoTblAttendance_SSTC_V2(row.MSPIN, row.Date, row.SessionID, row.Day, row.CreatedBy);
+                        int Status = Context.sp_Update_InsertIntoTblAttendance_SSTC_V2(row.MSPIN, row.Date, row.SessionID,row.IsChecked, row.Day, row.CreatedBy);
                         if (Status < 1)
                         {
                             Msg = Msg + "Error";
@@ -465,7 +475,6 @@ namespace STEPDAL.CustomDAL
             {
                 List<DaySequenceSSTC> List = null;
 
-
                 var ReqData = Context.sp_GetDaySequence_STEPAgency(Obj.RegionVenues[0].SessionID,Obj.Type).ToList();
 
                 if (ReqData.Count != 0)
@@ -477,7 +486,8 @@ namespace STEPDAL.CustomDAL
                         SessionId = x.SessionId,
                         Date = x.Date,
                         Weekday = x.Weekday,
-                        DayDate = x.DayDate
+                        DayDate = x.DayDate,
+                        Max_Marks=x.Max_Marks
                     }).ToList();
                 }
                 return List;

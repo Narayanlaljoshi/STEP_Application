@@ -80,7 +80,7 @@ app.controller('VendorTrainierMasterController', function ($scope, $http, $locat
         $scope.IsValid = true;
 
         angular.forEach($scope.TrainerList, function (v1, key) {
-            v1.TrainerCode = $rootScope.session.UserName;
+            v1.VendorName = $rootScope.session.UserName;
             $scope.Count = 0;
             angular.forEach($scope.TrainerList, function (v2, key) {
                 if (v1.TrainerCode === v2.TrainerCode) {

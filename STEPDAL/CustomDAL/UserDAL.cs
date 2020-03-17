@@ -251,7 +251,7 @@ namespace STEPDAL.CustomDAL
                     string ccEmail = "";
                     if (toEmail != null)
                     {
-                        string str = Email.sendEmailReport("", toEmail, ccEmail, subject, Body);
+                        string str = Email.sendEmailForPasswordReset( toEmail, subject, Body);
                         if (str.Equals("Success: Notification sent"))
                         {
                             ireturn = 1;

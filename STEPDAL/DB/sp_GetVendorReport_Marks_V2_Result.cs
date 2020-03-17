@@ -30,5 +30,6 @@ namespace STEPDAL.DB
         public Nullable<int> EvaluationTypeId { get; set; }
         public Nullable<int> AgenyType { get; set; }
         public string TypeOfTest { get; set; }
+        public string Venue { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace STEPDAL.DB
     
     public partial class sp_GetVendorReport_Marks_Result
     {
-        public int Marks { get; set; }
+        public Nullable<int> Marks { get; set; }
         public string Co_id { get; set; }
         public string MSPIN { get; set; }
         public Nullable<int> Agency_Id { get; set; }
