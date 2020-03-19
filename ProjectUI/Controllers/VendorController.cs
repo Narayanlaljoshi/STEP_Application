@@ -40,10 +40,10 @@ namespace ProjectUI.Controllers
             return Vendors.GetSessionList_StepManager(Obj);
         }
 
-        [HttpGet]
-        public IList<ActiveTrainerForVendor> GetActiveTrainerForVendor(string UserName)
+        [HttpPost]
+        public IList<ActiveTrainerForVendor> GetActiveTrainerForVendor(ReportFilter_Vendor Obj)
         {
-            return Vendors.GetActiveTrainerForVendor(UserName);
+            return Vendors.GetActiveTrainerForVendor(Obj);
         }
 
         [HttpPost]

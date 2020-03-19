@@ -13,9 +13,9 @@ app.service('VendorManageSessionService', function ($http, $location) {
     this.GetSessionList_StepManager = function (Filter) {
         return $http.post(this.AppUrl + '/Vendor/GetSessionList_StepManager/', Filter);
     };
-    this.GetActiveTrainerForVendor = function (UserName) {
+    this.GetActiveTrainerForVendor = function (Obj) {
         //       console.log("yahiooooooooooo");
-        return $http.get(this.AppUrl + '/Vendor/GetActiveTrainerForVendor?UserName=' + UserName);
+        return $http.post(this.AppUrl + '/Vendor/GetActiveTrainerForVendor' ,Obj);
     };
     this.UpdateFaculty = function (Obj) {
         return $http.post(this.AppUrl + '/Vendor/UpdateFaculty' ,Obj);
@@ -50,15 +50,24 @@ app.controller('VendorManageSessionController', function ($scope, $http, $locati
     var date = new Date('01-Jan-2019');
     var year = date.getFullYear();
     var month = new Date().getMonth();
+
     $scope.Filter = {
         Month: month + 1,
         ProgramCode: null,
         UserName: $rootScope.session.UserName
     };
+    $scope.ReportInput = {
+        ProgramId: null,
+        Trainer_Id: null,
+        SessionID: null,
+        StartDate: null,
+        EndDate: null,
+        ManagerID: $rootScope.session.UserName
+    };
     $scope.Month = month + 1;
     $scope.ProgramList = [];
     $scope.init = function () {
-        VendorManageSessionService.GetActiveTrainerForVendor($rootScope.session.UserName).then(function success(data) {
+        VendorManageSessionService.GetActiveTrainerForVendor($scope.ReportInput).then(function success(data) {
             $scope.TrainerList = data.data;
             console.log("Get Region List", data);
             return VendorManageSessionService.GetSessionList_StepManager($scope.Filter);

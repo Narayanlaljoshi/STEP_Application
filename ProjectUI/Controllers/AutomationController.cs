@@ -76,6 +76,7 @@ namespace ProjectUI.Controllers
             {
                 ServiceReference1.STEP_NominationSoapClient Client = new STEP_NominationSoapClient();
                 DataTable CalendarFile = Client.GetCalendarFile(1, DateTime.Now);
+
                 Automation.SaveCalanderFile(CalendarFile);
             }
             catch (Exception Ex)
@@ -340,6 +341,12 @@ namespace ProjectUI.Controllers
             sw.WriteLine(string.Format(content, DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt")));
             sw.Flush();
             sw.Close();
+        }
+
+        /*GetSessionIdsPendingForClosure_StepAgency*/
+        [HttpGet]
+        public void BatchJob_StepAgencyForPendingCourses() {
+            Vendors.GetSessionIdsPendingForClosure_StepAgency();
         }
     }
 }

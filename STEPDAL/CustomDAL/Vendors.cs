@@ -191,14 +191,14 @@ namespace STEPDAL.CustomDAL
             }
         }
 
-        public static IList<ActiveTrainerForVendor> GetActiveTrainerForVendor(string UserName)
+        public static IList<ActiveTrainerForVendor> GetActiveTrainerForVendor(ReportFilter_Vendor Obj)
         {
             using (var Context = new CEIDBEntities())
             {
                 //var UserDetail = Context.TblUsers.Where(x => x.UserName == UserName && x.IsActive == true).FirstOrDefault();
-                var VendorDtl = Context.TblVendorMasters.Where(x => x.ManagerID == UserName && x.IsActive == true).FirstOrDefault();
+                var VendorDtl = Context.TblVendorMasters.Where(x => x.ManagerID == Obj.ManagerID && x.IsActive == true).FirstOrDefault();
                 IList<ActiveTrainerForVendor> objlist = null;
-                var ReqData = Context.sp_GetActiveTrainerForVendor(VendorDtl.Id).ToList();
+                var ReqData = Context.sp_GetActiveTrainerForVendor( VendorDtl.Id).ToList();
                 if (ReqData.Count != 0)
                 {
                     objlist = ReqData.Select(x => new ActiveTrainerForVendor()
@@ -461,6 +461,28 @@ namespace STEPDAL.CustomDAL
             {
                 return ex.ToString();
             }
+        }
+
+        public static void GetSessionIdsPendingForClosure_StepAgency()
+        {
+            using (var Context = new CEIDBEntities()) {
+                var Data = Context.sp_GetSessionIdsPendingForClosure_STEPAgency().ToList();
+                foreach (var item in Data)
+                {
+                    string Body = GenerateEMailBody(item);
+                    Email.sendEmailForCourseClosure_STEPAgency(item.ManagerEmail,"STEP | Course Closure",Body);
+                }
+            }
+        }
+        private static string GenerateEMailBody(sp_GetSessionIdsPendingForClosure_STEPAgency_Result Obj)
+        {
+            string Body = "<html><body><h3>Dear "+Obj.ManagerName+ ",</h3><b>Greetings from Maruti Service !!</b>";
+            Body += "<p>It has been noted that the program " + Obj.ProgramName + " courses being conducted by you from " + Obj.StartDate.Value.ToString("dd-MMM-yyyy") + " to " + Obj.EndDate.Value.ToString("dd-MMM-yyyy");
+            Body += " at "+ Obj.Venue +" and session id "+Obj.SessionID+" </p>";
+            Body += "<p>Request you to kindly submit the course as soon as possible.</p>";
+            Body += "<p>Thank You.</p><p> Regards </p><p> Admin - Service Training Evaluation Portal </p>";
+            //Body += "<p>** This is an auto generated mail, please do not reply.</p></body></html>";
+            return Body;
         }
     }
 }

@@ -820,6 +820,11 @@
         <Function Name="sp_GetActiveTrainerForVendor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Vendor_Id" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_GetActiveTrainerListForFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="Vendor_Id" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_GetAgencyList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_GetAgencyWiseFaculty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Agency_Id" Type="int" Mode="In" />
@@ -948,6 +953,7 @@
         <Function Name="sp_GetProgramListForFilter_Vendor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StartDate" Type="date" Mode="In" />
           <Parameter Name="EndDate" Type="date" Mode="In" />
+          <Parameter Name="Vendor_Id" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_GetQuestionCountAgainstProgramTestCalender" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ProgramTestCalenderId" Type="int" Mode="In" />
@@ -986,6 +992,13 @@
           <Parameter Name="Agency_Id" Type="int" Mode="In" />
           <Parameter Name="FacultyCode" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="sp_GetSessionIdListForFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProgramId" Type="int" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="Vendor_Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetSessionIdsPendingForClosure_STEPAgency" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_GetSessionIDWiseStudentList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SessionID" Type="nvarchar(max)" Mode="In" />
         </Function>
@@ -2560,9 +2573,6 @@
           <FunctionImport Name="sp_GetVendorTrainerMaster" ReturnType="Collection(STEPDBBetaModel.sp_GetVendorTrainerMaster_Result)">
           <Parameter Name="User_Id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_GetActiveTrainerForVendor" ReturnType="Collection(STEPDBBetaModel.sp_GetActiveTrainerForVendor_Result)">
-          <Parameter Name="Vendor_Id" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="sp_GetStudentMarksReport_DistinctSession_MSPIN" ReturnType="Collection(STEPDBBetaModel.sp_GetStudentMarksReport_DistinctSession_MSPIN_Result)">
           <Parameter Name="EndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -2579,10 +2589,6 @@
             <Parameter Name="Program_Id" Mode="In" Type="Int32" />
             <Parameter Name="Trainer_Id" Mode="In" Type="Int32" />
             <Parameter Name="SessionID" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_GetProgramListForFilter_Vendor" ReturnType="Collection(STEPDBBetaModel.sp_GetProgramListForFilter_Vendor_Result)">
-            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
-            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="sp_GetDaySequence_STEPAgency" ReturnType="Collection(STEPDBBetaModel.sp_GetDaySequence_STEPAgency_Result)">
             <Parameter Name="SessionID" Mode="In" Type="String" />
@@ -2672,6 +2678,26 @@
             <Parameter Name="month" Mode="In" Type="Int32" />
             <Parameter Name="ProgramCode" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="sp_GetProgramListForFilter_Vendor" ReturnType="Collection(STEPDBBetaModel.sp_GetProgramListForFilter_Vendor_Result)">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Vendor_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetSessionIdListForFilter" ReturnType="Collection(STEPDBBetaModel.sp_GetSessionIdListForFilter_Result)">
+            <Parameter Name="ProgramId" Mode="In" Type="Int32" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Vendor_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetActiveTrainerForVendor" ReturnType="Collection(STEPDBBetaModel.sp_GetActiveTrainerForVendor_Result)">
+          <Parameter Name="Vendor_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetActiveTrainerListForFilter" ReturnType="Collection(STEPDBBetaModel.sp_GetActiveTrainerListForFilter_Result)">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Vendor_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetSessionIdsPendingForClosure_STEPAgency" ReturnType="Collection(STEPDBBetaModel.sp_GetSessionIdsPendingForClosure_STEPAgency_Result)" />
         </EntityContainer>
         <ComplexType Name="sp_AttendanceReport_Result">
           <Property Type="String" Name="Co_id" Nullable="true" MaxLength="50" />
@@ -4057,19 +4083,6 @@
           <Property Type="Int32" Name="CreatedBy" Nullable="false" />
           <Property Type="Int32" Name="ModifiedBy" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="sp_GetActiveTrainerForVendor_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="Int32" Name="Vendor_Id" Nullable="false" />
-          <Property Type="String" Name="TrainerCode" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="TrainerName" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="TrainerMobile" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="TrainerEmail" Nullable="true" MaxLength="100" />
-          <Property Type="Boolean" Name="IsActive" Nullable="false" />
-          <Property Type="DateTime" Name="CreationDate" Nullable="false" Precision="23" />
-          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-          <Property Type="Int32" Name="ModifiedBy" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="sp_GetStudentMarksReport_DistinctSession_MSPIN_Result">
           <Property Type="String" Name="MSPIN" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="SessionID" Nullable="true" MaxLength="50" />
@@ -4120,15 +4133,6 @@
           <Property Type="String" Name="TrainerCode" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="ProgramType_Id" Nullable="true" />
           <Property Type="Int32" Name="ProgramId" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="sp_GetProgramListForFilter_Vendor_Result">
-          <Property Type="String" Name="ProgramCode" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="ProgramID" Nullable="false" />
-          <Property Type="String" Name="SessionID" Nullable="true" MaxLength="100" />
-          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
-          <Property Type="String" Name="ProgramName" Nullable="true" MaxLength="150" />
-          <Property Type="Int32" Name="ProgramType_Id" Nullable="true" />
         </ComplexType>
         <ComplexType Name="sp_GetDaySequence_STEPAgency_Result">
           <Property Type="String" Name="SessionId" Nullable="true" MaxLength="100" />
@@ -4265,6 +4269,59 @@
           <Property Type="String" Name="ProgramName" Nullable="true" MaxLength="150" />
           <Property Type="Int32" Name="Duration" Nullable="true" />
           <Property Type="String" Name="TrainerCode" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_GetProgramListForFilter_Vendor_Result">
+          <Property Type="String" Name="ProgramCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ProgramName" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="ProgramID" Nullable="false" />
+          <Property Type="String" Name="SessionID" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="ProgramType_Id" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_GetSessionIdListForFilter_Result">
+          <Property Type="String" Name="SessionID" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="sp_GetActiveTrainerForVendor_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="Vendor_Id" Nullable="false" />
+          <Property Type="String" Name="TrainerCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TrainerName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="TrainerMobile" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="TrainerEmail" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="DateTime" Name="CreationDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="Int32" Name="ModifiedBy" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_GetActiveTrainerListForFilter_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="Vendor_Id" Nullable="false" />
+          <Property Type="String" Name="TrainerCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TrainerName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="TrainerMobile" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="TrainerEmail" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="DateTime" Name="CreationDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="Int32" Name="ModifiedBy" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_GetSessionIdsPendingForClosure_STEPAgency_Result">
+          <Property Type="Int32" Name="Agency_Id" Nullable="true" />
+          <Property Type="Int32" Name="ProgramId" Nullable="true" />
+          <Property Type="String" Name="AgencyCode" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Faculty_Id" Nullable="true" />
+          <Property Type="String" Name="FacultyCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SessionID" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Venue" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="Vendor_Id" Nullable="false" />
+          <Property Type="String" Name="ManagerEmail" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ProgramName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="ManagerName" Nullable="false" MaxLength="500" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -6508,23 +6565,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_GetActiveTrainerForVendor" FunctionName="STEPDBBetaModel.Store.sp_GetActiveTrainerForVendor">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="STEPDBBetaModel.sp_GetActiveTrainerForVendor_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Vendor_Id" ColumnName="Vendor_Id" />
-                <ScalarProperty Name="TrainerCode" ColumnName="TrainerCode" />
-                <ScalarProperty Name="TrainerName" ColumnName="TrainerName" />
-                <ScalarProperty Name="TrainerMobile" ColumnName="TrainerMobile" />
-                <ScalarProperty Name="TrainerEmail" ColumnName="TrainerEmail" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_GetStudentMarksReport_DistinctSession_MSPIN" FunctionName="STEPDBBetaModel.Store.sp_GetStudentMarksReport_DistinctSession_MSPIN">
             <ResultMapping>
               <ComplexTypeMapping TypeName="STEPDBBetaModel.sp_GetStudentMarksReport_DistinctSession_MSPIN_Result">
@@ -6589,19 +6629,6 @@
                 <ScalarProperty Name="TrainerCode" ColumnName="TrainerCode" />
                 <ScalarProperty Name="ProgramType_Id" ColumnName="ProgramType_Id" />
                 <ScalarProperty Name="ProgramId" ColumnName="ProgramId" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_GetProgramListForFilter_Vendor" FunctionName="STEPDBBetaModel.Store.sp_GetProgramListForFilter_Vendor">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="STEPDBBetaModel.sp_GetProgramListForFilter_Vendor_Result">
-                <ScalarProperty Name="ProgramCode" ColumnName="ProgramCode" />
-                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
-                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
-                <ScalarProperty Name="ProgramType_Id" ColumnName="ProgramType_Id" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -6791,6 +6818,79 @@
                 <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
                 <ScalarProperty Name="Duration" ColumnName="Duration" />
                 <ScalarProperty Name="TrainerCode" ColumnName="TrainerCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetProgramListForFilter_Vendor" FunctionName="STEPDBBetaModel.Store.sp_GetProgramListForFilter_Vendor">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="STEPDBBetaModel.sp_GetProgramListForFilter_Vendor_Result">
+                <ScalarProperty Name="ProgramCode" ColumnName="ProgramCode" />
+                <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="ProgramType_Id" ColumnName="ProgramType_Id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetSessionIdListForFilter" FunctionName="STEPDBBetaModel.Store.sp_GetSessionIdListForFilter" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="STEPDBBetaModel.sp_GetSessionIdListForFilter_Result">
+                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetActiveTrainerForVendor" FunctionName="STEPDBBetaModel.Store.sp_GetActiveTrainerForVendor">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="STEPDBBetaModel.sp_GetActiveTrainerForVendor_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Vendor_Id" ColumnName="Vendor_Id" />
+                <ScalarProperty Name="TrainerCode" ColumnName="TrainerCode" />
+                <ScalarProperty Name="TrainerName" ColumnName="TrainerName" />
+                <ScalarProperty Name="TrainerMobile" ColumnName="TrainerMobile" />
+                <ScalarProperty Name="TrainerEmail" ColumnName="TrainerEmail" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetActiveTrainerListForFilter" FunctionName="STEPDBBetaModel.Store.sp_GetActiveTrainerListForFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="STEPDBBetaModel.sp_GetActiveTrainerListForFilter_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Vendor_Id" ColumnName="Vendor_Id" />
+                <ScalarProperty Name="TrainerCode" ColumnName="TrainerCode" />
+                <ScalarProperty Name="TrainerName" ColumnName="TrainerName" />
+                <ScalarProperty Name="TrainerMobile" ColumnName="TrainerMobile" />
+                <ScalarProperty Name="TrainerEmail" ColumnName="TrainerEmail" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetSessionIdsPendingForClosure_STEPAgency" FunctionName="STEPDBBetaModel.Store.sp_GetSessionIdsPendingForClosure_STEPAgency">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="STEPDBBetaModel.sp_GetSessionIdsPendingForClosure_STEPAgency_Result">
+                <ScalarProperty Name="Agency_Id" ColumnName="Agency_Id" />
+                <ScalarProperty Name="ProgramId" ColumnName="ProgramId" />
+                <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
+                <ScalarProperty Name="Faculty_Id" ColumnName="Faculty_Id" />
+                <ScalarProperty Name="FacultyCode" ColumnName="FacultyCode" />
+                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Venue" ColumnName="Venue" />
+                <ScalarProperty Name="Vendor_Id" ColumnName="Vendor_Id" />
+                <ScalarProperty Name="ManagerEmail" ColumnName="ManagerEmail" />
+                <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+                <ScalarProperty Name="ManagerName" ColumnName="ManagerName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

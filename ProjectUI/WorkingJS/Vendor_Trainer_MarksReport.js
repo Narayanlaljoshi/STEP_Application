@@ -13,13 +13,12 @@ app.service('MarksReport_VendorService', function ($http, $location) {
 
         this.AppUrl = "/api/";
     }
-    //this.GetAttendanceReport = function (data) {
-    //    //       console.log("yahiooooooooooo");
-    //    return $http.post(this.AppUrl + '/Reports/GetMarksReportForAdmin', data);
-    //};
-    this.GetActiveTrainerForVendor = function (UserName) {
+    this.GetSessionList = function (data) {
         //       console.log("yahiooooooooooo");
-        return $http.get(this.AppUrl + '/Vendor/GetActiveTrainerForVendor?UserName=' + UserName);
+        return $http.post(this.AppUrl + '/Reports/GetSessionList', data);
+    };
+    this.GetTrainerForFilter = function (Obj) {
+        return $http.post(this.AppUrl + '/Reports/GetTrainerForFilter' , Obj);
     };
     this.GetProgramList = function (Obj) {
         return $http.post(this.AppUrl + '/Reports/GetProgramList', Obj);
@@ -54,7 +53,8 @@ app.controller('MarksReport_VendorController', function ($scope, $filter, $http,
     $scope.currentPage = 1;
     $scope.ShowReport = false;
     $scope.init = function () {
-        MarksReport_VendorService.GetActiveTrainerForVendor($rootScope.session.UserName).then(function success(data) {
+        $scope.ReportInput.Trainer_Id = null;
+        MarksReport_VendorService.GetTrainerForFilter($scope.ReportInput).then(function success(data) {
             $scope.TrainerList = data.data;
         }, function error(data) {
             console.log("Error in loading data from EDB");
@@ -91,6 +91,7 @@ app.controller('MarksReport_VendorController', function ($scope, $filter, $http,
     $scope.ProgramList = [];
     $scope.SessionIDList = [];
     $scope.GetProgramList = function (ReportInput) {
+        $scope.init();
         MarksReport_VendorService.GetProgramList(ReportInput).then(function success(data) {
             if (ReportInput) {
                 $scope.RawProgramList = data.data;
@@ -107,20 +108,23 @@ app.controller('MarksReport_VendorController', function ($scope, $filter, $http,
             console.log("Error in loading data from EDB");
         });
     };
-    $scope.GetSessionIDList = function (ProgramID) {
-        console.log(ProgramID);
-        $scope.SessionIDList = [];
-        angular.forEach($scope.RawProgramList, function (key, value) {
-            if (key.ProgramID === ProgramID) {
-                console.log(key.ProgramID === ProgramID);
-                $scope.SessionIDList.push({
-                    SessionID: key.SessionID
-                });
-            }
-
-        });
+    $scope.GetSessionList = function (ReportInput) {
+        //console.log(ProgramID);
+        //$scope.SessionIDList = [];
+        //angular.forEach($scope.ProgramList, function (key, value) {
+        //    if (key.ProgramID === ProgramID) {
+        //        console.log(key.ProgramID === ProgramID);
+        //        $scope.SessionIDList.push({
+        //            SessionID: key.SessionID
+        //        });
+        //    }
+        //});
         //$scope.SessionIDList = $filter('filter')($scope.ProgramList, { 'ProgramName': ProgramId });//$scope.ProgramList.find(x => x.ProgramId === ReportInput.ProgramId);
-
+        MarksReport_VendorService.GetSessionList(ReportInput).then(function success(data) {
+            $scope.SessionIDList = data.data;
+        }, function error(data) {
+            console.log("Error in loading data from EDB");
+        });
     };
     $scope.exportExcel = function () {
 

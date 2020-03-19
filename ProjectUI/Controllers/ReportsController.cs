@@ -71,5 +71,16 @@ namespace Project.Controllers
         {
             return ReportsDAL.GetProgramList(Obj);
         }
+
+        [HttpPost]
+        public List<SessionIdListForFilter> GetSessionList(ReportFilter_Vendor Obj)
+        {
+            return ReportsDAL.GetSessionList(Obj);
+        }
+        [HttpPost]
+        public IList<ActiveTrainerForVendor> GetTrainerForFilter(ReportFilter_Vendor Obj)
+        {
+            return ReportsDAL.GetTrainerForFilter(Obj);
+        }
     }
 }

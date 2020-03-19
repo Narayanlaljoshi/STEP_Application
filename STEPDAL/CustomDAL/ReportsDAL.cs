@@ -863,7 +863,9 @@ namespace STEPDAL.CustomDAL
             {
                 List<ProgramList_For_Filter_Vendor> objList = new List<ProgramList_For_Filter_Vendor>();
 
-                var PRGList = context.sp_GetProgramListForFilter_Vendor(Obj.StartDate, Obj.EndDate).ToList();
+                var VendorDtl = context.TblVendorMasters.Where(x => x.ManagerID == Obj.ManagerID && x.IsActive == true).FirstOrDefault();
+
+                var PRGList = context.sp_GetProgramListForFilter_Vendor(Obj.StartDate, Obj.EndDate, VendorDtl.Id).ToList();
                 if (PRGList.Count != 0)
                 {
                     objList = PRGList.Select(x => new ProgramList_For_Filter_Vendor
@@ -878,6 +880,52 @@ namespace STEPDAL.CustomDAL
                     }).ToList();
                 }
                 return objList;
+            }
+        }
+        public static List<SessionIdListForFilter> GetSessionList(ReportFilter_Vendor Obj)
+        {
+            using (var context = new CEIDBEntities())
+            {
+                List<SessionIdListForFilter> objList = new List<SessionIdListForFilter>();
+                var VendorDtl = context.TblVendorMasters.Where(x => x.ManagerID == Obj.ManagerID && x.IsActive == true).FirstOrDefault();
+                var PRGList = context.sp_GetSessionIdListForFilter(Obj.ProgramId,Obj.StartDate, Obj.EndDate, VendorDtl.Id).ToList();
+                if (PRGList.Count != 0)
+                {
+                    objList = PRGList.Select(x => new SessionIdListForFilter
+                    {
+                        SessionID = x.SessionID
+                    }).ToList();
+                }
+                return objList;
+            }
+        }
+
+        public static IList<ActiveTrainerForVendor> GetTrainerForFilter(ReportFilter_Vendor Obj)
+        {
+            using (var Context = new CEIDBEntities())
+            {
+                //var UserDetail = Context.TblUsers.Where(x => x.UserName == UserName && x.IsActive == true).FirstOrDefault();
+                var VendorDtl = Context.TblVendorMasters.Where(x => x.ManagerID == Obj.ManagerID && x.IsActive == true).FirstOrDefault();
+                IList<ActiveTrainerForVendor> objlist = null;
+                var ReqData = Context.sp_GetActiveTrainerListForFilter(Obj.StartDate, Obj.EndDate, VendorDtl.Id).ToList();
+                if (ReqData.Count != 0)
+                {
+                    objlist = ReqData.Select(x => new ActiveTrainerForVendor()
+                    {
+                        Id = x.Id,
+                        TrainerName = x.TrainerName,
+                        TrainerCode = x.TrainerCode,
+                        Vendor_Id = x.Vendor_Id,
+                        IsActive = x.IsActive,
+                        CreatedBy = x.CreatedBy,
+                        CreationDate = x.CreationDate,
+                        ModifiedBy = x.ModifiedBy,
+                        ModifiedDate = x.ModifiedDate,
+                        TrainerEmail = x.TrainerEmail,
+                        TrainerMobile = x.TrainerMobile
+                    }).ToList();
+                }
+                return objlist;
             }
         }
     }

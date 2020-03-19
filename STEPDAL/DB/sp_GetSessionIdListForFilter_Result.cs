@@ -11,14 +11,8 @@ namespace STEPDAL.DB
 {
     using System;
     
-    public partial class sp_GetProgramListForFilter_Vendor_Result
+    public partial class sp_GetSessionIdListForFilter_Result
     {
-        public string ProgramCode { get; set; }
-        public string ProgramName { get; set; }
-        public int ProgramID { get; set; }
         public string SessionID { get; set; }
-        public Nullable<System.DateTime> StartDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
-        public Nullable<int> ProgramType_Id { get; set; }
     }
 }

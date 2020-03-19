@@ -159,6 +159,9 @@
     <Compile Include="DB\sp_GetActiveTrainerForVendor_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\sp_GetActiveTrainerListForFilter_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\sp_GetAgencyList_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -294,7 +297,13 @@
     <Compile Include="DB\SP_GetSessionIdListBy_FacultyCode_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\sp_GetSessionIdListForFilter_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\sp_GetSessionIDList_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\sp_GetSessionIdsPendingForClosure_STEPAgency_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\sp_GetSessionIDWiseStudentList_Result.cs">

@@ -2165,15 +2165,6 @@ namespace STEPDAL.DB
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetVendorTrainerMaster_Result>("sp_GetVendorTrainerMaster", user_IdParameter);
         }
     
-        public virtual ObjectResult<sp_GetActiveTrainerForVendor_Result> sp_GetActiveTrainerForVendor(Nullable<int> vendor_Id)
-        {
-            var vendor_IdParameter = vendor_Id.HasValue ?
-                new ObjectParameter("Vendor_Id", vendor_Id) :
-                new ObjectParameter("Vendor_Id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetActiveTrainerForVendor_Result>("sp_GetActiveTrainerForVendor", vendor_IdParameter);
-        }
-    
         public virtual ObjectResult<sp_GetStudentMarksReport_DistinctSession_MSPIN_Result> sp_GetStudentMarksReport_DistinctSession_MSPIN(Nullable<System.DateTime> endDate)
         {
             var endDateParameter = endDate.HasValue ?
@@ -2228,19 +2219,6 @@ namespace STEPDAL.DB
                 new ObjectParameter("SessionID", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SessionIDsFor_AgencyManagerReport_Result>("sp_SessionIDsFor_AgencyManagerReport", managerIDParameter, startDateParameter, endDateParameter, program_IdParameter, trainer_IdParameter, sessionIDParameter);
-        }
-    
-        public virtual ObjectResult<sp_GetProgramListForFilter_Vendor_Result> sp_GetProgramListForFilter_Vendor(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
-        {
-            var startDateParameter = startDate.HasValue ?
-                new ObjectParameter("StartDate", startDate) :
-                new ObjectParameter("StartDate", typeof(System.DateTime));
-    
-            var endDateParameter = endDate.HasValue ?
-                new ObjectParameter("EndDate", endDate) :
-                new ObjectParameter("EndDate", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetProgramListForFilter_Vendor_Result>("sp_GetProgramListForFilter_Vendor", startDateParameter, endDateParameter);
         }
     
         public virtual ObjectResult<sp_GetDaySequence_STEPAgency_Result> sp_GetDaySequence_STEPAgency(string sessionID, string listType)
@@ -2545,6 +2523,75 @@ namespace STEPDAL.DB
                 new ObjectParameter("ProgramCode", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetSessionListForStepAgencyManager_Result>("sp_GetSessionListForStepAgencyManager", agency_IdParameter, vendor_IdParameter, monthParameter, programCodeParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetProgramListForFilter_Vendor_Result> sp_GetProgramListForFilter_Vendor(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<int> vendor_Id)
+        {
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            var vendor_IdParameter = vendor_Id.HasValue ?
+                new ObjectParameter("Vendor_Id", vendor_Id) :
+                new ObjectParameter("Vendor_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetProgramListForFilter_Vendor_Result>("sp_GetProgramListForFilter_Vendor", startDateParameter, endDateParameter, vendor_IdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetSessionIdListForFilter_Result> sp_GetSessionIdListForFilter(Nullable<int> programId, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<int> vendor_Id)
+        {
+            var programIdParameter = programId.HasValue ?
+                new ObjectParameter("ProgramId", programId) :
+                new ObjectParameter("ProgramId", typeof(int));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            var vendor_IdParameter = vendor_Id.HasValue ?
+                new ObjectParameter("Vendor_Id", vendor_Id) :
+                new ObjectParameter("Vendor_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetSessionIdListForFilter_Result>("sp_GetSessionIdListForFilter", programIdParameter, startDateParameter, endDateParameter, vendor_IdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetActiveTrainerForVendor_Result> sp_GetActiveTrainerForVendor(Nullable<int> vendor_Id)
+        {
+            var vendor_IdParameter = vendor_Id.HasValue ?
+                new ObjectParameter("Vendor_Id", vendor_Id) :
+                new ObjectParameter("Vendor_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetActiveTrainerForVendor_Result>("sp_GetActiveTrainerForVendor", vendor_IdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetActiveTrainerListForFilter_Result> sp_GetActiveTrainerListForFilter(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<int> vendor_Id)
+        {
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            var vendor_IdParameter = vendor_Id.HasValue ?
+                new ObjectParameter("Vendor_Id", vendor_Id) :
+                new ObjectParameter("Vendor_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetActiveTrainerListForFilter_Result>("sp_GetActiveTrainerListForFilter", startDateParameter, endDateParameter, vendor_IdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetSessionIdsPendingForClosure_STEPAgency_Result> sp_GetSessionIdsPendingForClosure_STEPAgency()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetSessionIdsPendingForClosure_STEPAgency_Result>("sp_GetSessionIdsPendingForClosure_STEPAgency");
         }
     }
 }

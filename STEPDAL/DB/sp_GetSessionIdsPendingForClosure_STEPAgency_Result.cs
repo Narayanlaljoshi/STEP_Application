@@ -11,14 +11,20 @@ namespace STEPDAL.DB
 {
     using System;
     
-    public partial class sp_GetProgramListForFilter_Vendor_Result
+    public partial class sp_GetSessionIdsPendingForClosure_STEPAgency_Result
     {
-        public string ProgramCode { get; set; }
-        public string ProgramName { get; set; }
-        public int ProgramID { get; set; }
+        public Nullable<int> Agency_Id { get; set; }
+        public Nullable<int> ProgramId { get; set; }
+        public string AgencyCode { get; set; }
+        public Nullable<int> Faculty_Id { get; set; }
+        public string FacultyCode { get; set; }
         public string SessionID { get; set; }
         public Nullable<System.DateTime> StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
-        public Nullable<int> ProgramType_Id { get; set; }
+        public string Venue { get; set; }
+        public int Vendor_Id { get; set; }
+        public string ManagerEmail { get; set; }
+        public string ProgramName { get; set; }
+        public string ManagerName { get; set; }
     }
 }

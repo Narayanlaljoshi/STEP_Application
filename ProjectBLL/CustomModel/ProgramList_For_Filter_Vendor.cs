@@ -16,4 +16,8 @@ namespace ProjectBLL.CustomModel
         public string ProgramName  { get; set; }
         public int? ProgramType_Id { get; set; }
     }
+    public class SessionIdListForFilter
+    {
+        public string SessionID { get; set; }
+    }
 }
