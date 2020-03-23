@@ -18,8 +18,6 @@
         <EntityTypeShape EntityType="STEPDBBetaModel.TblPhotoDocumentDtl" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="STEPDBBetaModel.tblPrgramMasterDetail" Width="1.5" PointX="10.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblProgramMaster" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="STEPDBBetaModel.TblProgramTestCalender" Width="1.5" PointX="2.75" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="STEPDBBetaModel.TblProgramTestCalenderDetail" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblProgramTypeMaster" Width="1.5" PointX="6.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblQuestionLanguageDetail" Width="1.5" PointX="8.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblQuestionLanguageDetail_Practical" Width="1.5" PointX="12.75" PointY="9.75" IsExpanded="true" />
@@ -48,6 +46,8 @@
         <EntityTypeShape EntityType="STEPDBBetaModel.TblVendorMaster" Width="1.5" PointX="19.375" PointY="13.75" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblVendorTrainerMaster" Width="1.5" PointX="19.375" PointY="18.75" />
         <EntityTypeShape EntityType="STEPDBBetaModel.Tbl_Log_Report_DMS" Width="1.5" PointX="20.375" PointY="0.75" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblProgramTestCalender" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblProgramTestCalenderDetail" Width="1.5" PointX="3.375" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -16,6 +16,7 @@ namespace STEPDAL.DB
     {
         public int DetailId { get; set; }
         public int ProgramTestCalenderId { get; set; }
+        public Nullable<int> Set_Id { get; set; }
         public string QuestionCode { get; set; }
         public string Question { get; set; }
         public string Image { get; set; }

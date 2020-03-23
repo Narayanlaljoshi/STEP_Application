@@ -27,9 +27,9 @@ namespace Project.Controllers
         //}
 
         [HttpGet]
-        public List<ProgramTest_QuestionDetail> GetQuestionBankList(int id)
+        public List<ProgramTest_QuestionDetail> GetQuestionBankList(int id,int Set_Id)
         {
-            return QuestionBankDAL.GetQuestionBankList(id);
+            return QuestionBankDAL.GetQuestionBankList(id,Set_Id);
         }
         [HttpGet]
         public List<Practical_QuestionDetail> GetPracticalQuestionBankList(int id,int Set_Id)
@@ -51,8 +51,6 @@ namespace Project.Controllers
         {
             return QuestionBankDAL.GetQuestionFormatedList(data);
         }
-
-        
 
         [HttpGet]
         public List<GetLanguage_Model> GetLanguage(int id)
@@ -108,8 +106,6 @@ namespace Project.Controllers
             {
                 var sheet = excel.Workbook.Worksheets[1];
 
-
-
                 DataTable tbl = new DataTable();
                 foreach (var firstRowCell in sheet.Cells[1, 1, 1, sheet.Dimension.End.Column])
                 {
@@ -126,21 +122,26 @@ namespace Project.Controllers
                         row[cell.Start.Column - 1] = cell.Text;
                     }
                 }
+                var PTCDtl = QuestionBankDAL.GetPTCDetail(Obj.ProgramTestCalenderId);
+                if (PTCDtl.QuestionPaperType == "QB")
+                {
+                    if (tbl.Rows.Count < PTCDtl.TotalNoQuestion)
+                        return Request.CreateResponse(HttpStatusCode.Accepted, "Number of Questions should be greater then or equal to - " + PTCDtl.TotalNoQuestion);
+                }
+                else {
+                    if (tbl.Rows.Count != PTCDtl.TotalNoQuestion)
+                        return Request.CreateResponse(HttpStatusCode.Accepted, "Number of Questions should be equal to - " + PTCDtl.TotalNoQuestion);
+                }
                 string msg = QuestionBankDAL.UploadList(tbl, Obj);
                 return Request.CreateResponse(HttpStatusCode.Accepted, msg);
-
-
             }
             catch (Exception ex)//open xls file
             {
-                //if its a .xls file it will throw an Exception  
-                return Request.CreateResponse(HttpStatusCode.Accepted);
+                //if its a .xls file it will throw an Exception
+                return Request.CreateResponse(HttpStatusCode.ExpectationFailed,ex.ToString());
             }
-
-
-
-
         }
+
         [HttpPost]
         public async Task<HttpResponseMessage> UploadExcel_Practical()
         {
@@ -157,7 +158,6 @@ namespace Project.Controllers
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
 
-
             var root = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["ExcelPath"]);
 
             Directory.CreateDirectory(root);
@@ -166,7 +166,6 @@ namespace Project.Controllers
 
             var model = result.FormData["data"];
             var Obj = JsonConvert.DeserializeObject<ProgramTestModel>(model);
-
 
             Stream stream = await Request.Content.ReadAsStreamAsync();
 

@@ -8,6 +8,8 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using STEPDAL.DB;
+using System.Collections;
+using ProjectBLL.CustomModel;
 
 namespace STEPDAL.CustomDAL
 {
@@ -17,9 +19,27 @@ namespace STEPDAL.CustomDAL
         {
             //int countIfProccessed = 0;
             DataTable newInfo = info.Clone();
-            string RetMessage = string.Empty ;
+            string RetMessage = string.Empty;
             bool IsErroredRecords = false;
             List<TblAutomationErrorLog> ErrList = new List<TblAutomationErrorLog>();
+            ArrayList UniqueRecords = new ArrayList();
+            ArrayList DuplicateRecords = new ArrayList();
+            List<NominationData> DuplicateList = new List<NominationData>();
+            // Check if records is already added to UniqueRecords otherwise,
+            // Add the records to DuplicateRecords
+            foreach (DataRow dRow in info.Rows)
+            {
+                if (UniqueRecords.Contains(dRow["MSPIN"]))
+                {
+                    DuplicateRecords.Add(dRow["MSPIN"]);
+                    //info.Rows.Remove(dRow);
+                }
+                else
+                    UniqueRecords.Add(dRow["MSPIN"]);
+            }
+
+            //var duplicates = info.AsEnumerable().GroupBy(r => r[0]).Where(gr => gr.Count() > 1).ToList();
+
             using (var context = new CEIDBEntities())
             {
                 var ProgramList = context.TblProgramMasters.Where(x => x.IsActive == true).ToList();
@@ -154,9 +174,17 @@ namespace STEPDAL.CustomDAL
                     catch (Exception ex) { }
                     try
                     {
+                        if (DuplicateRecords.Contains(MSPIN))
+                        {
+                            DuplicateList.Add(new NominationData {
+                                MSPIN=MSPIN,AgencyCode=AgencyCode,City=City,Co_id=Co_id,DateofBirth=DateofBirth,DealerCode=DealerCode,
+                                DealerName=DealerName,Duration=Duration,EndDate=EndDate,FacultyCode=FacultyCode,Location=Location,
+                                MobileNo=MobileNo,Name=Name,ProgramCode=ProgramCode,Region=Region,SessionID=SessionID,StartDate=StartDate,Venue=Venue
+                            });
+                            continue;
+                        }
                         //if (SessionID == "SSI19182858" && MSPIN=="707413")// || SessionID == "SSI19167355" || SessionID == "SSI19167355"
                         //{
-
                         //}
                         //else
                         //{ continue; }
@@ -201,6 +229,12 @@ namespace STEPDAL.CustomDAL
                             Value = MSPIN+" Exception:"+e.Message.ToString()
                         });
                         continue;
+                    }
+                }
+                if (DuplicateRecords.Count!=0) {
+                    foreach (var item in DuplicateList)
+                    {
+                        var status = context.sp_Insert_Update_Tbl_Multi_Nomination(item.Co_id, item.Region, item.Venue, item.DealerCode, item.DealerName, item.City, item.Location, item.AgencyCode, item.FacultyCode, item.ProgramCode, item.SessionID, item.StartDate, item.EndDate, item.Duration, item.MSPIN, item.Name, item.DateofBirth, item.MobileNo, false,DateTime.Now);
                     }
                 }
                 if (IsErroredRecords)

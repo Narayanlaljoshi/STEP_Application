@@ -37,7 +37,7 @@ namespace STEPDAL.CustomDAL
         {
             using (var context = new CEIDBEntities())
             {
-                var data = context.Sp_ProgramTestCalenderDetail(ProgramId).ToList();                
+                var data = context.Sp_ProgramTestCalenderDetail(ProgramId).ToList();
                 List<ProgramTestCalenderDetail_Model> objList = new List<ProgramTestCalenderDetail_Model>();
                 foreach (var s in data) {
                     int? QuesCount = 0;
@@ -51,6 +51,7 @@ namespace STEPDAL.CustomDAL
                         EvaluationTypeId=s.EvaluationTypeId,
                         TypeOfTest = s.TypeOfTest,
                         ProgramTestCalenderId = s.ProgramTestCalenderId,
+                        QuestionPaperType=s.QuestionPaperType,
                         TotalNoQuestion = s.TotalNoQuestion,
                         TestDuration = s.TestDuration,
                         Marks_Question = s.Marks_Question,
@@ -96,6 +97,7 @@ namespace STEPDAL.CustomDAL
                             Marks_Question = obj.Marks_Question,
                             Q_Bank = obj.Q_Bank,
                             TestCode = obj.TestCode,
+                            QuestionPaperType=obj.QuestionPaperType,
                             Total_Marks = obj.TotalNoQuestion * obj.Marks_Question==null?0: obj.Marks_Question,
                             TestInitiated = false,
                             ValidDuration = obj.ValidDuration,
@@ -123,6 +125,7 @@ namespace STEPDAL.CustomDAL
                         prop.EvaluationTypeId= obj.EvaluationTypeId;
                         prop.Marks_Question = obj.Marks_Question;
                         prop.Q_Bank = obj.Q_Bank;
+                        prop.QuestionPaperType = obj.QuestionPaperType;
                         prop.TestCode = obj.TestCode;
                         prop.Total_Marks = obj.Marks_Question!=null? obj.TotalNoQuestion * obj.Marks_Question:0;
                         prop.PracticalDefaultMarks = obj.PracticalDefaultMarks;
@@ -164,6 +167,7 @@ namespace STEPDAL.CustomDAL
                         Details.TotalNoQuestion = info.TotalNoQuestion;
                         Details.TestDuration = info.TestDuration;
                         Details.Q_Bank = info.Q_Bank;
+                        Details.QuestionPaperType = info.QuestionPaperType;
                         Details.TestCode = info.TestCode;
                         Details.Marks_Question = info.Marks_Question;
                         Details.Total_Marks = info.TotalNoQuestion * info.Marks_Question;

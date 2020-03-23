@@ -448,7 +448,7 @@ app.controller('ProgramTestCalenderController', function ($scope, $http, $locati
         ProgramTestCalenderService.ProgramId = pt.ProgramId;
         ProgramTestCalenderService.Day = pt.DayCount;
         ProgramTestCalenderService.TypeOfTest = pt.TypeOfTest;
-
+        ProgramTestCalenderService.QuestionPaperType = pt.QuestionPaperType;
         //console.log(ProgramTestCalenderService);
         if (pt.EvaluationTypeId == 2)
         {

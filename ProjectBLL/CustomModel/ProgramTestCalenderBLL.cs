@@ -17,6 +17,7 @@ namespace ProjectBLL.CustomModel
         public Nullable<int> TestDuration { get; set; }
         public Nullable<int> ValidDuration { get; set; }
         public string TestCode { get; set; }
+        public string QuestionPaperType { get; set; }
         public Nullable<int> Marks_Question { get; set; }
         public Nullable<int> Total_Marks { get; set; }
         public Nullable<int> Q_Bank { get; set; }
@@ -89,6 +90,7 @@ namespace ProjectBLL.CustomModel
         public string TypeOfTest { get; set; }
         public Nullable<int> TotalNoQuestion { get; set; }
         public Nullable<int> TestDuration { get; set; }
+        public string QuestionPaperType { get; set; }
 
         public string TestCode { get; set; }
         public Nullable<int> Marks_Question { get; set; }

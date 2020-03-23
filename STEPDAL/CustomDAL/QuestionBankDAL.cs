@@ -19,21 +19,18 @@ namespace STEPDAL.CustomDAL
         {
             using (var context = new CEIDBEntities())
             {
-                //string QuestionCode = "";
                 string Question = "";
                 string Answer1 = "";
                 string Answer2 = "";
                 string Answer3 = "";
                 string Answer4 = "";
                 string AnswerKey = "";
-                //string Msg="";
 
                 string Msg = string.Empty;
                 foreach (DataRow dr in dt.Rows)
                 {
-                    if (!dr["Question"].Equals(string.Empty) && !dr["AnswerKey"].Equals(string.Empty)) // && !dr["RegistrationNo"].Equals(string.Empty)))
+                    if (!dr["Question"].Equals(string.Empty) && !dr["AnswerKey"].Equals(string.Empty))
                     {
-                        //QuestionCode = dr["Question Code"].ToString();
                         Question = dr["Question"].ToString();
                         Answer1 = dr["a"].ToString();
                         Answer2 = dr["b"].ToString();
@@ -41,53 +38,42 @@ namespace STEPDAL.CustomDAL
                         Answer4 = dr["d"].ToString();
                         AnswerKey = dr["AnswerKey"].ToString();
 
+                        var dt1 = context.TblProgramTestCalenderDetails.Where(x => x.ProgramTestCalenderId == obj.ProgramTestCalenderId && x.Question == Question && x.IsActive == true && x.Set_Id==obj.Set_Id).FirstOrDefault();
+                        if (dt1 == null)
+                        {
+                            TblProgramTestCalenderDetail item = new TblProgramTestCalenderDetail();
 
-
-                        var dt1 = context.TblProgramTestCalenderDetails.Where(x => x.ProgramTestCalenderId == obj.ProgramTestCalenderId && x.Question == Question && x.IsActive == true).FirstOrDefault();
-
-
-
-                        TblProgramTestCalenderDetail item = new TblProgramTestCalenderDetail();
-
-                        item.ProgramTestCalenderId = obj.ProgramTestCalenderId;
-                        item.Question = Question;
-                        // item.QuestionCode = QuestionCode;
-                        item.Answer1 = Answer1;      //"(a)." +
-                        item.Answer2 = Answer2;           //"(b)." +
-                        item.Answer3 = Answer3;
-                        item.Answer4 = Answer4;
-
-                        item.AnswerKey = AnswerKey;
-
-
-                        item.CreationDate = DateTime.Now;
-                        item.CreatedBy = 1;
-                        item.ModifiedDate = DateTime.Now;
-                        item.ModifiedBy = null;
-                        item.IsActive = true;
-                        context.Entry(item).State = System.Data.Entity.EntityState.Added;
-                        context.SaveChanges();
-
-                        item.QuestionCode = "QUE-" + item.DetailId;
-                        context.Entry(item).State = System.Data.Entity.EntityState.Modified;
-                        context.SaveChanges();
-
-
-
-
-
-                        Msg = "Successfully saved..";
+                            item.ProgramTestCalenderId = obj.ProgramTestCalenderId;
+                            item.Question = Question;
+                            item.Set_Id = obj.Set_Id;
+                            // item.QuestionCode = QuestionCode;
+                            item.Answer1 = Answer1;      //"(a)." +
+                            item.Answer2 = Answer2;           //"(b)." +
+                            item.Answer3 = Answer3;
+                            item.Answer4 = Answer4;
+                            item.AnswerKey = AnswerKey;
+                            item.CreationDate = DateTime.Now;
+                            item.CreatedBy = 1;
+                            item.ModifiedDate = DateTime.Now;
+                            item.ModifiedBy = null;
+                            item.IsActive = true;
+                            context.Entry(item).State = System.Data.Entity.EntityState.Added;
+                            context.SaveChanges();
+                            item.QuestionCode = "QUE-" + item.DetailId;
+                            context.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                            context.SaveChanges();
+                            Msg = "Successfully saved..";
+                        }
                     }
-
                     else
                     {
                         Msg = "Invalid columns in excel sheet. Please check template";
                     }
                 }
                 return Msg;
-
             }
         }
+
         public static string UploadList_Practical(DataTable dt, ProgramTestModel obj)
         {
             string ReturnMessage = string.Empty;
@@ -501,6 +487,7 @@ namespace STEPDAL.CustomDAL
             //}
             #endregion
         }
+
         private static string BulkInsertDataTable(DataTable dataTable)
         {
             string isSuccuss;
@@ -548,6 +535,7 @@ namespace STEPDAL.CustomDAL
             }
             return isSuccuss;
         }
+
         public static string UploadLanguageList(DataTable dt, QestionLanguageModel obj)
         {
             using (var context = new CEIDBEntities())
@@ -610,11 +598,11 @@ namespace STEPDAL.CustomDAL
             }
         }
 
-        public static List<ProgramTest_QuestionDetail> GetQuestionBankList(int id)
+        public static List<ProgramTest_QuestionDetail> GetQuestionBankList(int id, int Set_Id)
         {
             using (var context = new CEIDBEntities())
             {
-                var data = context.Sp_Question_Detail(id).ToList();
+                var data = context.Sp_Question_Detail(id, Set_Id==0?null: Set_Id).ToList();
 
                 List<ProgramTest_QuestionDetail> objList = null;
                 objList = data.Select(x => new ProgramTest_QuestionDetail
@@ -637,13 +625,11 @@ namespace STEPDAL.CustomDAL
                     TotalNoQuestion = x.TotalNoQuestion,
                     TypeOfTest = x.TypeOfTest,
                     IsChecked = false
-
                 }).ToList();
                 return objList;
-
             }
-
         }
+
         public static List<Practical_QuestionDetail> GetPracticalQuestionBankList(int id, int Set_Id)
         {
             using (var context = new CEIDBEntities())
@@ -735,6 +721,7 @@ namespace STEPDAL.CustomDAL
             }
 
         }
+
         public static List<Practical_Question_OtherLanguage> GetPracticalQuestionTemplate(FilterBLL Obj)
         {
             using (var context = new CEIDBEntities())
@@ -765,11 +752,12 @@ namespace STEPDAL.CustomDAL
                 return objList;
             }
         }
+
         public static List<ProgramTest_QuestionDetail> GetQuestionFormatedList(QuestionVariable data)
         {
             using (var context = new CEIDBEntities())
             {
-                var dtl = context.Sp_GetLanguageWiseQuestionList(data.id, data.LangId).ToList();
+                var dtl = context.Sp_GetLanguageWiseQuestionList(data.id, data.LangId,data.Set_Id).ToList();
 
                 List<ProgramTest_QuestionDetail> objList = null;
                 objList = dtl.Select(x => new ProgramTest_QuestionDetail
@@ -1007,6 +995,15 @@ namespace STEPDAL.CustomDAL
                 return Msg.Equals(string.Empty)?"Success: Data Uploaded!":Msg;
             }
 
+        }
+
+        public static TblProgramTestCalender GetPTCDetail(int Id)
+        {
+            using (var Context= new CEIDBEntities())
+            {
+                var Detail = Context.TblProgramTestCalenders.Where(X => X.ProgramTestCalenderId == Id).FirstOrDefault();
+                return Detail;
+            }
         }
     }
 }

@@ -89,6 +89,16 @@ namespace Project.Controllers
         {
             return RtcMaster.GetSessionIDListForFaculty(Agency_Id, FacultyCode);
         }
-        
+        [HttpGet]
+        public List<MultiNominationList> GetMultiNominationListbyAgency(string UserName)
+        {
+            return RtcMaster.GetMultiNominationListbyAgency(UserName);
+        }
+        [HttpPost]
+        public static string UpdateMultiNominationListbyAgency(List<MultiNominationList> Obj)
+        {
+            return RtcMaster.UpdateMultiNominationListbyAgency(Obj);
+        }
+
     }
 }

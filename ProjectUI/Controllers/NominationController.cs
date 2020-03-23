@@ -195,5 +195,10 @@ namespace Project.Controllers
         {
             NominationDAL.FilterDownloadedNomination();
         }
+        [HttpGet]
+        public void batchJob()
+        {
+            NominationDAL.batchJob();
+        }
     }
 }

@@ -36,6 +36,7 @@
                         <th>Test Code</th>
                         <th>Evaluation Type</th>
                         <th>Type Of Test</th>
+                        <th>QB Type</th>
 
                         <th>Test Questions</th>
                         <th>Questions / Sets</th>
@@ -72,7 +73,7 @@
                             <label ng-if="pt.TypeOfTest=='3'">Post Test</label>
 
                         </td>
-
+                        <td>{{pt.QuestionPaperType}}</td>
                         <td>{{pt.TotalNoQuestion}}</td>
                         <td>{{pt.QuesAdded}}</td>
                         <td>{{pt.Marks_Question}}</td>
@@ -123,7 +124,7 @@
                         <label>Test Code*</label>
                         <input type="text" class=" form-control" ng-maxlength="100" ng-model="ProgramTestCalenderDetailData.TestCode" placeholder="Test Code " />
                     </div>
-                    <div class="col-xs-3 col-md-3">
+                    <div class="col-xs-3 col-md-2">
                         <label>Evaluation Type*</label>
                         <select ng-required="" name="singleSelect" class="form-control"
                                 ng-model="ProgramTestCalenderDetailData.EvaluationType">
@@ -133,7 +134,7 @@
                         </select>
 
                     </div>
-                    <div class="col-xs-3 col-md-3">
+                    <div class="col-xs-3 col-md-2">
                         <label>Type Of Test*</label>
                         <select ng-required="" name="singleSelect" class="form-control"
                                 ng-model="ProgramTestCalenderDetailData.TypeOfTest">
@@ -145,7 +146,15 @@
                         </select>
 
                     </div>
-
+                    <div class="col-xs-3 col-md-2">
+                        <label>QB Type*</label>
+                        <select ng-required="" name="singleSelect" class="form-control"
+                                ng-model="ProgramTestCalenderDetailData.QuestionPaperType">
+                            <!--<option label="Select Program Name" value="number:0" selected="selected">Select</option>-->
+                            <option value="Set">Set Based</option>
+                            <option value="QB">QB Based</option>
+                        </select>
+                    </div>
                     <div class="col-xs-2">
                         <label>Total No question*</label>
                         <input numbers-Only type="text" class=" form-control" ng-maxlength="100" ng-model="ProgramTestCalenderDetailData.TotalNoQuestion" placeholder="Total No Question" />
@@ -190,6 +199,9 @@
                                 <th style="text-align:center; width:120px;">
                                     Type Of Test:
                                 </th>
+                                <th style="text-align:center; width:120px;">
+                                    QB Type:
+                                </th>
                                 <th style="text-align:center;">
                                     Total No question:
                                 </th>
@@ -231,7 +243,6 @@
                                 <td>
                                     <select ng-required="" name="singleSelect" class="form-control"
                                             ng-model="pt.TypeOfTest">
-                                        <!--<option label="Select Program Name" value="number:0" selected="selected">Select Program Name</option>-->
                                         <option ng-if="$first" value="1">Pre Test</option>
                                         <!--<option value="2">Daily Test</option>-->
                                         <option value="3">Post Test</option>
@@ -239,7 +250,15 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <input numbers-Only type="text"ng-show="pt.EvaluationTypeId==1" class=" form-control" ng-maxlength="100" ng-model="pt.TotalNoQuestion" placeholder="Total No Question" />
+                                    <select ng-required="" name="singleSelect" class="form-control"
+                                            ng-model="pt.QuestionPaperType">
+                                        <!--<option label="Select Program Name" value="number:0" selected="selected">Select</option>-->
+                                        <option value="Set">Set Based</option>
+                                        <option value="QB">QB Based</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input numbers-Only type="text" ng-show="pt.EvaluationTypeId==1" class=" form-control" ng-maxlength="100" ng-model="pt.TotalNoQuestion" placeholder="Total No Question" />
                                 </td>
                                 <td>
                                     <input ng-show="pt.EvaluationTypeId==1" numbers-Only type="text" class=" form-control" ng-maxlength="100" ng-model="pt.Marks_Question" placeholder="Marks/Question" />

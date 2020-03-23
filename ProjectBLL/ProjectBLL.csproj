@@ -90,6 +90,8 @@
     <Compile Include="CustomModel\MarksReportBLL.cs" />
     <Compile Include="CustomModel\Mobile_Notification.cs" />
     <Compile Include="CustomModel\MSPINDetails.cs" />
+    <Compile Include="CustomModel\MultiNominationList.cs" />
+    <Compile Include="CustomModel\NominationData.cs" />
     <Compile Include="CustomModel\NominationsList.cs" />
     <Compile Include="CustomModel\NominationValidationBLL.cs" />
     <Compile Include="CustomModel\ProgramList_For_Filter_Vendor.cs" />

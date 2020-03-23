@@ -30,5 +30,6 @@ namespace STEPDAL.DB
         public Nullable<int> ModifiedBy { get; set; }
         public Nullable<int> ExtendedTime { get; set; }
         public Nullable<int> Position { get; set; }
+        public Nullable<int> Set_Id { get; set; }
     }
 }

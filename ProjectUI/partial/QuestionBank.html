@@ -43,20 +43,26 @@
         </div>
 
         <div class="box" ng-show="showAddBulkButton==true" style="margin:0; border:0">
-            <div class="box-header with-border" >
+            <div class="box-header with-border">
                 <!--<button class="btn btn-primary btn-sm" ng-click="GetList(SearchData,TargetType)">Search</button>-->
                 <button class="btn btn-success btn-sm btn-xs" ng-click="AddQuestionBank()">Add Question </button>
-                
+
                 <button class="btn btn-primary btn-sm btn-xs" ng-click="AddBulk()">Bulk Upload</button>
                 <button class="btn btn-primary btn-sm btn-xs" ng-click="AddLanguage()">Add Language Wise </button>
                 <button class="btn btn-danger btn-sm btn-xs" ng-show="ShowDeleteAllButton" ng-click="DeleteAllSelected()">Delete All Selected</button>
                 <button class="btn btn-warning btn-sm pull-right btn-xs" ng-click="Back()">Back</button>
-                <input type="text" placeholder="Search here.." ng-model="SearchText"/>    
+                <input type="text" placeholder="Search here.." ng-model="SearchText" />
+                
+                <select class="form-control" ng-show="QuestionPaperType=='Set'" ng-options="item.Set_Id as ('Set-')+item.SetNumber for item in SetSequence" ng-op="" ng-model="Set_Id"
+                        style="width:166PX;FLOAT:RIGHT;MARGIN-RIGHT: 15PX;HEIGHT: 30PX;">
+                    <option value="">Select Set</option>
+                </select>
+                
                 <select class="form-control ng-pristine ng-valid ng-valid-required" style="width:166PX;FLOAT:RIGHT;MARGIN-RIGHT: 15PX;HEIGHT: 30PX;"
-                     ng-options="item.LanguageMaster_Id as item.Language for item in ProgramLanguageArray" ng-model="QuestionDetailData.LanguageMasterId"
-                     ng-change="ChangeFormat(QuestionDetailData.LanguageMasterId)">
-                        <option value="">Select Language</option>
-                    </select>
+                        ng-options="item.LanguageMaster_Id as item.Language for item in ProgramLanguageArray" ng-model="QuestionDetailData.LanguageMasterId"
+                        ng-change="ChangeFormat(QuestionDetailData.LanguageMasterId)">
+                    <option value="">Select Language</option>
+                </select>
             </div>
         </div>
             <div class="box" ng-show="showQuestionGrid ==true" style="border:0">
@@ -109,8 +115,6 @@
                                 </td>
                           <!---      <td>{{pt.TestDuration}}
 
-
-
                                 <td>
                                     <button class="btn btn-warning btn-sm" ng-click="DeleteTransaction(pt)">Delete</button>
                                     <button class="btn btn-primary btn-sm" ng-click="UpdateTransaction(pt)">Update </button>
@@ -127,10 +131,6 @@
 
             </div>
 
-
-
-
- 
         <div class="box" style="border: 0;" ng-show="AddGrid==true">
             <div class="box-header with-border">
                 <h3 class="box-title">Add Question</h3>
@@ -191,13 +191,6 @@
 
           </div>
   
-      
-
-
-
-
-    
-
         <div class="box" style="border:0" ng-show="AddLanguageGrid==true">
             
              <div class="box-header with-border">
@@ -233,25 +226,15 @@
                     <div class="box-footer">
                             
                             <!--<a class="btn btn-primary btn-sm">Download Template</a>-->
-                            
-
                             <button class="btn btn-warning btn-sm pull-right btn-xs" ng-click="init()">Back </button>
 
                             <!--<button class="btn btn-primary btn-sm" ng-click="AddSaveQuestion()">Save</button>
                             <button class="btn btn-primary btn-sm" ng-click="init()">Back </button>-->
                     
-
                     </div>
 
                 </div>
             </div>
-
-
-
-
-
-
-
 
     <div  class="box" ng-show="BulkGrid==true">
         <div class="box-header">
@@ -261,12 +244,20 @@
 
             <section style="margin-left: 22px;">
                 <div class="row">
+                    <div class="col-sm-2"ng-show="QuestionPaperType=='Set'">
+                        <div class="form-group">
+                            <label>
+                                Select Set:
+                            </label>
+                            <select class="form-control" ng-options="item.Set_Id as ('Set-')+item.SetNumber for item in SetSequence" ng-op="" ng-model="Set_Id"></select>
+                        </div>
+                    </div>
                     <div class="col-lg-3">
-                        <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                        <input type="file" style="margin-top: 31px;" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                                file-model="File1" />
                     </div>
                     <div class="col-lg-3">
-                        <button class="btn btn-success btn-sm btn-xs" ng-click="UploadExcelfunction()">Upload Excel</button>
+                        <button class="btn btn-success btn-sm btn-xs" style="margin-top: 31px;" ng-click="UploadExcelfunction()">Upload Excel</button>
                     </div>
                 </div>
                 <div class="row">

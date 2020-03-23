@@ -1623,5 +1623,535 @@ namespace STEPDAL.CustomDAL
             }
             return isSuccuss;
         }
+
+        public static string FilterNomination_MultiNomination(List<MultiNominationList> Obj)
+        {
+            string RetMessage = string.Empty;
+            using (var context = new CEIDBEntities())
+            {
+                context.Database.CommandTimeout = 1500;
+                var GetDownloadedData = Obj;// context.sp_GetNominationListFromDownload(DateTime.Now).ToList();
+                //GetDownloadedData= GetDownloadedData.Where(x=>x.SessionID == "SSI19192109" && x.MSPIN== "692385").ToList();
+                var ProgramList = context.TblProgramMasters.Where(x => x.IsActive == true).ToList();
+                var AgencyList = context.TblRTCMasters.Where(x => x.IsActive == true).ToList();
+                var FacultyList = context.TblFaculties.Where(x => x.IsActive == true).ToList();
+                var VendorFAC_List = context.TblVendorMasters.Where(x => x.IsActive == true).ToList();
+                //var SubFacultyList = context.TblSubFacultyMasters.Where(x => x.IsActive == true).ToList();
+                List<TblNomination> FilteredList = new List<TblNomination>();
+                foreach (var row in GetDownloadedData)
+                {
+                    string Co_id = row.Co_id;
+                    string AgencyCode = row.AgencyCode;
+                    string FacultyCode = row.FacultyCode;
+                    string ProgramCode = row.ProgramCode;
+                    string SessionID = row.SessionID;
+                    DateTime? StartDate = row.StartDate;
+                    DateTime? EndDate = row.EndDate;
+                    int? Duration = row.Duration;
+                    string MSPIN = row.MSPIN;
+                    string Name = row.Name;
+                    DateTime? DateofBirth = row.DateofBirth;
+                    string MobileNo = row.MobileNo;
+                    string Region = row.Region;
+                    string Venue = row.Venue;
+                    string DealerCode = row.Dealer_LocationCode;
+                    string DealerName = row.DealerName;
+                    string Location = row.Location;
+                    //if (row.AgencyCode=="AG017")
+                    //{ }
+                    try
+                    {
+                        if (!Name.Equals(string.Empty) && !AgencyCode.Equals(string.Empty) && !FacultyCode.Equals(string.Empty) && !MSPIN.Equals(string.Empty) && StartDate != null && EndDate != null && !ProgramCode.Equals(string.Empty))
+                        {
+                            var AgencyDtl = AgencyList.Where(x => x.AgencyCode == AgencyCode).FirstOrDefault();
+                            var ProgramDtl = ProgramList.Where(x => x.ProgramCode == ProgramCode).FirstOrDefault();
+                            if (AgencyDtl != null && ProgramDtl != null)
+                            {
+                                if (AgencyDtl.AgencyCode == "AG017")//AG017
+                                {
+                                    var CalendarTrainerDtl = context.sp_GetTrainerDetails_TblCalendar(SessionID).FirstOrDefault();
+                                    var FacultyDtl = VendorFAC_List.Where(x => x.FAC_Code == FacultyCode && x.IsActive == true).FirstOrDefault();
+                                    if (FacultyDtl != null)
+                                    {
+                                        var Check = context.TblNominations.Where(x => x.MSPIN == MSPIN && x.IsActive == true).FirstOrDefault();
+                                        if (Check == null)
+                                        {
+                                            //continue;
+                                            TblNomination NM = new TblNomination
+                                            {
+                                                FacultyCode = CalendarTrainerDtl != null ? CalendarTrainerDtl.TrainerCode : FacultyDtl.ManagerID,
+                                                IsActive = true,
+                                                MSPIN = MSPIN,
+                                                AgencyCode = AgencyCode,
+                                                Co_id = Co_id,
+                                                Agency_Id = AgencyDtl.Agency_Id,
+                                                DateofBirth = DateofBirth,
+                                                Duration = Duration,
+                                                EndDate = EndDate,
+                                                MobileNo = MobileNo,
+                                                Name = Name,
+                                                ProgramCode = ProgramCode,
+                                                ProgramId = ProgramDtl.ProgramId,
+                                                Faculty_Id = CalendarTrainerDtl != null ? CalendarTrainerDtl.Id : FacultyDtl.Id,
+                                                SessionID = SessionID,
+                                                StartDate = StartDate,
+                                                CreatedBy = 1,
+                                                CreationDate = DateTime.Now,
+                                                DealerName = DealerName,
+                                                Dealer_LocationCode = DealerCode,
+                                                Location = Location,
+                                                Region = Region,
+                                                Venue = Venue
+                                            };
+                                            context.Entry(NM).State = System.Data.Entity.EntityState.Added;
+                                            context.SaveChanges();
+                                            FilteredList.Add(NM);
+                                        }
+                                        else if (Check.EndDate.Value.Date < DateTime.Now.Date)
+                                        {
+                                            Check.IsActive = false;
+                                            Check.ModifiedDate = DateTime.Now;
+                                            Check.ModifiedBy = 1;
+                                            context.Entry(Check).State = System.Data.Entity.EntityState.Modified;
+                                            context.SaveChanges();
+
+                                            TblNomination NM = new TblNomination
+                                            {
+                                                FacultyCode = CalendarTrainerDtl != null ? CalendarTrainerDtl.TrainerCode : FacultyDtl.ManagerID,
+                                                IsActive = true,
+                                                MSPIN = MSPIN,
+                                                AgencyCode = AgencyCode,
+                                                Co_id = Co_id,
+                                                Agency_Id = AgencyDtl.Agency_Id,
+                                                DateofBirth = DateofBirth,
+                                                Duration = Duration,
+                                                EndDate = EndDate,
+                                                MobileNo = MobileNo,
+                                                Name = Name,
+                                                ProgramCode = ProgramCode,
+                                                ProgramId = ProgramDtl.ProgramId,
+                                                Faculty_Id = CalendarTrainerDtl != null ? CalendarTrainerDtl.Id : FacultyDtl.Id,
+                                                SessionID = SessionID,
+                                                StartDate = StartDate,
+                                                CreatedBy = 1,
+                                                CreationDate = DateTime.Now,
+                                                DealerName = DealerName,
+                                                Dealer_LocationCode = DealerCode,
+                                                Location = Location,
+                                                Region = Region,
+                                                Venue = Venue
+                                            };
+
+                                            context.Entry(NM).State = System.Data.Entity.EntityState.Added;
+                                            context.SaveChanges();
+                                            FilteredList.Add(NM);
+                                        }
+                                        else if (Check.EndDate.Value.Date >= DateTime.Now.Date)
+                                        {
+                                            var IsAbsenDtl = context.sp_Get_IfAbesnt_v2(Check.MSPIN, Check.SessionID).Where(x => x.IsPresent == "A").FirstOrDefault();
+                                            if (IsAbsenDtl != null)
+                                            {
+                                                Check.IsActive = false;
+                                                Check.ModifiedDate = DateTime.Now.AddDays(-1);
+                                                Check.ModifiedBy = 1;
+                                                context.Entry(Check).State = System.Data.Entity.EntityState.Modified;
+                                                context.SaveChanges();
+
+                                                TblNomination NM = new TblNomination
+                                                {
+                                                    FacultyCode = CalendarTrainerDtl != null ? CalendarTrainerDtl.TrainerCode : FacultyDtl.ManagerID,
+                                                    IsActive = true,
+                                                    MSPIN = MSPIN,
+                                                    AgencyCode = AgencyCode,
+                                                    Co_id = Co_id,
+                                                    Agency_Id = AgencyDtl.Agency_Id,
+                                                    DateofBirth = DateofBirth,
+                                                    Duration = Duration,
+                                                    EndDate = EndDate,
+                                                    MobileNo = MobileNo,
+                                                    Name = Name,
+                                                    ProgramCode = ProgramCode,
+                                                    ProgramId = ProgramDtl.ProgramId,
+                                                    Faculty_Id = CalendarTrainerDtl != null ? CalendarTrainerDtl.Id : FacultyDtl.Id,
+                                                    SessionID = SessionID,
+                                                    StartDate = StartDate,
+                                                    CreatedBy = 1,
+                                                    CreationDate = DateTime.Now,
+                                                    DealerName = DealerName,
+                                                    Dealer_LocationCode = DealerCode,
+                                                    Location = Location,
+                                                    Region = Region,
+                                                    Venue = Venue
+                                                };
+
+                                                context.Entry(NM).State = System.Data.Entity.EntityState.Added;
+                                                context.SaveChanges();
+                                                FilteredList.Add(NM);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            RetMessage += MSPIN + " - Currently under training at Agency : " + AgencyCode + "\n";
+                                        }
+                                    }
+                                    else
+                                    {
+                                        RetMessage += MSPIN + " - Faculty is not defined under Agency code \n";
+                                        continue;
+                                    }
+                                }
+                                else
+                                {
+                                    if (FacultyCode.Equals(string.Empty) || string.IsNullOrEmpty(FacultyCode))
+                                    {
+                                        var Check = context.TblNominations.Where(x => x.MSPIN == MSPIN && x.IsActive == true).FirstOrDefault();
+                                        if (Check == null)
+                                        {
+                                            TblNomination NM = new TblNomination
+                                            {
+                                                FacultyCode = "",
+                                                IsActive = true,
+                                                MSPIN = MSPIN,
+                                                AgencyCode = AgencyCode,
+                                                Co_id = Co_id,
+                                                Agency_Id = AgencyDtl.Agency_Id,
+                                                DateofBirth = DateofBirth,
+                                                Duration = Duration,
+                                                EndDate = EndDate,
+                                                MobileNo = MobileNo,
+                                                Name = Name,
+                                                ProgramCode = ProgramCode,
+                                                ProgramId = ProgramDtl.ProgramId,
+                                                Faculty_Id = null,
+                                                SessionID = SessionID,
+                                                StartDate = StartDate,
+                                                CreatedBy = 1,
+                                                CreationDate = DateTime.Now
+                                            };
+                                            context.Entry(NM).State = System.Data.Entity.EntityState.Added;
+                                            context.SaveChanges();
+                                            FilteredList.Add(NM);
+                                        }
+                                        else if (Check.EndDate.Value.Date < DateTime.Now.Date)
+                                        {
+                                            Check.IsActive = false;
+                                            Check.ModifiedDate = DateTime.Now;
+                                            Check.ModifiedBy = 1;
+                                            context.Entry(Check).State = System.Data.Entity.EntityState.Modified;
+                                            context.SaveChanges();
+
+                                            TblNomination NM = new TblNomination
+                                            {
+                                                FacultyCode = FacultyCode,
+                                                IsActive = true,
+                                                MSPIN = MSPIN,
+                                                AgencyCode = AgencyCode,
+                                                Co_id = Co_id,
+                                                Agency_Id = AgencyDtl.Agency_Id,
+                                                DateofBirth = DateofBirth,
+                                                Duration = Duration,
+                                                EndDate = EndDate,
+                                                MobileNo = MobileNo,
+                                                Name = Name,
+                                                ProgramCode = ProgramCode,
+                                                ProgramId = ProgramDtl.ProgramId,
+                                                Faculty_Id = null,
+                                                SessionID = SessionID,
+                                                StartDate = StartDate,
+                                                CreatedBy = 1,
+                                                CreationDate = DateTime.Now
+                                            };
+
+                                            context.Entry(NM).State = System.Data.Entity.EntityState.Added;
+                                            context.SaveChanges();
+                                            FilteredList.Add(NM);
+                                        }
+                                        else
+                                        {
+                                            RetMessage += MSPIN + " - Currently under training at Agency : " + AgencyCode + "\n";
+                                        }
+                                    }
+                                    else
+                                    {
+                                        var FacultyDtl = FacultyList.Where(x => x.FacultyCode == FacultyCode && x.Agency_Id == AgencyDtl.Agency_Id && x.IsActive == true).FirstOrDefault();
+                                        if (FacultyDtl != null)
+                                        {
+                                            var Check = context.TblNominations.Where(x => x.MSPIN == MSPIN && x.IsActive == true).FirstOrDefault();
+                                            if (Check == null)
+                                            {
+                                                TblNomination NM = new TblNomination
+                                                {
+                                                    FacultyCode = FacultyCode,
+                                                    IsActive = true,
+                                                    MSPIN = MSPIN,
+                                                    AgencyCode = AgencyCode,
+                                                    Co_id = Co_id,
+                                                    Agency_Id = AgencyDtl.Agency_Id,
+                                                    DateofBirth = DateofBirth,
+                                                    Duration = Duration,
+                                                    EndDate = EndDate,
+                                                    MobileNo = MobileNo,
+                                                    Name = Name,
+                                                    ProgramCode = ProgramCode,
+                                                    ProgramId = ProgramDtl.ProgramId,
+                                                    Faculty_Id = FacultyDtl.Faculty_Id,
+                                                    SessionID = SessionID,
+                                                    StartDate = StartDate,
+                                                    CreatedBy = 1,
+                                                    CreationDate = DateTime.Now,
+                                                    DealerName = DealerName,
+                                                    Dealer_LocationCode = DealerCode,
+                                                    Location = Location,
+                                                    Region = Region,
+                                                    Venue = Venue
+                                                };
+                                                context.Entry(NM).State = System.Data.Entity.EntityState.Added;
+                                                context.SaveChanges();
+                                                FilteredList.Add(NM);
+                                            }
+                                            else if (Check.EndDate.Value.Date < DateTime.Now.Date)
+                                            {
+                                                Check.IsActive = false;
+                                                Check.ModifiedDate = DateTime.Now;
+                                                Check.ModifiedBy = 1;
+                                                context.Entry(Check).State = System.Data.Entity.EntityState.Modified;
+                                                context.SaveChanges();
+
+                                                TblNomination NM = new TblNomination
+                                                {
+                                                    FacultyCode = FacultyCode,
+                                                    IsActive = true,
+                                                    MSPIN = MSPIN,
+                                                    AgencyCode = AgencyCode,
+                                                    Co_id = Co_id,
+                                                    Agency_Id = AgencyDtl.Agency_Id,
+                                                    DateofBirth = DateofBirth,
+                                                    Duration = Duration,
+                                                    EndDate = EndDate,
+                                                    MobileNo = MobileNo,
+                                                    Name = Name,
+                                                    ProgramCode = ProgramCode,
+                                                    ProgramId = ProgramDtl.ProgramId,
+                                                    Faculty_Id = FacultyDtl.Faculty_Id,
+                                                    SessionID = SessionID,
+                                                    StartDate = StartDate,
+                                                    CreatedBy = 1,
+                                                    CreationDate = DateTime.Now,
+                                                    DealerName = DealerName,
+                                                    Dealer_LocationCode = DealerCode,
+                                                    Location = Location,
+                                                    Region = Region,
+                                                    Venue = Venue
+                                                };
+
+                                                context.Entry(NM).State = System.Data.Entity.EntityState.Added;
+                                                context.SaveChanges();
+                                                FilteredList.Add(NM);
+                                            }
+                                            else if (Check.EndDate.Value.Date >= DateTime.Now.Date)
+                                            {
+                                                var IsAbsenDtl = context.sp_Get_IfAbesnt_v2(Check.MSPIN, Check.SessionID).Where(x => x.IsPresent == "A").FirstOrDefault();
+                                                if (IsAbsenDtl != null)
+                                                {
+                                                    Check.IsActive = false;
+                                                    Check.ModifiedDate = DateTime.Now;
+                                                    Check.ModifiedBy = 1;
+                                                    context.Entry(Check).State = System.Data.Entity.EntityState.Modified;
+                                                    context.SaveChanges();
+
+                                                    TblNomination NM = new TblNomination
+                                                    {
+                                                        FacultyCode = FacultyCode,
+                                                        IsActive = true,
+                                                        MSPIN = MSPIN,
+                                                        AgencyCode = AgencyCode,
+                                                        Co_id = Co_id,
+                                                        Agency_Id = AgencyDtl.Agency_Id,
+                                                        DateofBirth = DateofBirth,
+                                                        Duration = Duration,
+                                                        EndDate = EndDate,
+                                                        MobileNo = MobileNo,
+                                                        Name = Name,
+                                                        ProgramCode = ProgramCode,
+                                                        ProgramId = ProgramDtl.ProgramId,
+                                                        Faculty_Id = FacultyDtl.Faculty_Id,
+                                                        SessionID = SessionID,
+                                                        StartDate = StartDate,
+                                                        CreatedBy = 1,
+                                                        CreationDate = DateTime.Now,
+                                                        DealerName = DealerName,
+                                                        Dealer_LocationCode = DealerCode,
+                                                        Location = Location,
+                                                        Region = Region,
+                                                        Venue = Venue
+                                                    };
+
+                                                    context.Entry(NM).State = System.Data.Entity.EntityState.Added;
+                                                    context.SaveChanges();
+                                                    FilteredList.Add(NM);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                RetMessage += MSPIN + " - Currently under training at Agency : " + AgencyCode + "\n";
+                                            }
+                                        }
+                                        else
+                                        {
+                                            RetMessage += MSPIN + " - Faculty is not defined under Agency code \n";
+                                            continue;
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                TblUploadError UE = new TblUploadError
+                                {
+                                    ColumnName = ProgramDtl == null ? "Program Code" : (AgencyDtl == null ? "Agency Code" : ""),
+                                    CreatedBy = 1,
+                                    CreationDate = DateTime.Now,
+                                    IsActive = true,
+                                    Value = ProgramDtl == null ? ProgramCode : (AgencyDtl == null ? AgencyCode : "")
+                                };
+                                context.Entry(UE).State = System.Data.Entity.EntityState.Added;
+                                context.SaveChanges();
+                                //RetMessage = RetMessage + MSPIN + " - " + (ProgramDtl == null ? "(" + ProgramCode + ") " + "Program Code Does Not Exist <br />" : (AgencyDtl == null ? "(" + AgencyCode + ") " + "Agency Code is Does Not Exist <br />" : ""));
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            TblUploadError UE = new TblUploadError
+                            {
+                                ColumnName = Name.Equals(string.Empty) ? "Name" : (AgencyCode.Equals(string.Empty) ? "AgencyCode" : (FacultyCode.Equals(string.Empty) ? "FacultyCode" : (MSPIN.Equals(string.Empty) ? "MSPIN" : (StartDate == null ? "StartDate" : (EndDate == null ? "EndDate" : (ProgramCode.Equals(string.Empty) ? "ProgramCode" : "")))))),
+                                CreatedBy = 1,
+                                CreationDate = DateTime.Now,
+                                IsActive = true,
+                                Value = Name.Equals(string.Empty) ? Name : (AgencyCode.Equals(string.Empty) ? AgencyCode : (FacultyCode.Equals(string.Empty) ? FacultyCode : (MSPIN.Equals(string.Empty) ? MSPIN : (StartDate == null ? "" : (EndDate == null ? "" : (ProgramCode.Equals(string.Empty) ? ProgramCode : "")))))),
+                            };
+                            context.Entry(UE).State = System.Data.Entity.EntityState.Added;
+                            context.SaveChanges();
+                            //RetMessage += MSPIN + " - " + (Name.Equals(string.Empty) ? "Name Is Empty <br />" : (AgencyCode.Equals(string.Empty) ? "AgencyCode  Is Empty<br />" : (FacultyCode.Equals(string.Empty) ? "FacultyCode Is Empty <br />" : (MSPIN.Equals(string.Empty) ? "MSPIN Is Empty <br />" : (StartDate == null ? "StartDate Is Empty <br />" : (EndDate == null ? "EndDate Is Empty <br />" : (ProgramCode.Equals(string.Empty) ? "ProgramCode Is Empty <br />" : "")))))));
+                            continue;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        continue;
+                    }
+                }
+                bool Status = CreateUserIds(FilteredList);
+            }
+            return RetMessage;
+        }
+
+        public static bool CreateUserIdsForMSPINs(List<TblNomination> FilteredList)
+        {
+            bool isSuccuss;
+            UserDetailsBLL Obj = new UserDetailsBLL
+            {
+                CreatedBy = 1,
+                CreationDate = DateTime.Now
+            };
+            using (var context = new CEIDBEntities())
+            {
+                context.Database.CommandTimeout = 15000;
+                try
+                {
+                    foreach (var Dr in FilteredList)// (int i=0;i< dataTable.Rows.Count;i++)
+                    {
+                        string MSPIN = Dr.MSPIN;
+                        int? Agency_Id = Dr.Agency_Id;
+                        var check = context.TblUsers.Where(x => x.UserName == MSPIN && x.Agency_Id == Agency_Id && x.IsActive == true).FirstOrDefault();
+                        if (check == null)
+                        {
+                            string pass = "1234";// Dr.DateofBirth!=null? Dr.DateofBirth.Value.ToString("dd-MM-yyyy"):"1234";
+                            pass = pass.Replace("/", "");
+                            pass = pass.Replace("-", "");
+                            pass = pass.Replace(" ", "");
+
+                            TblUser _user = new TblUser
+                            {
+                                UserName = MSPIN,
+                                Password = pass,
+                                Role_Id = 4,
+                                Agency_Id = Agency_Id,
+                                IsActive = true,
+                                CreatedBy = Obj.User_Id,
+                                CreationDate = DateTime.Now,//LocalTimeRegion.GetLocalDate(),
+                                ModifiedBy = null,
+                                ModifiedDate = null
+                            };
+                            context.Entry(_user).State = System.Data.Entity.EntityState.Added;
+                            context.SaveChanges();
+                        }
+                        else
+                        {
+                            check.IsActive = false;
+                            check.ModifiedBy = Obj.User_Id;
+                            check.ModifiedDate = DateTime.Now;
+
+                            context.Entry(check).State = System.Data.Entity.EntityState.Modified;
+                            context.SaveChanges();
+
+                            string pass = "1234";//  Convert.ToDateTime(Dr["Date of Birth"].ToString()).ToString("dd-MM-yyyy");
+                            pass = pass.Replace("/", "");
+                            pass = pass.Replace("-", "");
+                            pass = pass.Replace(" ", "");
+
+                            TblUser _user = new TblUser
+                            {
+                                UserName = MSPIN,
+                                Password = pass,
+                                Role_Id = 4,
+                                Agency_Id = Agency_Id,
+                                IsActive = true,
+                                CreatedBy = Obj.User_Id,
+                                CreationDate = DateTime.Now,//LocalTimeRegion.GetLocalDate(),
+                                ModifiedBy = null,
+                                ModifiedDate = null
+                            };
+                            context.Entry(_user).State = System.Data.Entity.EntityState.Added;
+                            context.SaveChanges();
+                        }
+                    }
+                    isSuccuss = true;
+                }
+                catch (Exception ex)
+                {
+                    isSuccuss = false;
+                }
+                finally
+                {
+                    int Sataus = context.SP_BatchJobWith_Practical();
+                }
+            }
+            return isSuccuss;
+        }
+
+        public static void batchJob() {
+            using (var context= new CEIDBEntities())
+            {
+                context.Database.CommandTimeout = 15000;
+                var NominationList = context.sp_GetNominationListForBatchJob().ToList();
+                foreach (var item in NominationList)
+                {
+                    if (item.EvaluationTypeId==1)
+                    {
+                        if (item.QuestionPaperType == "QB")
+                        {
+                            var status = context.sp_Insert_Update_QB(item.ProgramId, item.AgencyCode, item.FacultyCode, item.SessionID, item.StartDate, item.EndDate, item.Duration, item.MSPIN, item.ProgramCode, item.TestCode, item.DayCount, item.TypeOfTest, item.TotalNoQuestion, item.Marks_Question, item.Total_Marks, item.ProgramTestCalenderId, item.TestDuration, item.EvaluationTypeId,item.QuestionPaperType,null);
+                        }
+                        else {
+                            var setNo = context.sp_SelectRandom_Ques_Set(item.MSPIN, item.ProgramTestCalenderId).FirstOrDefault();
+                            var status = context.sp_Insert_Update_QB(item.ProgramId, item.AgencyCode, item.FacultyCode, item.SessionID, item.StartDate, item.EndDate, item.Duration, item.MSPIN, item.ProgramCode, item.TestCode, item.DayCount, item.TypeOfTest, item.TotalNoQuestion, item.Marks_Question, item.Total_Marks, item.ProgramTestCalenderId, item.TestDuration, item.EvaluationTypeId, item.QuestionPaperType, setNo.Set_Id);
+                        }
+
+                    }
+                }
+            }
+        }
+
     }
 }

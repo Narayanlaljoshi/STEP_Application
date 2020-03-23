@@ -38,24 +38,24 @@ app.service('QuestionBankService', function ($http, $location) {
         });
     };
 
-    this.GetQuestionBankList = function (id) {
-        return $http.get(this.AppUrl + '/QuestionBank/GetQuestionBankList?id=' + id);
+    this.GetQuestionBankList = function (id, Set_Id) {
+        return $http.get(this.AppUrl + '/QuestionBank/GetQuestionBankList?id=' + id + '&Set_Id=' + Set_Id);
     };
 
     this.GetLanguageList = function () {
-        return $http.get(this.AppUrl + '/LanguageMaster/GetLanguage')
+        return $http.get(this.AppUrl + '/LanguageMaster/GetLanguage');
     };
-
-
+    this.GetSetSequenceList = function () {
+        return $http.get(this.AppUrl + '/QuestionBank/GetSetSequenceList');
+    };
     this.GetPrgramLanguage = function (id) {
         return $http.get(this.AppUrl + '/QuestionBank/GetLanguage?id=' + id);
     };
 
-    this.UploadLanguage = function (fd) {                                //----------------------upload excel against Question (LANGUAGE) ------------------//
+    this.UploadLanguage = function (fd) {
         return $http.post(this.AppUrl + '/QuestionBank/UploadLanguage', fd, {
             transformRequest: angular.identity,
             headers: { 'Content-Type': undefined }
-
         });
     };
     
@@ -69,10 +69,7 @@ app.service('QuestionBankService', function ($http, $location) {
 
     this.GetQuestionFormatedList = function (data) {
         return $http.post(this.AppUrl + '/QuestionBank/GetQuestionFormatedList', data, {});
-        //return $http.get(this.AppUrl + '/QuestionBank/GetQuestionFormatedList?id=' + id +'&LangId=' + LangId);
     };
-
-
 });
 app.controller('QuestionBankController', function ($scope, $http, $location, QuestionBankService, ProgramTestCalenderService, $rootScope) {
     $scope.ShowDeleteAllButton = false;
@@ -107,8 +104,8 @@ app.controller('QuestionBankController', function ($scope, $http, $location, Que
         $scope.ProgramName = ProgramTestCalenderService.ProgramName;
         $scope.ProgramId = ProgramTestCalenderService.ProgramId;
         $scope.ProgramCode = ProgramTestCalenderService.ProgramCode;
-
-
+        $scope.QuestionPaperType = ProgramTestCalenderService.QuestionPaperType;
+        $scope.Set_Id = $scope.QuestionPaperType == 'QB' ? 0 : 1;
         $scope.showAddBulkButton = true;
 
         $scope.showQuestionGrid = true;
@@ -126,7 +123,7 @@ app.controller('QuestionBankController', function ($scope, $http, $location, Que
         $scope.QuestionDetailData = {};
 
         if (ProgramTestCalenderService.id) {
-            QuestionBankService.GetQuestionBankList(ProgramTestCalenderService.id).then(function success(data) {
+            QuestionBankService.GetQuestionBankList(ProgramTestCalenderService.id, $scope.Set_Id).then(function success(data) {
                 $scope.QuestionBankData = data.data;
                 console.log("Get Question Bank Service Data List", $scope.QuestionBankData);
             }, function error(data) {
@@ -140,7 +137,6 @@ app.controller('QuestionBankController', function ($scope, $http, $location, Que
                 console.log("Error in loading data from EDB");
             });
             //--------------bulk language screen ------- dropdown-- //
-
             QuestionBankService.GetPrgramLanguage($scope.ProgramId).then(function success(data) {
                 $scope.ProgramLanguageArray = data.data;
                 console.log("Program Language Array List", $scope.ProgramLanguageArray);
@@ -148,20 +144,20 @@ app.controller('QuestionBankController', function ($scope, $http, $location, Que
                 console.log("Error in loading data from EDB");
             });
 
-
-
+            QuestionBankService.GetSetSequenceList().then(function success(data) {
+                $scope.SetSequence = data.data;
+            }, function error(data) {
+                console.log("Error in loading data from EDB");
+            });
         }
         else {
             window.location.href = '#/ProgramTestCalender/';
         }
-
-
     };
 
     $scope.SelectAllQues = function () {
         if ($scope.SelectAll == true) {
             $scope.ShowDeleteAllButton = true;
-
             angular.forEach($scope.QuestionBankData, function (value, key) {
                 value.IsChecked = true;
             });
@@ -175,17 +171,15 @@ app.controller('QuestionBankController', function ($scope, $http, $location, Que
     };
     $scope.SelectedQuestions = function () {
 
-
         $scope.IsAnySelected = false;
         angular.forEach($scope.QuestionBankData, function (value, key) {
-            if (value.IsChecked == true) { $scope.IsAnySelected = true }
+            if (value.IsChecked == true) { $scope.IsAnySelected = true;}
         });
         if ($scope.IsAnySelected == true) {
             $scope.ShowDeleteAllButton = true;
         }
         else {
             $scope.ShowDeleteAllButton = false;
-
         }
     };
     $scope.DeleteAllSelected = function () {
@@ -327,7 +321,7 @@ app.controller('QuestionBankController', function ($scope, $http, $location, Que
         var Obj = {            
             LanguageMasterId: id,
             CreatedBy: $rootScope.session.User_Id,            //$rootScope.session.data.User_Id,
-            ModifiedBy: $rootScope.session.User_Id,
+            ModifiedBy: $rootScope.session.User_Id
         };
         console.log("Obj", Obj);
         fd.append('file', $scope.File2);
@@ -353,42 +347,34 @@ app.controller('QuestionBankController', function ($scope, $http, $location, Que
 
     $scope.UploadExcelfunction = function () {
 
-        console.log("UploadExcel ex");
-
-
         if (!$scope.File1) {
             swal("Error", "Please upload the excel", "error");
             return false;
         }
-
-
+        if (ProgramTestCalenderService.QuestionPaperType === "Set" && !$scope.Set_Id) {
+            swal("", "Please select Set Sequence", "warning");
+            return false;
+        }
         console.log($scope.files);
         var fd = new FormData();
         var Obj = {
-
             ProgramTestCalenderId: ProgramTestCalenderService.id,
-            CreatedBy: $rootScope.session.User_Id,            //$rootScope.session.data.User_Id,
+            CreatedBy: $rootScope.session.User_Id,
             ModifiedBy: $rootScope.session.User_Id,
+            Set_Id: $scope.Set_Id
         };
         console.log("Obj", Obj);
         fd.append('file', $scope.File1);
         fd.append('data', angular.toJson(Obj));
 
-
-
-        console.log("upload");
-       // var file = $scope.File1;
-
-       // console.log(file);
-        //var fd = new FormData();
-      //  fd.append('file', file);
-
-
-        console.log(fd);
-
         QuestionBankService.UploadExcel(fd).then(function (success) {
-            swal("Save!", "Your file has been Uploaded.", "success");
-            $scope.init();
+            if (success.data.indexOf('Success') != -1) {
+                swal("Save!", "Your file has been Uploaded.", "success");
+                $scope.init();
+            }
+            else {
+                swal("", success.data,"error");
+            }
         },
             function (error) {
                 console.log(error.data);
@@ -417,8 +403,6 @@ app.controller('QuestionBankController', function ($scope, $http, $location, Que
        
     $scope.updateImage = function () {
 
-
-
         console.log($scope.QuestionDetailData);
 
         var fd = new FormData();
@@ -427,7 +411,6 @@ app.controller('QuestionBankController', function ($scope, $http, $location, Que
         fd.append('data', angular.toJson($scope.QuestionDetailData));
 
         console.log(fd);
-
 
         QuestionBankService.UploadData(fd).then(function (success) {
           //  swal("Save!", "Your file has been Uploaded.", "success");
@@ -479,39 +462,11 @@ app.controller('QuestionBankController', function ($scope, $http, $location, Que
             return date;
         };
 
-
-        //var mystyle = {
-        //    headers: true,
-        //    columns: [
-        //        { columnid: 'QuestionCode', title: 'Question Code' },
-        //        { columnid: 'Question', title: 'Question' },
-        //        { columnid: 'Answer1', title: 'Answer(a)' },
-        //        { columnid: 'Answer2', title: 'Answer(b)' },
-        //        { columnid: 'Answer3', title: 'Answer(c)' },
-        //        { columnid: 'Answer4', title: 'Answer(d)' },
-        //        //{ columnid: 'AnswerKey', title: 'Answer Key' },
-        //        { columnid: 'QueInOther', title: 'QueInOtherLang' },//QueInOther=question in other language
-        //        { columnid: 'AnswerA', title: 'Answer(a)' },
-        //        { columnid: 'AnswerB', title: 'Answer(b)' },
-        //        { columnid: 'AnswerC', title: 'Answer(c)' },
-        //        { columnid: 'AnswerD', title: 'Answer(d)' },
-
-        //    ],
-        //};
-
         alasql.promise('SELECT QuestionCode,Question,Answer1  A,Answer2  B,Answer3  C,Answer4  D,QueInOther  QueInOther,AnswerA,AnswerB,AnswerC,AnswerD INTO XLSX("QuestionLanguage.xlsx",{headers:true}) FROM ? ', [$scope.QuestionBankData]).then(function (data) {
             console.log('Data saved');
         }).catch(function (err) {
             console.log('Error:', err);
         });
-        //var res = alasql('SELECT *  FROM  ?', $scope.QuestionBankData);
-        //console.log(res);
-
-
-        //        var res = alasql('SELECT * INTO XLSX ("CCReport.xlsx",{headers:true}) FROM ?', [$scope.List]);
-        //console.log(res);
-
-
     };
 
 
@@ -521,7 +476,7 @@ app.controller('QuestionBankController', function ($scope, $http, $location, Que
         var QuestionVariable = {
             id: ProgramTestCalenderService.id,
             LangId: pt,
-
+            Set_Id: $scope.Set_Id
         };
         console.log(ProgramTestCalenderService.id);
         console.log(QuestionVariable);
@@ -532,10 +487,7 @@ app.controller('QuestionBankController', function ($scope, $http, $location, Que
         }, function error(data) {
             console.log("Error in loading data from EDB");
         });
-
-
     };
-
 
     $scope.Back = function () {
         window.location.href = '#/ProgramTestCalender/';

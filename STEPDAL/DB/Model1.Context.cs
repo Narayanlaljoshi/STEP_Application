@@ -40,8 +40,6 @@ namespace STEPDAL.DB
         public virtual DbSet<TblPhotoDocumentDtl> TblPhotoDocumentDtls { get; set; }
         public virtual DbSet<tblPrgramMasterDetail> tblPrgramMasterDetails { get; set; }
         public virtual DbSet<TblProgramMaster> TblProgramMasters { get; set; }
-        public virtual DbSet<TblProgramTestCalender> TblProgramTestCalenders { get; set; }
-        public virtual DbSet<TblProgramTestCalenderDetail> TblProgramTestCalenderDetails { get; set; }
         public virtual DbSet<TblProgramTypeMaster> TblProgramTypeMasters { get; set; }
         public virtual DbSet<TblQuestionLanguageDetail> TblQuestionLanguageDetails { get; set; }
         public virtual DbSet<TblQuestionLanguageDetail_Practical> TblQuestionLanguageDetail_Practical { get; set; }
@@ -69,32 +67,12 @@ namespace STEPDAL.DB
         public virtual DbSet<TblVendorMaster> TblVendorMasters { get; set; }
         public virtual DbSet<TblVendorTrainerMaster> TblVendorTrainerMasters { get; set; }
         public virtual DbSet<Tbl_Log_Report_DMS> Tbl_Log_Report_DMS { get; set; }
+        public virtual DbSet<TblProgramTestCalender> TblProgramTestCalenders { get; set; }
+        public virtual DbSet<TblProgramTestCalenderDetail> TblProgramTestCalenderDetails { get; set; }
     
         public virtual ObjectResult<sp_AttendanceReport_Result> sp_AttendanceReport()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_AttendanceReport_Result>("sp_AttendanceReport");
-        }
-    
-        public virtual int SP_BatchJobMSPIN_And_SessionId_Wise(string newMSPIN, string sessionIdForMSPIN)
-        {
-            var newMSPINParameter = newMSPIN != null ?
-                new ObjectParameter("NewMSPIN", newMSPIN) :
-                new ObjectParameter("NewMSPIN", typeof(string));
-    
-            var sessionIdForMSPINParameter = sessionIdForMSPIN != null ?
-                new ObjectParameter("SessionIdForMSPIN", sessionIdForMSPIN) :
-                new ObjectParameter("SessionIdForMSPIN", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_BatchJobMSPIN_And_SessionId_Wise", newMSPINParameter, sessionIdForMSPINParameter);
-        }
-    
-        public virtual int SP_BatchJobMSPINWise(string newMSPIN)
-        {
-            var newMSPINParameter = newMSPIN != null ?
-                new ObjectParameter("NewMSPIN", newMSPIN) :
-                new ObjectParameter("NewMSPIN", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_BatchJobMSPINWise", newMSPINParameter);
         }
     
         public virtual int SP_BatchJobSessionIDWise()
@@ -387,19 +365,6 @@ namespace STEPDAL.DB
                 new ObjectParameter("programId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_GetLanguage_Result>("Sp_GetLanguage", programIdParameter);
-        }
-    
-        public virtual ObjectResult<Sp_GetLanguageWiseQuestionList_Result> Sp_GetLanguageWiseQuestionList(Nullable<int> programTestCalenderId, Nullable<int> langId)
-        {
-            var programTestCalenderIdParameter = programTestCalenderId.HasValue ?
-                new ObjectParameter("ProgramTestCalenderId", programTestCalenderId) :
-                new ObjectParameter("ProgramTestCalenderId", typeof(int));
-    
-            var langIdParameter = langId.HasValue ?
-                new ObjectParameter("LangId", langId) :
-                new ObjectParameter("LangId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_GetLanguageWiseQuestionList_Result>("Sp_GetLanguageWiseQuestionList", programTestCalenderIdParameter, langIdParameter);
         }
     
         public virtual ObjectResult<sp_GetMarksReport_Result> sp_GetMarksReport(Nullable<int> agency_Id, Nullable<int> faculty_Id, string sessionID, Nullable<int> program_Id, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
@@ -1118,15 +1083,6 @@ namespace STEPDAL.DB
                 new ObjectParameter("ProgramId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ProgramTestCalenderDetail_Result>("Sp_ProgramTestCalenderDetail", programIdParameter);
-        }
-    
-        public virtual ObjectResult<Sp_Question_Detail_Result> Sp_Question_Detail(Nullable<int> programTestCalenderId)
-        {
-            var programTestCalenderIdParameter = programTestCalenderId.HasValue ?
-                new ObjectParameter("ProgramTestCalenderId", programTestCalenderId) :
-                new ObjectParameter("ProgramTestCalenderId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_Question_Detail_Result>("Sp_Question_Detail", programTestCalenderIdParameter);
         }
     
         public virtual int Sp_Region_City()
@@ -2592,6 +2548,246 @@ namespace STEPDAL.DB
         public virtual ObjectResult<sp_GetSessionIdsPendingForClosure_STEPAgency_Result> sp_GetSessionIdsPendingForClosure_STEPAgency()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetSessionIdsPendingForClosure_STEPAgency_Result>("sp_GetSessionIdsPendingForClosure_STEPAgency");
+        }
+    
+        public virtual int sp_Insert_Update_Tbl_Multi_Nomination(string co_id, string region, string venue, string dealer_LocationCode, string dealerName, string city, string location, string agencyCode, string facultyCode, string programCode, string sessionID, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<int> duration, string mSPIN, string name, Nullable<System.DateTime> dateofBirth, string mobileNo, Nullable<bool> isAccepted, Nullable<System.DateTime> creationDate)
+        {
+            var co_idParameter = co_id != null ?
+                new ObjectParameter("Co_id", co_id) :
+                new ObjectParameter("Co_id", typeof(string));
+    
+            var regionParameter = region != null ?
+                new ObjectParameter("Region", region) :
+                new ObjectParameter("Region", typeof(string));
+    
+            var venueParameter = venue != null ?
+                new ObjectParameter("Venue", venue) :
+                new ObjectParameter("Venue", typeof(string));
+    
+            var dealer_LocationCodeParameter = dealer_LocationCode != null ?
+                new ObjectParameter("Dealer_LocationCode", dealer_LocationCode) :
+                new ObjectParameter("Dealer_LocationCode", typeof(string));
+    
+            var dealerNameParameter = dealerName != null ?
+                new ObjectParameter("DealerName", dealerName) :
+                new ObjectParameter("DealerName", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("City", city) :
+                new ObjectParameter("City", typeof(string));
+    
+            var locationParameter = location != null ?
+                new ObjectParameter("Location", location) :
+                new ObjectParameter("Location", typeof(string));
+    
+            var agencyCodeParameter = agencyCode != null ?
+                new ObjectParameter("AgencyCode", agencyCode) :
+                new ObjectParameter("AgencyCode", typeof(string));
+    
+            var facultyCodeParameter = facultyCode != null ?
+                new ObjectParameter("FacultyCode", facultyCode) :
+                new ObjectParameter("FacultyCode", typeof(string));
+    
+            var programCodeParameter = programCode != null ?
+                new ObjectParameter("ProgramCode", programCode) :
+                new ObjectParameter("ProgramCode", typeof(string));
+    
+            var sessionIDParameter = sessionID != null ?
+                new ObjectParameter("SessionID", sessionID) :
+                new ObjectParameter("SessionID", typeof(string));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            var durationParameter = duration.HasValue ?
+                new ObjectParameter("Duration", duration) :
+                new ObjectParameter("Duration", typeof(int));
+    
+            var mSPINParameter = mSPIN != null ?
+                new ObjectParameter("MSPIN", mSPIN) :
+                new ObjectParameter("MSPIN", typeof(string));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var dateofBirthParameter = dateofBirth.HasValue ?
+                new ObjectParameter("DateofBirth", dateofBirth) :
+                new ObjectParameter("DateofBirth", typeof(System.DateTime));
+    
+            var mobileNoParameter = mobileNo != null ?
+                new ObjectParameter("MobileNo", mobileNo) :
+                new ObjectParameter("MobileNo", typeof(string));
+    
+            var isAcceptedParameter = isAccepted.HasValue ?
+                new ObjectParameter("IsAccepted", isAccepted) :
+                new ObjectParameter("IsAccepted", typeof(bool));
+    
+            var creationDateParameter = creationDate.HasValue ?
+                new ObjectParameter("CreationDate", creationDate) :
+                new ObjectParameter("CreationDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Insert_Update_Tbl_Multi_Nomination", co_idParameter, regionParameter, venueParameter, dealer_LocationCodeParameter, dealerNameParameter, cityParameter, locationParameter, agencyCodeParameter, facultyCodeParameter, programCodeParameter, sessionIDParameter, startDateParameter, endDateParameter, durationParameter, mSPINParameter, nameParameter, dateofBirthParameter, mobileNoParameter, isAcceptedParameter, creationDateParameter);
+        }
+    
+        public virtual ObjectResult<sp_getMultiNominationListbyAgency_Result> sp_getMultiNominationListbyAgency(string userName)
+        {
+            var userNameParameter = userName != null ?
+                new ObjectParameter("UserName", userName) :
+                new ObjectParameter("UserName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_getMultiNominationListbyAgency_Result>("sp_getMultiNominationListbyAgency", userNameParameter);
+        }
+    
+        public virtual int SP_BatchJobMSPIN_And_SessionId_Wise(string newMSPIN, string newSessionId)
+        {
+            var newMSPINParameter = newMSPIN != null ?
+                new ObjectParameter("NewMSPIN", newMSPIN) :
+                new ObjectParameter("NewMSPIN", typeof(string));
+    
+            var newSessionIdParameter = newSessionId != null ?
+                new ObjectParameter("NewSessionId", newSessionId) :
+                new ObjectParameter("NewSessionId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_BatchJobMSPIN_And_SessionId_Wise", newMSPINParameter, newSessionIdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetNominationListForBatchJob_Result> sp_GetNominationListForBatchJob()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetNominationListForBatchJob_Result>("sp_GetNominationListForBatchJob");
+        }
+    
+        public virtual int sp_Insert_Update_QB(Nullable<int> programId, string agencyCode, string facultyCode, string sessionID, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<int> duration, string mSPIN, string programCode, string testCode, Nullable<int> dayCount, string typeOfTest, Nullable<int> totalNoQuestion, Nullable<int> marks_Question, Nullable<int> total_Marks, Nullable<int> programTestCalenderId, Nullable<int> testDuration, Nullable<int> evaluationTypeId, string questionPaperType, Nullable<int> set_Id)
+        {
+            var programIdParameter = programId.HasValue ?
+                new ObjectParameter("ProgramId", programId) :
+                new ObjectParameter("ProgramId", typeof(int));
+    
+            var agencyCodeParameter = agencyCode != null ?
+                new ObjectParameter("AgencyCode", agencyCode) :
+                new ObjectParameter("AgencyCode", typeof(string));
+    
+            var facultyCodeParameter = facultyCode != null ?
+                new ObjectParameter("FacultyCode", facultyCode) :
+                new ObjectParameter("FacultyCode", typeof(string));
+    
+            var sessionIDParameter = sessionID != null ?
+                new ObjectParameter("SessionID", sessionID) :
+                new ObjectParameter("SessionID", typeof(string));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            var durationParameter = duration.HasValue ?
+                new ObjectParameter("Duration", duration) :
+                new ObjectParameter("Duration", typeof(int));
+    
+            var mSPINParameter = mSPIN != null ?
+                new ObjectParameter("MSPIN", mSPIN) :
+                new ObjectParameter("MSPIN", typeof(string));
+    
+            var programCodeParameter = programCode != null ?
+                new ObjectParameter("ProgramCode", programCode) :
+                new ObjectParameter("ProgramCode", typeof(string));
+    
+            var testCodeParameter = testCode != null ?
+                new ObjectParameter("TestCode", testCode) :
+                new ObjectParameter("TestCode", typeof(string));
+    
+            var dayCountParameter = dayCount.HasValue ?
+                new ObjectParameter("DayCount", dayCount) :
+                new ObjectParameter("DayCount", typeof(int));
+    
+            var typeOfTestParameter = typeOfTest != null ?
+                new ObjectParameter("TypeOfTest", typeOfTest) :
+                new ObjectParameter("TypeOfTest", typeof(string));
+    
+            var totalNoQuestionParameter = totalNoQuestion.HasValue ?
+                new ObjectParameter("TotalNoQuestion", totalNoQuestion) :
+                new ObjectParameter("TotalNoQuestion", typeof(int));
+    
+            var marks_QuestionParameter = marks_Question.HasValue ?
+                new ObjectParameter("Marks_Question", marks_Question) :
+                new ObjectParameter("Marks_Question", typeof(int));
+    
+            var total_MarksParameter = total_Marks.HasValue ?
+                new ObjectParameter("Total_Marks", total_Marks) :
+                new ObjectParameter("Total_Marks", typeof(int));
+    
+            var programTestCalenderIdParameter = programTestCalenderId.HasValue ?
+                new ObjectParameter("ProgramTestCalenderId", programTestCalenderId) :
+                new ObjectParameter("ProgramTestCalenderId", typeof(int));
+    
+            var testDurationParameter = testDuration.HasValue ?
+                new ObjectParameter("TestDuration", testDuration) :
+                new ObjectParameter("TestDuration", typeof(int));
+    
+            var evaluationTypeIdParameter = evaluationTypeId.HasValue ?
+                new ObjectParameter("EvaluationTypeId", evaluationTypeId) :
+                new ObjectParameter("EvaluationTypeId", typeof(int));
+    
+            var questionPaperTypeParameter = questionPaperType != null ?
+                new ObjectParameter("QuestionPaperType", questionPaperType) :
+                new ObjectParameter("QuestionPaperType", typeof(string));
+    
+            var set_IdParameter = set_Id.HasValue ?
+                new ObjectParameter("Set_Id", set_Id) :
+                new ObjectParameter("Set_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Insert_Update_QB", programIdParameter, agencyCodeParameter, facultyCodeParameter, sessionIDParameter, startDateParameter, endDateParameter, durationParameter, mSPINParameter, programCodeParameter, testCodeParameter, dayCountParameter, typeOfTestParameter, totalNoQuestionParameter, marks_QuestionParameter, total_MarksParameter, programTestCalenderIdParameter, testDurationParameter, evaluationTypeIdParameter, questionPaperTypeParameter, set_IdParameter);
+        }
+    
+        public virtual ObjectResult<sp_SelectRandom_Ques_Set_Result> sp_SelectRandom_Ques_Set(string mSPIN, Nullable<int> programTestCalenderId)
+        {
+            var mSPINParameter = mSPIN != null ?
+                new ObjectParameter("MSPIN", mSPIN) :
+                new ObjectParameter("MSPIN", typeof(string));
+    
+            var programTestCalenderIdParameter = programTestCalenderId.HasValue ?
+                new ObjectParameter("ProgramTestCalenderId", programTestCalenderId) :
+                new ObjectParameter("ProgramTestCalenderId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SelectRandom_Ques_Set_Result>("sp_SelectRandom_Ques_Set", mSPINParameter, programTestCalenderIdParameter);
+        }
+    
+        public virtual ObjectResult<Sp_Question_Detail_Result> Sp_Question_Detail(Nullable<int> programTestCalenderId, Nullable<int> set_Id)
+        {
+            var programTestCalenderIdParameter = programTestCalenderId.HasValue ?
+                new ObjectParameter("ProgramTestCalenderId", programTestCalenderId) :
+                new ObjectParameter("ProgramTestCalenderId", typeof(int));
+    
+            var set_IdParameter = set_Id.HasValue ?
+                new ObjectParameter("Set_Id", set_Id) :
+                new ObjectParameter("Set_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_Question_Detail_Result>("Sp_Question_Detail", programTestCalenderIdParameter, set_IdParameter);
+        }
+    
+        public virtual ObjectResult<Sp_GetLanguageWiseQuestionList_Result> Sp_GetLanguageWiseQuestionList(Nullable<int> programTestCalenderId, Nullable<int> langId, Nullable<int> set_Id)
+        {
+            var programTestCalenderIdParameter = programTestCalenderId.HasValue ?
+                new ObjectParameter("ProgramTestCalenderId", programTestCalenderId) :
+                new ObjectParameter("ProgramTestCalenderId", typeof(int));
+    
+            var langIdParameter = langId.HasValue ?
+                new ObjectParameter("LangId", langId) :
+                new ObjectParameter("LangId", typeof(int));
+    
+            var set_IdParameter = set_Id.HasValue ?
+                new ObjectParameter("Set_Id", set_Id) :
+                new ObjectParameter("Set_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_GetLanguageWiseQuestionList_Result>("Sp_GetLanguageWiseQuestionList", programTestCalenderIdParameter, langIdParameter, set_IdParameter);
         }
     }
 }

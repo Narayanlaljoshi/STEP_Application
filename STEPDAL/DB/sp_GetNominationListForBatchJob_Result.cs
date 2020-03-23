@@ -11,25 +11,26 @@ namespace STEPDAL.DB
 {
     using System;
     
-    public partial class Sp_ProgramTestCalenderDetail_Result
+    public partial class sp_GetNominationListForBatchJob_Result
     {
-        public int ProgramTestCalenderId { get; set; }
         public Nullable<int> ProgramId { get; set; }
+        public string AgencyCode { get; set; }
+        public string FacultyCode { get; set; }
+        public string SessionID { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
+        public Nullable<System.DateTime> EndDate { get; set; }
+        public Nullable<int> Duration { get; set; }
+        public string MSPIN { get; set; }
         public string ProgramCode { get; set; }
-        public string ProgramName { get; set; }
         public string TestCode { get; set; }
-        public Nullable<int> EvaluationTypeId { get; set; }
         public Nullable<int> DayCount { get; set; }
         public string TypeOfTest { get; set; }
         public Nullable<int> TotalNoQuestion { get; set; }
-        public Nullable<int> ValidDuration { get; set; }
         public Nullable<int> Marks_Question { get; set; }
         public Nullable<int> Total_Marks { get; set; }
-        public Nullable<int> Q_Bank { get; set; }
+        public int ProgramTestCalenderId { get; set; }
         public Nullable<int> TestDuration { get; set; }
-        public Nullable<int> PracticalDefaultMarks { get; set; }
-        public Nullable<int> PracticalMaxMarks { get; set; }
-        public Nullable<int> PracticalMinMarks { get; set; }
+        public Nullable<int> EvaluationTypeId { get; set; }
         public string QuestionPaperType { get; set; }
     }
 }

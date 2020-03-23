@@ -249,6 +249,12 @@
     <Compile Include="DB\sp_GetMarksReport_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\sp_getMultiNominationListbyAgency_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\sp_GetNominationListForBatchJob_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\sp_GetNominationListFromDownload_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -409,6 +415,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\Sp_Question_Detail_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\sp_SelectRandom_Ques_Set_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\sp_SessionIDsForManage_Result.cs">
