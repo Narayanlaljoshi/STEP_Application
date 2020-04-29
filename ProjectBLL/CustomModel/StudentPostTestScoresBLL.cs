@@ -15,5 +15,6 @@ namespace ProjectBLL.CustomModel
         public Nullable<int> Day { get; set; }
         public Nullable<int> PostTest_MarksObtained { get; set; }
         public Nullable<int> PostTestMaxMarks { get; set; }
+        public Nullable<int> Set_Id { get; set; }
     }
 }

@@ -36,8 +36,8 @@ namespace STEPDAL.CustomDAL
                     //message.To.Add("tiwarih521@gmail.com");
                     //message.Bcc.Add("himanshu.tiwari@phoenixtech.consulting");
 
-                    message.CC.Add("narayan.joshi@phoenixtech.consulting");
-                    message.CC.Add("shubham.jain@phoenixtech.consulting");
+                    message.CC.Add("step_support@phoenixtech.consulting");
+                    //message.CC.Add("shubham.jain@phoenixtech.consulting");
 
                     if (toEmail != null)
                     {

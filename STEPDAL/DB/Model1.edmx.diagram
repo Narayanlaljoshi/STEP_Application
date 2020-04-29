@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="STEPDBBetaModel.TblAgencyBioMetricMaster" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblAttendance" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblAttendance_SSTC" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="STEPDBBetaModel.TblAttendancePunchIn" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblEvaluationTypeMaster" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblFaculty" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="STEPDBBetaModel.tblLanguageMaster" Width="1.5" PointX="4.75" PointY="8.75" IsExpanded="true" />
@@ -46,8 +45,12 @@
         <EntityTypeShape EntityType="STEPDBBetaModel.TblVendorMaster" Width="1.5" PointX="19.375" PointY="13.75" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblVendorTrainerMaster" Width="1.5" PointX="19.375" PointY="18.75" />
         <EntityTypeShape EntityType="STEPDBBetaModel.Tbl_Log_Report_DMS" Width="1.5" PointX="20.375" PointY="0.75" />
-        <EntityTypeShape EntityType="STEPDBBetaModel.TblProgramTestCalender" Width="1.5" PointX="0.75" PointY="10.75" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblProgramTestCalenderDetail" Width="1.5" PointX="3.375" PointY="12.75" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblQueryAttachment" Width="1.5" PointX="21.375" PointY="4.75" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblQueryDetail" Width="1.5" PointX="21.375" PointY="8.75" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblQueryHeader" Width="1.5" PointX="21.375" PointY="12.75" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblProgramTestCalender" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblAttendancePunchIn" Width="1.5" PointX="21.375" PointY="17.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

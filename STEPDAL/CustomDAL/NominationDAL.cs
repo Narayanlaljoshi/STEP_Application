@@ -817,7 +817,8 @@ namespace STEPDAL.CustomDAL
                 }
                 finally
                 {
-                    int Sataus = context.SP_BatchJobWith_Practical();
+                    NominationDAL.batchJob();
+                    //int Sataus = context.SP_BatchJobWith_Practical();
                 }
             }
             return isSuccuss;
@@ -1624,7 +1625,7 @@ namespace STEPDAL.CustomDAL
             return isSuccuss;
         }
 
-        public static string FilterNomination_MultiNomination(List<MultiNominationList> Obj)
+        public static string FilterNomination_MultiNomination(List<MultiNominationDetails> Obj)
         {
             string RetMessage = string.Empty;
             using (var context = new CEIDBEntities())

@@ -39,5 +39,7 @@ namespace STEPDAL.DB
         public string LanguageAnswer2 { get; set; }
         public string LanguageAnswer3 { get; set; }
         public string LanguageAnswer4 { get; set; }
+        public Nullable<bool> EnableJumbling { get; set; }
+        public Nullable<int> Set_Id { get; set; }
     }
 }

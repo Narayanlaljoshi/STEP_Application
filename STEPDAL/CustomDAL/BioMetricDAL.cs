@@ -17,10 +17,6 @@ namespace STEPDAL.CustomDAL
             {
                 try
                 {
-                    //byte[] Thumb_1 = Encoding.ASCII.GetBytes(Obj.Thumb_1);
-                    //byte[] Thumb_2 = Encoding.ASCII.GetBytes(Obj.Thumb_2);
-                    //byte[] Candidate_Image = Encoding.ASCII.GetBytes(Obj.Candidate_Image);
-                    //byte[] Document_Image = Encoding.ASCII.GetBytes(Obj.Document_Image);
                     int Status = Context.SP_InsertIntoTblRegistrationData(Obj.MSPIN, Obj.Thumb_1, Obj.Thumb_2, Obj.Candidate_Image, Obj.Document_Image,Obj.IsActive,Obj.CreatedBy);
                     if (Status > 0)
                     {
@@ -46,9 +42,6 @@ namespace STEPDAL.CustomDAL
                 try
                 {
                     var ReqData = Context.SP_CheckMSPIN_Registered_NotRegistered(AgencyCode,MSPIN).FirstOrDefault();
-                    //var ReaqData2 = Context.SP_CheckMSPIN_Registered_NotRegistered(AgencyCode, "736121").FirstOrDefault();
-
-                    //bool IsMatched = ReqData.Candidate_Image.Equals(ReaqData2.Candidate_Image);
 
                     if (ReqData != null)
                     {
@@ -63,7 +56,45 @@ namespace STEPDAL.CustomDAL
                             Name= ReqData.Name
                         };
                         return Dtl;
-                    }                    
+                    }
+                    else
+                        return null;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+
+        public static MSPINDetails GetDetailsforMSPIN(string MSPIN, string AgencyCode)
+        {
+            using (var Context = new CEIDBEntities())
+            {
+                MSPINDetails Dtl=null;
+                try
+                {
+                    var ReqData = Context.SP_CheckMSPIN_Registered_NotRegistered(AgencyCode, MSPIN).ToList();
+
+                    if (ReqData.Count != 0)
+                    {
+                        Dtl = new MSPINDetails
+                        {
+                            AgencyCode = ReqData[0].AgencyCode,
+                            Candidate_Image = ReqData[0].Candidate_Image,
+                            Document_Image = ReqData[0].Document_Image,
+                            IsRegistered = ReqData[0].IsRegistered,
+                            MSPIN = ReqData[0].MSPIN,
+                            Thumb_1 = ReqData[0].Thumb_1,
+                            Thumb_2 = ReqData[0].Thumb_2,
+                            Name = ReqData[0].Name,
+                            CourseDetails= ReqData.Select(x => new CourseDTL {
+                                ProgramName=x.ProgramName,
+                                SessionID=x.SessionID
+                            }).ToList()
+                        };
+                        return Dtl;
+                    }
                     else
                         return null;
                 }
@@ -135,6 +166,7 @@ namespace STEPDAL.CustomDAL
                 }
             }
         }
+
         public static BiometricVersiondetails UpdateBiometricVersionMapping(BiometricVersiondetails_V2 Obj)
         {
             using (var Context = new CEIDBEntities())

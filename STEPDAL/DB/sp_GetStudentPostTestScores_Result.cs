@@ -21,5 +21,6 @@ namespace STEPDAL.DB
         public Nullable<int> PostTest_MarksObtained { get; set; }
         public int ProgramTestCalenderId { get; set; }
         public Nullable<int> PostTestMaxMarks { get; set; }
+        public Nullable<int> Set_Id { get; set; }
     }
 }

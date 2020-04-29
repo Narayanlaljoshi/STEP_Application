@@ -221,6 +221,7 @@
     <Compile Include="Controllers\NominationController.cs" />
     <Compile Include="Controllers\ProgramMasterController.cs" />
     <Compile Include="Controllers\ProgramTestCalenderController.cs" />
+    <Compile Include="Controllers\QueriesController.cs" />
     <Compile Include="Controllers\QuestionBankController.cs" />
     <Compile Include="Controllers\RegistrationInfoController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
@@ -427,6 +428,8 @@
     <Content Include="partial\ProgramMaster.html" />
     <Content Include="partial\ProgramTestCalender.html" />
     <Content Include="partial\ProgramTestCalender_Evaluation.html" />
+    <Content Include="partial\Queries_Admin.html" />
+    <Content Include="partial\Queries_User.html" />
     <Content Include="partial\QuestionBank.html" />
     <Content Include="partial\QuestionBankPractical.html" />
     <Content Include="partial\RegionMaster.html" />
@@ -1355,6 +1358,8 @@
     <Content Include="WorkingJS\ProgramMaster.js" />
     <Content Include="WorkingJS\ProgramTestCalender.js" />
     <Content Include="WorkingJS\ProgramTestCalender_Evaluation.js" />
+    <Content Include="WorkingJS\Queries_Admin.js" />
+    <Content Include="WorkingJS\Queries_User.js" />
     <Content Include="WorkingJS\QuestionBank.js" />
     <Content Include="WorkingJS\QuestionBankPractical.js" />
     <Content Include="WorkingJS\RegionMaster.js" />
@@ -1438,6 +1443,7 @@
     <Folder Include="dist\js\pages\" />
     <Folder Include="Documents\" />
     <Folder Include="Models\" />
+    <Folder Include="QueryAttachment\" />
     <Folder Include="ServiceReferences\" />
     <Folder Include="UploadedImages\" />
     <Folder Include="Uploaded\" />

@@ -48,13 +48,14 @@
                 <button class="btn btn-success btn-sm btn-xs" ng-click="AddQuestionBank()">Add Question </button>
 
                 <button class="btn btn-primary btn-sm btn-xs" ng-click="AddBulk()">Bulk Upload</button>
-                <button class="btn btn-primary btn-sm btn-xs" ng-click="AddLanguage()">Add Language Wise </button>
+                <button class="btn btn-primary btn-sm btn-xs" ng-click="AddLanguage()">Add Additional Language </button>
                 <button class="btn btn-danger btn-sm btn-xs" ng-show="ShowDeleteAllButton" ng-click="DeleteAllSelected()">Delete All Selected</button>
                 <button class="btn btn-warning btn-sm pull-right btn-xs" ng-click="Back()">Back</button>
                 <input type="text" placeholder="Search here.." ng-model="SearchText" />
                 
                 <select class="form-control" ng-show="QuestionPaperType=='Set'" ng-options="item.Set_Id as ('Set-')+item.SetNumber for item in SetSequence" ng-op="" ng-model="Set_Id"
-                        style="width:166PX;FLOAT:RIGHT;MARGIN-RIGHT: 15PX;HEIGHT: 30PX;">
+                        style="width:166PX;FLOAT:RIGHT;MARGIN-RIGHT: 15PX;HEIGHT: 30PX;"
+                        ng-change="ChangeFormat(QuestionDetailData.LanguageMasterId)">
                     <option value="">Select Set</option>
                 </select>
                 
@@ -193,16 +194,23 @@
   
         <div class="box" style="border:0" ng-show="AddLanguageGrid==true">
             
-             <div class="box-header with-border">
-                    <h3 class="box-title" style="float:left;padding: 7px 0;">Step 1</h3>
-                     <div class="col-xs-4">
-                         <label>Select Language</label>
-                         <select   class="form-control ng-pristine ng-valid ng-valid-required" ng-options="item.LanguageMaster_Id as item.Language for item in ProgramLanguageArray" ng-model="QuestionDetailData.LanguageMaster_Id">
-                             <option value="">---Select Any Language--- </option>
-                         </select>
-                   
-                     </div>
-              </div>
+            <div class="box-header with-border">
+                <h3 class="box-title" style="float:left;padding: 7px 0;">Step 1</h3>
+                <div class="col-xs-4">
+                    <label>Select Additional Language</label>
+                    <select class="form-control ng-pristine ng-valid ng-valid-required" ng-options="item.LanguageMaster_Id as item.Language for item in ProgramLanguageArray" ng-model="QuestionDetailData.LanguageMaster_Id">
+                        <option value="">---Select Any Language--- </option>
+                    </select>
+
+                </div>
+                <div class="col-xs-4">
+                    <label>Select Set</label>
+                    <select class="form-control ng-pristine ng-valid ng-valid-required" ng-show="QuestionPaperType=='Set'" ng-change="GetQuestionBankList()" ng-options="item.Set_Id as ('Set-')+item.SetNumber for item in SetSequence" ng-op="" ng-model="Set_Id">
+                        <option value="">---Select Set---</option>
+                    </select>
+
+                </div>
+            </div>
                 
             <div class="box-header with-border" style="border-bottom:2px solid #f4f4f4">
                 <h3 class="box-title" style="padding: 7px 0;">

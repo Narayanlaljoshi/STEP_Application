@@ -31,5 +31,6 @@ namespace STEPDAL.DB
         public Nullable<int> PracticalMaxMarks { get; set; }
         public Nullable<int> PracticalMinMarks { get; set; }
         public string QuestionPaperType { get; set; }
+        public Nullable<bool> EnableJumbling { get; set; }
     }
 }

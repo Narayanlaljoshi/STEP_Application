@@ -598,7 +598,7 @@ namespace STEPDAL.CustomDAL
             }
         }
 
-        public static List<ProgramTest_QuestionDetail> GetQuestionBankList(int id, int Set_Id)
+        public static List<ProgramTest_QuestionDetail> GetQuestionBankList(int id, int? Set_Id)
         {
             using (var context = new CEIDBEntities())
             {
@@ -789,7 +789,7 @@ namespace STEPDAL.CustomDAL
             using (var context = new CEIDBEntities())
             {
                 var data = context.Sp_GetLanguage(id).ToList();
-
+                data = data.Where(x => x.Language != "English").ToList();
                 List<GetLanguage_Model> objList = null;
                 objList = data.Select(x => new GetLanguage_Model
                 {

@@ -52,6 +52,7 @@ namespace STEPDAL.CustomDAL
                         TypeOfTest = s.TypeOfTest,
                         ProgramTestCalenderId = s.ProgramTestCalenderId,
                         QuestionPaperType=s.QuestionPaperType,
+                        EnableJumbling=s.EnableJumbling,
                         TotalNoQuestion = s.TotalNoQuestion,
                         TestDuration = s.TestDuration,
                         Marks_Question = s.Marks_Question,
@@ -95,6 +96,7 @@ namespace STEPDAL.CustomDAL
                             TotalNoQuestion = obj.TotalNoQuestion,
                             ProgramTestCalenderId = obj.ProgramTestCalenderId,
                             Marks_Question = obj.Marks_Question,
+                            EnableJumbling=obj.EnableJumbling,
                             Q_Bank = obj.Q_Bank,
                             TestCode = obj.TestCode,
                             QuestionPaperType=obj.QuestionPaperType,
@@ -125,6 +127,7 @@ namespace STEPDAL.CustomDAL
                         prop.EvaluationTypeId= obj.EvaluationTypeId;
                         prop.Marks_Question = obj.Marks_Question;
                         prop.Q_Bank = obj.Q_Bank;
+                        prop.EnableJumbling = obj.EnableJumbling;
                         prop.QuestionPaperType = obj.QuestionPaperType;
                         prop.TestCode = obj.TestCode;
                         prop.Total_Marks = obj.Marks_Question!=null? obj.TotalNoQuestion * obj.Marks_Question:0;
@@ -168,6 +171,7 @@ namespace STEPDAL.CustomDAL
                         Details.TestDuration = info.TestDuration;
                         Details.Q_Bank = info.Q_Bank;
                         Details.QuestionPaperType = info.QuestionPaperType;
+                        Details.EnableJumbling = info.EnableJumbling;
                         Details.TestCode = info.TestCode;
                         Details.Marks_Question = info.Marks_Question;
                         Details.Total_Marks = info.TotalNoQuestion * info.Marks_Question;
@@ -258,16 +262,16 @@ namespace STEPDAL.CustomDAL
                             var dt1 = context.TblProgramTestCalenders.Where(x => x.ProgramId == Request.ProgramId && x.DayCount == DayCount && x.TypeOfTest == TypeOfTest && x.IsActive == true).FirstOrDefault();
 
                             if(dt1 == null)
-                            { 
-                            TblProgramTestCalender item = new TblProgramTestCalender();
+                            {
+                                TblProgramTestCalender item = new TblProgramTestCalender();
 
-                            item.ProgramId = Request.ProgramId;
-                            item.DayCount = DayCount;
-                            item.TestDuration = TestDuration;
-                            item.TypeOfTest = type;
-                            item.TotalNoQuestion = TotalNoQuestion;
-
-                                item.ValidDuration= ValidDuration;
+                                item.ProgramId = Request.ProgramId;
+                                item.DayCount = DayCount;
+                                item.TestDuration = TestDuration;
+                                item.TypeOfTest = type;
+                                item.TotalNoQuestion = TotalNoQuestion;
+                                //item.EnableJumbling = info.EnableJumbling;
+                                item.ValidDuration = ValidDuration;
 
                                 //    item.Q_Bank = Question_Bank;
                                 item.TestCode = TestCode;
@@ -276,14 +280,14 @@ namespace STEPDAL.CustomDAL
                                 item.TestInitiated = false;
 
                                 item.CreationDate = DateTime.Now;
-                            item.CreatedBy = 1;
-                            item.ModifiedDate = DateTime.Now;
-                            item.ModifiedBy = null;
-                            item.IsActive = true;
-                            context.Entry(item).State = System.Data.Entity.EntityState.Added;
-                            context.SaveChanges();
+                                item.CreatedBy = 1;
+                                item.ModifiedDate = DateTime.Now;
+                                item.ModifiedBy = null;
+                                item.IsActive = true;
+                                context.Entry(item).State = System.Data.Entity.EntityState.Added;
+                                context.SaveChanges();
 
-                        }
+                            }
 
                         }
 

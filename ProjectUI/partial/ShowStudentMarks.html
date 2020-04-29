@@ -55,9 +55,11 @@
                 <th>Session ID</th>
                 <th>Date of Start</th>
                 <th>Pre Test Score</th>
-                <th>Post Test Score</th>
+                <th>Set #</th>
+                <th >Post Test Score</th>
 
             </tr>
+           
         </thead>
         <tbody ng-repeat="pt in MarksReport | filter: SearchText">
             <!--|filter: serachText-->
@@ -72,7 +74,9 @@
                     <span ng-if="pt.IsPresentInPreTest==0">NA</span>
                     <span ng-if="pt.IsPresentInPreTest==1">{{pt.PreTest_MarksObtained}}</span>
                     <span ng-if="pt.IsPresentInPreTest==1">({{pt.PreTestPercentage}}%)</span>
+                   
                 </td>
+                <td> <span>{{pt.Set_Id}}</span></td>
                 <td>
                     <span ng-if="pt.IsPresentInPostTest==0">NA</span>
                     <!--<a href="" >-->
@@ -163,6 +167,9 @@
                                     Day
                                 </th>
                                 <th style="text-align:center;">
+                                    Set #
+                                </th>
+                                <th style="text-align:center;">
                                     Marks Scored
                                 </th>
 
@@ -177,6 +184,7 @@
                         <tbody>
                             <tr style="text-align:center;" ng-repeat="pt in StudentPostTestScores |filter:SearchText">
                                 <td>{{pt.Day}}</td>
+                                <td>{{pt.Set_Id}}</td>
                                 <td>{{pt.PostTest_MarksObtained}}</td>
                                 <td>{{pt.PostTestMaxMarks}}</td>
                                 <td>{{(pt.PostTest_MarksObtained*100)/pt.PostTestMaxMarks | number:2}} %</td>

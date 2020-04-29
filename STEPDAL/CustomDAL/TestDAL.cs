@@ -397,6 +397,7 @@ namespace STEPDAL.CustomDAL
             }
         }
 
+
         public static string SaveTestResponse(StudentTestResponse Obj)
         {
             string Msg = "";
@@ -423,8 +424,8 @@ namespace STEPDAL.CustomDAL
 
                     //if (CheckStudentHeader != null)
                     //    {
-                    int Status=context.SP_Insert_Update_TblStudentAnswerHdr(Obj.StudentTestDetails.ProgramTestCalenderId, Obj.StudentTestDetails.ProgramId, Obj.StudentTestDetails.TypeOfTest, Obj.StudentTestDetails.MSPIN, Obj.StudentTestDetails.RemainingTime, Obj.StudentTestDetails.Day, Obj.StudentTestDetails.SessionID, Obj.StudentTestDetails.Status_Id);
-                    TestDAL.LogService("SP_Insert_Update_TblStudentAnswerHdr Status: - "+Status);
+                    //int Status=context.SP_Insert_Update_TblStudentAnswerHdr(Obj.StudentTestDetails.ProgramTestCalenderId, Obj.StudentTestDetails.ProgramId, Obj.StudentTestDetails.TypeOfTest, Obj.StudentTestDetails.MSPIN, Obj.StudentTestDetails.RemainingTime, Obj.StudentTestDetails.Day, Obj.StudentTestDetails.SessionID, Obj.StudentTestDetails.Status_Id);
+                    //TestDAL.LogService("SP_Insert_Update_TblStudentAnswerHdr Status: - "+Status);
                     if (Obj.StudentTestDetails.Status_Id == 1)
                     {
                         context.sp_UpdateTblTestDtl_Evaluation(Obj.StudentTestDetails.MSPIN, Obj.StudentTestDetails.SessionID, Obj.StudentTestDetails.Day);
@@ -449,7 +450,7 @@ namespace STEPDAL.CustomDAL
                         bool IsCorrect = Ques.AnswerGiven == Ques.AnswerKey ? true : false;
                         QuesCode = Ques.QuestionCode;
 
-                        int StatusDtl=context.SP_Insert_Update_TblStudentAnswer(Ques.ProgramTestCalenderId, Ques.ProgramId, null, Ques.MSPIN, Ques.QuestionCode, Ques.AnswerGiven, Ques.AnswerKey, Ques.Day, Ques.TypeOfTest, Ques.SessionID, IsCorrect, true);
+                        int StatusDtl = context.SP_Insert_Update_TblStudentAnswer(Ques.ProgramTestCalenderId, Ques.ProgramId, null, Ques.MSPIN, Ques.QuestionCode, Ques.AnswerGiven, Ques.AnswerKey, Ques.Day, Ques.TypeOfTest, Ques.SessionID, IsCorrect, true, Obj.StudentTestDetails.RemainingTime, Obj.StudentTestDetails.Status_Id);
                         TestDAL.LogService("SP_Insert_Update_TblStudentAnswer Status: - " + StatusDtl);
                         //TblStudentAnswer Sa = new TblStudentAnswer
                         //{
@@ -580,7 +581,7 @@ namespace STEPDAL.CustomDAL
 
                     //}
                     //}
-
+                    Msg = "Success: Response Saved Successfully !";
                 }
                 catch (Exception ex)
                 {
@@ -592,6 +593,7 @@ namespace STEPDAL.CustomDAL
                     {
                         es = es + ex.InnerException;
                     }
+                    Msg = "Error: Response not saved, Please try again!";
                     es = es + "BaseException :-" + ex.GetBaseException();
                     TblLogWhile_AfterSavingQuestions Twas = new TblLogWhile_AfterSavingQuestions
                     {
@@ -615,7 +617,7 @@ namespace STEPDAL.CustomDAL
                     //tr.Complete();
                     //tr.Dispose();
                 }
-                return "Success: Response Saved Successfully !";
+                return Msg;
 
                 //}
             }
@@ -625,9 +627,9 @@ namespace STEPDAL.CustomDAL
         public static string SaveTestResponse2(StudentTestResponse2 Obj)
         {
             string Msg = "";
-            string StudentMSPIN =string.Empty;
-            int? TestDay =null;
-            int? TotalQuestion =null;
+            string StudentMSPIN = string.Empty;
+            int? TestDay = null;
+            int? TotalQuestion = null;
             if (Obj.StudentLanguageQuestion.AnswerGiven == null)
             {
                 Obj.StudentLanguageQuestion.AnswerGiven = "";
@@ -637,23 +639,23 @@ namespace STEPDAL.CustomDAL
                 //using (var scope = new TransactionScope(TransactionScopeOption.Required, new   TransactionOptions
                 //{ IsolationLevel = System.Transactions.IsolationLevel.Snapshot }))
                 //{
-                    // do something with EF here
-                    
+                // do something with EF here
+
                 try
-                    {
-                        StudentMSPIN = Obj.StudentTestDetails.MSPIN;
-                        TestDay = Obj.StudentTestDetails.Day;
-                        TotalQuestion = Obj.StudentTestDetails.TotalNoQuestion;
+                {
+                    StudentMSPIN = Obj.StudentTestDetails.MSPIN;
+                    TestDay = Obj.StudentTestDetails.Day;
+                    TotalQuestion = Obj.StudentTestDetails.TotalNoQuestion;
                     var Ques = Obj.StudentLanguageQuestion;
                     bool IsCorrect = Ques.AnswerGiven == Ques.AnswerKey ? true : false;
 
-                    int HdrStatus=context.SP_Insert_Update_TblStudentAnswerHdr(Obj.StudentTestDetails.ProgramTestCalenderId, Obj.StudentTestDetails.ProgramId, Obj.StudentTestDetails.TypeOfTest, Obj.StudentTestDetails.MSPIN, Obj.StudentTestDetails.RemainingTime, Obj.StudentTestDetails.Day, Obj.StudentTestDetails.SessionID, Obj.StudentTestDetails.Status_Id);
+                    //int HdrStatus=context.SP_Insert_Update_TblStudentAnswerHdr(Obj.StudentTestDetails.ProgramTestCalenderId, Obj.StudentTestDetails.ProgramId, Obj.StudentTestDetails.TypeOfTest, Obj.StudentTestDetails.MSPIN, Obj.StudentTestDetails.RemainingTime, Obj.StudentTestDetails.Day, Obj.StudentTestDetails.SessionID, Obj.StudentTestDetails.Status_Id);
 
-                    int DtlStatus = context.SP_Insert_Update_TblStudentAnswer(Ques.ProgramTestCalenderId, Ques.ProgramId, null, Ques.MSPIN, Ques.QuestionCode, Ques.AnswerGiven, Ques.AnswerKey, Ques.Day, Ques.TypeOfTest, Ques.SessionID, IsCorrect, true);
+                    int DtlStatus = context.SP_Insert_Update_TblStudentAnswer(Ques.ProgramTestCalenderId, Ques.ProgramId, null, Ques.MSPIN, Ques.QuestionCode, Ques.AnswerGiven, Ques.AnswerKey, Ques.Day, Ques.TypeOfTest, Ques.SessionID, IsCorrect, true, Obj.StudentTestDetails.RemainingTime, Obj.StudentTestDetails.Status_Id);
                     // && x.ProgramTestCalenderId == Obj.StudentTestDetails.ProgramTestCalenderId && x.ProgramId == Obj.StudentTestDetails.ProgramId
                     if (Obj.StudentTestDetails.Status_Id == 1)
                     {
-                        int status=context.sp_UpdateTblTestDtl_Evaluation(Obj.StudentTestDetails.MSPIN, Obj.StudentTestDetails.SessionID, Obj.StudentTestDetails.Day);
+                        int status = context.sp_UpdateTblTestDtl_Evaluation(Obj.StudentTestDetails.MSPIN, Obj.StudentTestDetails.SessionID, Obj.StudentTestDetails.Day);
                     }
                     //var CheckStudentHeader = context.TblStudentAnswerHdrs.Where(x => x.MSPIN == Obj.StudentTestDetails.MSPIN && x.IsActive == true&& x.SessionID== Obj.StudentTestDetails.SessionID && x.Day== Obj.StudentTestDetails.Day).FirstOrDefault();
                     //if (CheckStudentHeader != null)
@@ -800,41 +802,482 @@ namespace STEPDAL.CustomDAL
                     //}
 
                     return "Success: Response Saved Successfully !";
-                    }
-                    catch (Exception ex)
+                }
+                catch (Exception ex)
+                {
+                    var st = new StackTrace(ex, true);
+                    var frame = st.GetFrame(0);
+                    var line = frame.GetFileLineNumber();
+                    string es = string.Empty;
+                    while (ex.InnerException != null)
                     {
-                        var st = new StackTrace(ex, true);
-                        var frame = st.GetFrame(0);
-                        var line = frame.GetFileLineNumber();
-                        string es = string.Empty;
-                        while (ex.InnerException != null)
-                        {
-                            es = es + ex.InnerException;
-                        }
-                        es = es +"BaseException :-"+ ex.GetBaseException();
-                        TblLogWhile_AfterSavingQuestions Twas = new TblLogWhile_AfterSavingQuestions
-                        {
-                            Date = DateTime.Now,
-                            Day = TestDay,
-                            ExceptionMsg ="While Saving one by one question"+ es + " StackTrace : - " + ex.StackTrace + "ex.InnerException : -" + ex.InnerException + " Obect : - " + JsonConvert.SerializeObject(Obj) ,
-                            MSPIN = StudentMSPIN,
-                            LineNumber = line
-                        };
-                        context.Entry(Twas).State = System.Data.Entity.EntityState.Added;
-                        context.SaveChanges();
+                        es = es + ex.InnerException;
+                    }
+                    es = es + "BaseException :-" + ex.GetBaseException();
+                    TblLogWhile_AfterSavingQuestions Twas = new TblLogWhile_AfterSavingQuestions
+                    {
+                        Date = DateTime.Now,
+                        Day = TestDay,
+                        ExceptionMsg = "While Saving one by one question" + es + " StackTrace : - " + ex.StackTrace + "ex.InnerException : -" + ex.InnerException + " Obect : - " + JsonConvert.SerializeObject(Obj),
+                        MSPIN = StudentMSPIN,
+                        LineNumber = line
+                    };
+                    context.Entry(Twas).State = System.Data.Entity.EntityState.Added;
+                    context.SaveChanges();
 
-                        return "Error: Response Not Saved!";
-                    }
-                    finally
-                    {
-                        //scope.Complete();
-                        //tr.Complete();
-                        //tr.Dispose();
-                    }
-                    
-               // }
+                    return "Error: Response Not Saved!";
+                }
+                finally
+                {
+                    //scope.Complete();
+                    //tr.Complete();
+                    //tr.Dispose();
+                }
+
+                // }
             }
         }
+
+
+
+        //public static string SaveTestResponse(StudentTestResponse Obj)
+        //{
+        //    string Msg = "";
+        //    string QuesCode = "";
+        //    int Processed = 0;
+        //    string StudentMSPIN = string.Empty;
+        //    int? TestDay = null;
+        //    int? TotalQuestion = null;
+        //    int? QuetionReceivedCount = null;
+        //    TblStudentAnswer ObjctToBeSaved = new TblStudentAnswer();
+        //    TblStudentAnswerHdr ObjctToBeSavedHdr = new TblStudentAnswerHdr();
+
+        //    using (var context = new CEIDBEntities())
+        //    {
+        //        try
+        //        {
+        //            StudentMSPIN = Obj.StudentTestDetails.MSPIN;
+        //            TestDay = Obj.StudentTestDetails.Day;
+        //            TotalQuestion = Obj.StudentTestDetails.TotalNoQuestion.HasValue ? Obj.StudentTestDetails.TotalNoQuestion : null;
+        //            QuetionReceivedCount = Obj.StudentLanguageQuestion.Count;
+
+        //            //var CheckStudentHeader = context.TblStudentAnswerHdrs.Where(x => x.MSPIN == Obj.StudentTestDetails.MSPIN && x.ProgramTestCalenderId == Obj.StudentTestDetails.ProgramTestCalenderId && x.ProgramId == Obj.StudentTestDetails.ProgramId && x.IsActive == true).FirstOrDefault();
+
+
+        //            //if (CheckStudentHeader != null)
+        //            //    {
+        //            int Status=context.SP_Insert_Update_TblStudentAnswerHdr(Obj.StudentTestDetails.ProgramTestCalenderId, Obj.StudentTestDetails.ProgramId, Obj.StudentTestDetails.TypeOfTest, Obj.StudentTestDetails.MSPIN, Obj.StudentTestDetails.RemainingTime, Obj.StudentTestDetails.Day, Obj.StudentTestDetails.SessionID, Obj.StudentTestDetails.Status_Id);
+        //            TestDAL.LogService("SP_Insert_Update_TblStudentAnswerHdr Status: - "+Status);
+        //            if (Obj.StudentTestDetails.Status_Id == 1)
+        //            {
+        //                context.sp_UpdateTblTestDtl_Evaluation(Obj.StudentTestDetails.MSPIN, Obj.StudentTestDetails.SessionID, Obj.StudentTestDetails.Day);
+        //            }
+        //            //CheckStudentHeader.Status_Id = Obj.StudentTestDetails.Status_Id;
+        //            //CheckStudentHeader.ModifiedDate = DateTime.Now;
+        //            //CheckStudentHeader.ModifiedBy = Obj.StudentTestDetails.ModifiedBy;
+        //            //CheckStudentHeader.RemainingTime = Obj.StudentTestDetails.RemainingTime;
+        //            //for log purpose
+        //            //ObjctToBeSavedHdr = CheckStudentHeader;
+
+        //            //context.Entry(CheckStudentHeader).State = System.Data.Entity.EntityState.Modified;
+        //            //context.SaveChanges();
+
+        //            foreach (var Ques in Obj.StudentLanguageQuestion)
+        //            {
+        //                //var check = context.TblStudentAnswers.Where(x => x.MSPIN == Ques.MSPIN && x.QuestionCode == Ques.QuestionCode && x.IsActive == true).FirstOrDefault();
+
+        //                //if (check == null)
+        //                //{
+
+        //                bool IsCorrect = Ques.AnswerGiven == Ques.AnswerKey ? true : false;
+        //                QuesCode = Ques.QuestionCode;
+
+        //                int StatusDtl=context.SP_Insert_Update_TblStudentAnswer(Ques.ProgramTestCalenderId, Ques.ProgramId, null, Ques.MSPIN, Ques.QuestionCode, Ques.AnswerGiven, Ques.AnswerKey, Ques.Day, Ques.TypeOfTest, Ques.SessionID, IsCorrect, true);
+        //                TestDAL.LogService("SP_Insert_Update_TblStudentAnswer Status: - " + StatusDtl);
+        //                //TblStudentAnswer Sa = new TblStudentAnswer
+        //                //{
+        //                //    IsActive = true,
+        //                //    QuestionCode = Ques.QuestionCode,
+        //                //    MSPIN = Ques.MSPIN,
+        //                //    AnswerGiven = Ques.AnswerGiven,
+        //                //    CorrectAnswer = Ques.AnswerKey,
+        //                //    Day = Ques.Day,
+        //                //    IsAnswerCorrect = IsCorrect,
+        //                //    ProgramId = Ques.ProgramId.Value,
+        //                //    ProgramTestCalenderId = Ques.ProgramTestCalenderId,
+        //                //    SessionID = Ques.SessionID,
+        //                //    TypeOfTest = Ques.TypeOfTest,
+        //                //    CreatedBy = 1,
+        //                //    CreationDate = DateTime.Now
+        //                //};
+        //                //ObjctToBeSaved = Sa;
+        //                //context.Entry(Sa).State = System.Data.Entity.EntityState.Added;
+        //                //context.SaveChanges();
+        //                //    Processed++;
+        //                //}
+        //                //else
+        //                //{
+        //                //    bool IsCorrect = Ques.AnswerGiven == Ques.AnswerKey ? true : false;
+
+        //                //    context.SP_Insert_Update_TblStudentAnswer(Ques.ProgramTestCalenderId, Ques.ProgramId, CheckStudentHeader.SA_Id, Ques.MSPIN, Ques.QuestionCode, Ques.AnswerGiven, Ques.AnswerKey, Ques.Day, Ques.TypeOfTest, Ques.SessionID, IsCorrect, true, 1);
+
+        //                //    //check.IsActive = true;
+        //                //    //check.QuestionCode = Ques.QuestionCode;
+        //                //    //check.MSPIN = Ques.MSPIN;
+        //                //    //check.AnswerGiven = Ques.AnswerGiven;
+        //                //    //check.CorrectAnswer = Ques.AnswerKey;
+        //                //    //check.Day = Ques.Day;
+        //                //    //check.IsAnswerCorrect = IsCorrect;
+        //                //    //check.ProgramId = Ques.ProgramId.Value;
+        //                //    //check.ProgramTestCalenderId = Ques.ProgramTestCalenderId;
+        //                //    //check.ModifiedBy = 1;
+        //                //    //check.ModifiedDate = DateTime.Now;
+        //                //    //check.TypeOfTest = Ques.TypeOfTest;
+        //                //    //check.SessionID = Ques.SessionID;
+        //                //    //ObjctToBeSaved = check;
+        //                //    //context.Entry(check).State = System.Data.Entity.EntityState.Modified;
+        //                //    //context.SaveChanges();
+        //                //    Processed++;
+        //                //}
+        //            }
+        //            //}
+        //            //else
+        //            //{
+        //            // context.SP_InertInto_TblStudentAnswerHdr(null, Obj.StudentTestDetails.ProgramTestCalenderId, Obj.StudentTestDetails.ProgramId, Obj.StudentTestDetails.MSPIN, Obj.StudentTestDetails.RemainingTime, Obj.StudentTestDetails.Day, Obj.StudentTestDetails.TypeOfTest, Obj.StudentTestDetails.SessionID, Obj.StudentTestDetails.Status_Id, true);
+        //            //TblStudentAnswerHdr SAH = new TblStudentAnswerHdr
+        //            //{
+        //            //    MSPIN = Obj.StudentTestDetails.MSPIN,
+        //            //    ProgramId = Obj.StudentTestDetails.ProgramId,
+        //            //    ProgramTestCalenderId = Obj.StudentTestDetails.ProgramTestCalenderId,
+        //            //    Status_Id = Obj.StudentTestDetails.Status_Id,
+        //            //    SessionID = Obj.StudentTestDetails.SessionID,
+        //            //    TypeOfTest = Obj.StudentTestDetails.TypeOfTest,
+
+        //            //    IsActive = true,
+        //            //    RemainingTime = Obj.StudentTestDetails.RemainingTime,
+        //            //    Day = Obj.StudentTestDetails.Day,
+        //            //    CreatedBy = Obj.StudentTestDetails.CreatedBy,
+        //            //    CreationDate = DateTime.Now
+        //            //};
+        //            //ObjctToBeSavedHdr = SAH;
+        //            //context.Entry(SAH).State = System.Data.Entity.EntityState.Added;
+        //            //context.SaveChanges();
+        //            //foreach (var Ques in Obj.StudentLanguageQuestion)
+        //            //{
+
+        //            //    var check = context.TblStudentAnswers.Where(x => x.MSPIN == Ques.MSPIN && x.QuestionCode == Ques.QuestionCode && x.IsActive == true && x.Day == Ques.Day && x.SessionID == Ques.SessionID).FirstOrDefault();
+
+        //            //    if (check == null)
+        //            //    {
+        //            //        bool IsCorrect = Ques.AnswerGiven == Ques.AnswerKey ? true : false;
+        //            //        //int? SAid = CheckStudentHeader.SA_Id == null ? null : CheckStudentHeader.SA_Id;
+        //            //        context.SP_Insert_Update_TblStudentAnswer(Ques.ProgramTestCalenderId, Ques.ProgramId, null, Ques.MSPIN, Ques.QuestionCode, Ques.AnswerGiven, Ques.AnswerKey, Ques.Day, Ques.TypeOfTest, Ques.SessionID, IsCorrect, true, 2);
+
+        //            //        //TblStudentAnswer Sa = new TblStudentAnswer
+        //            //        //{
+        //            //        //    SA_Id = SAH.SA_Id,
+        //            //        //    IsActive = true,
+        //            //        //    QuestionCode = Ques.QuestionCode,
+        //            //        //    MSPIN = Ques.MSPIN,
+        //            //        //    AnswerGiven = Ques.AnswerGiven,
+        //            //        //    CorrectAnswer = Ques.AnswerKey,
+        //            //        //    Day = Ques.Day,
+        //            //        //    IsAnswerCorrect = IsCorrect,
+        //            //        //    ProgramId = Ques.ProgramId.Value,
+        //            //        //    ProgramTestCalenderId = Ques.ProgramTestCalenderId,
+        //            //        //    SessionID = Ques.SessionID,
+        //            //        //    TypeOfTest = Ques.TypeOfTest,
+        //            //        //    CreatedBy = 1,
+        //            //        //    CreationDate = DateTime.Now
+        //            //        //};
+        //            //        //ObjctToBeSaved = Sa;
+        //            //        //context.Entry(Sa).State = System.Data.Entity.EntityState.Added;
+        //            //        //context.SaveChanges();
+        //            //        Processed++;
+        //            //    }
+        //            //    else
+        //            //    {
+        //            //        bool IsCorrect = Ques.AnswerGiven == Ques.AnswerKey ? true : false;
+        //            //        context.SP_Insert_Update_TblStudentAnswer(Ques.ProgramTestCalenderId, Ques.ProgramId, CheckStudentHeader.SA_Id, Ques.MSPIN, Ques.QuestionCode, Ques.AnswerGiven, Ques.AnswerKey, Ques.Day, Ques.TypeOfTest, Ques.SessionID, IsCorrect, true, 1);
+
+        //            //        //check.IsActive = true;
+        //            //        //check.QuestionCode = Ques.QuestionCode;
+        //            //        //check.MSPIN = Ques.MSPIN;
+        //            //        //check.AnswerGiven = Ques.AnswerGiven;
+        //            //        //check.CorrectAnswer = Ques.AnswerKey;
+        //            //        //check.Day = Ques.Day;
+        //            //        //check.IsAnswerCorrect = IsCorrect;
+        //            //        //check.ProgramId = Ques.ProgramId.Value;
+        //            //        //check.ProgramTestCalenderId = Ques.ProgramTestCalenderId;
+        //            //        //check.ModifiedBy = 1;
+        //            //        //check.ModifiedDate = DateTime.Now;
+        //            //        //check.TypeOfTest = Ques.TypeOfTest;
+        //            //        //check.SessionID = Ques.SessionID;
+        //            //        //ObjctToBeSaved = check;
+
+        //            //        //context.Entry(check).State = System.Data.Entity.EntityState.Modified;
+        //            //        //context.SaveChanges();
+        //            //        Processed++;
+        //            //    }
+
+
+        //            //}
+        //            //}
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            var st = new StackTrace(ex, true);
+        //            var frame = st.GetFrame(0);
+        //            var line = frame.GetFileLineNumber();
+        //            string es = string.Empty;
+        //            while (ex.InnerException != null)
+        //            {
+        //                es = es + ex.InnerException;
+        //            }
+        //            es = es + "BaseException :-" + ex.GetBaseException();
+        //            TblLogWhile_AfterSavingQuestions Twas = new TblLogWhile_AfterSavingQuestions
+        //            {
+        //                Date = DateTime.Now,
+        //                Day = TestDay,
+        //                ExceptionMsg = es + " StackTrace : - " + ex.StackTrace + ex.InnerException.StackTrace + "Total Questions " + JsonConvert.SerializeObject(Obj),// + " Obect : - " + JsonConvert.SerializeObject(ObjctToBeSaved) + " header Object:-" + JsonConvert.SerializeObject(ObjctToBeSavedHdr)
+        //                MSPIN = StudentMSPIN,
+        //                ProcessedCount = Processed,
+        //                QuestionCode = QuesCode,
+        //                QuestionCount = QuetionReceivedCount,
+        //                TotalQuestion = TotalQuestion,
+        //                LineNumber = line
+        //            };
+        //            context.Entry(Twas).State = System.Data.Entity.EntityState.Added;
+        //            context.SaveChanges();
+        //        }
+        //        finally
+        //        {
+        //            GC.Collect();
+        //            //scope.Complete();
+        //            //tr.Complete();
+        //            //tr.Dispose();
+        //        }
+        //        return "Success: Response Saved Successfully !";
+
+        //        //}
+        //    }
+
+        //}
+
+        //public static string SaveTestResponse2(StudentTestResponse2 Obj)
+        //{
+        //    string Msg = "";
+        //    string StudentMSPIN =string.Empty;
+        //    int? TestDay =null;
+        //    int? TotalQuestion =null;
+        //    if (Obj.StudentLanguageQuestion.AnswerGiven == null)
+        //    {
+        //        Obj.StudentLanguageQuestion.AnswerGiven = "";
+        //    }
+        //    using (var context = new CEIDBEntities())
+        //    {
+        //        //using (var scope = new TransactionScope(TransactionScopeOption.Required, new   TransactionOptions
+        //        //{ IsolationLevel = System.Transactions.IsolationLevel.Snapshot }))
+        //        //{
+        //            // do something with EF here
+
+        //        try
+        //            {
+        //                StudentMSPIN = Obj.StudentTestDetails.MSPIN;
+        //                TestDay = Obj.StudentTestDetails.Day;
+        //                TotalQuestion = Obj.StudentTestDetails.TotalNoQuestion;
+        //            var Ques = Obj.StudentLanguageQuestion;
+        //            bool IsCorrect = Ques.AnswerGiven == Ques.AnswerKey ? true : false;
+
+        //            int HdrStatus=context.SP_Insert_Update_TblStudentAnswerHdr(Obj.StudentTestDetails.ProgramTestCalenderId, Obj.StudentTestDetails.ProgramId, Obj.StudentTestDetails.TypeOfTest, Obj.StudentTestDetails.MSPIN, Obj.StudentTestDetails.RemainingTime, Obj.StudentTestDetails.Day, Obj.StudentTestDetails.SessionID, Obj.StudentTestDetails.Status_Id);
+
+        //            int DtlStatus = context.SP_Insert_Update_TblStudentAnswer(Ques.ProgramTestCalenderId, Ques.ProgramId, null, Ques.MSPIN, Ques.QuestionCode, Ques.AnswerGiven, Ques.AnswerKey, Ques.Day, Ques.TypeOfTest, Ques.SessionID, IsCorrect, true);
+        //            // && x.ProgramTestCalenderId == Obj.StudentTestDetails.ProgramTestCalenderId && x.ProgramId == Obj.StudentTestDetails.ProgramId
+        //            if (Obj.StudentTestDetails.Status_Id == 1)
+        //            {
+        //                int status=context.sp_UpdateTblTestDtl_Evaluation(Obj.StudentTestDetails.MSPIN, Obj.StudentTestDetails.SessionID, Obj.StudentTestDetails.Day);
+        //            }
+        //            //var CheckStudentHeader = context.TblStudentAnswerHdrs.Where(x => x.MSPIN == Obj.StudentTestDetails.MSPIN && x.IsActive == true&& x.SessionID== Obj.StudentTestDetails.SessionID && x.Day== Obj.StudentTestDetails.Day).FirstOrDefault();
+        //            //if (CheckStudentHeader != null)
+        //            //{
+        //            //    context.SP_UpdateTblStudentAnswerHdr(CheckStudentHeader.SA_Id, Obj.StudentTestDetails.MSPIN, Obj.StudentTestDetails.RemainingTime, Obj.StudentTestDetails.Day, Obj.StudentTestDetails.SessionID, Obj.StudentTestDetails.Status_Id,true);
+        //            //    #region 
+        //            //    //CheckStudentHeader.Status_Id = Obj.StudentTestDetails.Status_Id;
+        //            //    //CheckStudentHeader.ModifiedDate = DateTime.Now;
+        //            //    //CheckStudentHeader.ModifiedBy = Obj.StudentTestDetails.ModifiedBy;
+        //            //    //CheckStudentHeader.RemainingTime = Obj.StudentTestDetails.RemainingTime;
+        //            //    //context.Entry(CheckStudentHeader).State = System.Data.Entity.EntityState.Modified;
+        //            //    //context.SaveChanges();
+        //            //    #endregion
+
+        //            //    var Ques = Obj.StudentLanguageQuestion;
+        //            //    var check = context.TblStudentAnswers.Where(x => x.MSPIN == Ques.MSPIN && x.QuestionCode == Ques.QuestionCode && x.IsActive == true).FirstOrDefault();
+
+        //            //    if (check == null)
+        //            //    {
+        //            //        //var Ques = Obj.StudentLanguageQuestion;
+        //            //        bool IsCorrect = Ques.AnswerGiven == Ques.AnswerKey ? true : false;
+        //            //        context.SP_Insert_Update_TblStudentAnswer(Ques.ProgramTestCalenderId, Ques.ProgramId, CheckStudentHeader.SA_Id,Ques.MSPIN,Ques.QuestionCode,Ques.AnswerGiven,Ques.AnswerKey,Ques.Day,Ques.TypeOfTest,Ques.SessionID,IsCorrect,true,2);
+        //            //        #region
+        //            //        //TblStudentAnswer Sa = new TblStudentAnswer
+        //            //        //{
+        //            //        //    IsActive = true,
+        //            //        //    QuestionCode = Ques.QuestionCode,
+        //            //        //    MSPIN = Ques.MSPIN,
+        //            //        //    AnswerGiven = Ques.AnswerGiven,
+        //            //        //    CorrectAnswer = Ques.AnswerKey,
+        //            //        //    Day = Ques.Day,
+        //            //        //    IsAnswerCorrect = IsCorrect,
+        //            //        //    ProgramId = Ques.ProgramId.Value,
+        //            //        //    ProgramTestCalenderId = Ques.ProgramTestCalenderId,
+        //            //        //    SessionID = Ques.SessionID,
+        //            //        //    TypeOfTest = Ques.TypeOfTest,
+        //            //        //    CreatedBy = Obj.StudentTestDetails.CreatedBy,
+        //            //        //    CreationDate = DateTime.Now
+        //            //        //};
+        //            //        //context.Entry(Sa).State = System.Data.Entity.EntityState.Added;
+        //            //        //context.SaveChanges();
+        //            //        #endregion
+        //            //    }
+        //            //    else
+        //            //    {
+        //            //        // var Ques = Obj.StudentLanguageQuestion;
+        //            //        bool IsCorrect = Ques.AnswerGiven == Ques.AnswerKey ? true : false;
+        //            //        context.SP_Insert_Update_TblStudentAnswer(Ques.ProgramTestCalenderId, Ques.ProgramId, CheckStudentHeader.SA_Id, Ques.MSPIN, Ques.QuestionCode, Ques.AnswerGiven, Ques.AnswerKey, Ques.Day, Ques.TypeOfTest, Ques.SessionID, IsCorrect, true, 1);
+        //            //        #region
+        //            //        //check.IsActive = true;
+        //            //        //check.QuestionCode = Ques.QuestionCode;
+        //            //        //check.MSPIN = Ques.MSPIN;
+        //            //        //check.AnswerGiven = Ques.AnswerGiven;
+        //            //        //check.CorrectAnswer = Ques.AnswerKey;
+        //            //        //check.Day = Ques.Day;
+        //            //        //check.IsAnswerCorrect = IsCorrect;
+        //            //        //check.ProgramId = Ques.ProgramId.Value;
+        //            //        //check.ProgramTestCalenderId = Ques.ProgramTestCalenderId;
+        //            //        //check.ModifiedBy = Obj.StudentTestDetails.CreatedBy;
+        //            //        //check.ModifiedDate = DateTime.Now;
+        //            //        //check.TypeOfTest = Ques.TypeOfTest;
+        //            //        //check.SessionID = Ques.SessionID;
+        //            //        //context.Entry(check).State = System.Data.Entity.EntityState.Modified;
+        //            //        //context.SaveChanges();
+        //            //        #endregion
+        //            //    }
+
+        //            //}
+        //            //else
+        //            //{
+        //            //    context.SP_InertInto_TblStudentAnswerHdr(null, Obj.StudentTestDetails.ProgramTestCalenderId, Obj.StudentTestDetails.ProgramId, Obj.StudentTestDetails.MSPIN, Obj.StudentTestDetails.TestDuration, Obj.StudentTestDetails.Day, Obj.StudentTestDetails.TypeOfTest, Obj.StudentTestDetails.SessionID, Obj.StudentTestDetails.Status_Id,true);
+        //            //    #region
+        //            //    //TblStudentAnswerHdr SAH = new TblStudentAnswerHdr
+        //            //    //{
+        //            //    //    MSPIN = Obj.StudentTestDetails.MSPIN,
+        //            //    //    ProgramId = Obj.StudentTestDetails.ProgramId,
+        //            //    //    ProgramTestCalenderId = Obj.StudentTestDetails.ProgramTestCalenderId,
+        //            //    //    Status_Id = Obj.StudentTestDetails.Status_Id,
+        //            //    //    SessionID = Obj.StudentTestDetails.SessionID,
+        //            //    //    TypeOfTest = Obj.StudentTestDetails.TypeOfTest,
+        //            //    //    IsActive = true,
+        //            //    //    RemainingTime = Obj.StudentTestDetails.TestDuration,
+        //            //    //    Day = Obj.StudentTestDetails.Day,
+        //            //    //    CreatedBy = Obj.StudentTestDetails.CreatedBy,
+        //            //    //    CreationDate = DateTime.Now
+        //            //    //};
+        //            //    //context.Entry(SAH).State = System.Data.Entity.EntityState.Added;
+        //            //    //context.SaveChanges();
+        //            //    #endregion
+        //            //    var Ques = Obj.StudentLanguageQuestion;
+        //            //    var check = context.TblStudentAnswers.Where(x => x.MSPIN == Ques.MSPIN && x.QuestionCode == Ques.QuestionCode && x.IsActive == true).FirstOrDefault();
+
+        //            //    if (check == null)
+        //            //    {
+        //            //        // var Ques = Obj.StudentLanguageQuestion;
+        //            //        bool IsCorrect = Ques.AnswerGiven == Ques.AnswerKey ? true : false;
+        //            //        context.SP_Insert_Update_TblStudentAnswer(Ques.ProgramTestCalenderId, Ques.ProgramId, CheckStudentHeader.SA_Id, Ques.MSPIN, Ques.QuestionCode, Ques.AnswerGiven, Ques.AnswerKey, Ques.Day, Ques.TypeOfTest, Ques.SessionID, IsCorrect, true, 2);
+        //            //        #region 
+        //            //        //TblStudentAnswer Sa = new TblStudentAnswer
+        //            //        //{
+        //            //        //    SA_Id = SAH.SA_Id,
+        //            //        //    IsActive = true,
+        //            //        //    QuestionCode = Ques.QuestionCode,
+        //            //        //    MSPIN = Ques.MSPIN,
+        //            //        //    AnswerGiven = Ques.AnswerGiven,
+        //            //        //    CorrectAnswer = Ques.AnswerKey,
+        //            //        //    Day = Ques.Day,
+        //            //        //    IsAnswerCorrect = IsCorrect,
+        //            //        //    ProgramId = Ques.ProgramId.Value,
+        //            //        //    ProgramTestCalenderId = Ques.ProgramTestCalenderId,
+        //            //        //    SessionID = Ques.SessionID,
+        //            //        //    TypeOfTest = Ques.TypeOfTest,
+        //            //        //    CreatedBy = 1,
+        //            //        //    CreationDate = DateTime.Now
+        //            //        //};
+        //            //        //context.Entry(Sa).State = System.Data.Entity.EntityState.Added;
+        //            //        //context.SaveChanges();
+        //            //        #endregion
+
+        //            //    }
+        //            //    else
+        //            //    {
+        //            //        // var Ques = Obj.StudentLanguageQuestion;
+        //            //        bool IsCorrect = Ques.AnswerGiven == Ques.AnswerKey ? true : false;
+        //            //        context.SP_Insert_Update_TblStudentAnswer(Ques.ProgramTestCalenderId, Ques.ProgramId, CheckStudentHeader.SA_Id, Ques.MSPIN, Ques.QuestionCode, Ques.AnswerGiven, Ques.AnswerKey, Ques.Day, Ques.TypeOfTest, Ques.SessionID, IsCorrect, true, 1);
+        //            //        #region
+        //            //        //check.IsActive = true;
+        //            //        //check.QuestionCode = Ques.QuestionCode;
+        //            //        //check.MSPIN = Ques.MSPIN;
+        //            //        //check.AnswerGiven = Ques.AnswerGiven;
+        //            //        //check.CorrectAnswer = Ques.AnswerKey;
+        //            //        //check.Day = Ques.Day;
+        //            //        //check.IsAnswerCorrect = IsCorrect;
+        //            //        //check.ProgramId = Ques.ProgramId.Value;
+        //            //        //check.ProgramTestCalenderId = Ques.ProgramTestCalenderId;
+        //            //        //check.ModifiedBy = 1;
+        //            //        //check.ModifiedDate = DateTime.Now;
+        //            //        //check.TypeOfTest = Ques.TypeOfTest;
+        //            //        //check.SessionID = Ques.SessionID;
+        //            //        //context.Entry(check).State = System.Data.Entity.EntityState.Modified;
+        //            //        //context.SaveChanges();
+        //            //        #endregion
+        //            //    }
+        //            //}
+
+        //            return "Success: Response Saved Successfully !";
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                var st = new StackTrace(ex, true);
+        //                var frame = st.GetFrame(0);
+        //                var line = frame.GetFileLineNumber();
+        //                string es = string.Empty;
+        //                while (ex.InnerException != null)
+        //                {
+        //                    es = es + ex.InnerException;
+        //                }
+        //                es = es +"BaseException :-"+ ex.GetBaseException();
+        //                TblLogWhile_AfterSavingQuestions Twas = new TblLogWhile_AfterSavingQuestions
+        //                {
+        //                    Date = DateTime.Now,
+        //                    Day = TestDay,
+        //                    ExceptionMsg ="While Saving one by one question"+ es + " StackTrace : - " + ex.StackTrace + "ex.InnerException : -" + ex.InnerException + " Obect : - " + JsonConvert.SerializeObject(Obj) ,
+        //                    MSPIN = StudentMSPIN,
+        //                    LineNumber = line
+        //                };
+        //                context.Entry(Twas).State = System.Data.Entity.EntityState.Added;
+        //                context.SaveChanges();
+
+        //                return "Error: Response Not Saved!";
+        //            }
+        //            finally
+        //            {
+        //                //scope.Complete();
+        //                //tr.Complete();
+        //                //tr.Dispose();
+        //            }
+
+        //       // }
+        //    }
+        //}
 
         public static List<StudenttestDetailsBLL> Get_Check(string MSPin, int Day)
         {
@@ -911,6 +1354,7 @@ namespace STEPDAL.CustomDAL
                         ProgramId = x.ProgramId,
                         SessionID = x.SessionID,
                         TypeOfTest = x.TypeOfTest,
+                        Set_Id=x.Set_Id
 
                     }).ToList();
 
@@ -945,6 +1389,7 @@ namespace STEPDAL.CustomDAL
 
             using (var context = new CEIDBEntities())
             {
+                #region
                 //List<StudentLanguageQuestion> objList = new List<StudentLanguageQuestion>();
                 // var dtl = context.Sp_GetStudentTestLanguageWiseList(data.ProgramTestCalenderId, data.LangId).ToList();
                 //var dtl = context.Sp_GetStudentTestLanguageWiseList(data.ProgramTestCalenderId, data.LangId).ToList();
@@ -985,11 +1430,11 @@ namespace STEPDAL.CustomDAL
                 //        });
                 //    }
                 //}
+                #endregion
                 var IfExist = context.SP_GetQuestionListFromTblSA(data.MSPIN, SessionId,data.Day,data.LangId).ToList();
                 if (IfExist.Count != 0)
                 {
                     List<StudentLanguageQuestion> QuesList = null;
-
                     //var QuesDtl = dtl.Where(x => x.QuestionCode == IfExist[i].QuestionCode).FirstOrDefault();
                     QuesList = IfExist.Select(x => new StudentLanguageQuestion
                     {
@@ -1019,6 +1464,9 @@ namespace STEPDAL.CustomDAL
                         SessionID = data.SessionID,
                         Day = data.Day
                     }).ToList();
+                    if (IfExist[0].EnableJumbling == true)
+                        QuesList = QuesList.OrderBy(a => Guid.NewGuid()).ToList();
+
                     StudentTestResponse.StudentLanguageQuestion = QuesList;
 
                     return StudentTestResponse;
@@ -1026,84 +1474,6 @@ namespace STEPDAL.CustomDAL
                 else {
                     return null;
                 }
-                #region
-                //else
-                //{
-                //    var TestDetails = context.sp_GetStudentTestDetails(data.MSPIN).FirstOrDefault();
-                //    int TotalNoOfTestQuestions = Convert.ToInt32(TestDetails.TotalNoQuestion);
-                //    var random = new Random();
-                //    StudentTestResponse.StudentTestDetails.RemainingTime = dtl[0].TestDuration * 60;
-                //    var result = Enumerable.Range(0, dtl.Count - 1)
-                //                            .OrderBy(i => random.Next(TotalNoOfTestQuestions))
-                //                            .Take(TotalNoOfTestQuestions)
-                //                            .OrderBy(i => i).ToList();
-                //    if (result.Count < TotalNoOfTestQuestions)
-                //    {
-
-                //        result = Enumerable.Range(0, dtl.Count - 1)
-                //                            .OrderBy(i => random.Next(TotalNoOfTestQuestions))
-                //                            .Take(TotalNoOfTestQuestions)
-                //                            .OrderBy(i => i).ToList();
-                //    }
-
-                //    for (int i = 0; i < TotalNoOfTestQuestions; i++)
-                //    {
-                //        int RandomIndex = result[i];
-                //        StudentTestResponse.StudentLanguageQuestion.Add(new StudentLanguageQuestion
-                //        {
-                //            TypeOfTest = dtl[RandomIndex].TypeOfTest,
-                //            Answer1 = dtl[RandomIndex].Answer1,
-                //            Answer2 = dtl[RandomIndex].Answer2,
-                //            Answer3 = dtl[RandomIndex].Answer3,
-                //            Answer4 = dtl[RandomIndex].Answer4,
-                //            AnswerKey = dtl[RandomIndex].AnswerKey,
-                //            AnswerGiven = null,
-                //            Image = dtl[RandomIndex].Image,
-                //            DetailId = dtl[RandomIndex].DetailId,
-                //            IsActive = dtl[RandomIndex].IsActive,
-                //            ProgramId = dtl[RandomIndex].ProgramId,
-                //            ProgramTestCalenderId = dtl[RandomIndex].ProgramTestCalenderId,
-                //            Question = dtl[RandomIndex].Question,
-                //            QuestionCode = dtl[RandomIndex].QuestionCode,
-                //            TestDuration = dtl[RandomIndex].TestDuration,
-                //            TestInitiated = dtl[RandomIndex].TestInitiated,
-                //            TotalNoQuestion = dtl[RandomIndex].TotalNoQuestion,
-                //            LanguageAnswer1 = dtl[RandomIndex].LanguageAnswer1,
-                //            LanguageAnswer2 = dtl[RandomIndex].LanguageAnswer2,
-                //            LanguageAnswer3 = dtl[RandomIndex].LanguageAnswer3,
-                //            LanguageAnswer4 = dtl[RandomIndex].LanguageAnswer4,
-                //            QuestionLanguage = dtl[RandomIndex].QuestionLanguage,
-                //            MSPIN = data.MSPIN,
-                //            SessionID = data.SessionID,
-                //            Day = data.Day
-                //        });
-                //    }
-
-                //    TblLogBeforeSaveQuestion Tlbs = new TblLogBeforeSaveQuestion
-                //    {
-                //        Date = DateTime.Now,
-                //        TotalQuestion = TotalNoOfTestQuestions,
-                //        MSPIN = data.MSPIN,
-                //        QuestionListCount = StudentTestResponse.StudentLanguageQuestion.Count,
-                //        RandomLogicCount = result.Count
-                //    };
-                //    context.Entry(Tlbs).State = System.Data.Entity.EntityState.Added;
-                //    context.SaveChanges();
-
-
-                //    TestDAL.SaveTestResponse(StudentTestResponse);
-                //    //TestDAL.LogService("Before SaveTestResponse StudentTestResponse.StudentLanguageQuestion.Count : " + StudentTestResponse.StudentLanguageQuestion.Count);
-
-                //    //TestDAL.LogService("After SaveTestResponse");
-                //    //while (true)
-                //    //{
-
-                //    //    TestDAL.SaveTestResponse(StudentTestResponse);
-                //    //    GetStudentQuestionFormatedList(data);
-                //    //}
-                //}
-                #endregion
-                
             }
 
         }
@@ -1473,18 +1843,7 @@ namespace STEPDAL.CustomDAL
                     List<StudentLanguageQuestion_Practical> StDataList = new List<StudentLanguageQuestion_Practical>();
                     STObj.Catagory = catg;
                     StDataList = StudentTestResponse.StudentLanguageQuestion.Where(x => x.QuestionCategory == catg).ToList();
-                    //foreach (var st in StudentTestResponse.StudentLanguageQuestion)
-                    //{
-                    //    StudentLanguageQuestion_Practical StData = new StudentLanguageQuestion_Practical();
-                    //    if (catg == st.QuestionCategory)
-                    //    {
-                    //        StData = st;
 
-                    //        StDataList.Add(StData);
-
-                    //    }
-
-                    //}
                     STObj.StudentLanguageQuestion = StDataList;
                     stuCat.Add(STObj);
 
@@ -1770,7 +2129,8 @@ namespace STEPDAL.CustomDAL
                         Day = data.Day
                     }).ToList();
 
-                    QuesList = QuesList.OrderBy(a => Guid.NewGuid()).ToList();
+                    if (IfExist[0].EnableJumbling == true)
+                        QuesList = QuesList.OrderBy(a => Guid.NewGuid()).ToList();
 
                     return QuesList;
                 }
@@ -1804,8 +2164,8 @@ namespace STEPDAL.CustomDAL
                     TotalQuestion = Obj.StudentTestDetails.TotalNoQuestion.HasValue ? Obj.StudentTestDetails.TotalNoQuestion : null;
                     QuetionReceivedCount = Obj.StudentLanguageQuestion.Count;
                     Obj.StudentTestDetails.Status_Id = 1;
-                    int Status = context.SP_Insert_Update_TblStudentAnswerHdr(Obj.StudentTestDetails.ProgramTestCalenderId, Obj.StudentTestDetails.ProgramId, Obj.StudentTestDetails.TypeOfTest, Obj.StudentTestDetails.MSPIN, Obj.StudentTestDetails.RemainingTime, TestDay, Obj.StudentTestDetails.SessionID, Obj.StudentTestDetails.Status_Id);
-                    TestDAL.LogService("SP_Insert_Update_TblStudentAnswerHdr Status: - " + Status);
+                    //int Status = context.SP_Insert_Update_TblStudentAnswerHdr(Obj.StudentTestDetails.ProgramTestCalenderId, Obj.StudentTestDetails.ProgramId, Obj.StudentTestDetails.TypeOfTest, Obj.StudentTestDetails.MSPIN, Obj.StudentTestDetails.RemainingTime, TestDay, Obj.StudentTestDetails.SessionID, Obj.StudentTestDetails.Status_Id);
+                    //TestDAL.LogService("SP_Insert_Update_TblStudentAnswerHdr Status: - " + Status);
                     if (Obj.StudentTestDetails.Status_Id == 1)
                     {
                         int status=context.sp_UpdateTblTestDtl_Evaluation(Obj.StudentTestDetails.MSPIN, Obj.StudentTestDetails.SessionID, Obj.StudentTestDetails.DayCount);
@@ -1815,7 +2175,7 @@ namespace STEPDAL.CustomDAL
                     {
                         bool IsCorrect = Ques.AnswerGiven == Ques.AnswerKey ? true : false;
                         QuesCode = Ques.QuestionCode;
-                        int StatusDtl = context.SP_Insert_Update_TblStudentAnswer(Ques.ProgramTestCalenderId, Ques.ProgramId, null, Ques.MSPIN, Ques.QuestionCode, Ques.AnswerGiven, Ques.AnswerKey, Ques.Day, Ques.TypeOfTest, Ques.SessionID, IsCorrect, true);
+                        int StatusDtl = context.SP_Insert_Update_TblStudentAnswer(Ques.ProgramTestCalenderId, Ques.ProgramId, null, Ques.MSPIN, Ques.QuestionCode, Ques.AnswerGiven, Ques.AnswerKey, Ques.Day, Ques.TypeOfTest, Ques.SessionID, IsCorrect, true, Obj.StudentTestDetails.RemainingTime, Obj.StudentTestDetails.Status_Id);
                         TestDAL.LogService("SP_Insert_Update_TblStudentAnswer Status: - " + StatusDtl);
                     }
 

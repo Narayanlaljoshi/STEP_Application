@@ -23,5 +23,7 @@ namespace STEPDAL.DB
         public byte[] Candidate_Image { get; set; }
         public byte[] Document_Image { get; set; }
         public string IsRegistered { get; set; }
+        public string SessionID { get; set; }
+        public string ProgramName { get; set; }
     }
 }

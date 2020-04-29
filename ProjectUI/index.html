@@ -222,10 +222,10 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <!--<li class="active" ng-show="session.RoleName !='Faculty'">
-                        <a href="#/dashboard">
-                            <i class="fa fa-dashboard"></i><span>Dashboard</span>
-                        </a>
-                    </li>-->
+        <a href="#/dashboard">
+            <i class="fa fa-dashboard"></i><span>Dashboard</span>
+        </a>
+    </li>-->
 
                     <li class="treeview active" ng-show="session.RoleName =='HOAdmin'">
                         <a href="" title="Masters">
@@ -254,15 +254,15 @@
                                 <a href="#/FeedbackMaster"><i class="fa fa-th"></i> <span>Feedback Setup</span></a>
                             </li>
                             <!--<li>
-                                <a href="#/ProgramTestCalender"><i class="fa fa-th"></i> <span>Test Setup</span></a>
+                <a href="#/ProgramTestCalender"><i class="fa fa-th"></i> <span>Test Setup</span></a>
 
-                            </li>-->
+            </li>-->
                             <!--<li>
-                                <a href="#/ReportScoreSheet"><i class="fa fa-th"></i> <span>Report Score Sheet</span></a>
-                            </li>
-                            <li>
-                                <a href="#/ReportAttendanceSheet"><i class="fa fa-th"></i> <span>Report Attendance Sheet</span></a>
-                            </li>-->
+                <a href="#/ReportScoreSheet"><i class="fa fa-th"></i> <span>Report Score Sheet</span></a>
+            </li>
+            <li>
+                <a href="#/ReportAttendanceSheet"><i class="fa fa-th"></i> <span>Report Attendance Sheet</span></a>
+            </li>-->
                         </ul>
 
                     </li>
@@ -281,11 +281,11 @@
                                 <a href="#/AC"><i class="fa fa-th"></i> <span>Assign Course</span></a>
                             </li>
                             <!--<li>
-                                <a href="#/SSTC"><i class="fa fa-th"></i> <span>Manage Trainer</span></a>
-                            </li>-->
+                <a href="#/SSTC"><i class="fa fa-th"></i> <span>Manage Trainer</span></a>
+            </li>-->
                             <!--<li>
-                                <a href="#/ManageSessions"><i class="fa fa-th"></i> <span>Sessions</span></a>
-                            </li>-->
+                <a href="#/ManageSessions"><i class="fa fa-th"></i> <span>Sessions</span></a>
+            </li>-->
                         </ul>
                     </li>
                     <li class="treeview" ng-show="session.Role_Id ==5">
@@ -303,11 +303,11 @@
                                 <a href="#/Mrks_vendor"><i class="fa fa-th"></i> <span>Marks</span></a>
                             </li>
                             <!--<li>
-                                <a href="#/SSTC"><i class="fa fa-th"></i> <span>Manage Trainer</span></a>
-                            </li>-->
+                <a href="#/SSTC"><i class="fa fa-th"></i> <span>Manage Trainer</span></a>
+            </li>-->
                             <!--<li>
-                                <a href="#/ManageSessions"><i class="fa fa-th"></i> <span>Sessions</span></a>
-                            </li>-->
+                <a href="#/ManageSessions"><i class="fa fa-th"></i> <span>Sessions</span></a>
+            </li>-->
                         </ul>
                     </li>
                     <li ng-show="session.Role_Id ==6">
@@ -373,6 +373,7 @@
                             <li ng-show="session.RoleName =='HOAdmin'">
                                 <a href="#/CC_DMS"><i class="fa fa-th"></i> <span>Close Course-DMS</span></a>
                             </li>
+
                         </ul>
                     </li>
                     <li ng-show="session.RoleName =='HOAdmin'">
@@ -392,6 +393,13 @@
                         <a href="#/Student">
                             <i class="fa fa-th"></i> <span>Student</span>
                         </a>
+                    </li>
+                    <!--ticket system-->
+                    <li ng-show="session.RoleName =='HOAdmin'">
+                        <a href="#/Queries_Admin"><i class="fa fa-th"></i> <span>Queries</span></a>
+                    </li>
+                    <li>
+                        <a href="#/Queries_User"><i class="fa fa-th"></i> <span>Raise Query</span></a>
                     </li>
                 </ul>
             </section>
@@ -504,6 +512,8 @@
     <script src="WorkingJS/Vendor_Trainer_MarksReport.js"></script>
     <script src="WorkingJS/RegistrationInfo.js"></script>
     <script src="WorkingJS/CloseCourse_DMS.js"></script>
+    <script src="WorkingJS/Queries_Admin.js"></script>
+    <script src="WorkingJS/Queries_User.js"></script>
 </body>
 </html>
 <script>

@@ -656,36 +656,49 @@ namespace STEPDAL.CustomDAL
                     multiNominationLists = Reqdata.Select(x => new MultiNominationList
                     {
                         AgencyCode=x.AgencyCode,
-                        City=x.City,
-                        Co_id=x.Co_id,
-                        CreatedBy=x.CreatedBy,
-                        CreationDate=x.CreationDate,
-                        DateofBirth=x.DateofBirth,
-                        DealerName=x.DealerName,
-                        Dealer_LocationCode=x.Dealer_LocationCode,
-                        Duration=x.Duration,
-                        EndDate=x.EndDate,
-                        FacultyCode=x.FacultyCode,
-                        Id=x.Id,
-                        IsAccepted=x.IsAccepted,
-                        Location=x.Location,
-                        MobileNo=x.MobileNo,
-                        ModifiedBy=x.ModifiedBy,
-                        ModifiedDate=x.ModifiedDate,
                         MSPIN=x.MSPIN,
-                        Name=x.Name,
-                        ProgramCode=x.ProgramCode,
-                        Region=x.Region,
-                        SessionID=x.SessionID,
-                        StartDate=x.StartDate,
-                        Venue =x.Venue
+                        Name=x.Name
                     }).ToList();
                 }
             }
             return multiNominationLists;
         }
-
-        public static string UpdateMultiNominationListbyAgency(List<MultiNominationList> Obj)
+        public static List<MultiNominationDetails> GetMultiNominationDetailsByMSPIN(MultiNominationList Obj)
+        {
+            List<MultiNominationDetails> multiNominationDetails = null;
+            using (var Context = new CEIDBEntities())
+            {
+                var Data = Context.sp_getMultiNominationDetailsByMSPIN(Obj.MSPIN).ToList();
+                multiNominationDetails = Data.Select(x => new MultiNominationDetails {
+                    MSPIN=x.MSPIN,
+                    AgencyCode=x.AgencyCode,
+                    City=x.City,
+                    Co_id=x.Co_id,
+                    CreatedBy=x.CreatedBy,
+                    CreationDate=x.CreationDate,
+                    DateofBirth=x.DateofBirth,
+                    DealerName=x.DealerName,
+                    Dealer_LocationCode=x.Dealer_LocationCode,
+                    Duration=x.Duration,
+                    EndDate=x.EndDate,
+                    FacultyCode=x.FacultyCode,
+                    Id=x.Id,
+                    IsAccepted=x.IsAccepted,
+                    Location=x.Location,
+                    MobileNo=x.MobileNo,
+                    ModifiedBy=x.ModifiedBy,
+                    ModifiedDate=x.ModifiedDate,
+                    Name=x.Name,
+                    ProgramCode=x.ProgramCode,
+                    Region=x.Region,
+                    SessionID=x.SessionID,
+                    StartDate=x.StartDate,
+                    Venue=x.Venue
+                }).ToList();
+            }
+            return multiNominationDetails;
+        }
+        public static string UpdateMultiNominationListbyAgency(List<MultiNominationDetails> Obj)
         {
             //List<MultiNominationList> multiNominationLists = new List<MultiNominationList>();
             using (var Context = new CEIDBEntities())
@@ -696,7 +709,8 @@ namespace STEPDAL.CustomDAL
                 }
                 Obj = Obj.Where(x => x.IsAccepted == true).ToList();
             }
-            NominationDAL.FilterNomination_MultiNomination(Obj);
+
+            //NominationDAL.FilterNomination_MultiNomination(Obj);
 
             return "Success: Updated Successfully!";
         }

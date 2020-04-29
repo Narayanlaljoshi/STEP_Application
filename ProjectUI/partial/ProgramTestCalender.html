@@ -37,7 +37,9 @@
                         <th>Evaluation Type</th>
                         <th>Type Of Test</th>
                         <th>QB Type</th>
-
+                        <th>
+                            Enable Jumbling:
+                        </th>
                         <th>Test Questions</th>
                         <th>Questions / Sets</th>
                         <th>Marks/ Question</th>
@@ -61,7 +63,7 @@
                         <td style="white-space: nowrap;">
                             <span ng-show="ProgramType_Id==1"> Day-{{pt.DayCount}}</span>
                             <span ng-show="ProgramType_Id!=1"> {{pt.DayCount}}</span>
-                           
+
                         </td>
                         <td style="white-space: nowrap;">{{pt.TestCode}}</td>
                         <td>
@@ -74,6 +76,9 @@
 
                         </td>
                         <td>{{pt.QuestionPaperType}}</td>
+                        <td>
+                            {{pt.EnableJumbling==true?'Yes':'No'}}
+                        </td>
                         <td>{{pt.TotalNoQuestion}}</td>
                         <td>{{pt.QuesAdded}}</td>
                         <td>{{pt.Marks_Question}}</td>
@@ -155,6 +160,9 @@
                             <option value="QB">QB Based</option>
                         </select>
                     </div>
+                    <!--<div>
+
+                    </div>-->
                     <div class="col-xs-2">
                         <label>Total No question*</label>
                         <input numbers-Only type="text" class=" form-control" ng-maxlength="100" ng-model="ProgramTestCalenderDetailData.TotalNoQuestion" placeholder="Total No Question" />
@@ -201,6 +209,9 @@
                                 </th>
                                 <th style="text-align:center; width:120px;">
                                     QB Type:
+                                </th>
+                                <th style="text-align:center;">
+                                    Enable Jumbling:
                                 </th>
                                 <th style="text-align:center;">
                                     Total No question:
@@ -256,6 +267,9 @@
                                         <option value="Set">Set Based</option>
                                         <option value="QB">QB Based</option>
                                     </select>
+                                </td>
+                                <td>
+                                    <input ng-show="pt.QuestionPaperType=='Set'"type="checkbox"ng-model="pt.EnableJumbling" />
                                 </td>
                                 <td>
                                     <input numbers-Only type="text" ng-show="pt.EvaluationTypeId==1" class=" form-control" ng-maxlength="100" ng-model="pt.TotalNoQuestion" placeholder="Total No Question" />
@@ -318,10 +332,6 @@
 
             <div class="row" ng-show="ProgramTestCalenderDetailData.ProgramId">
 
-
-
-
-
                 <div class="col-xs-2">
                     <label>Day*</label>
                     <input ng-disabled="ProgramTestCalenderDetailData.DayCount" numbers-Only type="text" class=" form-control" ng-maxlength="100" ng-model="ProgramTestCalenderDetailData.DayCount" placeholder="Day " />
@@ -342,12 +352,7 @@
                         <option value="3">Post Test</option>
                         <option value="4">Non-DMS</option>
                     </select>
-
                 </div>
-
-
-
-
 
                 <div class="col-xs-2">
                     <label>Total No question*</label>
@@ -405,27 +410,19 @@
                             <button class="btn btn-primary btn-xs" ng-click="UploadExcelfunction()">Upload Excel</button>
                         </div>
                     </div>
-
-
         </div>
         <div class="box-footer">
-                    
                     <a class="btn btn-success btn-sm btn-xs" href="../Excel Template/testCalender.xlsx">Download Template</a>
 
                     <button class="btn btn-warning btn-sm pull-right btn-xs" ng-click="init()">Back </button>
         </div>
-
     </div>
 
     <!-------------------Add Question Section ------------------>
     <!--<div ng-show="QuestionShow==true">
-
-
-
         <button class="btn btn-primary btn-sm" ng-click="init()">Back </button>
         <button class="btn btn-primary btn-sm" ng-click="init()">Back </button>
         <button class="btn btn-primary btn-sm" ng-click="oh()">check </button>
-
     </div>-->
 
 </section>

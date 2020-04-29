@@ -99,6 +99,7 @@
     <Compile Include="CustomModel\ProgramTestCalenderBLL.cs" />
     <Compile Include="CustomModel\ProgramTestCalenderDetail_Practical.cs" />
     <Compile Include="CustomModel\ProgramTypes.cs" />
+    <Compile Include="CustomModel\QueriesBLL.cs" />
     <Compile Include="CustomModel\RegistrationDetails.cs" />
     <Compile Include="CustomModel\RegistrationInfoBLL.cs" />
     <Compile Include="CustomModel\ReportFilterBLL.cs" />

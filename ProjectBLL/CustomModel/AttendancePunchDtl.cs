@@ -19,4 +19,12 @@ namespace ProjectBLL.CustomModel
         public Nullable<int> ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     }
+    public class CandidatesDetailsForPunchIn {
+        public string MSPIN { get; set; }
+        public string AgencyCode { get; set; }
+        public System.DateTime DateTime { get; set; }
+        public string MachineCode { get; set; }
+        public string SessionID { get; set; }
+        public string ProgramName { get; set; }
+    }
 }

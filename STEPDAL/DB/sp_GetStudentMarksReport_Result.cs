@@ -25,5 +25,6 @@ namespace STEPDAL.DB
         public string Name { get; set; }
         public string ProgramCode { get; set; }
         public Nullable<System.DateTime> StartDate { get; set; }
+        public Nullable<int> Set_Id { get; set; }
     }
 }

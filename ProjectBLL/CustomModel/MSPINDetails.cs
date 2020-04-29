@@ -16,7 +16,11 @@ namespace ProjectBLL.CustomModel
         public byte[] Candidate_Image { get; set; }
         public byte[] Document_Image { get; set; }
         public string IsRegistered { get; set; }
-        //public Nullable<System.DateTime> StartDate { get; set; }
-        //public Nullable<System.DateTime> EndDate { get; set; }
+        public List<CourseDTL> CourseDetails { get; set; }
+    }
+    public class CourseDTL
+    {
+        public string SessionID { get; set; }
+        public string ProgramName { get; set; }
     }
 }

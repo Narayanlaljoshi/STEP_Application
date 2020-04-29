@@ -89,13 +89,28 @@ namespace Project.Controllers
         {
             return RtcMaster.GetSessionIDListForFaculty(Agency_Id, FacultyCode);
         }
+      
+        [HttpGet]
+        public MSPINDetails CheckMSPIN_Registered(string MSPIN, string AgencyCode)
+        {
+            return BioMetricDAL.GetDetailsforMSPIN(MSPIN, AgencyCode);
+        }
+
+        /*Multi Nomination APIs*/
         [HttpGet]
         public List<MultiNominationList> GetMultiNominationListbyAgency(string UserName)
         {
             return RtcMaster.GetMultiNominationListbyAgency(UserName);
         }
+
         [HttpPost]
-        public static string UpdateMultiNominationListbyAgency(List<MultiNominationList> Obj)
+        public List<MultiNominationDetails> GetMultiNominationDetailsByMSPIN(MultiNominationList Obj)
+        {
+            return RtcMaster.GetMultiNominationDetailsByMSPIN(Obj);
+        }
+
+        [HttpPost]
+        public string UpdateMultiNominationList(List<MultiNominationDetails> Obj)
         {
             return RtcMaster.UpdateMultiNominationListbyAgency(Obj);
         }

@@ -20,6 +20,7 @@ namespace STEPDAL.DB
         public Nullable<int> DayCount { get; set; }
         public string TypeOfTest { get; set; }
         public Nullable<int> EvaluationTypeId { get; set; }
+        public Nullable<bool> EnableJumbling { get; set; }
         public string QuestionPaperType { get; set; }
         public Nullable<int> TotalNoQuestion { get; set; }
         public Nullable<int> Marks_Question { get; set; }

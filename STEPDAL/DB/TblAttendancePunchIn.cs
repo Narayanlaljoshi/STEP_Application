@@ -16,6 +16,7 @@ namespace STEPDAL.DB
     {
         public long Id { get; set; }
         public string MSPIN { get; set; }
+        public string SessionID { get; set; }
         public string AgencyCode { get; set; }
         public System.DateTime DateTime { get; set; }
         public string MachineCode { get; set; }

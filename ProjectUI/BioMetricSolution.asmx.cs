@@ -18,7 +18,6 @@ namespace ProjectUI
     // [System.Web.Script.Services.ScriptService]
     public class BioMetricSolution : System.Web.Services.WebService
     {
-
         [WebMethod]
         public string HelloWorld()
         {
@@ -55,6 +54,17 @@ namespace ProjectUI
         public BiometricVersiondetails UpdateBiometricVersionMapping(BiometricVersiondetails_V2 Obj)
         {
             return BioMetricDAL.UpdateBiometricVersionMapping(Obj);
+        }
+        /*For Session ID wise Candidates deatils */
+        [WebMethod]
+        public MSPINDetails GetDetailsforMSPIN(string MSPIN, string AgencyCode)
+        {
+            return BioMetricDAL.GetDetailsforMSPIN(MSPIN, AgencyCode);
+        }
+        [WebMethod]
+        public bool PunchIn (CandidatesDetailsForPunchIn Obj)
+        {
+            return AttendancePunch.PunchIn(Obj);
         }
     }
 }

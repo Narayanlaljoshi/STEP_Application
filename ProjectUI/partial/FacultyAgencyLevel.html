@@ -77,7 +77,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="pt in SessionIdList | filter:SearchText">                        
-                        <td class="hidden-xs"style="width:25px"><input type="checkbox" ng-change="GetSelectedSessionIds(pt)" ng-model="pt.IsChecked"/></td>                      
+                        <td class="hidden-xs"style="width:25px"><input type="checkbox" ng-change="GetSelectedSessionIds(pt)" ng-model="pt.IsChecked"/></td>
                         <td>{{pt.SessionID}}</td>
                         <td>{{pt.ProgramCode}}</td>
                         <td>{{pt.ProgramName}}</td>

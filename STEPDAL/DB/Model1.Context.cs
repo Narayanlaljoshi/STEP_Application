@@ -30,7 +30,6 @@ namespace STEPDAL.DB
         public virtual DbSet<TblAgencyBioMetricMaster> TblAgencyBioMetricMasters { get; set; }
         public virtual DbSet<TblAttendance> TblAttendances { get; set; }
         public virtual DbSet<TblAttendance_SSTC> TblAttendance_SSTC { get; set; }
-        public virtual DbSet<TblAttendancePunchIn> TblAttendancePunchIns { get; set; }
         public virtual DbSet<TblEvaluationTypeMaster> TblEvaluationTypeMasters { get; set; }
         public virtual DbSet<TblFaculty> TblFaculties { get; set; }
         public virtual DbSet<tblLanguageMaster> tblLanguageMasters { get; set; }
@@ -67,8 +66,12 @@ namespace STEPDAL.DB
         public virtual DbSet<TblVendorMaster> TblVendorMasters { get; set; }
         public virtual DbSet<TblVendorTrainerMaster> TblVendorTrainerMasters { get; set; }
         public virtual DbSet<Tbl_Log_Report_DMS> Tbl_Log_Report_DMS { get; set; }
-        public virtual DbSet<TblProgramTestCalender> TblProgramTestCalenders { get; set; }
         public virtual DbSet<TblProgramTestCalenderDetail> TblProgramTestCalenderDetails { get; set; }
+        public virtual DbSet<TblQueryAttachment> TblQueryAttachments { get; set; }
+        public virtual DbSet<TblQueryDetail> TblQueryDetails { get; set; }
+        public virtual DbSet<TblQueryHeader> TblQueryHeaders { get; set; }
+        public virtual DbSet<TblProgramTestCalender> TblProgramTestCalenders { get; set; }
+        public virtual DbSet<TblAttendancePunchIn> TblAttendancePunchIns { get; set; }
     
         public virtual ObjectResult<sp_AttendanceReport_Result> sp_AttendanceReport()
         {
@@ -734,59 +737,6 @@ namespace STEPDAL.DB
                 new ObjectParameter("IsActive", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InertInto_TblStudentAnswerHdr", sA_IdParameter, programTestCalenderIdParameter, programIdParameter, mSPINParameter, remainingTimeParameter, dayParameter, typeOfTestParameter, sessionIDParameter, status_IdParameter, isActiveParameter);
-        }
-    
-        public virtual int SP_Insert_Update_TblStudentAnswer(Nullable<int> programTestCalenderId, Nullable<int> programId, Nullable<int> sA_Id, string mSPIN, string questionCode, string answerGiven, string correctAnswer, Nullable<int> day, string typeOfTest, string sessionID, Nullable<bool> isAnswerCorrect, Nullable<bool> isActive)
-        {
-            var programTestCalenderIdParameter = programTestCalenderId.HasValue ?
-                new ObjectParameter("ProgramTestCalenderId", programTestCalenderId) :
-                new ObjectParameter("ProgramTestCalenderId", typeof(int));
-    
-            var programIdParameter = programId.HasValue ?
-                new ObjectParameter("ProgramId", programId) :
-                new ObjectParameter("ProgramId", typeof(int));
-    
-            var sA_IdParameter = sA_Id.HasValue ?
-                new ObjectParameter("SA_Id", sA_Id) :
-                new ObjectParameter("SA_Id", typeof(int));
-    
-            var mSPINParameter = mSPIN != null ?
-                new ObjectParameter("MSPIN", mSPIN) :
-                new ObjectParameter("MSPIN", typeof(string));
-    
-            var questionCodeParameter = questionCode != null ?
-                new ObjectParameter("QuestionCode", questionCode) :
-                new ObjectParameter("QuestionCode", typeof(string));
-    
-            var answerGivenParameter = answerGiven != null ?
-                new ObjectParameter("AnswerGiven", answerGiven) :
-                new ObjectParameter("AnswerGiven", typeof(string));
-    
-            var correctAnswerParameter = correctAnswer != null ?
-                new ObjectParameter("CorrectAnswer", correctAnswer) :
-                new ObjectParameter("CorrectAnswer", typeof(string));
-    
-            var dayParameter = day.HasValue ?
-                new ObjectParameter("Day", day) :
-                new ObjectParameter("Day", typeof(int));
-    
-            var typeOfTestParameter = typeOfTest != null ?
-                new ObjectParameter("TypeOfTest", typeOfTest) :
-                new ObjectParameter("TypeOfTest", typeof(string));
-    
-            var sessionIDParameter = sessionID != null ?
-                new ObjectParameter("SessionID", sessionID) :
-                new ObjectParameter("SessionID", typeof(string));
-    
-            var isAnswerCorrectParameter = isAnswerCorrect.HasValue ?
-                new ObjectParameter("IsAnswerCorrect", isAnswerCorrect) :
-                new ObjectParameter("IsAnswerCorrect", typeof(bool));
-    
-            var isActiveParameter = isActive.HasValue ?
-                new ObjectParameter("IsActive", isActive) :
-                new ObjectParameter("IsActive", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insert_Update_TblStudentAnswer", programTestCalenderIdParameter, programIdParameter, sA_IdParameter, mSPINParameter, questionCodeParameter, answerGivenParameter, correctAnswerParameter, dayParameter, typeOfTestParameter, sessionIDParameter, isAnswerCorrectParameter, isActiveParameter);
         }
     
         public virtual int SP_Insert_Update_TblStudentAnswer_Practical(Nullable<long> sA_Id, Nullable<int> programTestCalenderId, Nullable<int> programId, string mSPIN, string questionCode, Nullable<int> day, string sessionID, string typeOfTest, Nullable<bool> actionA, Nullable<bool> actionB, Nullable<bool> actionC, Nullable<bool> actionD, Nullable<bool> actionE, Nullable<bool> actionF, Nullable<int> marks_A, Nullable<int> marks_B, Nullable<int> marks_C, Nullable<int> marks_D, Nullable<int> marks_E, Nullable<int> marks_F, Nullable<bool> isActive)
@@ -2788,6 +2738,81 @@ namespace STEPDAL.DB
                 new ObjectParameter("Set_Id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_GetLanguageWiseQuestionList_Result>("Sp_GetLanguageWiseQuestionList", programTestCalenderIdParameter, langIdParameter, set_IdParameter);
+        }
+    
+        public virtual ObjectResult<SP_GetAllQueries_Result> SP_GetAllQueries()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetAllQueries_Result>("SP_GetAllQueries");
+        }
+    
+        public virtual int SP_Insert_Update_TblStudentAnswer(Nullable<int> programTestCalenderId, Nullable<int> programId, Nullable<int> sA_Id, string mSPIN, string questionCode, string answerGiven, string correctAnswer, Nullable<int> day, string typeOfTest, string sessionID, Nullable<bool> isAnswerCorrect, Nullable<bool> isActive, Nullable<double> remainingTime, Nullable<int> status_Id)
+        {
+            var programTestCalenderIdParameter = programTestCalenderId.HasValue ?
+                new ObjectParameter("ProgramTestCalenderId", programTestCalenderId) :
+                new ObjectParameter("ProgramTestCalenderId", typeof(int));
+    
+            var programIdParameter = programId.HasValue ?
+                new ObjectParameter("ProgramId", programId) :
+                new ObjectParameter("ProgramId", typeof(int));
+    
+            var sA_IdParameter = sA_Id.HasValue ?
+                new ObjectParameter("SA_Id", sA_Id) :
+                new ObjectParameter("SA_Id", typeof(int));
+    
+            var mSPINParameter = mSPIN != null ?
+                new ObjectParameter("MSPIN", mSPIN) :
+                new ObjectParameter("MSPIN", typeof(string));
+    
+            var questionCodeParameter = questionCode != null ?
+                new ObjectParameter("QuestionCode", questionCode) :
+                new ObjectParameter("QuestionCode", typeof(string));
+    
+            var answerGivenParameter = answerGiven != null ?
+                new ObjectParameter("AnswerGiven", answerGiven) :
+                new ObjectParameter("AnswerGiven", typeof(string));
+    
+            var correctAnswerParameter = correctAnswer != null ?
+                new ObjectParameter("CorrectAnswer", correctAnswer) :
+                new ObjectParameter("CorrectAnswer", typeof(string));
+    
+            var dayParameter = day.HasValue ?
+                new ObjectParameter("Day", day) :
+                new ObjectParameter("Day", typeof(int));
+    
+            var typeOfTestParameter = typeOfTest != null ?
+                new ObjectParameter("TypeOfTest", typeOfTest) :
+                new ObjectParameter("TypeOfTest", typeof(string));
+    
+            var sessionIDParameter = sessionID != null ?
+                new ObjectParameter("SessionID", sessionID) :
+                new ObjectParameter("SessionID", typeof(string));
+    
+            var isAnswerCorrectParameter = isAnswerCorrect.HasValue ?
+                new ObjectParameter("IsAnswerCorrect", isAnswerCorrect) :
+                new ObjectParameter("IsAnswerCorrect", typeof(bool));
+    
+            var isActiveParameter = isActive.HasValue ?
+                new ObjectParameter("IsActive", isActive) :
+                new ObjectParameter("IsActive", typeof(bool));
+    
+            var remainingTimeParameter = remainingTime.HasValue ?
+                new ObjectParameter("RemainingTime", remainingTime) :
+                new ObjectParameter("RemainingTime", typeof(double));
+    
+            var status_IdParameter = status_Id.HasValue ?
+                new ObjectParameter("Status_Id", status_Id) :
+                new ObjectParameter("Status_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insert_Update_TblStudentAnswer", programTestCalenderIdParameter, programIdParameter, sA_IdParameter, mSPINParameter, questionCodeParameter, answerGivenParameter, correctAnswerParameter, dayParameter, typeOfTestParameter, sessionIDParameter, isAnswerCorrectParameter, isActiveParameter, remainingTimeParameter, status_IdParameter);
+        }
+    
+        public virtual ObjectResult<sp_getMultiNominationDetailsByMSPIN_Result> sp_getMultiNominationDetailsByMSPIN(string mSPIN)
+        {
+            var mSPINParameter = mSPIN != null ?
+                new ObjectParameter("MSPIN", mSPIN) :
+                new ObjectParameter("MSPIN", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_getMultiNominationDetailsByMSPIN_Result>("sp_getMultiNominationDetailsByMSPIN", mSPINParameter);
         }
     }
 }

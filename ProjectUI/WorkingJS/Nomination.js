@@ -32,10 +32,10 @@ app.controller('NominationController', function (NominationService, $scope, $roo
 
 	$scope.UploadExel = function () {
 		console.log("hi");
-		//if (!$scope.File1) {
-		//	swal("Error", "Please upload the excel", "error");
-		//	return false;
-		//}
+		if (!$scope.File1) {
+			swal("Error", "Please select the excel file", "error");
+			return false;
+		}
 		console.log($scope.File1);
 		var fd = new FormData();
 		//var Obj = {

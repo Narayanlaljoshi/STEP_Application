@@ -24,7 +24,7 @@ namespace Project.Controllers
         {
             string location = "";
             string fileName = "";
-            string ResponseMessage = "Error";
+            string ResponseMessage = "";
             NominationValidationBLL Data = new NominationValidationBLL();
             // Check if the request contains multipart/form-data.
             string strUniqueId = System.Guid.NewGuid().ToString();
@@ -117,9 +117,9 @@ namespace Project.Controllers
                         tbl.Columns.Add("Agency_Id",typeof(Int32));
                         tbl.Columns.Add("Faculty_Id", typeof(Int32));
                         DataColumnCollection columns = tbl.Columns;
-                        if (tbl.Columns.Count == 21)
+                        if (tbl.Columns.Count == 22)
                         {
-                            if (!columns.Contains("Co_id") ||!columns.Contains("Agency Code") ||!columns.Contains("Faculty Code") ||!columns.Contains("Program Code") ||!columns.Contains("Session ID") ||!columns.Contains("Start Date") ||!columns.Contains("End Date") ||!columns.Contains("Duration(As per Program Master)") ||!columns.Contains("MSPIN" )||!columns.Contains("Name") ||!columns.Contains("Date of Birth") ||!columns.Contains("Mobile No") ||!columns.Contains("ProgramId") ||!columns.Contains("Agency_Id") ||!columns.Contains("Faculty_Id")||!columns.Contains("Region") ||!columns.Contains("Venue") ||!columns.Contains("Dealer Code") ||!columns.Contains("Dealer Name") ||!columns.Contains("Location"))
+                            if (!columns.Contains("Co_id") || !columns.Contains("region_cd") || !columns.Contains("AGENCY_CD") ||!columns.Contains("FAC_CD") ||!columns.Contains("PRG_ID") ||!columns.Contains("CALNDR_ID") || !columns.Contains("prg_venue") || !columns.Contains("RO_FRM_DATE") ||!columns.Contains("RO_TO_DATE") ||!columns.Contains("PROG_DURATION") || !columns.Contains("DEALER_CD") || !columns.Contains("DEALER_NAME") || !columns.Contains("city") || !columns.Contains("LOC_DESC") || !columns.Contains("MSPIN" )||!columns.Contains("PARTICIPANTS_NAME") ||!columns.Contains("EMP_DOB") ||!columns.Contains("Mobile") ||!columns.Contains("ProgramId") ||!columns.Contains("Agency_Id") ||!columns.Contains("Faculty_Id") )
                             {
                                 return Request.CreateResponse(HttpStatusCode.OK, "Excel Sheet Not In Format (Column Names are Misspelled).");
                             }
@@ -137,9 +137,14 @@ namespace Project.Controllers
                         {
                             if (count == sheet.Dimension.End.Row)
                             {
-                                Data = NominationDAL.FilterDataTable(tbl, ref countIfProccessed,Obj);
+                                //Data = NominationDAL.FilterDataTable(tbl, ref countIfProccessed,Obj);
 
-                                NominationDAL.BulkInsertDataTable(Data.Datatbl,Obj);
+                                //NominationDAL.BulkInsertDataTable(Data.Datatbl,Obj);
+
+                                //Automation.BulkInsert_RawData(tbl);
+                                Automation.FilterNominationData(tbl);
+                                ResponseMessage=NominationDAL.FilterDownloadedNomination();
+
                                 count = 0;
                                 tbl.Rows.Clear();
                                 // tbl.Columns.Clear();   //warning: All Columns delete
@@ -159,9 +164,12 @@ namespace Project.Controllers
                         }
                         if (tbl.Rows.Count > 0 && tbl.Rows.Count < sheet.Dimension.End.Row)
                         {
-                            
-                            Data = NominationDAL.FilterDataTable(tbl, ref countIfProccessed, Obj);
-                            NominationDAL.BulkInsertDataTable(Data.Datatbl, Obj);
+
+                            //Data = NominationDAL.FilterDataTable(tbl, ref countIfProccessed, Obj);
+                            //NominationDAL.BulkInsertDataTable(Data.Datatbl, Obj);
+                            //Automation.BulkInsert_RawData(tbl);
+                            Automation.FilterNominationData(tbl);
+                            ResponseMessage=NominationDAL.FilterDownloadedNomination();
                         }
                         tbl.Rows.Clear();
                         tbl.Columns.Clear();   //warning: All Columns delete
@@ -174,9 +182,9 @@ namespace Project.Controllers
                 return Request.CreateResponse(HttpStatusCode.Accepted, e.Message);
             }
 
-            if (Data.Response.Length < 1)
-                Data.Response = "Success: File uploaded successfully";
-            return Request.CreateResponse(HttpStatusCode.Accepted, Data.Response);
+            if (ResponseMessage.Length < 1)
+                ResponseMessage = "Success: File uploaded successfully";
+            return Request.CreateResponse(HttpStatusCode.Accepted, ResponseMessage);
         }
 
         [HttpGet]

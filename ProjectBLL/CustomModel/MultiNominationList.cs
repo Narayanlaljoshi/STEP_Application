@@ -8,6 +8,13 @@ namespace ProjectBLL.CustomModel
 {
     public class MultiNominationList
     {
+        public string AgencyCode { get; set; }
+        public string MSPIN { get; set; }
+        public string Name { get; set; }
+    }
+    public class MultiNominationDetails
+    {
+       
         public int Id { get; set; }
         public string Co_id { get; set; }
         public string Region { get; set; }

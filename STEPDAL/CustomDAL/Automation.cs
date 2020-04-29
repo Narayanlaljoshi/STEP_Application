@@ -25,8 +25,8 @@ namespace STEPDAL.CustomDAL
             ArrayList UniqueRecords = new ArrayList();
             ArrayList DuplicateRecords = new ArrayList();
             List<NominationData> DuplicateList = new List<NominationData>();
-            // Check if records is already added to UniqueRecords otherwise,
-            // Add the records to DuplicateRecords
+            // Check if record is already added to UniqueRecords otherwise,
+            // Add the record to DuplicateRecords
             foreach (DataRow dRow in info.Rows)
             {
                 if (UniqueRecords.Contains(dRow["MSPIN"]))

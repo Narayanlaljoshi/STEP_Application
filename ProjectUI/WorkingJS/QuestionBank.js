@@ -154,7 +154,14 @@ app.controller('QuestionBankController', function ($scope, $http, $location, Que
             window.location.href = '#/ProgramTestCalender/';
         }
     };
-
+    $scope.GetQuestionBankList = function () {
+        QuestionBankService.GetQuestionBankList(ProgramTestCalenderService.id, $scope.Set_Id).then(function success(data) {
+            $scope.QuestionBankData = data.data;
+            console.log("Get Question Bank Service Data List", $scope.QuestionBankData);
+        }, function error(data) {
+            console.log("Error in loading data from EDB");
+        });
+    };
     $scope.SelectAllQues = function () {
         if ($scope.SelectAll == true) {
             $scope.ShowDeleteAllButton = true;

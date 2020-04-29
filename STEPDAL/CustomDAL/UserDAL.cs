@@ -119,7 +119,7 @@ namespace STEPDAL.CustomDAL
                                     else
                                     {
                                         UserDetails.AlreadyLoggedIn = true;
-                                        UserDetails.ErrorMsg = "Error: Alraedy Logged In, Kindly Contact Your Trainer!";
+                                        UserDetails.ErrorMsg = "Error: Already Logged In, Kindly Contact Your Trainer!";
                                     }
                                 }
 

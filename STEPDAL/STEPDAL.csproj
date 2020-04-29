@@ -79,6 +79,7 @@
     <Compile Include="CustomDAL\NominationDAL.cs" />
     <Compile Include="CustomDAL\ProgramMasterDAL.cs" />
     <Compile Include="CustomDAL\ProgramTestCalenderDAL.cs" />
+    <Compile Include="CustomDAL\QueriesDAL.cs" />
     <Compile Include="CustomDAL\QuestionBankDAL.cs" />
     <Compile Include="CustomDAL\RegistrationInfoDAL.cs" />
     <Compile Include="CustomDAL\ReportsDAL.cs" />
@@ -171,6 +172,9 @@
     <Compile Include="DB\sp_GetAgencyWiseFaculty_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\SP_GetAllQueries_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\sp_GetAttendanceReport_Evaluation_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -247,6 +251,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\sp_GetMarksReport_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\sp_getMultiNominationDetailsByMSPIN_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\sp_getMultiNominationListbyAgency_Result.cs">
@@ -487,6 +494,15 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\TblProgramTypeMaster.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\TblQueryAttachment.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\TblQueryDetail.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\TblQueryHeader.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\TblQuestionLanguageDetail.cs">

@@ -30,6 +30,7 @@ namespace STEPDAL.CustomDAL
 
             }
         }
+
         public static bool SavePunchInDetails(AttendancePunchDtl Obj)
         {
             using (var Context = new CEIDBEntities())
@@ -195,5 +196,54 @@ namespace STEPDAL.CustomDAL
                 //}
             }
         }
+
+        public static bool PunchIn(CandidatesDetailsForPunchIn Obj)
+        {
+            using (var Context = new CEIDBEntities())
+            {
+                //foreach (var Obj in Objects)
+                //{
+                var Check = Context.TblAttendancePunchIns.Where(x => x.MSPIN == Obj.MSPIN && x.DateTime == Obj.DateTime && x.AgencyCode == Obj.AgencyCode && x.IsActive == true && x.SessionID==Obj.SessionID).FirstOrDefault();
+                try
+                {
+                    if (Check == null)
+                    {
+                        TblAttendancePunchIn AP = new TblAttendancePunchIn
+                        {
+                            DateTime = Obj.DateTime,
+                            MSPIN = Obj.MSPIN,
+                            AgencyCode = Obj.AgencyCode,
+                            CreatedBy = 1,
+                            CreationDate = DateTime.Now,
+                            IsActive = true,
+                            MachineCode = Obj.MachineCode,
+                            SessionID=Obj.SessionID
+                            //MachineId = Obj.MachineId
+                        };
+                        Context.Entry(AP).State = System.Data.Entity.EntityState.Added;
+                        Context.SaveChanges();
+                    }
+                    else
+                    {
+                        Check.DateTime = Obj.DateTime;
+                        Check.ModifiedBy = 1;
+                        Check.ModifiedDate = DateTime.Now;
+                        Check.IsActive = true;
+                        Check.MachineCode = Obj.MachineCode;
+                        Check.SessionID = Obj.SessionID;
+                        //Check.MachineId = Obj.MachineId;
+                        Context.Entry(Check).State = System.Data.Entity.EntityState.Modified;
+                        Context.SaveChanges();
+                    }
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+                //}
+            }
+        }
+
     }
 }

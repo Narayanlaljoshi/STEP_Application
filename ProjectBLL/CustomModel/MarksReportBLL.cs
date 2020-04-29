@@ -28,6 +28,7 @@ namespace ProjectBLL.CustomModel
         public Nullable<int> PostTotalMarks { get; set; }
         public Nullable<double> PreTestPercentage { get; set; }
         public Nullable<double> PostTestPercentage { get; set; }
+        public Nullable<int> Set_Id { get; set; }
         //public string Co_id { get; set; }
         //public Nullable<int> Agency_Id { get; set; }
         //public Nullable<int> ProgramId { get; set; }

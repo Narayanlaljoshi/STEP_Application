@@ -116,6 +116,7 @@ namespace STEPDAL.CustomDAL
                 return objList;
             }
         }
+
         public static ReportFilterBLL GetReportFilter()
         {
             ReportFilterBLL ReportFilter = new ReportFilterBLL();
@@ -215,6 +216,7 @@ namespace STEPDAL.CustomDAL
                                 ProgramCode = TestDetails.ProgramCode,
                                 PostTestPercentage = postTestDetails != null ? postTestDetails.Percentage : null,
                                 PreTestPercentage = preTestDetails != null ? preTestDetails.Percentage : null,
+                                Set_Id= preTestDetails != null ? preTestDetails.Set_Id : null,
                             });
 
 
@@ -260,6 +262,7 @@ namespace STEPDAL.CustomDAL
                 return objList;
             }
         }
+
         public static List<MarksReportBLL> GetMarksReportAsperDMS(SessionIDListBLL Obj)
         {
             using (var context = new CEIDBEntities())
@@ -339,6 +342,7 @@ namespace STEPDAL.CustomDAL
                 return objList;
             }
         }
+
         public static List<MarksReportBLL> GetMarksReportAsperDMS_V2(SessionIDListBLL Obj)
         {
             using (var context = new CEIDBEntities())
@@ -403,6 +407,7 @@ namespace STEPDAL.CustomDAL
                 return objList;
             }
         }
+
         public static Boolean GenerateMarksReportAsperDMS_Phase_2()
         {
             //bool IsGenerated = false;
@@ -415,6 +420,7 @@ namespace STEPDAL.CustomDAL
                     return false;
             }
         }
+
         public static List<DayWiseReportBLL> GetMarksReportForAdmin(SessionIDListBLL Obj)
         {
             using (var context = new CEIDBEntities())
@@ -489,6 +495,7 @@ namespace STEPDAL.CustomDAL
                 return objList;
             }
         }
+
         public static List<DayWiseReportBLL> GetMarksReportForFaculty(List<SessionIDListBLL> Object)
         {
             using (var context = new CEIDBEntities())
@@ -695,7 +702,6 @@ namespace STEPDAL.CustomDAL
             return string.Empty;
         }
 
-
         public static List<DayWiseReportVendor> GetVendorAttendanceReport(ReportFilter_Vendor Obj)
         {
             using (var context = new CEIDBEntities())
@@ -762,6 +768,7 @@ namespace STEPDAL.CustomDAL
                 return objList;
             }
         }
+
         public static List<DayWiseReportVendor> GetVendorMarksReport(ReportFilter_Vendor Obj)
         {
             using (var context = new CEIDBEntities())
@@ -882,6 +889,7 @@ namespace STEPDAL.CustomDAL
                 return objList;
             }
         }
+
         public static List<SessionIdListForFilter> GetSessionList(ReportFilter_Vendor Obj)
         {
             using (var context = new CEIDBEntities())

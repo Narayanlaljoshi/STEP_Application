@@ -48,16 +48,13 @@ app.controller('ShowStudentMarksController', function ($scope, $http, $location,
             SessionID: null,
             StartDate: null,
             EndDate: null
-
         };
         ShowStudentMarksService.GetReportFilter().then(function success(data) {
             $scope.ReportFilter = data.data;
-
             console.log("$scope.ReportFilter", $scope.ReportFilter);
             return ShowStudentMarksService.GetMarksReport(FacultyAgencyLevelService.SelectedSessionIds);
         }).then(function success(data) {
             $scope.MarksReport = data.data;
-
             return ShowStudentMarksService.GetMarksReportForFaculty(FacultyAgencyLevelService.SelectedSessionIds);
         }).then(function success(data) {
             $scope.MarksReportDayWise= data.data;

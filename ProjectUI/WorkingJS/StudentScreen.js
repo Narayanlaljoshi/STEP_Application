@@ -106,13 +106,27 @@ app.controller('StudentController', function ($scope, $http, $location, $cookies
     //    // Prevent the browser default action (Going back):
     //    event.preventDefault();
     //});
+    var DTL = JSON.parse(localStorage.getItem('StudentTestQuestions'));
+
     $scope.init = function () {
+        if (DTL != null) {
+            $scope.Duration = DTL.StudentTestDetails.RemainingTime;
+            console.log("$scope.Duration", $scope.Duration);
+        }
         var Cookiess = $cookies.get('StudentDetails');
+        //window.localStorage.setItem('StudentTestQuestions', JSON.stringify(StudentService.StudentTestQuestions));
+        var Details = JSON.parse(localStorage.getItem('StudentTestQuestions'));
+        console.log(DTL);
         $scope.dirOptions = {};
         $scope.UserName = $location.absUrl().substring($location.absUrl().indexOf('=') + 1, $location.absUrl().indexOf('&'));
         $scope.User_Id = $location.absUrl().substring($location.absUrl().indexOf('&') + 5, $location.absUrl().length);
         StudentService.GetStudenttestDetails($scope.UserName).then(function success(success) {
             if (success.data != null) {
+                //window.localStorage.setItem('UserName', success.data);
+                window.localStorage.setItem('StudenttestDetails', JSON.stringify(success.data));
+                //var Details = JSON.parse(localStorage.getItem('StudenttestDetails'));
+                //var as = window.localStorage.getItem('UserName');
+                //console.log(Details);
                 if (success.data.ErrorMessage != null) {
                     swal({
                         title: success.data.ErrorMessage,
@@ -135,7 +149,10 @@ app.controller('StudentController', function ($scope, $http, $location, $cookies
                     console.log("$scope.Duration", $scope.Duration);
                     $scope.ShowStartButton = true;
                     $scope.ShowQuestions = false;
-
+                    if (DTL != null) {
+                        $scope.Duration = DTL.StudentTestDetails.RemainingTime;
+                        console.log("$scope.Duration", $scope.Duration);
+                    }
                     console.log($scope.StudentTestDetails.ProgramId);
 
                     StudentService.GetPrgramLanguage($scope.StudentTestDetails.ProgramId).then(function success(data) {
@@ -195,7 +212,7 @@ app.controller('StudentController', function ($scope, $http, $location, $cookies
 
     $scope.goTo = function (index) {
         StudentService.prevPage = $scope.currentPage - 1;
-        console.log($scope.totalItems);
+        console.log(StudentService.StudentTestQuestions.StudentLanguageQuestion[StudentService.prevPage]);
         if (index > 0 && index <= $scope.totalItems) {
             $scope.currentPage = index;
             $scope.mode = 'quiz';
@@ -215,10 +232,16 @@ app.controller('StudentController', function ($scope, $http, $location, $cookies
             StudentTestDetails: StudentService.QuestionVariable,
             StudentLanguageQuestion: StudentService.StudentTestQuestions.StudentLanguageQuestion[StudentService.prevPage]
         };
-        StudentService.SaveTestResponse(Obj).then(function success(success) {
-            console.log("saving data at every second is working");
-        }, function error(error) {
-        });
+        StudentService.StudentTestQuestions.StudentTestDetails = StudentService.QuestionVariable;
+        StudentService.StudentTestQuestions.StudentLanguageQuestion = $scope.questions;//StudentService.StudentTestQuestions.StudentLanguageQuestion;
+        /*API call to save question response*/
+        window.localStorage.setItem('StudentTestQuestions', JSON.stringify(StudentService.StudentTestQuestions));
+        console.log(JSON.parse(localStorage.getItem('StudentTestQuestions')));
+
+        //StudentService.SaveTestResponse(Obj).then(function success(success) {
+        //    console.log("saving data at every second is working");
+        //}, function error(error) {
+        //});
     };
 
     $scope.onSelect = function (question, option) {
@@ -274,7 +297,7 @@ app.controller('StudentController', function ($scope, $http, $location, $cookies
                     $scope.filteredQuestions = $scope.questions.slice(begin, end);
                 });
             });
-    }
+    };
 
     $scope.shuffleOptions = function () {
         $scope.questions.forEach(function (question) {
@@ -298,7 +321,7 @@ app.controller('StudentController', function ($scope, $http, $location, $cookies
         }
         else { return "unanswered"; }
         //});
-        return answered;
+        //return answered;
     };
 
     $scope.isCorrect = function (question) {
@@ -330,6 +353,9 @@ app.controller('StudentController', function ($scope, $http, $location, $cookies
             StudentService.GetStudenttestDetails($scope.UserName).then(function success(success) {
                 if (success.data != null) {
                     $scope.StudentTestDetails = success.data;
+                    if (DTL != null) {
+                        $scope.StudentTestDetails = DTL.StudentTestDetails;
+                    }
                     StudentService.StudentTestDetail = $scope.StudentTestDetails;
                     StudentService.IsStarted = true;
                     $scope.ShowStartButton = true;
@@ -344,12 +370,13 @@ app.controller('StudentController', function ($scope, $http, $location, $cookies
                     LangId: pt,
                     MSPIN: $scope.StudentTestDetails.MSPIN,
                     SessionID: $scope.StudentTestDetails.SessionID,
-                    Day: $scope.StudentTestDetails.DayCount,
+                    Day: $scope.StudentTestDetails.Day ? $scope.StudentTestDetails.Day : $scope.StudentTestDetails.DayCount,
                     UserId: $scope.User_Id,
                     ProgramId: $scope.StudentTestDetails.ProgramId,
                     TypeOfTest: $scope.StudentTestDetails.TypeOfTest
                 };
                 console.log(StudentService.QuestionVariable);
+
                 StudentService.GetStudentQuestionFormatedList(StudentService.QuestionVariable).then(function success(success) {
                     //StudentService.GetStudentTestQuestions($scope.StudentTestDetails.ProgramTestCalenderId).then(function success(success) {
                     StudentService.StudentTestQuestions = success.data;
@@ -358,18 +385,18 @@ app.controller('StudentController', function ($scope, $http, $location, $cookies
                     }
                     else {
                         if (StudentService.StudentTestQuestions != null) {
-                            StudentService.Get_Check($scope.StudentTestDetails.MSPIN, $scope.StudentTestDetails.DayCount).then(function success(success) {
+                            StudentService.Get_Check($scope.StudentTestDetails.MSPIN, StudentService.QuestionVariable.Day).then(function success(success) {
                                 $scope.Check = success.data;
                                 console.log($scope.Check == null);
                                 if ($scope.Check != null) {
                                     swal("Thanks", "You have already taken this test or You have exceed the time limit", "warning");
                                 }
+
                                 else {
                                     $scope.Duration = $scope.StudentTestDetails.TestDuration;
                                     console.log("$scope.Duration", $scope.Duration);
                                     $scope.dirOptions.directiveFunction();
-                                    console.log(StudentService.StudentTestQuestions);
-                                    $scope.QuestionsResponse = StudentService.StudentTestQuestions;
+                                    //console.log(StudentService.StudentTestQuestions);
                                     $scope.ShowQuestions = true;
                                     $scope.ShowStartButton = false;
                                     var config = {
@@ -382,13 +409,24 @@ app.controller('StudentController', function ($scope, $http, $location, $cookies
                                     $scope.quiz = $scope.QuestionsResponse;
                                     console.log('Initiating Shuffle');
                                     $scope.config = helperService.extend({}, $scope.defaultConfig, config);
-                                    $scope.questions = StudentService.StudentTestQuestions.StudentLanguageQuestion;//$scope.config.shuffleQuestions ? helperService.shuffle(StudentService.StudentTestQuestions.StudentLanguageQuestion) : StudentService.StudentTestQuestions.StudentLanguageQuestion;
+                                    $scope.questions = StudentService.StudentTestQuestions.StudentLanguageQuestion;
+                                    $scope.QuestionsResponse = StudentService.StudentTestQuestions;
+                                    console.log($scope.QuestionsResponse);
+                                    if (DTL != null) {
+                                        //var  = window.localStorage.getItem('StudentTestQuestions');
+                                        $scope.questions = DTL.StudentLanguageQuestion;
+                                        $scope.QuestionsResponse = DTL;
+                                        $scope.Duration = DTL.StudentTestDetails.RemainingTime;
+                                        console.log("$scope.Duration", $scope.Duration);
+                                    }
+                                    //$scope.config.shuffleQuestions ? helperService.shuffle(StudentService.StudentTestQuestions.StudentLanguageQuestion) : StudentService.StudentTestQuestions.StudentLanguageQuestion;
                                     //$scope.questions = $scope.QuestionsResponse;
                                     console.log('Ended Shuffle');
                                     $scope.totalItems = $scope.questions.length;
                                     $scope.itemsPerPage = $scope.config.pageSize;
                                     $scope.currentPage = 1;
-
+                                    window.localStorage.setItem('StudentTestQuestions', JSON.stringify(StudentService.StudentTestQuestions));
+                                    //console.log(JSON.parse(localStorage.getItem('StudentTestQuestions')));
                                     if ($scope.config.shuffleOptions)
                                         $scope.shuffleOptions();
                                     angular.forEach(StudentService.StudentTestQuestions, function (value, key) {
@@ -413,6 +451,7 @@ app.controller('StudentController', function ($scope, $http, $location, $cookies
 
                     //console.log("Error in loading data from EDB");
                 });
+
             }, function error(Error) {
                 //console.log("Error in loading data from EDB");
             });
@@ -447,35 +486,41 @@ app.controller('StudentController', function ($scope, $http, $location, $cookies
                 //};
                 var Obj = {
                     StudentTestDetails: StudentService.QuestionVariable,
-                    StudentLanguageQuestion: StudentService.StudentTestQuestions.StudentLanguageQuestion[StudentService.currentPage - 1]
-                    //StudentLanguageQuestion: StudentService.StudentTestQuestions.StudentLanguageQuestion
+                    //StudentLanguageQuestion: StudentService.StudentTestQuestions.StudentLanguageQuestion[StudentService.currentPage - 1]
+                    StudentLanguageQuestion: StudentService.StudentTestQuestions.StudentLanguageQuestion
                 };
 
                 console.log(Obj);
-                StudentService.SaveTestResponse(Obj).then(function success(success) {
-                    swal({
-                        title: 'Thanks',
-                        text: "You have submitted test successfully",
-                        type: 'success',
-                        showCancelButton: false,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'OK'
-                    }).then((result) => {
-                        $cookies.remove('LogKey');
-                        $cookies.get('LogKey');
-                        if (StudentService.StudentTestDetail.Duration == StudentService.StudentTestDetail.DayCount)
-                        {
-                            $scope.ProgramId = StudentService.StudentTestDetail.ProgramId;
-                            $scope.SessionID = StudentService.StudentTestDetail.SessionID;
-                            $scope.MSPIN = StudentService.StudentTestDetail.MSPIN;
-                            console.log('./Feedback.html?ProgramId=' + $scope.ProgramId + '&SessionID=' + $scope.SessionID + '&MSPIN=' + $scope.MSPIN);
-                            window.location = './Feedback.html?ProgramId=' + $scope.ProgramId + '&SessionID=' + $scope.SessionID + '&MSPIN=' + $scope.MSPIN;
-                        }
-                        else {
-                            window.location = './Stlogin.html';
-                        }
-                    });
+                StudentService.SaveTestResponseComplete(Obj).then(function success(success) {
+                    if (success.data.indexOf('Success') != -1) {
+
+                        swal({
+                            title: 'Thanks',
+                            text: "You have submitted test successfully",
+                            type: 'success',
+                            showCancelButton: false,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            window.localStorage.removeItem('StudentTestQuestions');
+                            $cookies.remove('LogKey');
+                            $cookies.get('LogKey');
+                            if (StudentService.StudentTestDetail.Duration == StudentService.StudentTestDetail.DayCount) {
+                                $scope.ProgramId = StudentService.StudentTestDetail.ProgramId;
+                                $scope.SessionID = StudentService.StudentTestDetail.SessionID;
+                                $scope.MSPIN = StudentService.StudentTestDetail.MSPIN;
+                                console.log('./Feedback.html?ProgramId=' + $scope.ProgramId + '&SessionID=' + $scope.SessionID + '&MSPIN=' + $scope.MSPIN);
+                                window.location = './Feedback.html?ProgramId=' + $scope.ProgramId + '&SessionID=' + $scope.SessionID + '&MSPIN=' + $scope.MSPIN;
+                            }
+                            else {
+                                window.location = './Stlogin.html';
+                            }
+                        });
+                    }
+                    else {
+                        swal("", success.data, "error");
+                    }
                 }, function error(Error) {
                     //console.log("Error in loading data from EDB");
                 });
@@ -501,11 +546,19 @@ app.controller('StudentController', function ($scope, $http, $location, $cookies
                 console.log(StudentService.StudentTestQuestions.StudentLanguageQuestion[StudentService.currentPage - 1]);
                 var Obj = {
                     StudentTestDetails: StudentService.QuestionVariable,
-                    StudentLanguageQuestion: StudentService.StudentTestQuestions.StudentLanguageQuestion[StudentService.currentPage - 1]
-                    //StudentLanguageQuestion: StudentService.StudentTestQuestions.StudentLanguageQuestion
+                    //StudentLanguageQuestion: StudentService.StudentTestQuestions.StudentLanguageQuestion[StudentService.currentPage - 1]
+                    StudentLanguageQuestion: StudentService.StudentTestQuestions.StudentLanguageQuestion
                 };
-                StudentService.SaveTestResponse(Obj).then(function success(success) {
-                    window.location = './Stlogin.html';
+                StudentService.SaveTestResponseComplete(Obj).then(function success(success) {
+                    if (success.data.indexOf('Success') != -1) {
+                        swal("", success.data, "success");
+                        window.localStorage.removeItem('StudentTestQuestions');
+                        window.location = './Stlogin.html';
+                    }
+                    else {
+                        swal("", success.data, "error");
+                    }
+
                 }, function error(Error) {
                     //console.log("Error in loading data from EDB");
                 });
@@ -643,7 +696,7 @@ app.directive('timer', function ($timeout, $http, $compile, $cookies, StudentSer
                 if (scope.minutes < 10) {
                     scope.minutes = '0' + scope.minutes;
                 }
-                
+
                 scope.$emit('timer-tick', {
                     intervalId: scope.intervalId,
                     millis: scope.millis
@@ -662,36 +715,44 @@ app.directive('timer', function ($timeout, $http, $compile, $cookies, StudentSer
                 StudentService.QuestionVariable.Status_Id = 1;
                 var Obj = {
                     StudentTestDetails: StudentService.QuestionVariable,
-                    StudentLanguageQuestion: StudentService.StudentTestQuestions.StudentLanguageQuestion[StudentService.currentPage - 1]
+                    //StudentLanguageQuestion: StudentService.StudentTestQuestions.StudentLanguageQuestion[StudentService.currentPage - 1]
+                    StudentLanguageQuestion: StudentService.StudentTestQuestions.StudentLanguageQuestion
                 };
                 //$http.post(StudentService.AppUrl + '/Test/SaveTestResponse/', Obj).then(function (results) {
                 //console.log(results);
                 // window.location = './Stlogin.html';
                 //});
                 console.log(Obj);
-                StudentService.SaveTestResponse(Obj).then(function success(success) {
-                    swal({
-                        title: 'Thanks',
-                        text: "You have submitted test successfully",
-                        type: 'success',
-                        showCancelButton: false,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'OK'
-                    }).then((result) => {
-                        console.log(StudentService.StudentTestDetail.Duration == StudentService.StudentTestDetail.DayCount);
-                        $cookies.remove('LogKey');
-                        if (StudentService.StudentTestDetail.Duration == StudentService.StudentTestDetail.DayCount) {
-                            var ProgramId = StudentService.StudentTestDetail.ProgramId;
-                            var SessionID = StudentService.StudentTestDetail.SessionID;
-                            var MSPIN = StudentService.StudentTestDetail.MSPIN;
-                            console.log('./Feedback.html?ProgramId=' + ProgramId + '&SessionID=' + SessionID + '&MSPIN=' + MSPIN);
-                            window.location = './Feedback.html?ProgramId=' + ProgramId + '&SessionID=' + SessionID + '&MSPIN=' + MSPIN;
-                        }
-                        else {
-                            window.location = './Stlogin.html';
-                        }
-                    });
+                StudentService.SaveTestResponseComplete(Obj).then(function success(success) {
+                    if (success.data.indexOf('Success') != -1) {
+
+                        swal({
+                            title: 'Thanks',
+                            text: "You have submitted test successfully",
+                            type: 'success',
+                            showCancelButton: false,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            console.log(StudentService.StudentTestDetail.Duration == StudentService.StudentTestDetail.DayCount);
+                            $cookies.remove('LogKey');
+                            window.localStorage.removeItem('StudentTestQuestions');
+                            if (StudentService.StudentTestDetail.Duration == StudentService.StudentTestDetail.DayCount) {
+                                var ProgramId = StudentService.StudentTestDetail.ProgramId;
+                                var SessionID = StudentService.StudentTestDetail.SessionID;
+                                var MSPIN = StudentService.StudentTestDetail.MSPIN;
+                                console.log('./Feedback.html?ProgramId=' + ProgramId + '&SessionID=' + SessionID + '&MSPIN=' + MSPIN);
+                                window.location = './Feedback.html?ProgramId=' + ProgramId + '&SessionID=' + SessionID + '&MSPIN=' + MSPIN;
+                            }
+                            else {
+                                window.location = './Stlogin.html';
+                            }
+                        });
+                    }
+                    else {
+                        swal("", success.data, "error");
+                    }
                 }, function error(Error) {
                     //console.log("Error in loading data from EDB");
                 });

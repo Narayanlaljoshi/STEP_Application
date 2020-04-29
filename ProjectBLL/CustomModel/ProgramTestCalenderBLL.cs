@@ -21,7 +21,7 @@ namespace ProjectBLL.CustomModel
         public Nullable<int> Marks_Question { get; set; }
         public Nullable<int> Total_Marks { get; set; }
         public Nullable<int> Q_Bank { get; set; }
-
+        public Nullable<bool> EnableJumbling { get; set; }
         public bool IsActive { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
@@ -91,7 +91,7 @@ namespace ProjectBLL.CustomModel
         public Nullable<int> TotalNoQuestion { get; set; }
         public Nullable<int> TestDuration { get; set; }
         public string QuestionPaperType { get; set; }
-
+        public Nullable<bool> EnableJumbling { get; set; }
         public string TestCode { get; set; }
         public Nullable<int> Marks_Question { get; set; }
         public Nullable<int> Total_Marks { get; set; }

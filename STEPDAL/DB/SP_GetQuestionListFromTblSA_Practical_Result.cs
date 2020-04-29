@@ -62,5 +62,7 @@ namespace STEPDAL.DB
         public int Status_Id { get; set; }
         public Nullable<int> Ques_Sequence { get; set; }
         public string Set_Title { get; set; }
+        public Nullable<bool> EnableJumbling { get; set; }
+        public Nullable<int> TestDuration1 { get; set; }
     }
 }
