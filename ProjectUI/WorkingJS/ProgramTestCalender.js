@@ -111,12 +111,12 @@ app.controller('ProgramTestCalenderController', function ($scope, $http, $locati
                 $scope.ProgramTestCalenderDetailData = $scope.ProgramTestCalenderData;
 
                 angular.forEach($scope.ProgramTestCalenderData, function (value, key) {
-                    console.log((value.EvaluationTypeId == 1) && (value.TotalNoQuestion <= value.QuesAdded));
+                    console.log((value.EvaluationTypeId === 1 && value.QuestionPaperType==="QB") && (value.TotalNoQuestion <= value.QuesAdded));
                     console.log((value.EvaluationTypeId == 2) && (value.QuesAdded >= 1));
-                    if ((value.EvaluationTypeId==1)&& (value.TotalNoQuestion <= value.QuesAdded))
+                    if ((value.EvaluationTypeId == 1) && (value.QuestionPaperType === "QB")&& (value.TotalNoQuestion <= value.QuesAdded))
                     { value.RowColor = '#9cd6cb'; }
-                    else if ((value.EvaluationTypeId == 2) && (value.QuesAdded >= 1))
-                    { value.RowColor = '#9cd6cb'; } 
+                    else if ((value.EvaluationTypeId == 1) && ( value.QuestionPaperType === "Set") && (1 <= value.QuesAdded)) { value.RowColor = '#9cd6cb'; }
+                    else if ((value.EvaluationTypeId == 2) && (value.QuesAdded >= 1)) { value.RowColor = '#9cd6cb'; } 
                     else { value.RowColor = '#d6a19c';}
                 });
             }, function error(data) {

@@ -144,14 +144,22 @@ app.controller('StudentController', function ($scope, $http, $location, $cookies
                 }
                 else {
                     $scope.StudentTestDetails = success.data;
+                    
                     StudentService.StudentTestDetail = $scope.StudentTestDetails;
                     $scope.Duration = $scope.StudentTestDetails.TestDuration;//parseInt($scope.StudentTestDetails.TestDuration * 60);
                     console.log("$scope.Duration", $scope.Duration);
                     $scope.ShowStartButton = true;
                     $scope.ShowQuestions = false;
                     if (DTL != null) {
-                        $scope.Duration = DTL.StudentTestDetails.RemainingTime;
-                        console.log("$scope.Duration", $scope.Duration);
+                        if ($scope.StudentTestDetails.MSPIN != DTL.StudentTestDetails.MSPIN || DTL.StudentTestDetails.DayCount != $scope.StudentTestDetails.MSPIN.DayCount || DTL.StudentTestDetails.SessionID != $scope.StudentTestDetails.MSPIN.SessionID) {
+                            DTL = null;
+                            window.localStorage.removeItem('StudentTestQuestions');
+                        }
+                        else {
+
+                            $scope.Duration = DTL.StudentTestDetails.RemainingTime;
+                            console.log("$scope.Duration", $scope.Duration);
+                        }
                     }
                     console.log($scope.StudentTestDetails.ProgramId);
 

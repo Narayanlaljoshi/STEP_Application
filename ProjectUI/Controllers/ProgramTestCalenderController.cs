@@ -19,22 +19,17 @@ namespace Project.Controllers
 {
     public class ProgramTestCalenderController : ApiController
     {
-
-
         [HttpGet]
         public List<ProgramMaster> GetProgramList()
         {
             return ProgramTestCalenderDAL.GetProgramList();
         }
 
-
         [HttpGet]
         public List<ProgramTestCalenderDetail_Model> GetProgramTestCalenderList(int ProgramId)
         {
             return ProgramTestCalenderDAL.GetProgramTestCalenderList(ProgramId);
         }
-
-
 
         [HttpPost]
         public string AddProgramTestCalender([FromBody] List<ProgramTestCalenderBLL> obj)
@@ -47,7 +42,6 @@ namespace Project.Controllers
         {
             return ProgramTestCalenderDAL.UpdateProgramTestCalender(info);
         }
-
 
         [HttpPost]
         public async Task<HttpResponseMessage> UploadExcel()
@@ -103,7 +97,6 @@ namespace Project.Controllers
 
 
         }
-
 
     }
 }
