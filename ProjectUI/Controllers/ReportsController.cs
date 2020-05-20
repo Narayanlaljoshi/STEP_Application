@@ -15,7 +15,8 @@ namespace Project.Controllers
         [HttpPost]
         public List<AttendanceReportBLL> GetAttendanceReport(ReportInputBLL Obj)
         {
-            return ReportsDAL.GetAttendanceReport(Obj);
+            //return ReportsDAL.GetAttendanceReport(Obj);
+            return ReportsDAL.GetAttendanceReport_V2(Obj);
         }
         [HttpPost]
         public ReportFilterBLL GetReportFilter()
@@ -31,6 +32,16 @@ namespace Project.Controllers
         public List<DayWiseReportBLL> GetMarksReportForAdmin(SessionIDListBLL Obj)
         {
             return ReportsDAL.GetMarksReportForAdmin(Obj);
+        }
+        [HttpPost]
+        public List<ProgramListForReportInput> GetProgramList_From_To_Date(ReportInputBLL Obj)
+        {
+            return ReportsDAL.GetProgramList_From_To_Date(Obj);
+        }
+        [HttpPost]
+        public List<SessionIdListForFilter> GetSessionList_ProgramWise(ReportInputBLL Obj)
+        {
+            return ReportsDAL.GetSessionList_ProgramWise(Obj);
         }
         /*Marks report as per DMS*/
         [HttpPost]

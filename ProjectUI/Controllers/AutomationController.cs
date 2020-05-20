@@ -110,7 +110,7 @@ namespace ProjectUI.Controllers
                 EndDate = EndDate
             };
 
-            List<AttendanceReportBLL> List= ReportsDAL.GetAttendanceReport(Obj);
+            List<AttendanceReportBLL> List= ReportsDAL.GetAttendanceReport_V2(Obj);
             List<string> SessionIDs = List.Select(x => x.SessionID).Distinct().ToList();
             DataTable Dt = new DataTable("myTable");
             Dt.Columns.Add("LV_FACULTY");

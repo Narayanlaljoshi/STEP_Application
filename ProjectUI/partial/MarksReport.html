@@ -18,15 +18,17 @@
             <div class="row">
 
                 <div class="col-xs-2">
-                    <label>Start Date* </label><!--{{MaxDate.toString()}}-->
+                    <label>From Date* </label><!--{{MaxDate.toString()}}-->
                     <div class="datepicker" id="Div1" date-format="MMM dd, yyyy" date-min-limit="{{MaxDate.toString()}}" button-prev="<i class=&quot;fa fa-arrow-circle-left&quot;></i>" button-next="<i class=&quot;fa fa-arrow-circle-right&quot;></i>">
-                        <input ng-required="true"autocomplete="off" class="form-control" contenteditable="false" name="ExpectedStartDate" ng-model="ReportInput.StartDate" type="text" />
+                        <input ng-required="true" autocomplete="off" class="form-control" contenteditable="false" name="ExpectedStartDate"
+                               ng-change="GetProgramList_From_To_Date()" ng-model="ReportInput.StartDate" type="text" />
                     </div>
                 </div>
                 <div class="col-xs-2">
-                    <label>End Date* </label><!--{{MaxDate.toString()}}-->
+                    <label>To Date* </label><!--{{MaxDate.toString()}}-->
                     <div class="datepicker" id="Div1" date-format="MMM dd, yyyy" date-min-limit="{{MaxDate.toString()}}" button-prev="<i class=&quot;fa fa-arrow-circle-left&quot;></i>" button-next="<i class=&quot;fa fa-arrow-circle-right&quot;></i>">
-                        <input ng-required="true"autocomplete="off" class="form-control" contenteditable="false" name="ExpectedStartDate" ng-model="ReportInput.EndDate" type="text" />
+                        <input ng-required="true" autocomplete="off" class="form-control" contenteditable="false" name="ExpectedStartDate"
+                               ng-change="GetProgramList_From_To_Date()" ng-model="ReportInput.EndDate" type="text" />
 
                     </div>
                 </div>
@@ -38,14 +40,13 @@
 
                 <div class="col col-xs-2">
                     <label>Program</label>
-                    <select class="form-control" ng-options="pt.ProgramId as pt.ProgramName for pt in ReportFilter.ProgramList" ng-model="ReportInput.ProgramId"></select>
+                    <select class="form-control" ng-options="pt.ProgramId as pt.ProgramName for pt in ReportFilter.ProgramList"
+                            ng-change="GetSessionList_ProgramWise()" ng-model="ReportInput.ProgramId"></select>
                 </div>
-
                 <div class="col col-xs-2">
                     <label>Session</label>
                     <select class="form-control" ng-options="pt.SessionID as pt.SessionID for pt in ReportFilter.SessionList" ng-model="ReportInput.SessionID"></select>
                 </div>
-
                 <div class="col col-xs-2" ng-hide="session.RoleName == 'Faculty'">
                     <label>Faculty</label>
                     <select class="form-control" ng-options="pt.Faculty_Id as pt.FacultyName for pt in ReportFilter.FacultyList" ng-model="ReportInput.Faculty_Id"></select>

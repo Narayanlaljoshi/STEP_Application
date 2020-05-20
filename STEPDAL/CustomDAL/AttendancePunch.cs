@@ -10,26 +10,26 @@ namespace STEPDAL.CustomDAL
 {
     public class AttendancePunch
     {
-        public static bool SavePunchInDetailsList(List<AttendancePunchDtl> Objects)
-        {
-            using (var Context = new CEIDBEntities())
-            {
-                foreach (var Obj in Objects)
-                {   
-                    try
-                    {
-                        int Status = Context.sp_Update_InsertIntoTblAttendancePunchIn(Obj.MSPIN,Obj.AgencyCode,Obj.DateTime,Obj.MachineCode,Obj.MachineId);
-                    }
-                    catch (Exception ex)
-                    {
-                        continue;
-                    }
-                }
-                return true;
+        //public static bool SavePunchInDetailsList(List<AttendancePunchDtl> Objects)
+        //{
+        //    using (var Context = new CEIDBEntities())
+        //    {
+        //        foreach (var Obj in Objects)
+        //        {   
+        //            try
+        //            {
+        //                int Status = Context.sp_Update_InsertIntoTblAttendancePunchIn(Obj.MSPIN,Obj.AgencyCode,Obj.DateTime,Obj.MachineCode,Obj.MachineId);
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                continue;
+        //            }
+        //        }
+        //        return true;
 
 
-            }
-        }
+        //    }
+        //}
 
         public static bool SavePunchInDetails(AttendancePunchDtl Obj)
         {

@@ -113,7 +113,9 @@ namespace ProjectBLL.CustomModel
     }
 
 
-
+    public class SetSequence {
+        public int? Set_Id  { get; set; }
+    }
 
 
     public class ProgramTest_QuestionDetail

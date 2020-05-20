@@ -6,12 +6,9 @@ app.service('MarksReportService', function ($http, $location) {
     console.log($location.absUrl());
 
     if ($location.absUrl().indexOf('CST') != -1) {
-
         this.AppUrl = "/CST/api/";
-
     }
     else {
-
         this.AppUrl = "/api/";
     }
     this.GetMarksReport = function (data) {
@@ -27,8 +24,13 @@ app.service('MarksReportService', function ($http, $location) {
     this.GetStudentPostTestScores = function (MSpin) {
         return $http.get(this.AppUrl + '/Test/GetStudentPostTestScores/?MSpin=' + MSpin);
     };
+    this.GetProgramList_From_To_Date = function (Obj) {
+        return $http.post(this.AppUrl + '/Reports/GetProgramList_From_To_Date', Obj);
+    };
+    this.GetSessionList_ProgramWise = function (Obj) {
+        return $http.post(this.AppUrl + '/Reports/GetSessionList_ProgramWise', Obj);
+    };
 });
-
 
 app.controller('MarksReportController', function ($scope, $http, $location, MarksReportService, $uibModal, $rootScope, InitFactory) {
     $scope.ReportInput = {};
@@ -109,10 +111,28 @@ app.controller('MarksReportController', function ($scope, $http, $location, Mark
         console.log("ng-Change Working", Agency_Id);
         MarksReportService.GetFacultyList(Agency_Id).then(function success(success) {
             $scope.ReportFilter.FacultyList = success.data;
+            $scope.GetProgramList_From_To_Date();
         }, function error(Error) {
             console.log("Error in loading data from EDB");
         });
     };
+
+    $scope.GetProgramList_From_To_Date = function () {
+        MarksReportService.GetProgramList_From_To_Date($scope.ReportInput).then(function success(success) {
+            $scope.ReportFilter.ProgramList = success.data;
+        }, function error(Error) {
+            console.log("Error in loading data from EDB");
+        });
+    };
+
+    $scope.GetSessionList_ProgramWise = function () {
+        MarksReportService.GetSessionList_ProgramWise($scope.ReportInput).then(function success(success) {
+            $scope.ReportFilter.SessionList = success.data;
+        }, function error(Error) {
+            console.log("Error in loading data from EDB");
+        });
+    };
+
     $scope.ResetFilters = function (ReportInput) {
         $scope.ReportInput = null;
         $scope.ShowReport = true;

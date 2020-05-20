@@ -209,6 +209,7 @@
           <Property Name="Venue" Type="nvarchar" MaxLength="500" />
           <Property Name="Dealer_LocationCode" Type="nvarchar" MaxLength="50" />
           <Property Name="DealerName" Type="nvarchar" MaxLength="500" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" />
           <Property Name="Location" Type="nvarchar" MaxLength="500" />
           <Property Name="AgencyCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Faculty_Id" Type="int" />
@@ -891,6 +892,15 @@
           <Parameter Name="Faculty_Id" Type="int" Mode="In" />
           <Parameter Name="Program_Id" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_GetAttendanceReport_Blank_NewModel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="Program_Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetAttendanceReport_Blank_PRG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+          <Parameter Name="Program_Id" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_GetAttendanceReport_Evaluation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StartDate" Type="datetime" Mode="In" />
           <Parameter Name="EndDate" Type="datetime" Mode="In" />
@@ -990,6 +1000,13 @@
           <Parameter Name="StartDate" Type="datetime" Mode="In" />
           <Parameter Name="EndDate" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="sp_GetMSPINList_For_BlankPRG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Agency_Id" Type="int" Mode="In" />
+          <Parameter Name="ProgramId" Type="int" Mode="In" />
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDAte" Type="datetime" Mode="In" />
+          <Parameter Name="Faculty_Id" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_getMultiNominationDetailsByMSPIN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MSPIN" Type="nvarchar" Mode="In" />
         </Function>
@@ -1002,6 +1019,11 @@
           <Parameter Name="CreationDate" Type="datetime" Mode="In" />
         </Function>
         <Function Name="sp_GetProgramList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetProgramList_From_To_Date" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+          <Parameter Name="Agency_Id" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_GetProgramListByEndDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EndDate" Type="datetime" Mode="In" />
         </Function>
@@ -1055,6 +1077,12 @@
           <Parameter Name="StartDate" Type="datetime" Mode="In" />
           <Parameter Name="EndDate" Type="datetime" Mode="In" />
           <Parameter Name="Vendor_Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetSessionIdListForProgram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProgramId" Type="int" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="Agency_Id" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_GetSessionIdsPendingForClosure_STEPAgency" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_GetSessionIDWiseStudentList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1128,6 +1156,9 @@
         </Function>
         <Function Name="sp_GetTrainerDetails_TblCalendar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CALNDR_ID" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_GetUploadedSetSequences" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProgramTestCalenderId" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_GetUploadErrors" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_GetUserDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1475,6 +1506,8 @@
           <Parameter Name="MSPIN" Type="nvarchar" Mode="In" />
           <Parameter Name="AgencyCode" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="DateTime" Type="datetime" Mode="In" />
+          <Parameter Name="SessionID" Type="nvarchar" Mode="In" />
+          <Parameter Name="Day" Type="int" Mode="In" />
           <Parameter Name="MachineCode" Type="nvarchar" Mode="In" />
           <Parameter Name="MachineId" Type="int" Mode="In" />
         </Function>
@@ -2297,13 +2330,6 @@
             <Parameter Name="SessionId" Mode="In" Type="String" />
             <Parameter Name="Day" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_Update_InsertIntoTblAttendancePunchIn">
-            <Parameter Name="MSPIN" Mode="In" Type="String" />
-            <Parameter Name="AgencyCode" Mode="In" Type="String" />
-            <Parameter Name="DateTime" Mode="In" Type="DateTime" />
-            <Parameter Name="MachineCode" Mode="In" Type="String" />
-            <Parameter Name="MachineId" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="sp_UpdateNomination">
             <Parameter Name="SessionID" Mode="In" Type="String" />
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
@@ -2365,7 +2391,6 @@
           <FunctionImport Name="sp_GetSessionListByProgramId" ReturnType="Collection(STEPDBBetaModel.sp_GetSessionListByProgramId_Result)">
           <Parameter Name="ProgramId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="TblNominations" EntityType="STEPDBBetaModel.TblNomination" />
           <EntitySet Name="TblTestDtl_Practical" EntityType="STEPDBBetaModel.TblTestDtl_Practical" />
           <EntitySet Name="TblUploadErrors" EntityType="STEPDBBetaModel.TblUploadError" />
           <FunctionImport Name="sp_Get_IfAbesnt" ReturnType="Collection(STEPDBBetaModel.sp_Get_IfAbesnt_Result)">
@@ -2804,7 +2829,47 @@
             <Parameter Name="Status_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_getMultiNominationDetailsByMSPIN" ReturnType="Collection(STEPDBBetaModel.sp_getMultiNominationDetailsByMSPIN_Result)">
+          <Parameter Name="MSPIN" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetUploadedSetSequences" ReturnType="Collection(STEPDBBetaModel.sp_GetUploadedSetSequences_Result)">
+          <Parameter Name="ProgramTestCalenderId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="TblNominations" EntityType="STEPDBBetaModel.TblNomination" />
+          <FunctionImport Name="sp_Update_InsertIntoTblAttendancePunchIn">
             <Parameter Name="MSPIN" Mode="In" Type="String" />
+            <Parameter Name="AgencyCode" Mode="In" Type="String" />
+            <Parameter Name="DateTime" Mode="In" Type="DateTime" />
+            <Parameter Name="SessionID" Mode="In" Type="String" />
+            <Parameter Name="Day" Mode="In" Type="Int32" />
+            <Parameter Name="MachineCode" Mode="In" Type="String" />
+            <Parameter Name="MachineId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetAttendanceReport_Blank_NewModel" ReturnType="Collection(STEPDBBetaModel.sp_GetAttendanceReport_Blank_NewModel_Result)">
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Program_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetProgramList_From_To_Date" ReturnType="Collection(STEPDBBetaModel.sp_GetProgramList_From_To_Date_Result)">
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Agency_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetSessionIdListForProgram" ReturnType="Collection(STEPDBBetaModel.sp_GetSessionIdListForProgram_Result)">
+            <Parameter Name="ProgramId" Mode="In" Type="Int32" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Agency_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetMSPINList_For_BlankPRG" ReturnType="Collection(STEPDBBetaModel.sp_GetMSPINList_For_BlankPRG_Result)">
+            <Parameter Name="Agency_Id" Mode="In" Type="Int32" />
+            <Parameter Name="ProgramId" Mode="In" Type="Int32" />
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDAte" Mode="In" Type="DateTime" />
+            <Parameter Name="Faculty_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetAttendanceReport_Blank_PRG" ReturnType="Collection(STEPDBBetaModel.sp_GetAttendanceReport_Blank_PRG_Result)">
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Program_Id" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_AttendanceReport_Result">
@@ -3659,37 +3724,6 @@
           <Property Type="DateTime" Name="StartDate" Nullable="true" />
           <Property Type="DateTime" Name="EndDate" Nullable="true" />
         </ComplexType>
-        <EntityType Name="TblNomination">
-          <Key>
-            <PropertyRef Name="Nomination_Id" />
-          </Key>
-          <Property Name="Nomination_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Co_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Agency_Id" Type="Int32" />
-          <Property Name="ProgramId" Type="Int32" />
-          <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Venue" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Dealer_LocationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DealerName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="AgencyCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Faculty_Id" Type="Int32" />
-          <Property Name="FacultyCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ProgramCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SessionID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="StartDate" Type="DateTime" Precision="3" />
-          <Property Name="EndDate" Type="DateTime" Precision="3" />
-          <Property Name="Duration" Type="Int32" />
-          <Property Name="MSPIN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="DateofBirth" Type="DateTime" Precision="3" />
-          <Property Name="MobileNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CreationDate" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="ModifiedBy" Type="Int32" />
-        </EntityType>
         <EntityType Name="TblTestDtl_Practical">
           <Key>
             <PropertyRef Name="Id" />
@@ -3931,6 +3965,10 @@
           <Property Type="String" Name="AgencyCode" Nullable="false" MaxLength="50" />
           <Property Type="Boolean" Name="IsPresent" Nullable="true" />
           <Property Type="DateTime" Name="DateTime" Nullable="true" />
+          <Property Type="String" Name="SessionID" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Day" Nullable="true" />
+          <Property Type="Int32" Name="LastDay" Nullable="true" />
+          <Property Type="DateTime" Name="LastDate" Nullable="true" />
         </ComplexType>
         <ComplexType Name="sp_GetAgencyWiseFaculty_External_Result">
           <Property Type="Int32" Name="SubFaculty_Id" Nullable="false" />
@@ -4629,6 +4667,98 @@
           <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="CreatedBy" Nullable="true" />
           <Property Type="Int32" Name="ModifiedBy" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_GetUploadedSetSequences_Result">
+          <Property Type="Int32" Name="Set_Id" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="TblNomination">
+          <Key>
+            <PropertyRef Name="Nomination_Id" />
+          </Key>
+          <Property Name="Nomination_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Co_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Agency_Id" Type="Int32" />
+          <Property Name="ProgramId" Type="Int32" />
+          <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Venue" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Dealer_LocationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DealerName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AgencyCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Faculty_Id" Type="Int32" />
+          <Property Name="FacultyCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProgramCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SessionID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="MSPIN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DateofBirth" Type="DateTime" Precision="3" />
+          <Property Name="MobileNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedBy" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="sp_GetAttendanceReport_Blank_NewModel_Result">
+          <Property Type="String" Name="Co_id" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Agency_Id" Nullable="true" />
+          <Property Type="Int32" Name="ProgramId" Nullable="true" />
+          <Property Type="String" Name="AgencyCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="FacultyCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ProgramCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SessionID" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Duration" Nullable="true" />
+          <Property Type="String" Name="MSPIN" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MobileNo" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="Day" Nullable="true" />
+          <Property Type="Boolean" Name="IsPresent" Nullable="true" />
+          <Property Type="String" Name="P_A" Nullable="false" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="sp_GetProgramList_From_To_Date_Result">
+          <Property Type="Int32" Name="ProgramId" Nullable="false" />
+          <Property Type="String" Name="ProgramCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ProgramName" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="ProgramType_Id" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_GetSessionIdListForProgram_Result">
+          <Property Type="String" Name="SessionID" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="sp_GetMSPINList_For_BlankPRG_Result">
+          <Property Type="String" Name="SessionID" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MSPIN" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ProgramCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="AgencyName" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="AgencyCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Duration" Nullable="true" />
+          <Property Type="String" Name="FacultyName" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="sp_GetAttendanceReport_Blank_PRG_Result">
+          <Property Type="String" Name="Co_id" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Agency_Id" Nullable="true" />
+          <Property Type="Int32" Name="ProgramId" Nullable="true" />
+          <Property Type="String" Name="AgencyCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="FacultyCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ProgramCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SessionID" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Duration" Nullable="true" />
+          <Property Type="String" Name="MSPIN" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MobileNo" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="Day" Nullable="true" />
+          <Property Type="Boolean" Name="IsPresent" Nullable="true" />
+          <Property Type="String" Name="P_A" Nullable="false" MaxLength="1" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -6051,7 +6181,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_TruncateTblNomination" FunctionName="STEPDBBetaModel.Store.sp_TruncateTblNomination" />
           <FunctionImportMapping FunctionImportName="sp_Update_InsertIntoTblAttendance_SSTC" FunctionName="STEPDBBetaModel.Store.sp_Update_InsertIntoTblAttendance_SSTC" />
-          <FunctionImportMapping FunctionImportName="sp_Update_InsertIntoTblAttendancePunchIn" FunctionName="STEPDBBetaModel.Store.sp_Update_InsertIntoTblAttendancePunchIn" />
           <FunctionImportMapping FunctionImportName="sp_UpdateNomination" FunctionName="STEPDBBetaModel.Store.sp_UpdateNomination" />
           <FunctionImportMapping FunctionImportName="Sp_UpdateQuestionLanguage" FunctionName="STEPDBBetaModel.Store.Sp_UpdateQuestionLanguage" />
           <FunctionImportMapping FunctionImportName="Sp_UpdateQuestionLanguage_Practical" FunctionName="STEPDBBetaModel.Store.Sp_UpdateQuestionLanguage_Practical" />
@@ -6125,38 +6254,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="TblNominations">
-            <EntityTypeMapping TypeName="STEPDBBetaModel.TblNomination">
-              <MappingFragment StoreEntitySet="TblNomination">
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
-                <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="MSPIN" ColumnName="MSPIN" />
-                <ScalarProperty Name="Duration" ColumnName="Duration" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
-                <ScalarProperty Name="ProgramCode" ColumnName="ProgramCode" />
-                <ScalarProperty Name="FacultyCode" ColumnName="FacultyCode" />
-                <ScalarProperty Name="Faculty_Id" ColumnName="Faculty_Id" />
-                <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="DealerName" ColumnName="DealerName" />
-                <ScalarProperty Name="Dealer_LocationCode" ColumnName="Dealer_LocationCode" />
-                <ScalarProperty Name="Venue" ColumnName="Venue" />
-                <ScalarProperty Name="Region" ColumnName="Region" />
-                <ScalarProperty Name="ProgramId" ColumnName="ProgramId" />
-                <ScalarProperty Name="Agency_Id" ColumnName="Agency_Id" />
-                <ScalarProperty Name="Co_id" ColumnName="Co_id" />
-                <ScalarProperty Name="Nomination_Id" ColumnName="Nomination_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TblTestDtl_Practical">
             <EntityTypeMapping TypeName="STEPDBBetaModel.TblTestDtl_Practical">
               <MappingFragment StoreEntitySet="TblTestDtl_Practical">
@@ -6460,6 +6557,10 @@
                 <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
                 <ScalarProperty Name="IsPresent" ColumnName="IsPresent" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="LastDay" ColumnName="LastDay" />
+                <ScalarProperty Name="LastDate" ColumnName="LastDate" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -7357,6 +7458,124 @@
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetUploadedSetSequences" FunctionName="STEPDBBetaModel.Store.sp_GetUploadedSetSequences" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="STEPDBBetaModel.sp_GetUploadedSetSequences_Result">
+                <ScalarProperty Name="Set_Id" ColumnName="Set_Id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="TblNominations">
+            <EntityTypeMapping TypeName="STEPDBBetaModel.TblNomination">
+              <MappingFragment StoreEntitySet="TblNomination">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MSPIN" ColumnName="MSPIN" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+                <ScalarProperty Name="ProgramCode" ColumnName="ProgramCode" />
+                <ScalarProperty Name="FacultyCode" ColumnName="FacultyCode" />
+                <ScalarProperty Name="Faculty_Id" ColumnName="Faculty_Id" />
+                <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+                <ScalarProperty Name="Dealer_LocationCode" ColumnName="Dealer_LocationCode" />
+                <ScalarProperty Name="Venue" ColumnName="Venue" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="ProgramId" ColumnName="ProgramId" />
+                <ScalarProperty Name="Agency_Id" ColumnName="Agency_Id" />
+                <ScalarProperty Name="Co_id" ColumnName="Co_id" />
+                <ScalarProperty Name="Nomination_Id" ColumnName="Nomination_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_Update_InsertIntoTblAttendancePunchIn" FunctionName="STEPDBBetaModel.Store.sp_Update_InsertIntoTblAttendancePunchIn" />
+          <FunctionImportMapping FunctionImportName="sp_GetAttendanceReport_Blank_NewModel" FunctionName="STEPDBBetaModel.Store.sp_GetAttendanceReport_Blank_NewModel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="STEPDBBetaModel.sp_GetAttendanceReport_Blank_NewModel_Result">
+                <ScalarProperty Name="Co_id" ColumnName="Co_id" />
+                <ScalarProperty Name="Agency_Id" ColumnName="Agency_Id" />
+                <ScalarProperty Name="ProgramId" ColumnName="ProgramId" />
+                <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
+                <ScalarProperty Name="FacultyCode" ColumnName="FacultyCode" />
+                <ScalarProperty Name="ProgramCode" ColumnName="ProgramCode" />
+                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="MSPIN" ColumnName="MSPIN" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="IsPresent" ColumnName="IsPresent" />
+                <ScalarProperty Name="P_A" ColumnName="P/A" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetProgramList_From_To_Date" FunctionName="STEPDBBetaModel.Store.sp_GetProgramList_From_To_Date">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="STEPDBBetaModel.sp_GetProgramList_From_To_Date_Result">
+                <ScalarProperty Name="ProgramId" ColumnName="ProgramId" />
+                <ScalarProperty Name="ProgramCode" ColumnName="ProgramCode" />
+                <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+                <ScalarProperty Name="ProgramType_Id" ColumnName="ProgramType_Id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetSessionIdListForProgram" FunctionName="STEPDBBetaModel.Store.sp_GetSessionIdListForProgram" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="STEPDBBetaModel.sp_GetSessionIdListForProgram_Result">
+                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetMSPINList_For_BlankPRG" FunctionName="STEPDBBetaModel.Store.sp_GetMSPINList_For_BlankPRG">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="STEPDBBetaModel.sp_GetMSPINList_For_BlankPRG_Result">
+                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+                <ScalarProperty Name="MSPIN" ColumnName="MSPIN" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="ProgramCode" ColumnName="ProgramCode" />
+                <ScalarProperty Name="AgencyName" ColumnName="AgencyName" />
+                <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="FacultyName" ColumnName="FacultyName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetAttendanceReport_Blank_PRG" FunctionName="STEPDBBetaModel.Store.sp_GetAttendanceReport_Blank_PRG">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="STEPDBBetaModel.sp_GetAttendanceReport_Blank_PRG_Result">
+                <ScalarProperty Name="Co_id" ColumnName="Co_id" />
+                <ScalarProperty Name="Agency_Id" ColumnName="Agency_Id" />
+                <ScalarProperty Name="ProgramId" ColumnName="ProgramId" />
+                <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
+                <ScalarProperty Name="FacultyCode" ColumnName="FacultyCode" />
+                <ScalarProperty Name="ProgramCode" ColumnName="ProgramCode" />
+                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="MSPIN" ColumnName="MSPIN" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="IsPresent" ColumnName="IsPresent" />
+                <ScalarProperty Name="P_A" ColumnName="P/A" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

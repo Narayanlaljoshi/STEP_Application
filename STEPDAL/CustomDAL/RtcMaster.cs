@@ -515,7 +515,7 @@ namespace STEPDAL.CustomDAL
                 string Msg = string.Empty;
                 foreach (var St in NewCandidates)
                 {
-                    var Status = context.sp_Update_InsertIntoTblAttendancePunchIn(St.MSPIN, St.AgencyCode, DateTime.Now, "Updtaed by RTM", null);
+                    var Status = context.sp_Update_InsertIntoTblAttendancePunchIn(St.MSPIN, St.AgencyCode, DateTime.Now,St.SessionID,St.Day, "Updtaed by RTM", null);
 
                     if (Status < 1) {
                         Msg += (Msg.Equals(string.Empty) ? "" : ",") + ("Attendance not marked for MSPIN: " + St.MSPIN);
@@ -567,7 +567,11 @@ namespace STEPDAL.CustomDAL
                         StartDate = s.StartDate,
                         IsChecked = false,
                         IsPresent = s.IsPresent,
-                        AgencyCode = s.AgencyCode
+                        AgencyCode = s.AgencyCode,
+                        Day=s.Day,
+                        LastDate=s.LastDate,
+                        LastDay=s.LastDay,
+                        SessionID=s.SessionID
                     }).ToList();
                 }
                 return objList;
@@ -582,8 +586,7 @@ namespace STEPDAL.CustomDAL
                 string Msg = string.Empty;
                 foreach (var St in NewCandidates)
                 {
-                    var Status = context.sp_Update_InsertIntoTblAttendancePunchIn(St.MSPIN, St.AgencyCode, DateTime.Now, "Updated by RTM", null);
-
+                    var Status = context.sp_Update_InsertIntoTblAttendancePunchIn(St.MSPIN, St.AgencyCode, DateTime.Now, St.SessionID,St.Day,  "Updated by RTM", null);
                     if (Status < 1)
                     {
                         Msg += (Msg.Equals(string.Empty) ? "" : ",") + ("Attendance not marked for MSPIN: " + St.MSPIN);
@@ -615,14 +618,14 @@ namespace STEPDAL.CustomDAL
                 if (Obj.Count != 0) {
                     string AgencyCode = Obj[0].AgencyCode;
                     var RTMDetails = context.TblRTCMasters.Where(x => x.AgencyCode == AgencyCode && x.IsActive == true).FirstOrDefault();
-                    var AttnList = context.sp_GetAttendanceUpdatedByRTM(AgencyCode).ToList();
+                    //var AttnList = context.sp_GetAttendanceUpdatedByRTM(AgencyCode).ToList();
                     string Body = "<html><body><h3>Dear " + RTMDetails.RTMName + " San,</h3><b>Greetings for the day!!</b>";
                     Body += "<p>You have marked the attendance for the following Candidates today: </p>";
                     Body = Body + @"<table border=\"" +1+\""style=\""text- align:center; \""><thead><tr><th>#</th><th>Agency Code</th><th>MSPIN</th></tr></thead>";
                     Body += "<tbody>";
                     int Index = 1;
                     //Obj = Obj.Select(x=>x.ErrorType).Distinct().ToList();
-                    foreach (var Q in AttnList)
+                    foreach (var Q in Obj)
                     {
                         Body += "<tr><td>";
                         Body += Index.ToString() + "</td><td>";
@@ -663,6 +666,7 @@ namespace STEPDAL.CustomDAL
             }
             return multiNominationLists;
         }
+
         public static List<MultiNominationDetails> GetMultiNominationDetailsByMSPIN(MultiNominationList Obj)
         {
             List<MultiNominationDetails> multiNominationDetails = null;
@@ -698,6 +702,7 @@ namespace STEPDAL.CustomDAL
             }
             return multiNominationDetails;
         }
+
         public static string UpdateMultiNominationListbyAgency(List<MultiNominationDetails> Obj)
         {
             //List<MultiNominationList> multiNominationLists = new List<MultiNominationList>();
@@ -710,7 +715,7 @@ namespace STEPDAL.CustomDAL
                 Obj = Obj.Where(x => x.IsAccepted == true).ToList();
             }
 
-            //NominationDAL.FilterNomination_MultiNomination(Obj);
+            NominationDAL.FilterNomination_MultiNomination(Obj);
 
             return "Success: Updated Successfully!";
         }

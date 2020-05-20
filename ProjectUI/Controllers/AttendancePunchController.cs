@@ -11,11 +11,11 @@ namespace Project.Controllers
 {
     public class AttendancePunchController : ApiController
     {
-        [HttpPost]
-        public bool SavePunchInDetails(List<AttendancePunchDtl> Obj)
-        {
-            return AttendancePunch.SavePunchInDetailsList(Obj);
-        }
+        //[HttpPost]
+        //public bool SavePunchInDetails(List<AttendancePunchDtl> Obj)
+        //{
+        //    return AttendancePunch.SavePunchInDetailsList(Obj);
+        //}
         [HttpPost]
         public bool SavePunchInDetailsSingle(AttendancePunchDtl Obj)
         {

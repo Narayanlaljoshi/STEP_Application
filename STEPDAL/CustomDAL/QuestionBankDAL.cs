@@ -1005,5 +1005,17 @@ namespace STEPDAL.CustomDAL
                 return Detail;
             }
         }
+        public static List<SetSequence> GetUploadedSetSequences(TblProgramTestCalender Obj)
+        {
+            List< SetSequence> UploadedSetSequences = null;
+            using (var Context = new CEIDBEntities())
+            {
+                var Detail = Context.sp_GetUploadedSetSequences(Obj.ProgramTestCalenderId).ToList();
+                UploadedSetSequences = Detail.Select(x => new SetSequence {
+                    Set_Id=x.Set_Id
+                }).ToList();
+                return UploadedSetSequences;
+            }
+        }
     }
 }

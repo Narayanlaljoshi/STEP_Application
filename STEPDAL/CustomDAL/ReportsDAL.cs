@@ -117,6 +117,187 @@ namespace STEPDAL.CustomDAL
             }
         }
 
+        public static List<AttendanceReportBLL> GetAttendanceReport_V2(ReportInputBLL Obj)
+        {
+            using (var context = new CEIDBEntities())
+            {
+                List<AttendanceReportBLL> objList = new List<AttendanceReportBLL>();
+                var ProgramList = context.sp_GetProgramListByEndDate_V2(Obj.EndDate).ToList();
+                if (ProgramList.Count != 0)
+                {
+                    foreach (var prg in ProgramList)
+                    {
+                        if (prg.ProgramType_Id == 1)
+                        {
+                            //if(prg.sessionID== "SSI19158582")
+                            //{ }
+
+                            var data = context.sp_GetAttendanceReport(prg.StartDate, prg.EndDate, Obj.Agency_Id, prg.sessionID, Obj.Faculty_Id, prg.ProgramID).ToList();
+
+                            foreach (var x in data)
+                            {
+                                objList.Add(new AttendanceReportBLL
+                                {
+                                    AgencyCode = x.AgencyCode,
+                                    Co_id = x.Co_id,
+                                    Day = x.Day,
+                                    FacultyCode = x.FacultyCode,
+                                    MSPIN = x.MSPIN,
+                                    ProgramCode = x.ProgramCode,
+                                    ProgramId = x.ProgramId,
+                                    P_A = x.P_A,
+                                    SessionID = x.SessionID,
+                                    StartDate = x.StartDate.Value,
+                                    Duration = x.Duration,
+                                    EndDate = x.EndDate,
+                                    Agency_Id = x.Agency_Id,
+                                    MobileNo = x.MobileNo,
+                                    Name = x.Name
+                                });
+                            }
+                        }
+                        else
+                        {
+                            //var data = context.sp_GetAttendanceReport_Evaluation(prg.StartDate, prg.EndDate, Obj.Agency_Id, prg.sessionID, Obj.Faculty_Id, prg.ProgramID).ToList();
+                            var data = context.sp_GetAttendanceReport_Blank_NewModel(prg.EndDate, prg.ProgramID).ToList();
+                            int? CourseDuration = context.TblProgramMasters.Where(x => x.ProgramId == prg.ProgramID).Select(x => x.Duration).FirstOrDefault();
+                            var MSPINList = data.Select(x =>new { x.MSPIN, x.SessionID }).Distinct();
+                            //objList = new List<AttendanceReportBLL>();
+                            foreach (var Cnd in MSPINList)
+                            {
+                                var Details = data.Where(x => x.MSPIN == Cnd.MSPIN && x.SessionID == Cnd.SessionID).ToList();
+                                int Day = 1;
+                                for (int i = 0; i < CourseDuration; i++)
+                                {
+                                    var IsPresent = data.Where(x => x.MSPIN == Cnd.MSPIN && x.SessionID == Cnd.SessionID && x.Day==Day).FirstOrDefault();
+                                    if (IsPresent!=null)
+                                    {
+                                        objList.Add(new AttendanceReportBLL
+                                        {
+                                            AgencyCode = Details[i].AgencyCode,
+                                            Co_id = Details[i].Co_id,
+                                            Day = Day,
+                                            FacultyCode = Details[i].FacultyCode,
+                                            MSPIN = Details[i].MSPIN,
+                                            ProgramCode = Details[i].ProgramCode,
+                                            ProgramId = Details[i].ProgramId,
+                                            P_A = "P",
+                                            SessionID = Details[i].SessionID,
+                                            StartDate = Details[i].StartDate.Value,
+                                            Duration = Details[i].Duration,
+                                            EndDate = Details[i].EndDate,
+                                            Agency_Id = Details[i].Agency_Id,
+                                            MobileNo = Details[i].MobileNo,
+                                            Name = Details[i].Name
+                                        });
+                                    }
+                                    else
+                                    {
+                                        objList.Add(new AttendanceReportBLL
+                                        {
+                                            AgencyCode = Details[0].AgencyCode,
+                                            Co_id = Details[0].Co_id,
+                                            Day = Day,
+                                            FacultyCode = Details[0].FacultyCode,
+                                            MSPIN = Details[0].MSPIN,
+                                            ProgramCode = Details[0].ProgramCode,
+                                            ProgramId = Details[0].ProgramId,
+                                            P_A = "A",
+                                            SessionID = Details[0].SessionID,
+                                            StartDate = Details[0].StartDate.Value,
+                                            Duration = Details[0].Duration,
+                                            EndDate = Details[0].EndDate,
+                                            Agency_Id = Details[0].Agency_Id,
+                                            MobileNo = Details[0].MobileNo,
+                                            Name = Details[0].Name
+                                        });
+                                    }
+                                    Day++;
+                                }
+                            }
+                        }
+                    }
+                }
+                return objList;
+            }
+        }
+
+        public static List<AttendanceReportBLL> GetAttendanceReport_Blank(ReportInputBLL Obj)
+        {
+            using (var context = new CEIDBEntities())
+            {
+                List<AttendanceReportBLL> objList = new List<AttendanceReportBLL>();
+                var ProgramList = GetProgramList_From_To_Date(Obj).ToList();
+                if (ProgramList.Count != 0)
+                {
+                    foreach (var prg in ProgramList)
+                    {
+                        
+                            //var data = context.sp_GetAttendanceReport_Evaluation(prg.StartDate, prg.EndDate, Obj.Agency_Id, prg.sessionID, Obj.Faculty_Id, prg.ProgramID).ToList();
+                            var data = context.sp_GetAttendanceReport_Blank_PRG(Obj.StartDate, Obj.EndDate, prg.ProgramId).ToList();
+                            int? CourseDuration = context.TblProgramMasters.Where(x => x.ProgramId == prg.ProgramId).Select(x => x.Duration).FirstOrDefault();
+                            var MSPINList = data.Select(x => new { x.MSPIN, x.SessionID }).Distinct();
+                            //objList = new List<AttendanceReportBLL>();
+                            foreach (var Cnd in MSPINList)
+                            {
+                                var Details = data.Where(x => x.MSPIN == Cnd.MSPIN && x.SessionID == Cnd.SessionID).ToList();
+                                int Day = 1;
+                                for (int i = 0; i < CourseDuration; i++)
+                                {
+                                    var IsPresent = data.Where(x => x.MSPIN == Cnd.MSPIN && x.SessionID == Cnd.SessionID && x.Day == Day).FirstOrDefault();
+                                    if (IsPresent != null)
+                                    {
+                                        objList.Add(new AttendanceReportBLL
+                                        {
+                                            AgencyCode = Details[i].AgencyCode,
+                                            Co_id = Details[i].Co_id,
+                                            Day = Day,
+                                            FacultyCode = Details[i].FacultyCode,
+                                            MSPIN = Details[i].MSPIN,
+                                            ProgramCode = Details[i].ProgramCode,
+                                            ProgramId = Details[i].ProgramId,
+                                            P_A = "P",
+                                            SessionID = Details[i].SessionID,
+                                            StartDate = Details[i].StartDate.Value,
+                                            Duration = Details[i].Duration,
+                                            EndDate = Details[i].EndDate,
+                                            Agency_Id = Details[i].Agency_Id,
+                                            MobileNo = Details[i].MobileNo,
+                                            Name = Details[i].Name
+                                        });
+                                    }
+                                    else
+                                    {
+                                        objList.Add(new AttendanceReportBLL
+                                        {
+                                            AgencyCode = Details[0].AgencyCode,
+                                            Co_id = Details[0].Co_id,
+                                            Day = Day,
+                                            FacultyCode = Details[0].FacultyCode,
+                                            MSPIN = Details[0].MSPIN,
+                                            ProgramCode = Details[0].ProgramCode,
+                                            ProgramId = Details[0].ProgramId,
+                                            P_A = "A",
+                                            SessionID = Details[0].SessionID,
+                                            StartDate = Details[0].StartDate.Value,
+                                            Duration = Details[0].Duration,
+                                            EndDate = Details[0].EndDate,
+                                            Agency_Id = Details[0].Agency_Id,
+                                            MobileNo = Details[0].MobileNo,
+                                            Name = Details[0].Name
+                                        });
+                                    }
+                                    Day++;
+                                }
+                            }
+                        
+                    }
+                }
+                return objList;
+            }
+        }
+
+
         public static ReportFilterBLL GetReportFilter()
         {
             ReportFilterBLL ReportFilter = new ReportFilterBLL();
@@ -126,34 +307,34 @@ namespace STEPDAL.CustomDAL
                 List<ProgramListForReportInput> ProgramList = null;
                 List<FacultyList> FacultyList = null;
                 List<SessionListForReportFilter> SessionList = null;
-                //var AgencyListData = context.sp_GetAgencyList().ToList();
+                var AgencyListData = context.sp_GetAgencyList().ToList();
                 //var FacultyListData = context.sp_GetFacultyList(null).ToList();
                 var ProgramListData = context.sp_GetProgramList().ToList();
                 //var SessionListData = context.sp_GetSessionList().ToList();
-                //if (AgencyListData!=null) {
-                //    AgencyList = AgencyListData.Select(x => new AgencyListForreportFilterBLL {
-                //        AgencyCode=x.AgencyCode,
-                //        AgencyName=x.AgencyName,
-                //        Agency_Id=x.Agency_Id
-                //    }).ToList();
-                //}
+                if (AgencyListData!=null) {
+                    AgencyList = AgencyListData.Select(x => new AgencyListForreportFilterBLL {
+                        AgencyCode=x.AgencyCode,
+                        AgencyName=x.AgencyName,
+                        Agency_Id=x.Agency_Id
+                    }).ToList();
+                }
                 //else {
                 //    AgencyList = null;
                 //}
-                if (ProgramListData != null)
-                {
-                    ProgramList = ProgramListData.Select(x => new ProgramListForReportInput
-                    {
-                        ProgramCode = x.ProgramCode,
-                        ProgramId = x.ProgramId,
-                        ProgramName = x.ProgramName,
-                        ProgramType_Id = x.ProgramType_Id
-                    }).ToList();
-                }
-                else
-                {
-                    ProgramList = null;
-                }
+                //if (ProgramListData != null)
+                //{
+                //    ProgramList = ProgramListData.Select(x => new ProgramListForReportInput
+                //    {
+                //        ProgramCode = x.ProgramCode,
+                //        ProgramId = x.ProgramId,
+                //        ProgramName = x.ProgramName,
+                //        ProgramType_Id = x.ProgramType_Id
+                //    }).ToList();
+                //}
+                //else
+                //{
+                //    ProgramList = null;
+                //}
                 //if (FacultyListData!=null) { 
                 //FacultyList = FacultyListData.Select(x => new FacultyList {
                 //    Faculty_Id=x.Faculty_Id,
@@ -182,7 +363,24 @@ namespace STEPDAL.CustomDAL
             }
 
         }
+        public static List<ProgramListForReportInput> GetProgramList_From_To_Date(ReportInputBLL Obj) {
+            using (var context = new CEIDBEntities())
+            {
+                List<ProgramListForReportInput> ProgramList = null;
+                var ProgramListData = context.sp_GetProgramList_From_To_Date(Obj.StartDate,Obj.EndDate,Obj.Agency_Id).ToList();
+                if (ProgramListData.Count!=0)
+                {
+                    ProgramList = ProgramListData.Select(x => new ProgramListForReportInput {
+                        ProgramCode=x.ProgramCode,
+                        ProgramId=x.ProgramId,
+                        ProgramName=x.ProgramName,
+                        ProgramType_Id=x.ProgramType_Id
+                    }).ToList();
+                }
+                return ProgramList;
+            }
 
+        }
         public static List<MarksReportBLL> GetMarksReport(List<SessionIDListBLL> Object)
         {
             using (var context = new CEIDBEntities())
@@ -350,7 +548,7 @@ namespace STEPDAL.CustomDAL
                 List<MarksReportBLL> objList = new List<MarksReportBLL>();
                 ReportInputBLL RpIn = new ReportInputBLL { EndDate = Obj.EndDate };
                 var data = context.sp_GetStudentMarksReport_V2(Obj.EndDate).ToList();
-                var AttRept = ReportsDAL.GetAttendanceReport(RpIn);
+                var AttRept = ReportsDAL.GetAttendanceReport_V2(RpIn);
                 if (data.Count != 0)
                 {
                     var Session_MSPinList = context.sp_GetStudentMarksReport_DistinctSession_MSPIN(Obj.EndDate).ToList();
@@ -427,50 +625,100 @@ namespace STEPDAL.CustomDAL
             {
                 context.Database.CommandTimeout = 1000000;
                 List<DayWiseReportBLL> objList = new List<DayWiseReportBLL>();
-
-                //var data = context.sp_GetMarksReport(Obj.Agency_Id, Obj.Faculty_Id, Obj.SessionID, Obj.ProgramId, Obj.StartDate, Obj.EndDate).ToList();
-                if (Obj.FacultyCode != null)
+                ReportInputBLL reportInputBLL = new ReportInputBLL
                 {
-                    Obj.Faculty_Id = context.TblFaculties.Where(x => x.FacultyCode == Obj.FacultyCode).Select(x => x.Faculty_Id).FirstOrDefault();
-                }
-                var data = context.sp_GetDayWiseMarksReport(Obj.Agency_Id, Obj.Faculty_Id, Obj.SessionID, Obj.ProgramId, Obj.StartDate, Obj.EndDate).ToList();
+                    ProgramId = Obj.ProgramId,
+                    Agency_Id = Obj.Agency_Id,
+                    EndDate = Obj.EndDate,
+                    StartDate = Obj.StartDate
+                };
+                var ProgramList = GetProgramList_From_To_Date(reportInputBLL);
+                if (Obj.ProgramId != null)
+                    ProgramList = ProgramList.Where(x => x.ProgramId == Obj.ProgramId).ToList();
 
-                if (data.Count != 0)
+                for (int j = 0; j < ProgramList.Count; j++)
                 {
-                    var MSPinList = data.Select(x => x.MSPIN).Distinct().ToList();
-
-                    foreach (var Mspin in MSPinList)
+                    if (Obj.FacultyCode != null)
                     {
-                        //if (Mspin=="777241")
-                        //{ }
-                        var StDtl = data.Where(x => x.MSPIN == Mspin).FirstOrDefault();
-                        var ReqData = data.Where(x => x.MSPIN == Mspin).ToList();
-
-                        objList.Add(new DayWiseReportBLL
-                        {
-                            MSPIN = Mspin,
-                            AgencyName = StDtl.AgencyName,
-                            AgencyCode = StDtl.AgencyCode,
-                            Agency_Id = StDtl.Agency_Id,
-                            FacultyName = StDtl.FacultyName,
-                            Name = StDtl.Name,
-                            ProgramCode = StDtl.ProgramCode,
-                            SessionID = StDtl.SessionID,
-                            StartDate = StDtl.StartDate,
-                            ProgramTestCalenderId = StDtl.ProgramTestCalenderId,
-                            DayWiseScore = ReqData.Select(x => new DayWiseScoreBLL
-                            {
-                                Day = x.Day,
-                                DayCount = x.DayCount,
-                                IsPresent = x.IsPresent != null ? 1 : 0,
-                                studentmrks = x.studentmrks,
-                                TotalQuestion = x.TotalQuestion,
-                                Total_Marks = x.Total_Marks,
-                                TypeOfTest = x.TypeOfTest
-
-                            }).ToList()
-                        });
+                        Obj.Faculty_Id = context.TblFaculties.Where(x => x.FacultyCode == Obj.FacultyCode).Select(x => x.Faculty_Id).FirstOrDefault();
                     }
+                    if (ProgramList[j].ProgramType_Id != 4)
+                    {
+                        var data = context.sp_GetDayWiseMarksReport(Obj.Agency_Id, Obj.Faculty_Id, Obj.SessionID, ProgramList[j].ProgramId, Obj.StartDate, Obj.EndDate).ToList();
+
+                        if (data.Count != 0)
+                        {
+                            var MSPinList = data.Select(x => x.MSPIN).Distinct().ToList();
+
+                            foreach (var Mspin in MSPinList)
+                            {
+                                var StDtl = data.Where(x => x.MSPIN == Mspin).FirstOrDefault();
+                                var ReqData = data.Where(x => x.MSPIN == Mspin).ToList();
+                                objList.Add(new DayWiseReportBLL
+                                {
+                                    MSPIN = Mspin,
+                                    AgencyName = StDtl.AgencyName,
+                                    AgencyCode = StDtl.AgencyCode,
+                                    Agency_Id = StDtl.Agency_Id,
+                                    FacultyName = StDtl.FacultyName,
+                                    Name = StDtl.Name,
+                                    ProgramCode = StDtl.ProgramCode,
+                                    SessionID = StDtl.SessionID,
+                                    StartDate = StDtl.StartDate,
+                                    ProgramTestCalenderId = StDtl.ProgramTestCalenderId,
+                                    DayWiseScore = ReqData.Select(x => new DayWiseScoreBLL
+                                    {
+                                        Day = x.Day,
+                                        DayCount = x.DayCount,
+                                        IsPresent = x.IsPresent != null ? 1 : 0,
+                                        studentmrks = x.studentmrks,
+                                        TotalQuestion = x.TotalQuestion,
+                                        Total_Marks = x.Total_Marks,
+                                        TypeOfTest = x.TypeOfTest
+
+                                    }).ToList()
+                                });
+                            }
+                        }
+                    }
+                    else
+                    {
+                        List<AttendanceReportBLL> List = GetAttendanceReport_Blank(reportInputBLL);
+                        var MSPINList = context.sp_GetMSPINList_For_BlankPRG(Obj.Agency_Id, ProgramList[j].ProgramId, Obj.StartDate, Obj.EndDate, Obj.Faculty_Id).ToList();
+                        foreach (var item in MSPINList)
+                        {
+                            List<DayWiseScoreBLL> dayWiseScoreBLLs = new List<DayWiseScoreBLL>();
+                            for (int k = 0; k < MSPINList[0].Duration; k++)
+                            {
+                                var P_ADTL = List.Where(x => x.MSPIN == item.MSPIN && x.SessionID == item.SessionID && x.Day == k + 1).FirstOrDefault();
+                                dayWiseScoreBLLs.Add(new DayWiseScoreBLL
+                                {
+                                    Day = k + 1,
+                                    DayCount = k + 1,
+                                    IsPresent = P_ADTL.P_A=="A"?0:1,
+                                    studentmrks = 0,
+                                    TotalQuestion = 0,
+                                    Total_Marks = 0,
+                                    TypeOfTest = "0"
+                                });
+                            }
+                            objList.Add(new DayWiseReportBLL
+                            {
+                                MSPIN = item.MSPIN,
+                                AgencyName = item.AgencyName,
+                                AgencyCode = item.AgencyCode,
+                                Agency_Id = Obj.Agency_Id,
+                                FacultyName = item.FacultyName,
+                                Name = item.Name,
+                                ProgramCode = item.ProgramCode,
+                                SessionID = item.SessionID,
+                                StartDate = item.StartDate,
+                                //ProgramTestCalenderId = StDtl.ProgramTestCalenderId,
+                                DayWiseScore = dayWiseScoreBLLs
+                            });
+                        }
+                    }
+                    
                 }
                 foreach (var Row in objList)
                 {
@@ -907,6 +1155,25 @@ namespace STEPDAL.CustomDAL
                 return objList;
             }
         }
+
+
+        public static List<SessionIdListForFilter> GetSessionList_ProgramWise(ReportInputBLL Obj)
+        {
+            using (var context = new CEIDBEntities())
+            {
+                List<SessionIdListForFilter> objList = new List<SessionIdListForFilter>();
+                var PRGList = context.sp_GetSessionIdListForProgram(Obj.ProgramId, Obj.StartDate, Obj.EndDate, Obj.Agency_Id).ToList();
+                if (PRGList.Count != 0)
+                {
+                    objList = PRGList.Select(x => new SessionIdListForFilter
+                    {
+                        SessionID = x.SessionID
+                    }).ToList();
+                }
+                return objList;
+            }
+        }
+
 
         public static IList<ActiveTrainerForVendor> GetTrainerForFilter(ReportFilter_Vendor Obj)
         {

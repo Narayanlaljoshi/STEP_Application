@@ -20,5 +20,9 @@ namespace STEPDAL.DB
         public string AgencyCode { get; set; }
         public Nullable<bool> IsPresent { get; set; }
         public Nullable<System.DateTime> DateTime { get; set; }
+        public string SessionID { get; set; }
+        public Nullable<int> Day { get; set; }
+        public Nullable<int> LastDay { get; set; }
+        public Nullable<System.DateTime> LastDate { get; set; }
     }
 }

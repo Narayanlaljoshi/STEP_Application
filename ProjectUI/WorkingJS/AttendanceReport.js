@@ -24,19 +24,23 @@ app.service('AttendanceReportService', function ($http, $location) {
     this.GetFacultyList = function (Agency_Id) {
         return $http.get(this.AppUrl + '/ManageSession/GetFacultyList?Agency_Id=' + Agency_Id);
     }; 
+    this.GetAgencyList = function () {
+        return $http.get(this.AppUrl + '/RtcMaster/GetAgencyList', {});
+    }; 
+    this.GetProgramList_From_To_Date = function (Obj) {
+        return $http.post(this.AppUrl + '/Reports/GetProgramList_From_To_Date', Obj);
+    }; 
+    this.GetSessionList_ProgramWise = function (Obj) {
+        return $http.post(this.AppUrl + '/Reports/GetSessionList_ProgramWise', Obj);
+    };
 });
 
 app.factory('InitFactory', function (AttendanceReportService) {
-
     return {
         init: function () {
-
-
             AttendanceReportService.GetAgencyList().then(function success(data) {
                 AttendanceReportService.AgencyList = data.data;
                 console.log("Get Region List", data);
-
-
             }, function error(data) {
                 console.log("Error in loading data from EDB");
             });
@@ -93,36 +97,68 @@ app.controller('AttendanceReportController', function ($scope, $http, $location,
             };
 
         }
+        AttendanceReportService.GetAgencyList().then(function success(data) {
+            $scope.AgencyList = data.data;
+            console.log("Get Region List", data);
 
+
+        }, function error(data) {
+            console.log("Error in loading data from EDB");
+        });
         AttendanceReportService.GetReportFilter().then(function success(data) {
             $scope.ReportFilter = data.data;
-            console.log("$scope.ReportFilter", $scope.ReportFilter);
-        //    return AttendanceReportService.GetAttendanceReport($scope.ReportInput);
-        //}).then(function success(data) {
-        //    $scope.AttendanceReportData = data.data;
-        //    //$scope.GetFacultyList($rootScope.session.Agency_Id);
+           console.log("$scope.ReportFilter", $scope.ReportFilter);
+            return AttendanceReportService.GetAgencyList();
+        }).then(function success(data) {
+             AttendanceReportService.AgencyList = data.data;
+            console.log("Get Region List", data);
         //    console.log("$scope.AttendanceReportData", $scope.AttendanceReportData);
         }, function error(data) {
             console.log("Error in loading data from EDB");
         });
 
     };
-    $scope.GetFacultyList = function (Agency_Id) {
-        console.log("ng-Change Working", Agency_Id);
-        AttendanceReportService.GetFacultyList(Agency_Id).then(function success(success) {
 
-            $scope.ReportFilter.FacultyList = success.data;
+    $scope.GetProgramList_From_To_Date = function () {
 
+        $scope.ReportInput.Faculty_Id = null;
+        $scope.ReportInput.SessionID = null;
+
+        AttendanceReportService.GetProgramList_From_To_Date($scope.ReportInput).then(function success(success) {
+            $scope.ReportFilter.ProgramList = success.data;
         }, function error(Error) {
-
             console.log("Error in loading data from EDB");
-
         });
     };
+
+    $scope.GetSessionList_ProgramWise = function () {
+        AttendanceReportService.GetSessionList_ProgramWise($scope.ReportInput).then(function success(success) {
+            $scope.ReportFilter.SessionList = success.data;
+        }, function error(Error) {
+            console.log("Error in loading data from EDB");
+        });
+    };
+
+    $scope.GetFacultyList = function (Agency_Id) {
+
+        $scope.ReportInputProgramId = null;
+        //$scope.ReportInputAgencyCode = null;
+        $scope.ReportInput.Faculty_Id = null;
+        $scope.ReportInput.SessionID = null;
+
+        AttendanceReportService.GetFacultyList(Agency_Id).then(function success(success) {
+            $scope.GetProgramList_From_To_Date();
+            $scope.ReportFilter.FacultyList = success.data;
+        }, function error(Error) {
+            console.log("Error in loading data from EDB");
+        });
+    };
+
     $scope.ResetFilters = function (ReportInput) {
         $scope.ReportInput = null;
         $scope.init();
     };
+
     $scope.GetReport = function (ReportInput) {
         $scope.AttendanceReportData = [];
         $scope.ReportInput = ReportInput;

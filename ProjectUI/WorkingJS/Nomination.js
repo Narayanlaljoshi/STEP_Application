@@ -9,20 +9,19 @@ app.service('NominationService', function ($http, $location) {
 
     if ($location.absUrl().indexOf('CST') != -1) {
 
-        this.AppUrl = "/CST/api/"
+        this.AppUrl = "/CST/api/";
 
     }
     else {
 
-        this.AppUrl = "/api/"
+        this.AppUrl = "/api/";
     }
 
-	this.UploadUserMatrix = function (fd) {
+    this.UploadUserMatrix = function (fd) {
 		console.log(fd);
         return $http.post(this.AppUrl + '/Nomination/UploadUserMatrix', fd, {
 			transformRequest: angular.identity,
 			headers: { 'Content-Type': undefined }
-
 		});	
 	};
 });

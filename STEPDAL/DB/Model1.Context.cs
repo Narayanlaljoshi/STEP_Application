@@ -55,7 +55,6 @@ namespace STEPDAL.DB
         public virtual DbSet<TblTestHdr> TblTestHdrs { get; set; }
         public virtual DbSet<TblStudentAnswerHdr> TblStudentAnswerHdrs { get; set; }
         public virtual DbSet<TblTestDtl_Evaluation> TblTestDtl_Evaluation { get; set; }
-        public virtual DbSet<TblNomination> TblNominations { get; set; }
         public virtual DbSet<TblTestDtl_Practical> TblTestDtl_Practical { get; set; }
         public virtual DbSet<TblUploadError> TblUploadErrors { get; set; }
         public virtual DbSet<TblFeedbackQuestion> TblFeedbackQuestions { get; set; }
@@ -72,6 +71,7 @@ namespace STEPDAL.DB
         public virtual DbSet<TblQueryHeader> TblQueryHeaders { get; set; }
         public virtual DbSet<TblProgramTestCalender> TblProgramTestCalenders { get; set; }
         public virtual DbSet<TblAttendancePunchIn> TblAttendancePunchIns { get; set; }
+        public virtual DbSet<TblNomination> TblNominations { get; set; }
     
         public virtual ObjectResult<sp_AttendanceReport_Result> sp_AttendanceReport()
         {
@@ -1082,31 +1082,6 @@ namespace STEPDAL.DB
                 new ObjectParameter("Day", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Update_InsertIntoTblAttendance_SSTC", mSPINParameter, dateTimeParameter, sessionIdParameter, dayParameter);
-        }
-    
-        public virtual int sp_Update_InsertIntoTblAttendancePunchIn(string mSPIN, string agencyCode, Nullable<System.DateTime> dateTime, string machineCode, Nullable<int> machineId)
-        {
-            var mSPINParameter = mSPIN != null ?
-                new ObjectParameter("MSPIN", mSPIN) :
-                new ObjectParameter("MSPIN", typeof(string));
-    
-            var agencyCodeParameter = agencyCode != null ?
-                new ObjectParameter("AgencyCode", agencyCode) :
-                new ObjectParameter("AgencyCode", typeof(string));
-    
-            var dateTimeParameter = dateTime.HasValue ?
-                new ObjectParameter("DateTime", dateTime) :
-                new ObjectParameter("DateTime", typeof(System.DateTime));
-    
-            var machineCodeParameter = machineCode != null ?
-                new ObjectParameter("MachineCode", machineCode) :
-                new ObjectParameter("MachineCode", typeof(string));
-    
-            var machineIdParameter = machineId.HasValue ?
-                new ObjectParameter("MachineId", machineId) :
-                new ObjectParameter("MachineId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Update_InsertIntoTblAttendancePunchIn", mSPINParameter, agencyCodeParameter, dateTimeParameter, machineCodeParameter, machineIdParameter);
         }
     
         public virtual int sp_UpdateNomination(string sessionID, Nullable<System.DateTime> endDate)
@@ -2813,6 +2788,141 @@ namespace STEPDAL.DB
                 new ObjectParameter("MSPIN", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_getMultiNominationDetailsByMSPIN_Result>("sp_getMultiNominationDetailsByMSPIN", mSPINParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetUploadedSetSequences_Result> sp_GetUploadedSetSequences(Nullable<int> programTestCalenderId)
+        {
+            var programTestCalenderIdParameter = programTestCalenderId.HasValue ?
+                new ObjectParameter("ProgramTestCalenderId", programTestCalenderId) :
+                new ObjectParameter("ProgramTestCalenderId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetUploadedSetSequences_Result>("sp_GetUploadedSetSequences", programTestCalenderIdParameter);
+        }
+    
+        public virtual int sp_Update_InsertIntoTblAttendancePunchIn(string mSPIN, string agencyCode, Nullable<System.DateTime> dateTime, string sessionID, Nullable<int> day, string machineCode, Nullable<int> machineId)
+        {
+            var mSPINParameter = mSPIN != null ?
+                new ObjectParameter("MSPIN", mSPIN) :
+                new ObjectParameter("MSPIN", typeof(string));
+    
+            var agencyCodeParameter = agencyCode != null ?
+                new ObjectParameter("AgencyCode", agencyCode) :
+                new ObjectParameter("AgencyCode", typeof(string));
+    
+            var dateTimeParameter = dateTime.HasValue ?
+                new ObjectParameter("DateTime", dateTime) :
+                new ObjectParameter("DateTime", typeof(System.DateTime));
+    
+            var sessionIDParameter = sessionID != null ?
+                new ObjectParameter("SessionID", sessionID) :
+                new ObjectParameter("SessionID", typeof(string));
+    
+            var dayParameter = day.HasValue ?
+                new ObjectParameter("Day", day) :
+                new ObjectParameter("Day", typeof(int));
+    
+            var machineCodeParameter = machineCode != null ?
+                new ObjectParameter("MachineCode", machineCode) :
+                new ObjectParameter("MachineCode", typeof(string));
+    
+            var machineIdParameter = machineId.HasValue ?
+                new ObjectParameter("MachineId", machineId) :
+                new ObjectParameter("MachineId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Update_InsertIntoTblAttendancePunchIn", mSPINParameter, agencyCodeParameter, dateTimeParameter, sessionIDParameter, dayParameter, machineCodeParameter, machineIdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetAttendanceReport_Blank_NewModel_Result> sp_GetAttendanceReport_Blank_NewModel(Nullable<System.DateTime> endDate, Nullable<int> program_Id)
+        {
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            var program_IdParameter = program_Id.HasValue ?
+                new ObjectParameter("Program_Id", program_Id) :
+                new ObjectParameter("Program_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetAttendanceReport_Blank_NewModel_Result>("sp_GetAttendanceReport_Blank_NewModel", endDateParameter, program_IdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetProgramList_From_To_Date_Result> sp_GetProgramList_From_To_Date(Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> agency_Id)
+        {
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            var agency_IdParameter = agency_Id.HasValue ?
+                new ObjectParameter("Agency_Id", agency_Id) :
+                new ObjectParameter("Agency_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetProgramList_From_To_Date_Result>("sp_GetProgramList_From_To_Date", fromDateParameter, toDateParameter, agency_IdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetSessionIdListForProgram_Result> sp_GetSessionIdListForProgram(Nullable<int> programId, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<int> agency_Id)
+        {
+            var programIdParameter = programId.HasValue ?
+                new ObjectParameter("ProgramId", programId) :
+                new ObjectParameter("ProgramId", typeof(int));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            var agency_IdParameter = agency_Id.HasValue ?
+                new ObjectParameter("Agency_Id", agency_Id) :
+                new ObjectParameter("Agency_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetSessionIdListForProgram_Result>("sp_GetSessionIdListForProgram", programIdParameter, startDateParameter, endDateParameter, agency_IdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetMSPINList_For_BlankPRG_Result> sp_GetMSPINList_For_BlankPRG(Nullable<int> agency_Id, Nullable<int> programId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDAte, Nullable<int> faculty_Id)
+        {
+            var agency_IdParameter = agency_Id.HasValue ?
+                new ObjectParameter("Agency_Id", agency_Id) :
+                new ObjectParameter("Agency_Id", typeof(int));
+    
+            var programIdParameter = programId.HasValue ?
+                new ObjectParameter("ProgramId", programId) :
+                new ObjectParameter("ProgramId", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDAteParameter = toDAte.HasValue ?
+                new ObjectParameter("ToDAte", toDAte) :
+                new ObjectParameter("ToDAte", typeof(System.DateTime));
+    
+            var faculty_IdParameter = faculty_Id.HasValue ?
+                new ObjectParameter("Faculty_Id", faculty_Id) :
+                new ObjectParameter("Faculty_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetMSPINList_For_BlankPRG_Result>("sp_GetMSPINList_For_BlankPRG", agency_IdParameter, programIdParameter, fromDateParameter, toDAteParameter, faculty_IdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetAttendanceReport_Blank_PRG_Result> sp_GetAttendanceReport_Blank_PRG(Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> program_Id)
+        {
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            var program_IdParameter = program_Id.HasValue ?
+                new ObjectParameter("Program_Id", program_Id) :
+                new ObjectParameter("Program_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetAttendanceReport_Blank_PRG_Result>("sp_GetAttendanceReport_Blank_PRG", fromDateParameter, toDateParameter, program_IdParameter);
         }
     }
 }

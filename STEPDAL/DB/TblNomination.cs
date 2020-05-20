@@ -22,6 +22,7 @@ namespace STEPDAL.DB
         public string Venue { get; set; }
         public string Dealer_LocationCode { get; set; }
         public string DealerName { get; set; }
+        public string City { get; set; }
         public string Location { get; set; }
         public string AgencyCode { get; set; }
         public Nullable<int> Faculty_Id { get; set; }

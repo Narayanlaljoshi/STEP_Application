@@ -44,6 +44,10 @@ namespace ProjectBLL.CustomModel
         public Nullable<bool> IsChecked { get; set; }
         public Nullable<bool> IsPresent { get; set; }
         public string AgencyCode { get; set; }
+        public string SessionID { get; set; }
+        public Nullable<int> Day { get; set; }
+        public Nullable<int> LastDay { get; set; }
+        public Nullable<System.DateTime> LastDate { get; set; }
     }
     public class CandidateList_SSTC
     {

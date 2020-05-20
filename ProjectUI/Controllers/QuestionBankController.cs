@@ -73,14 +73,6 @@ namespace Project.Controllers
         [HttpPost]
         public async Task<HttpResponseMessage> UploadExcel()
         {
-            //_commonDAL _userDAL = new _commonDAL();
-
-            // Check if the request contains multipart/form-data.
-           // if (!Request.Content.IsMimeMultipartContent())
-            //{
-             //   throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
-            //}
-
             string strUniqueId = System.Guid.NewGuid().ToString();
             if (!Request.Content.IsMimeMultipartContent())
             {
@@ -126,9 +118,17 @@ namespace Project.Controllers
                 if (PTCDtl.QuestionPaperType == "QB")
                 {
                     if (tbl.Rows.Count < PTCDtl.TotalNoQuestion)
-                        return Request.CreateResponse(HttpStatusCode.Accepted, "Number of Questions should be greater then or equal to - " + PTCDtl.TotalNoQuestion);
+                        return Request.CreateResponse(HttpStatusCode.Accepted, "Number of Questions should be greater then or equal to : " + PTCDtl.TotalNoQuestion);
                 }
-                else {
+                else
+                {
+                    List<SetSequence> setSeqs = QuestionBankDAL.GetUploadedSetSequences(PTCDtl).ToList();
+                    if (setSeqs.Count != 0)
+                    {
+                        var Check = setSeqs.Where(x => x.Set_Id == Obj.Set_Id).FirstOrDefault();
+                        if (Check!=null)
+                            return Request.CreateResponse(HttpStatusCode.Accepted, "Set-" + Obj.Set_Id.ToString() + " is already uploaded");
+                    }
                     if (tbl.Rows.Count != PTCDtl.TotalNoQuestion)
                         return Request.CreateResponse(HttpStatusCode.Accepted, "Number of Questions should be equal to - " + PTCDtl.TotalNoQuestion);
                 }

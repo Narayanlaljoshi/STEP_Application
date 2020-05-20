@@ -21,7 +21,7 @@ namespace Project.Controllers
         
         [HttpPost]
         public async Task<HttpResponseMessage> UploadUserMatrix()
-        {
+         {
             string location = "";
             string fileName = "";
             string ResponseMessage = "";
@@ -143,7 +143,7 @@ namespace Project.Controllers
 
                                 //Automation.BulkInsert_RawData(tbl);
                                 Automation.FilterNominationData(tbl);
-                                ResponseMessage=NominationDAL.FilterDownloadedNomination();
+                                ResponseMessage=NominationDAL.FilterDownloadedNomination_v2();
 
                                 count = 0;
                                 tbl.Rows.Clear();
@@ -169,7 +169,7 @@ namespace Project.Controllers
                             //NominationDAL.BulkInsertDataTable(Data.Datatbl, Obj);
                             //Automation.BulkInsert_RawData(tbl);
                             Automation.FilterNominationData(tbl);
-                            ResponseMessage=NominationDAL.FilterDownloadedNomination();
+                            ResponseMessage=NominationDAL.FilterDownloadedNomination_v2();
                         }
                         tbl.Rows.Clear();
                         tbl.Columns.Clear();   //warning: All Columns delete
