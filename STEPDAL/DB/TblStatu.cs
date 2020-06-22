@@ -16,5 +16,6 @@ namespace STEPDAL.DB
     {
         public int Status_Id { get; set; }
         public string StatusName { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     }
 }

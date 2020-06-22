@@ -26,7 +26,6 @@
         <EntityTypeShape EntityType="STEPDBBetaModel.TblSetMaster" Width="1.5" PointX="14.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblSSTC_CourseClosure" Width="1.5" PointX="14.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblSSTC_Marks" Width="1.5" PointX="15.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="STEPDBBetaModel.TblStatu" Width="1.5" PointX="10.75" PointY="15.75" IsExpanded="true" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblStudentAnswer" Width="1.5" PointX="16.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblTestDtl" Width="1.5" PointX="16.75" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblUser" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
@@ -46,11 +45,12 @@
         <EntityTypeShape EntityType="STEPDBBetaModel.Tbl_Log_Report_DMS" Width="1.5" PointX="20.375" PointY="0.75" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblProgramTestCalenderDetail" Width="1.5" PointX="3.375" PointY="12.75" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblQueryAttachment" Width="1.5" PointX="21.375" PointY="4.75" />
-        <EntityTypeShape EntityType="STEPDBBetaModel.TblQueryDetail" Width="1.5" PointX="21.375" PointY="8.75" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblQueryHeader" Width="1.5" PointX="21.375" PointY="12.75" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblProgramTestCalender" Width="1.5" PointX="0.75" PointY="10.75" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblAttendancePunchIn" Width="1.5" PointX="21.375" PointY="17.75" />
         <EntityTypeShape EntityType="STEPDBBetaModel.TblNomination" Width="1.5" PointX="5.375" PointY="22.75" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblStatu" Width="1.5" PointX="22.375" PointY="0.75" />
+        <EntityTypeShape EntityType="STEPDBBetaModel.TblQueryDetail" Width="1.5" PointX="21.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

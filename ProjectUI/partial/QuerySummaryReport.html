@@ -1,0 +1,129 @@
+﻿
+<section class="content-header">
+    <h1>
+        Queries Summary Report
+        <!--<small>Preview of UI elements</small>-->
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Queries Summary </li>
+    </ol>
+</section>
+
+<section class="content">
+    <style>
+        .cell {
+            max-width: 50px; /* tweak me please */
+            white-space: nowrap;
+            overflow: hidden;
+        }
+    </style>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border" style="border-bottom:1px solid #dddddd;">
+                    <h3 class="box-title">Report</h3>
+                    <button class="btn btn-primary btn-sm" style="float:right;"  ng-click="exportExcel()">Get Report</button>
+                </div>
+                <form role="form">
+                    <div class="box-header">
+                        <div class="row">
+
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <dir-pagination-controls max-size="10"
+                                                 direction-links="true"
+                                                 boundary-links="true">
+                        </dir-pagination-controls>
+                        <table class="table table-bordered" id="SummaryTable">
+                            <thead>
+                                <tr style="background: #ecf0f5;font-size: 12px;vertical-align: top;">
+                                    <th>S.No</th>
+                                    <th>Agency Code</th>
+                                    <th>Total</th>
+                                    <th>Closed</th>
+                                    <th>Pending</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr dir-paginate="pt in SummaryList | itemsPerPage: pageSize | filter:SearchText" current-page="currentPage">
+                                    <td>
+                                        {{ $index+1 + (currentPage * pageSize) - pageSize}}
+                                    </td>
+                                    <td>
+                                        {{pt.AgencyCode  }}
+                                    </td>
+                                    <td>{{pt.Closed+pt.Pending}}</td>
+                                    <td>{{pt.Closed}}</td>
+                                    <td class="cell expand-maximum-on-hover">{{pt.Pending}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <dir-pagination-controls max-size="10"
+                                                 direction-links="true"
+                                                 boundary-links="true">
+                        </dir-pagination-controls>
+                    </div>
+                    <!-- /.box-body -->
+
+                </form>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<script type="text/ng-template" id="CloseQueryModal.html">
+    <div class="modal-header">
+        <h5 class="modal-title">
+            <b>Close Query</b>
+            <div style="float:right" class="jarviswidget-ctrls" role="menu">
+                <a href="" ng-click="cancel()" class="button-icon jarviswidget-delete-btn" rel="tooltip" title=""
+                   data-placement="bottom" data-original-title="Delete"><i class="fa fa-times"></i></a>
+            </div>
+        </h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="box-body">
+                <form role="form">
+                    <div class="box-header">
+                        <div class="row">
+
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col col-lg-4 ">
+                                    <label>Status</label>
+                                    <select class="form-control" ng-options="st.Status_Id as st.StatusName for st in StatusList" ng-model="Status_Id"></select>
+                                </div>
+                                <div class="col col-lg-8 ">
+                                    <label>Remarks</label>
+                                    <div class="input-group" style="    width: 100%;">
+                                        <textarea class="form-control"
+                                                  ng-model="Remarks"
+                                                  placeholder="Type Remarks here"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="submit" ng-click="UpdateQuery()" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</script>

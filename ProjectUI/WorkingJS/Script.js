@@ -1,6 +1,7 @@
 ﻿var app = angular.module('homeApp', ['ui.bootstrap', 'ngLoadingSpinner', 'angularUtils.directives.dirPagination',
     'ngAnimate', 'ngRoute', 'chart.js', 'angular.morris-chart', 'ZoneModule', 'RtcMasterModule', 'RegionModule', 'CityModule', 'ChannelModule', 'DealerGroupModule', 'DealerOutletModule', '720kb.datepicker',
-    'ProgramTestCalenderModule', 'ProgramTestCalender_EvaluationModule', 'QuestionBankModule', 'NominationModule', 'LanguageMasterModule', 'ProgramMasterModule', 'ReportScoreSheetModule', 'ReportAttendanceSheetModule', 'FacultyAgencyLevelModule', 'StudentModule', 'AttendanceReportModule', 'ManageSessionModule', 'MarksReportModule', 'ShowStudentMarksModule', 'ManageNominationModule', 'ChangePasswordModule', 'MarksReportAsPerDMSModule', 'AttendanceReportDMSModule', 'ManageTestModule', 'ManageAttandenceModule', 'PracticalModule', 'EvaluationModule', 'SSTCModule', 'SSTCMarksModule', 'SSTCCourseClosureModule', 'UploadError', 'FeedbackModule', 'TestResetModule', 'VendorMasterModule', 'VendorTrainierMasterModule', 'VendorManageSessionModule', 'AttendanceReport_VendorModule', 'MarksReport_VendorModule', 'RegistrationInfoModule','Queries_AdminModule', 'Queries_UserModule','CloseCourse_DMSModule']);
+    'ProgramTestCalenderModule', 'ProgramTestCalender_EvaluationModule', 'QuestionBankModule', 'NominationModule', 'LanguageMasterModule', 'ProgramMasterModule', 'ReportScoreSheetModule', 'ReportAttendanceSheetModule', 'FacultyAgencyLevelModule', 'StudentModule', 'AttendanceReportModule', 'ManageSessionModule', 'MarksReportModule', 'ShowStudentMarksModule', 'ManageNominationModule', 'ChangePasswordModule', 'MarksReportAsPerDMSModule', 'AttendanceReportDMSModule', 'ManageTestModule', 'ManageAttandenceModule', 'PracticalModule', 'EvaluationModule', 'SSTCModule', 'SSTCMarksModule', 'SSTCCourseClosureModule', 'UploadError', 'FeedbackModule', 'TestResetModule', 'VendorMasterModule', 'VendorTrainierMasterModule', 'VendorManageSessionModule', 'AttendanceReport_VendorModule', 'MarksReport_VendorModule', 'RegistrationInfoModule','Queries_AdminModule', 'Queries_UserModule','CloseCourse_DMSModule',
+    'Queries_SummaryModule']);
 
 app.factory('httpRequestInterceptor', function () {
     return {
@@ -299,21 +300,28 @@ app.config(function ($routeProvider, $httpProvider, $locationProvider) {
         .when('/Mrks_vendor', {
             templateUrl: 'partial/Vendor_Trainer_MarksReport.html',
             controller: 'MarksReport_VendorController'
-        }).when('/RegistrationInfo', {
+        })
+        .when('/RegistrationInfo', {
             templateUrl: 'partial/RegistrationInfo.html',
             controller: 'RegistrationInfoController'
-        }).when('/CC_DMS', {
+        })
+        .when('/CC_DMS', {
             templateUrl: 'partial/CloseCourse_DMS.html',
             controller: 'CloseCourse_DMSController'
-        }).when('/Queries_Admin', {
+        })
+        .when('/Queries_Admin', {
             templateUrl: 'partial/Queries_Admin.html',
             controller: 'Queries_AdminController'
-        }).when('/Queries_User', {
+        })
+        .when('/Queries_User', {
             templateUrl: 'partial/Queries_User.html',
             controller: 'Queries_UserController'
         })
-
-    .otherwise({
+        .when('/Queries_Summary', {
+            templateUrl: 'partial/QuerySummaryReport.html',
+            controller: 'Queries_SummaryController'
+        })
+        .otherwise({
         redirectTo: "/"
         }); 
 

@@ -19,15 +19,15 @@ namespace STEPDAL.DB
         public bool IsActive { get; set; }
         public System.DateTime CreationDate { get; set; }
         public Nullable<int> IsClosed { get; set; }
+        public Nullable<int> CurrentStatus_Id { get; set; }
         public int User_Id { get; set; }
         public string RoleName { get; set; }
         public string Remarks { get; set; }
-        public string AgencyType { get; set; }
+        public string AgencyCode { get; set; }
+        public string StatusName { get; set; }
         public string Email { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<int> ModifedBy { get; set; }
-        public string AttachmentName { get; set; }
-        public string AttachmentPath { get; set; }
-        public string AttachmentType { get; set; }
+        public string Name { get; set; }
     }
 }

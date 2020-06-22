@@ -1952,9 +1952,51 @@ namespace STEPDAL.CustomDAL
                                             };
                                             context.Entry(NM).State = System.Data.Entity.EntityState.Added;
                                             context.SaveChanges();
-                                            FilteredList.Add(NM);
-                                        }
-                                        else if (Check.EndDate.Value.Date < DateTime.Now.Date)
+                                        FilteredList.Add(NM);
+                                    }
+                                    else if (Check.EndDate.Value.Date < DateTime.Now.Date)
+                                    {
+                                        Check.IsActive = false;
+                                        Check.ModifiedDate = DateTime.Now;
+                                        Check.ModifiedBy = 1;
+                                        context.Entry(Check).State = System.Data.Entity.EntityState.Modified;
+                                        context.SaveChanges();
+
+                                        TblNomination NM = new TblNomination
+                                        {
+                                            FacultyCode = FacultyCode,
+                                            IsActive = true,
+                                            MSPIN = MSPIN,
+                                            AgencyCode = AgencyCode,
+                                            Co_id = Co_id,
+                                            Agency_Id = AgencyDtl.Agency_Id,
+                                            DateofBirth = DateofBirth,
+                                            Duration = Duration,
+                                            EndDate = EndDate,
+                                            MobileNo = MobileNo,
+                                            Name = Name,
+                                            ProgramCode = ProgramCode,
+                                            ProgramId = ProgramDtl.ProgramId,
+                                            Faculty_Id = FacultyDtl.Faculty_Id,
+                                            SessionID = SessionID,
+                                            StartDate = StartDate,
+                                            CreatedBy = 1,
+                                            CreationDate = DateTime.Now,
+                                            DealerName = DealerName,
+                                            Dealer_LocationCode = DealerCode,
+                                            Location = Location,
+                                            Region = Region,
+                                            Venue = Venue
+                                        };
+
+                                        context.Entry(NM).State = System.Data.Entity.EntityState.Added;
+                                        context.SaveChanges();
+                                        FilteredList.Add(NM);
+                                    }
+                                    else if (Check.EndDate.Value.Date >= DateTime.Now.Date)
+                                    {
+                                        var IsAbsenDtl = context.sp_Get_IfAbesnt_v2(Check.MSPIN, Check.SessionID).Where(x => x.IsPresent == "A").FirstOrDefault();
+                                        if (IsAbsenDtl != null)
                                         {
                                             Check.IsActive = false;
                                             Check.ModifiedDate = DateTime.Now;
@@ -1993,47 +2035,62 @@ namespace STEPDAL.CustomDAL
                                             context.SaveChanges();
                                             FilteredList.Add(NM);
                                         }
-                                        else if (Check.EndDate.Value.Date >= DateTime.Now.Date)
+                                        else
                                         {
-                                            var IsAbsenDtl = context.sp_Get_IfAbesnt_v2(Check.MSPIN, Check.SessionID).Where(x => x.IsPresent == "A").FirstOrDefault();
-                                            if (IsAbsenDtl != null)
+                                            var Curr_ProgramDtl = context.TblProgramMasters.Where(x => x.ProgramId == Check.ProgramId && x.IsActive == true).FirstOrDefault();
+                                            if (Curr_ProgramDtl.ProgramType_Id != 1)
                                             {
-                                                Check.IsActive = false;
-                                                Check.ModifiedDate = DateTime.Now;
-                                                Check.ModifiedBy = 1;
-                                                context.Entry(Check).State = System.Data.Entity.EntityState.Modified;
-                                                context.SaveChanges();
+                                                var CheckAtndc = context.sp_CheckIfAbsent_Blank_NewModel( Check.SessionID, Check.MSPIN).FirstOrDefault();
+                                                var IsPrsnt = CheckAtndc != null ? CheckAtndc.IsPresent : null;
+                                                if (CheckAtndc == null || IsPrsnt == "P") {
+                                                    Check.IsActive = false;
+                                                    Check.ModifiedDate = DateTime.Now;
+                                                    Check.ModifiedBy = 1;
+                                                    context.Entry(Check).State = System.Data.Entity.EntityState.Modified;
+                                                    context.SaveChanges();
 
-                                                TblNomination NM = new TblNomination
+                                                    var status = context.sp_Insert_Update_Tbl_Multi_Nomination(Check.Co_id, Check.Region, Check.Venue, Check.Dealer_LocationCode, Check.DealerName, Check.City, Check.Location, Check.AgencyCode, Check.FacultyCode, Check.ProgramCode, Check.SessionID, Check.StartDate, Check.EndDate, Check.Duration, Check.MSPIN, Check.Name, Check.DateofBirth, Check.MobileNo, false, DateTime.Now);
+                                                    var status2 = context.sp_Insert_Update_Tbl_Multi_Nomination(Co_id, Region, Venue, DealerCode, DealerName, city, Location, AgencyCode, FacultyCode, ProgramCode, SessionID, StartDate, EndDate, Duration, MSPIN, Name, DateofBirth, MobileNo, false, DateTime.Now);
+                                                }
+                                                else if (CheckAtndc != null || IsPrsnt == "A")
                                                 {
-                                                    FacultyCode = FacultyCode,
-                                                    IsActive = true,
-                                                    MSPIN = MSPIN,
-                                                    AgencyCode = AgencyCode,
-                                                    Co_id = Co_id,
-                                                    Agency_Id = AgencyDtl.Agency_Id,
-                                                    DateofBirth = DateofBirth,
-                                                    Duration = Duration,
-                                                    EndDate = EndDate,
-                                                    MobileNo = MobileNo,
-                                                    Name = Name,
-                                                    ProgramCode = ProgramCode,
-                                                    ProgramId = ProgramDtl.ProgramId,
-                                                    Faculty_Id = FacultyDtl.Faculty_Id,
-                                                    SessionID = SessionID,
-                                                    StartDate = StartDate,
-                                                    CreatedBy = 1,
-                                                    CreationDate = DateTime.Now,
-                                                    DealerName = DealerName,
-                                                    Dealer_LocationCode = DealerCode,
-                                                    Location = Location,
-                                                    Region = Region,
-                                                    Venue = Venue
-                                                };
+                                                    Check.IsActive = false;
+                                                    Check.ModifiedDate = DateTime.Now;
+                                                    Check.ModifiedBy = 1;
+                                                    context.Entry(Check).State = System.Data.Entity.EntityState.Modified;
+                                                    context.SaveChanges();
 
-                                                context.Entry(NM).State = System.Data.Entity.EntityState.Added;
-                                                context.SaveChanges();
-                                                FilteredList.Add(NM);
+                                                    TblNomination NM = new TblNomination
+                                                    {
+                                                        FacultyCode = FacultyCode,
+                                                        IsActive = true,
+                                                        MSPIN = MSPIN,
+                                                        AgencyCode = AgencyCode,
+                                                        Co_id = Co_id,
+                                                        Agency_Id = AgencyDtl.Agency_Id,
+                                                        DateofBirth = DateofBirth,
+                                                        Duration = Duration,
+                                                        EndDate = EndDate,
+                                                        MobileNo = MobileNo,
+                                                        Name = Name,
+                                                        ProgramCode = ProgramCode,
+                                                        ProgramId = ProgramDtl.ProgramId,
+                                                        Faculty_Id = FacultyDtl.Faculty_Id,
+                                                        SessionID = SessionID,
+                                                        StartDate = StartDate,
+                                                        CreatedBy = 1,
+                                                        CreationDate = DateTime.Now,
+                                                        DealerName = DealerName,
+                                                        Dealer_LocationCode = DealerCode,
+                                                        Location = Location,
+                                                        Region = Region,
+                                                        Venue = Venue
+                                                    };
+
+                                                    context.Entry(NM).State = System.Data.Entity.EntityState.Added;
+                                                    context.SaveChanges();
+                                                    FilteredList.Add(NM);
+                                                }
                                             }
                                             else
                                             {
@@ -2047,9 +2104,10 @@ namespace STEPDAL.CustomDAL
                                                 var status2 = context.sp_Insert_Update_Tbl_Multi_Nomination(Co_id, Region, Venue, DealerCode, DealerName, city, Location, AgencyCode, FacultyCode, ProgramCode, SessionID, StartDate, EndDate, Duration, MSPIN, Name, DateofBirth, MobileNo, false, DateTime.Now);
                                             }
                                         }
-                                        else
-                                        {
-                                            RetMessage += MSPIN + " - Currently under training at Agency : " + AgencyCode + "\n";
+                                    }
+                                    else
+                                    {
+                                        RetMessage += MSPIN + " - Currently under training at Agency : " + AgencyCode + "\n";
                                         }
                                     //}
                                     //else

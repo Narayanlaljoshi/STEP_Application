@@ -116,6 +116,7 @@ namespace Project.Controllers
                         tbl.Columns.Add("ProgramId", typeof(Int32));
                         tbl.Columns.Add("Agency_Id",typeof(Int32));
                         tbl.Columns.Add("Faculty_Id", typeof(Int32));
+                        //tbl.Columns.();
                         DataColumnCollection columns = tbl.Columns;
                         if (tbl.Columns.Count == 22)
                         {

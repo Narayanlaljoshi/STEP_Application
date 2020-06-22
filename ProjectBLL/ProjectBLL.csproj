@@ -111,6 +111,7 @@
     <Compile Include="CustomModel\SessionList.cs" />
     <Compile Include="CustomModel\SetSequenceBll.cs" />
     <Compile Include="CustomModel\SSTCCandidatesList.cs" />
+    <Compile Include="CustomModel\StatusList.cs" />
     <Compile Include="CustomModel\StudentPostTestScoresBLL.cs" />
     <Compile Include="CustomModel\StudentsList.cs" />
     <Compile Include="CustomModel\StudenttestDetailsBLL.cs" />

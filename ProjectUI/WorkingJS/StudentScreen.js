@@ -301,7 +301,6 @@ app.controller('StudentController', function ($scope, $http, $location, $cookies
                 $scope.$watch('currentPage + itemsPerPage', function () {
                     var begin = (($scope.currentPage - 1) * $scope.itemsPerPage),
                         end = begin + $scope.itemsPerPage;
-
                     $scope.filteredQuestions = $scope.questions.slice(begin, end);
                 });
             });

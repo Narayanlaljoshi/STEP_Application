@@ -1,0 +1,50 @@
+﻿
+
+
+
+<div class="modal-header">
+    <h3 class="modal-title">Requester Details</h3>
+</div>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead class="thead-inverse">
+            <tr>
+                <th>Employee Code</th>
+                <th>Employee Name</th>
+                <th>Query Subject</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{EmployeeDetails.EmployeeCode}}</td>
+                <td>{{EmployeeDetails.Name}}</td>
+                <td>{{EmployeeDetails.QuerySubject}} </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal-header">
+    <h3 class="modal-title">Request Status Details : {{EmployeeDetails.RequestNumber}}</h3>
+</div>
+<br />
+<div>
+    <ul class="progress-indicator" style="overflow-x:auto">
+        <li class="completed" ng-repeat="item in PendingStatusData">
+            <span class="bubble"></span>
+            {{item.Status}} <label style="color:red">*</label><br>{{item.Added_Date | date:'dd-MM-yyyy'}}
+        </li>
+        <li class="active" ng-repeat="item in FutureStatus">
+            <span class="bubble"></span>
+            {{item.Status}} <!--<br>{{item.EmployeeCode}}-->
+        </li>
+    </ul>
+</div>
+<div ng-if="Hold==true">
+    <label style="color:red;font-size:x-small">&nbsp;&nbsp;&nbsp;&nbsp;* Request is pending at Purchase</label>
+</div>
+
+<hr />
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Back</button>
+</div>

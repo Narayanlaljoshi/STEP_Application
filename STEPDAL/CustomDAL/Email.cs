@@ -28,17 +28,9 @@ namespace STEPDAL.CustomDAL
                     smtp.EnableSsl = true;
                     MailMessage message = new MailMessage();
                     message.From = new MailAddress(FromMailAddress);
-                    //if (toEmail.Contains(new MailAddress("amit.kaushik@phoenixtech.consulting")))
-                    //{ toEmail.Remove(new MailAddress("amit.kaushik@phoenixtech.consulting")); }
-                    //if (ccEmail.Contains(new MailAddress("amit.kaushik@phoenixtech.consulting")))
-                    //{ ccEmail.Remove(new MailAddress("amit.kaushik@phoenixtech.consulting")); }
-                    //message.CC.Add("tiwarih521@gmail.com");
-                    //message.To.Add("tiwarih521@gmail.com");
-                    //message.Bcc.Add("himanshu.tiwari@phoenixtech.consulting");
-
+                    
                     message.CC.Add("step_support@phoenixtech.consulting");
-                    //message.CC.Add("shubham.jain@phoenixtech.consulting");
-
+                    
                     if (toEmail != null)
                     {
                         foreach (var mail in toEmail)

@@ -112,7 +112,7 @@
                         <td>{{pt.SessionID}}</td>
                         <td>{{pt.StartDate|date:'dd-MMM-yy'}}</td>
                         <td ng-repeat="day in pt.DayWiseScore">
-                            <span ng-if="day.IsPresent==0"></span>
+                            <span ng-if="day.IsPresent==0">-</span>
                             <span ng-if="day.IsPresent==1"><b>{{day.studentmrks}}</b></span>
 
                         </td>

@@ -1,4 +1,8 @@
-﻿
+﻿<style>
+    .col-sm-2 {
+        width: 19.666667%;
+    }
+</style>
 <section class="content-header">
     <h1>
         Raise Query
@@ -11,52 +15,72 @@
 </section>
 
 <section class="content" style=" text-align: center;text-align:center;">
-
-    <div class="row" style=" display: inline-block; width:50%;text-align: initial;">
-
+    <div class="row" style="/*display: inline-block; */width: 100%;text-align: initial;">
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border" style="border-bottom:1px solid #dddddd;">
                     <h3 class="box-title">  Raise Query</h3>
                 </div>
-                <form role="form">
+                <form role="form" class="ng-pristine ng-valid">
                     <div class="box-header">
                         <div class="row">
-
                         </div>
                     </div>
                     <div class="box-body">
-
-                        <div class="form-group">
-                            <label>Subject</label>
-
-                            <div class="input-group" style="        width: 100%;
-">
-
-                                <input type="text" class="form-control"
-                                       ng-model="QuerySubject"
-                                       placeholder="Type subject here">
-                            </div>
-
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Subject*</label>
+                                    <div class="input-group" style="width: 100%;">
+                                        <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="QuerySubject" placeholder="Type subject here">
+                                    </div>
+                                </div>
+                            </div><!--col end-->
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <label>Description*</label>
+                                    <div class="input-group" style="width: 100%;">
+                                        <textarea class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="QueryBody" placeholder="Type description here"></textarea>
+                                    </div>
+                                </div>
+                            </div><!--col end-->
                         </div>
-                        <div class="form-group">
-                            <label>Description</label>
-                            <div class="input-group" style="    width: 100%;">
-
-                                <textarea class="form-control"
-                                          ng-model="QueryBody"
-                                          placeholder="Type description here"></textarea>
-                            </div>
-
-                        </div>
-                        <div class="form-group">
-                            <input type="file" file-model="Attachment1" />
-                            <button ng-show="Attachment1" ng-click="clear()" class="btn btn-danger btn-xs" style="">Reset</button>
-                            <input type="file" file-model="Attachment2" />
-                            <input type="file" file-model="Attachment3" />
-                            <input type="file" file-model="Attachment4" />
-                            <input type="file" file-model="Attachment5" />
-                        </div>
+                        <h3 style="margin-top: 0px;">
+                            Upload Files 
+                            <span style="font-size: 12px;">(**File size should not be greater then 5 MB)</span>
+                        </h3>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label>Attachment-1</label>
+                                <div class="form-control">
+                                    <input type="file" style="width:100%" id="fileSelector" file-model="Attachment1">
+                                </div>
+                            </div><!--col end-->
+                            <div class="col-sm-2">
+                                <label>Attachment-2</label>
+                                <div class="form-control">
+                                    <input type="file" style="width:100%" file-model="Attachment2">
+                                </div>
+                            </div><!--col end-->
+                            <div class="col-sm-2">
+                                <label>Attachment-3</label>
+                                <div class="form-control">
+                                    <input type="file" style="width:100%" file-model="Attachment3">
+                                </div>
+                            </div><!--col end-->
+                            <div class="col-sm-2">
+                                <label>Attachment-4</label>
+                                <div class="form-control">
+                                    <input type="file" style="width:100%" file-model="Attachment4">
+                                </div>
+                            </div><!--col end-->
+                            <div class="col-sm-2">
+                                <label>Attachment-5</label>
+                                <div class="form-control">
+                                    <input type="file" style="width:100%" file-model="Attachment5">
+                                </div>
+                            </div><!--col end-->
+                        </div><!--row ned-->
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
@@ -66,10 +90,16 @@
             </div>
             <div class="row">
                 <div class="col-xs-6">
-
                 </div>
             </div>
         </div>
-
     </div>
 </section>
+<!--<script>
+    function checkFileSize() {
+        var size = document.getElementById("fileSelector").files[0].size;
+        //return ((size / 1024) / 1024);
+        alert("file size: " + (size / 1024) / 1024 + " MB");
+
+    }
+</script>-->

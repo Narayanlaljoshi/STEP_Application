@@ -19,6 +19,7 @@ namespace STEPDAL.DB
         public Nullable<int> AssignTo { get; set; }
         public Nullable<int> CurrentStatus_Id { get; set; }
         public Nullable<int> FutureStatus_Id { get; set; }
+        public string Remarks { get; set; }
         public bool IsActive { get; set; }
         public int CreatedBy { get; set; }
         public System.DateTime CreationDate { get; set; }

@@ -21,14 +21,41 @@ namespace ProjectUI.Controllers
         {
             return QueriesDAL.GetAllQueries(User_Id);
         }
-        public string CloseQuery([FromBody]CloseQueryBLL obj)
+        [HttpPost]
+        public string UpdateQuery(CloseQueryBLL obj)
         {
-            return QueriesDAL.CloseQuery(obj);
+            return QueriesDAL.UpdateQuery(obj);
+        }
+        [HttpGet]
+        public List<SummaryReport> GetSummaryReport(int User_Id)
+        {
+            return QueriesDAL.GetSummaryReport(User_Id);
         }
         //public string SaveQuery([FromBody]SaveQueryBLL obj)
         //{
         //    return QueriesDAL.SaveQuery(obj);
         //}
+        [HttpGet]
+        public List<StatusList> GetStatusList()
+        {
+            return QueriesDAL.GetStatusList();
+        }
+        [HttpGet]
+        public EmployeeDetails GetEmployeeDetails(int Query_Id)
+        {
+            return QueriesDAL.GetEmployeeDetails(Query_Id);
+        }
+        [HttpGet]
+        public IList<StatusdetailInfo> GetCurrentStatus(int Query_Id)
+        {
+            return QueriesDAL.GetCurrentStatus(Query_Id);
+        }
+        [HttpGet]
+        public IList<FutureStatus> GetFutureStatus(int Query_Id)
+        {
+            return QueriesDAL.GetFutureStatus(Query_Id);
+        }
+
 
         [HttpPost]
         public async Task<HttpResponseMessage> SaveQuery()

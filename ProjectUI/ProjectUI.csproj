@@ -270,6 +270,7 @@
     <Content Include="Content\loginPageContent\css\reset.css" />
     <Content Include="Content\loginPageContent\css\style.css" />
     <Content Include="Content\loginPageContent\js\index.js" />
+    <Content Include="Content\progress-wizard.min.css" />
     <Content Include="Content\survey-style.css" />
     <Content Include="dist\css\AdminLTE.css" />
     <Content Include="dist\css\AdminLTE.min.css" />
@@ -422,6 +423,7 @@
     <Content Include="partial\ManageTest.html" />
     <Content Include="partial\MarksReport.html" />
     <Content Include="partial\MarksReportAsPerDMS.html" />
+    <Content Include="partial\MyModelPopUp.html" />
     <Content Include="partial\Nomination.html" />
     <Content Include="partial\perfomance-report.html" />
     <Content Include="partial\PracticalScreen.html" />
@@ -1360,6 +1362,8 @@
     <Content Include="WorkingJS\ProgramTestCalender_Evaluation.js" />
     <Content Include="WorkingJS\Queries_Admin.js" />
     <Content Include="WorkingJS\Queries_User.js" />
+    <Content Include="partial\QuerySummaryReport.html" />
+    <Content Include="WorkingJS\QuerySummaryReport.js" />
     <Content Include="WorkingJS\QuestionBank.js" />
     <Content Include="WorkingJS\QuestionBankPractical.js" />
     <Content Include="WorkingJS\RegionMaster.js" />

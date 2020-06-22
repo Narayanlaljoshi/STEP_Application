@@ -136,6 +136,9 @@
     <Compile Include="DB\sp_CheckBiometricAppVersion_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\sp_CheckIfAbsent_Blank_NewModel_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\sp_CheckIfAnyTestIsGoingOn_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -214,6 +217,9 @@
     <Compile Include="DB\sp_GetCurrentSessionIdsForReset_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\sp_GetCurrentStatusList_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\sp_GetDaySequence_SSTC_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -227,6 +233,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\sp_GetEligibleCandidatesForEvaluation_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\sp_GetEmailTrail_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\sp_GetEmployeeDetils_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\SP_GetEvaluationTypePrograms_Result.cs">
@@ -245,6 +257,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\sp_GetFeedBackQueSet_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\sp_GetFutureStatus_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\SP_GETGuardLoginDetails_Result.cs">

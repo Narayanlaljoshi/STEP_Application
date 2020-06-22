@@ -42,6 +42,7 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <!--<link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">-->
     <link href="bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" />
+    <link href="Content/progress-wizard.min.css" rel="stylesheet" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -222,10 +223,10 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <!--<li class="active" ng-show="session.RoleName !='Faculty'">
-        <a href="#/dashboard">
-            <i class="fa fa-dashboard"></i><span>Dashboard</span>
-        </a>
-    </li>-->
+                        <a href="#/dashboard">
+                            <i class="fa fa-dashboard"></i><span>Dashboard</span>
+                        </a>
+                    </li>-->
 
                     <li class="treeview active" ng-show="session.RoleName =='HOAdmin'">
                         <a href="" title="Masters">
@@ -254,15 +255,15 @@
                                 <a href="#/FeedbackMaster"><i class="fa fa-th"></i> <span>Feedback Setup</span></a>
                             </li>
                             <!--<li>
-                <a href="#/ProgramTestCalender"><i class="fa fa-th"></i> <span>Test Setup</span></a>
+                                <a href="#/ProgramTestCalender"><i class="fa fa-th"></i> <span>Test Setup</span></a>
 
-            </li>-->
+                            </li>-->
                             <!--<li>
-                <a href="#/ReportScoreSheet"><i class="fa fa-th"></i> <span>Report Score Sheet</span></a>
-            </li>
-            <li>
-                <a href="#/ReportAttendanceSheet"><i class="fa fa-th"></i> <span>Report Attendance Sheet</span></a>
-            </li>-->
+                                <a href="#/ReportScoreSheet"><i class="fa fa-th"></i> <span>Report Score Sheet</span></a>
+                            </li>
+                            <li>
+                                <a href="#/ReportAttendanceSheet"><i class="fa fa-th"></i> <span>Report Attendance Sheet</span></a>
+                            </li>-->
                         </ul>
 
                     </li>
@@ -281,11 +282,11 @@
                                 <a href="#/AC"><i class="fa fa-th"></i> <span>Assign Course</span></a>
                             </li>
                             <!--<li>
-                <a href="#/SSTC"><i class="fa fa-th"></i> <span>Manage Trainer</span></a>
-            </li>-->
+                                <a href="#/SSTC"><i class="fa fa-th"></i> <span>Manage Trainer</span></a>
+                            </li>-->
                             <!--<li>
-                <a href="#/ManageSessions"><i class="fa fa-th"></i> <span>Sessions</span></a>
-            </li>-->
+                                <a href="#/ManageSessions"><i class="fa fa-th"></i> <span>Sessions</span></a>
+                            </li>-->
                         </ul>
                     </li>
                     <li class="treeview" ng-show="session.Role_Id ==5">
@@ -303,11 +304,11 @@
                                 <a href="#/Mrks_vendor"><i class="fa fa-th"></i> <span>Marks</span></a>
                             </li>
                             <!--<li>
-                <a href="#/SSTC"><i class="fa fa-th"></i> <span>Manage Trainer</span></a>
-            </li>-->
+                                <a href="#/SSTC"><i class="fa fa-th"></i> <span>Manage Trainer</span></a>
+                            </li>-->
                             <!--<li>
-                <a href="#/ManageSessions"><i class="fa fa-th"></i> <span>Sessions</span></a>
-            </li>-->
+                                <a href="#/ManageSessions"><i class="fa fa-th"></i> <span>Sessions</span></a>
+                            </li>-->
                         </ul>
                     </li>
                     <li ng-show="session.Role_Id ==6">
@@ -334,13 +335,16 @@
                                 <a href="#/ArDMS"><i class="fa fa-th"></i> <span>Attendance Sheet-DMS</span></a>
                             </li>
                             <li>
-                                <a href="#/MarksReport"><i class="fa fa-th"></i> <span>Marks Report</span></a>
+                                <a href="#/MarksReport"><i class="fa fa-th"></i> <span>Marks Sheet</span></a>
                             </li>
                             <li ng-show="session.RoleName =='HOAdmin'">
                                 <a href="#/MrksDMS"><i class="fa fa-th"></i> <span>Marks Report-DMS</span></a>
                             </li>
                             <li ng-show="session.RoleName =='HOAdmin'">
                                 <a href="#/UploadErrors"><i class="fa fa-th"></i> <span>Upload Error Report</span></a>
+                            </li>
+                            <li ng-show="session.RoleName  !='Faculty'">
+                                <a href="#/Queries_Summary"><i class="fa fa-th"></i> <span>Queries Summary</span></a>
                             </li>
                         </ul>
                     </li>
@@ -395,10 +399,10 @@
                         </a>
                     </li>
                     <!--ticket system-->
-                    <li ng-show="session.RoleName =='HOAdmin'">
+                    <li ng-show="session.RoleName =='HOAdmin'||session.RoleName =='AgencyAdmin'">
                         <a href="#/Queries_Admin"><i class="fa fa-th"></i> <span>Queries</span></a>
                     </li>
-                    <li>
+                    <li ng-show="session.RoleName !='HOAdmin'">
                         <a href="#/Queries_User"><i class="fa fa-th"></i> <span>Raise Query</span></a>
                     </li>
                 </ul>
@@ -514,6 +518,7 @@
     <script src="WorkingJS/CloseCourse_DMS.js"></script>
     <script src="WorkingJS/Queries_Admin.js"></script>
     <script src="WorkingJS/Queries_User.js"></script>
+    <script src="WorkingJS/QuerySummaryReport.js"></script>
 </body>
 </html>
 <script>

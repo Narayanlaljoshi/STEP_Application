@@ -71,14 +71,8 @@ namespace STEPDAL.CustomDAL
             }
         }
 
-
-
-
-
-
         public static string AddProgramTestCalender(List<ProgramTestCalenderBLL> List)
         {
-
             using (var context = new CEIDBEntities())
             {
                 foreach (var obj in List)
@@ -100,7 +94,7 @@ namespace STEPDAL.CustomDAL
                             Q_Bank = obj.Q_Bank,
                             TestCode = obj.TestCode,
                             QuestionPaperType=obj.QuestionPaperType,
-                            Total_Marks = obj.TotalNoQuestion * obj.Marks_Question==null?0: obj.Marks_Question,
+                            Total_Marks = obj.TotalNoQuestion * obj.Marks_Question,
                             TestInitiated = false,
                             ValidDuration = obj.ValidDuration,
                             PracticalMinMarks=obj.PracticalMinMarks,
@@ -130,7 +124,7 @@ namespace STEPDAL.CustomDAL
                         prop.EnableJumbling = obj.EnableJumbling;
                         prop.QuestionPaperType = obj.QuestionPaperType;
                         prop.TestCode = obj.TestCode;
-                        prop.Total_Marks = obj.Marks_Question!=null? obj.TotalNoQuestion * obj.Marks_Question:0;
+                        prop.Total_Marks =  obj.TotalNoQuestion * obj.Marks_Question;
                         prop.PracticalDefaultMarks = obj.PracticalDefaultMarks;
                         prop.PracticalMaxMarks = obj.PracticalMaxMarks;
                         prop.PracticalMinMarks = obj.PracticalMinMarks;

@@ -48,7 +48,6 @@ namespace STEPDAL.DB
         public virtual DbSet<TblSetMaster> TblSetMasters { get; set; }
         public virtual DbSet<TblSSTC_CourseClosure> TblSSTC_CourseClosure { get; set; }
         public virtual DbSet<TblSSTC_Marks> TblSSTC_Marks { get; set; }
-        public virtual DbSet<TblStatu> TblStatus { get; set; }
         public virtual DbSet<TblStudentAnswer> TblStudentAnswers { get; set; }
         public virtual DbSet<TblTestDtl> TblTestDtls { get; set; }
         public virtual DbSet<TblUser> TblUsers { get; set; }
@@ -67,11 +66,12 @@ namespace STEPDAL.DB
         public virtual DbSet<Tbl_Log_Report_DMS> Tbl_Log_Report_DMS { get; set; }
         public virtual DbSet<TblProgramTestCalenderDetail> TblProgramTestCalenderDetails { get; set; }
         public virtual DbSet<TblQueryAttachment> TblQueryAttachments { get; set; }
-        public virtual DbSet<TblQueryDetail> TblQueryDetails { get; set; }
         public virtual DbSet<TblQueryHeader> TblQueryHeaders { get; set; }
         public virtual DbSet<TblProgramTestCalender> TblProgramTestCalenders { get; set; }
         public virtual DbSet<TblAttendancePunchIn> TblAttendancePunchIns { get; set; }
         public virtual DbSet<TblNomination> TblNominations { get; set; }
+        public virtual DbSet<TblStatu> TblStatus { get; set; }
+        public virtual DbSet<TblQueryDetail> TblQueryDetails { get; set; }
     
         public virtual ObjectResult<sp_AttendanceReport_Result> sp_AttendanceReport()
         {
@@ -2715,11 +2715,6 @@ namespace STEPDAL.DB
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_GetLanguageWiseQuestionList_Result>("Sp_GetLanguageWiseQuestionList", programTestCalenderIdParameter, langIdParameter, set_IdParameter);
         }
     
-        public virtual ObjectResult<SP_GetAllQueries_Result> SP_GetAllQueries()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetAllQueries_Result>("SP_GetAllQueries");
-        }
-    
         public virtual int SP_Insert_Update_TblStudentAnswer(Nullable<int> programTestCalenderId, Nullable<int> programId, Nullable<int> sA_Id, string mSPIN, string questionCode, string answerGiven, string correctAnswer, Nullable<int> day, string typeOfTest, string sessionID, Nullable<bool> isAnswerCorrect, Nullable<bool> isActive, Nullable<double> remainingTime, Nullable<int> status_Id)
         {
             var programTestCalenderIdParameter = programTestCalenderId.HasValue ?
@@ -2923,6 +2918,64 @@ namespace STEPDAL.DB
                 new ObjectParameter("Program_Id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetAttendanceReport_Blank_PRG_Result>("sp_GetAttendanceReport_Blank_PRG", fromDateParameter, toDateParameter, program_IdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetEmailTrail_Result> sp_GetEmailTrail(Nullable<int> user_Id)
+        {
+            var user_IdParameter = user_Id.HasValue ?
+                new ObjectParameter("User_Id", user_Id) :
+                new ObjectParameter("User_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetEmailTrail_Result>("sp_GetEmailTrail", user_IdParameter);
+        }
+    
+        public virtual ObjectResult<SP_GetAllQueries_Result> SP_GetAllQueries(Nullable<int> agency_Id)
+        {
+            var agency_IdParameter = agency_Id.HasValue ?
+                new ObjectParameter("Agency_Id", agency_Id) :
+                new ObjectParameter("Agency_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetAllQueries_Result>("SP_GetAllQueries", agency_IdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetEmployeeDetils_Result> sp_GetEmployeeDetils(Nullable<int> query_Id)
+        {
+            var query_IdParameter = query_Id.HasValue ?
+                new ObjectParameter("Query_Id", query_Id) :
+                new ObjectParameter("Query_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetEmployeeDetils_Result>("sp_GetEmployeeDetils", query_IdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetCurrentStatusList_Result> sp_GetCurrentStatusList(Nullable<int> query_Id)
+        {
+            var query_IdParameter = query_Id.HasValue ?
+                new ObjectParameter("Query_Id", query_Id) :
+                new ObjectParameter("Query_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCurrentStatusList_Result>("sp_GetCurrentStatusList", query_IdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetFutureStatus_Result> sp_GetFutureStatus(Nullable<int> query_Id)
+        {
+            var query_IdParameter = query_Id.HasValue ?
+                new ObjectParameter("Query_Id", query_Id) :
+                new ObjectParameter("Query_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetFutureStatus_Result>("sp_GetFutureStatus", query_IdParameter);
+        }
+    
+        public virtual ObjectResult<sp_CheckIfAbsent_Blank_NewModel_Result> sp_CheckIfAbsent_Blank_NewModel(string sessionID, string mSPIN)
+        {
+            var sessionIDParameter = sessionID != null ?
+                new ObjectParameter("SessionID", sessionID) :
+                new ObjectParameter("SessionID", typeof(string));
+    
+            var mSPINParameter = mSPIN != null ?
+                new ObjectParameter("MSPIN", mSPIN) :
+                new ObjectParameter("MSPIN", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_CheckIfAbsent_Blank_NewModel_Result>("sp_CheckIfAbsent_Blank_NewModel", sessionIDParameter, mSPINParameter);
         }
     }
 }

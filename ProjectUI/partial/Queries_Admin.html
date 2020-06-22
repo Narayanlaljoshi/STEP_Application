@@ -23,6 +23,7 @@
             <div class="box box-primary">
                 <div class="box-header with-border" style="border-bottom:1px solid #dddddd;">
                     <h3 class="box-title">Raised Queries</h3>
+                    <button class="btn btn-primary btn-sm" style="float:right;" ng-click="exportExcel()">Get Report</button>
                 </div>
                 <form role="form">
                     <div class="box-header">
@@ -40,18 +41,19 @@
                                 <tr style="background: #ecf0f5;font-size: 12px;vertical-align: top;">
                                     <th>S.No</th>
                                     <th>Agency Code</th>
+                                    <th>Raised By</th>
                                     <th>Email</th>
                                     <th>Subject</th>
                                     <th>Description</th>
-                                    <th>Attachment</th>
+                                    <th>Attachments</th>
                                     <th>Submit Date</th>
                                     <th>Closed Date</th>
                                     <th>Remarks</th>
-                                    <th>Action</th>
+                                    <th>Status</th>
+                                    <th ng-show="session.RoleName =='HOAdmin'">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-
                                 <tr dir-paginate="pt in QueryList | itemsPerPage: pageSize | filter:SearchText" current-page="currentPage">
                                     <td>
                                         {{ $index+1 + (currentPage * pageSize) - pageSize}}
@@ -59,36 +61,37 @@
                                     <td>
                                         {{pt.AgencyCode  }}
                                     </td>
+                                    <td>
+                                        {{pt.Name}}
+                                    </td>
                                     <td>{{pt.Email}}</td>
                                     <td class="cell expand-maximum-on-hover" ng-attr-title="{{pt.QuerySubject}}">{{pt.QuerySubject}}</td>
-                                    <td class="cell expand-small-on-hover" ng-attr-title="{{pt.QueryBody}}">{{pt.QueryBody}}</td>
+                                    <td class="cell expand-small-on-hover" ng-attr-title="{{pt.QueryBody}}">
+                                        <a class="btn btn-xs" ng-click="ViewDescription(pt)" data-toggle="modal" data-target="#myModal">View</a>
+                                    </td>
                                     <td>
-
-                                        <span ng-if="pt.AttachmentPath">
-                                            <a ng-href=" {{pt.AttachmentPath}}" target="_blank">View</a>
+                                        <span ng-repeat="at in pt.AttachmentsList ">
+                                            <a href=" {{at.AttachmentPath}}" target="_blank">View</a>
+                                            <br />
                                         </span>
-
-                                        <span ng-if="!pt.AttachmentPath">
-                                           No Attachment
+                                        <span ng-if="pt.AttachmentPath.length==0">
+                                            No Attachment
                                         </span>
                                     </td>
                                     <td>
                                         {{pt.CreationDate | date:'dd-MMM-yyyy'}}
                                     </td>
-
                                     <td>
-
-
                                         {{pt.ModifiedDate | date:'dd-MMM-yyyy'}}
                                     </td>
                                     <td class="cell expand-small-on-hover" ng-attr-title="{{pt.Remarks}}">
                                         {{ pt.Remarks}}
                                     </td>
                                     <td>
-                                        <!--<select class="input-field" ng-model="Response">
-                                            <option>Close</option>
-                                        </select>-->
-                                        <span ng-if="pt.IsClosed == 0"><button class="btn btn-primary" ng-click="CloseQuery(pt.Id)">Close</button></span>
+                                        <button class="btn-primary btn-xs" ng-click="ViewStatus(pt.Id)" style="border-radius:10px;">{{pt.StatusName}}</button>
+                                    </td>
+                                    <td ng-show="session.RoleName =='HOAdmin'">
+                                        <span ng-if="pt.IsClosed == 0"><button class="btn btn-success  btn-xs" ng-click="UpdateQuery(pt)">Update</button></span>
                                         <span ng-if="pt.IsClosed == 1">
                                             Closed
                                         </span>
@@ -100,6 +103,61 @@
                                                  direction-links="true"
                                                  boundary-links="true">
                         </dir-pagination-controls>
+
+                        <table class="table table-bordered" id="SummaryTable" style="display:none;">
+                            <thead>
+                                <tr style="background: #ecf0f5;font-size: 12px;vertical-align: top;">
+                                    <th>S.No</th>
+                                    <th>Agency Code</th>
+                                    <th>Raised By</th>
+                                    <th>Email</th>
+                                    <th>Subject</th>
+                                    <th>Description</th>
+                                    <th>Attachments</th>
+                                    <th>Submit Date</th>
+                                    <th>Closed Date</th>
+                                    <th>Remarks</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr dir-paginate="pt in QueryList | itemsPerPage: pageSize | filter:SearchText" current-page="currentPage" style="">
+                                    <td>
+                                        {{ $index+1 + (currentPage * pageSize) - pageSize}}
+                                    </td>
+                                    <td>
+                                        {{pt.AgencyCode}}
+                                    </td>
+                                    <td>
+                                        {{pt.Name}}
+                                    </td>
+                                    <td>{{pt.Email}}</td>
+                                    <td class="cell expand-maximum-on-hover" ng-attr-title="{{pt.QuerySubject}}">{{pt.QuerySubject}}</td>
+                                    <td class="cell expand-small-on-hover" ng-attr-title="{{pt.QueryBody}}">{{pt.QueryBody}}</td>
+                                    <td>
+                                        <span ng-repeat="at in pt.AttachmentsList ">
+                                            <a href=" {{at.AttachmentPath}}" target="_blank">View</a>
+                                            <br />
+                                        </span>
+                                        <span ng-if="pt.AttachmentPath.length==0">
+                                            No Attachment
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {{pt.CreationDate | date:'dd-MMM-yyyy'}}
+                                    </td>
+                                    <td>
+                                        {{pt.ModifiedDate | date:'dd-MMM-yyyy'}}
+                                    </td>
+                                    <td class="cell expand-small-on-hover" ng-attr-title="{{pt.Remarks}}">
+                                        {{ pt.Remarks}}
+                                    </td>
+                                    <td>
+                                        {{pt.StatusName}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <!-- /.box-body -->
 
@@ -135,22 +193,26 @@
                         </div>
                     </div>
                     <div class="box-body">
-
                         <div class="form-group">
-                            <label>Remarks</label>
-                            <div class="input-group" style="    width: 100%;">
-
-                                <textarea class="form-control"
-                                          ng-model="Remarks"
-                                          placeholder="Type Remarks here"></textarea>
+                            <div class="row">
+                                <div class="col col-lg-4 ">
+                                    <label>Status</label>
+                                    <select class="form-control"  ng-options="st.Status_Id as st.StatusName for st in StatusList" ng-model="Status_Id"></select>
+                                </div>
+                                <div class="col col-lg-8 ">
+                                    <label>Remarks</label>
+                                    <div class="input-group" style="    width: 100%;">
+                                        <textarea class="form-control"
+                                                  ng-model="Remarks"
+                                                  placeholder="Type Remarks here"></textarea>
+                                    </div>
+                                </div>
                             </div>
-
                         </div>
-
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="submit" ng-click="CloseQuery()" class="btn btn-primary">Submit</button>
+                        <button type="submit" ng-click="UpdateQuery()" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
 
@@ -158,3 +220,32 @@
         </div>
     </div>
 </script>
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Query Details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="margin:0px;">
+                    <section class="col-lg-12" style="word-break: break-word;">
+                        <label>Subject</label>
+                        {{QueryDetail.QuerySubject}}
+                    </section>
+                </div>
+                    <div class="row" style="margin:0px;">
+                        <section class="col-lg-12" style="word-break: break-word;">
+                            <label>Description</label>
+                            {{QueryDetail.QueryBody}}
+                        </section>
+                    </div>
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
