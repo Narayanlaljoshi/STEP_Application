@@ -13,7 +13,29 @@ namespace STEPDAL.CustomDAL
 {
     public class ReportsDAL
     {
-
+        public static IList<FacultyList> GetFacultyListByFilters(ReportInputBLL Obj)
+        {
+            using (var Context = new CEIDBEntities())
+            {
+                IList<FacultyList> objlist = null;
+                var ReqData = Context.sp_GetFacultyListByFilters(Obj.StartDate, Obj.EndDate, Obj.Agency_Id, Obj.ProgramId, Obj.SessionID).ToList();
+                objlist = ReqData.Select(x => new FacultyList()
+                {
+                    FacultyCode = x.FacultyCode,
+                    FacultyName = "(" + x.FacultyCode + ")-" + x.FacultyName,
+                    Faculty_Id = x.Faculty_Id,
+                    Agency_Id = x.Agency_Id,
+                    CreatedBy = x.CreatedBy,
+                    CreationDate = x.CreationDate,
+                    Email = x.Email,
+                    IsActive = x.IsActive,
+                    Mobile = x.Mobile,
+                    ModifiedBy = x.ModifiedBy,
+                    ModifiedDate = x.ModifiedDate,
+                }).ToList();
+                return objlist;
+            }
+        }
         public static List<AttendanceReportBLL> GetAttendanceReport(ReportInputBLL Obj)
         {
             using (var context = new CEIDBEntities())

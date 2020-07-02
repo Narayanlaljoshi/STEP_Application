@@ -24,6 +24,11 @@ namespace Project.Controllers
             return ReportsDAL.GetReportFilter();
         }
         [HttpPost]
+        public IList<FacultyList> GetFacultyListByFilters(ReportInputBLL Obj)
+        {
+            return ReportsDAL.GetFacultyListByFilters(Obj);
+        }
+        [HttpPost]
         public List<MarksReportBLL> GetMarksReport(List<SessionIDListBLL> Obj)
         {
             return ReportsDAL.GetMarksReport(Obj);

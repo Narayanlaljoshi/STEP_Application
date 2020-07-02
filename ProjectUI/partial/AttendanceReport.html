@@ -45,7 +45,7 @@
                 </div>
                 <div class="col col-xs-2">
                     <label>Session</label>
-                    <select class="form-control" ng-options="pt.SessionID as pt.SessionID for pt in ReportFilter.SessionList" ng-model="ReportInput.SessionID"></select>
+                    <select class="form-control" ng-options="pt.SessionID as pt.SessionID for pt in ReportFilter.SessionList" ng-change="GetFacultyList()" ng-model="ReportInput.SessionID"></select>
                 </div>
                 <div class="col col-xs-2" ng-hide="session.RoleName == 'Faculty'">
                     <label>Faculty</label>

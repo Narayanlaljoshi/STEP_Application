@@ -994,6 +994,13 @@
           <Parameter Name="Agency_Id" Type="int" Mode="In" />
           <Parameter Name="ParentFaculty_Code" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="sp_GetFacultyListByFilters" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="Enddate" Type="datetime" Mode="In" />
+          <Parameter Name="Agency_Id" Type="int" Mode="In" />
+          <Parameter Name="ProgramId" Type="int" Mode="In" />
+          <Parameter Name="sessionId" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="sp_GetFeedBackQueSet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ProgramId" Type="int" Mode="In" />
         </Function>
@@ -2901,6 +2908,13 @@
           <FunctionImport Name="sp_CheckIfAbsent_Blank_NewModel" ReturnType="Collection(STEPDBBetaModel.sp_CheckIfAbsent_Blank_NewModel_Result)">
             <Parameter Name="SessionID" Mode="In" Type="String" />
             <Parameter Name="MSPIN" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetFacultyListByFilters" ReturnType="Collection(STEPDBBetaModel.sp_GetFacultyListByFilters_Result)">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Enddate" Mode="In" Type="DateTime" />
+            <Parameter Name="Agency_Id" Mode="In" Type="Int32" />
+            <Parameter Name="ProgramId" Mode="In" Type="Int32" />
+            <Parameter Name="sessionId" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_AttendanceReport_Result">
@@ -4832,6 +4846,19 @@
           <Property Type="DateTime" Name="Date" Nullable="true" />
           <Property Type="Int32" Name="DAy" Nullable="true" />
           <Property Type="String" Name="IsPresent" Nullable="false" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="sp_GetFacultyListByFilters_Result">
+          <Property Type="Int32" Name="Faculty_Id" Nullable="false" />
+          <Property Type="Int32" Name="Agency_Id" Nullable="false" />
+          <Property Type="String" Name="FacultyCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FacultyName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="DateTime" Name="CreationDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="Int32" Name="ModifiedBy" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -7704,6 +7731,23 @@
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="DAy" ColumnName="DAy" />
                 <ScalarProperty Name="IsPresent" ColumnName="IsPresent" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetFacultyListByFilters" FunctionName="STEPDBBetaModel.Store.sp_GetFacultyListByFilters">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="STEPDBBetaModel.sp_GetFacultyListByFilters_Result">
+                <ScalarProperty Name="Faculty_Id" ColumnName="Faculty_Id" />
+                <ScalarProperty Name="Agency_Id" ColumnName="Agency_Id" />
+                <ScalarProperty Name="FacultyCode" ColumnName="FacultyCode" />
+                <ScalarProperty Name="FacultyName" ColumnName="FacultyName" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -21,6 +21,9 @@ app.service('AttendanceReportService', function ($http, $location) {
         //       console.log("yahiooooooooooo");
         return $http.post(this.AppUrl + '/Reports/GetReportFilter', {});
     };
+    this.GetFacultyListByFilters = function (obj) {
+        return $http.post(this.AppUrl + '/Reports/GetFacultyListByFilters', obj);
+    };
     this.GetFacultyList = function (Agency_Id) {
         return $http.get(this.AppUrl + '/ManageSession/GetFacultyList?Agency_Id=' + Agency_Id);
     }; 
@@ -120,12 +123,12 @@ app.controller('AttendanceReportController', function ($scope, $http, $location,
     };
 
     $scope.GetProgramList_From_To_Date = function () {
-
         $scope.ReportInput.Faculty_Id = null;
         $scope.ReportInput.SessionID = null;
 
         AttendanceReportService.GetProgramList_From_To_Date($scope.ReportInput).then(function success(success) {
             $scope.ReportFilter.ProgramList = success.data;
+            $scope.GetFacultyList();
         }, function error(Error) {
             console.log("Error in loading data from EDB");
         });
@@ -134,20 +137,21 @@ app.controller('AttendanceReportController', function ($scope, $http, $location,
     $scope.GetSessionList_ProgramWise = function () {
         AttendanceReportService.GetSessionList_ProgramWise($scope.ReportInput).then(function success(success) {
             $scope.ReportFilter.SessionList = success.data;
+            $scope.GetFacultyList();
         }, function error(Error) {
             console.log("Error in loading data from EDB");
         });
     };
 
-    $scope.GetFacultyList = function (Agency_Id) {
+    $scope.GetFacultyList = function () {
 
-        $scope.ReportInputProgramId = null;
-        //$scope.ReportInputAgencyCode = null;
-        $scope.ReportInput.Faculty_Id = null;
-        $scope.ReportInput.SessionID = null;
+        //$scope.ReportInputProgramId = null;
+        ////$scope.ReportInputAgencyCode = null;
+        //$scope.ReportInput.Faculty_Id = null;
+        //$scope.ReportInput.SessionID = null;
 
-        AttendanceReportService.GetFacultyList(Agency_Id).then(function success(success) {
-            $scope.GetProgramList_From_To_Date();
+        AttendanceReportService.GetFacultyListByFilters($scope.ReportInput).then(function success(success) {
+            //$scope.GetProgramList_From_To_Date();
             $scope.ReportFilter.FacultyList = success.data;
         }, function error(Error) {
             console.log("Error in loading data from EDB");

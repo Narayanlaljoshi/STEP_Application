@@ -250,6 +250,9 @@
     <Compile Include="DB\sp_GetFaceRecognitionData_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\sp_GetFacultyListByFilters_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\sp_GetFacultyList_ExternalAgency_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

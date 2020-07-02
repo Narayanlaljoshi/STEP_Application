@@ -2977,5 +2977,30 @@ namespace STEPDAL.DB
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_CheckIfAbsent_Blank_NewModel_Result>("sp_CheckIfAbsent_Blank_NewModel", sessionIDParameter, mSPINParameter);
         }
+    
+        public virtual ObjectResult<sp_GetFacultyListByFilters_Result> sp_GetFacultyListByFilters(Nullable<System.DateTime> startDate, Nullable<System.DateTime> enddate, Nullable<int> agency_Id, Nullable<int> programId, string sessionId)
+        {
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var enddateParameter = enddate.HasValue ?
+                new ObjectParameter("Enddate", enddate) :
+                new ObjectParameter("Enddate", typeof(System.DateTime));
+    
+            var agency_IdParameter = agency_Id.HasValue ?
+                new ObjectParameter("Agency_Id", agency_Id) :
+                new ObjectParameter("Agency_Id", typeof(int));
+    
+            var programIdParameter = programId.HasValue ?
+                new ObjectParameter("ProgramId", programId) :
+                new ObjectParameter("ProgramId", typeof(int));
+    
+            var sessionIdParameter = sessionId != null ?
+                new ObjectParameter("sessionId", sessionId) :
+                new ObjectParameter("sessionId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetFacultyListByFilters_Result>("sp_GetFacultyListByFilters", startDateParameter, enddateParameter, agency_IdParameter, programIdParameter, sessionIdParameter);
+        }
     }
 }
